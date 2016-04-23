@@ -15,10 +15,10 @@ import java.util.ArrayList;
 /**
  * Created by uchennafokoye on 4/22/16.
  */
-public class ItemXMLLoader implements ItemLoader{
+public class ItemXMLLoaderImpl implements ItemLoader{
 
     private String filepath;
-    public ItemXMLLoader(String filepath){
+    public ItemXMLLoaderImpl(String filepath){
         this.filepath = filepath;
     }
 
@@ -85,7 +85,7 @@ public class ItemXMLLoader implements ItemLoader{
 
     public static void main(String[] args){
 
-        ItemXMLLoader xmlLoader =  new ItemXMLLoader("data/item_catalog.xml");
+        ItemXMLLoaderImpl xmlLoader =  new ItemXMLLoaderImpl("data/item_catalog.xml");
         try {
             xmlLoader.load();
         } catch (LoaderFileNotFoundException e) {
