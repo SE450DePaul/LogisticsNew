@@ -1,0 +1,93 @@
+<facilities>
+    <facility>
+        <name>Seattle, WA</name>
+        <rate>8</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>San Francisco, CA</name>
+        <rate>12</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>Los Angeles, CA</name>
+        <rate>10</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>Phoenix, AZ</name>
+        <rate>8</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>Denver, CO</name>
+        <rate>10</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>Santa Fe, NM</name>
+        <rate>8</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>Fargo, ND</name>
+        <rate>8</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>Austin, TX</name>
+        <rate>10</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>St. Louis, MO</name>
+        <rate>12</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>Chicago, IL</name>
+        <rate>10</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>New Orleans, LA</name>
+        <rate>10</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>Nashville, TN</name>
+        <rate>8</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>Detroit, MI</name>
+        <rate>10</rate>
+        <cost>300</cost>
+    </facility>
+
+    <facility>
+        <name>Boston, MA</name>
+        <rate>10</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>New York City, NY</name>
+        <rate>14</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>Norfolk, VA</name>
+        <rate>10</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>Atlanta, GA</name>
+        <rate>10</rate>
+        <cost>300</cost>
+    </facility>
+    <facility>
+        <name>Miami, FL</name>
+        <rate>12</rate>
+        <cost>300</cost>
+    </facility>
+</facilities>

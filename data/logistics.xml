@@ -1,0 +1,801 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<logistics version="1.0">
+    <facilities>
+        <facility>
+            <name>Seattle, WA</name>
+            <rate>8</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>San Francisco, CA</name>
+            <rate>12</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>Los Angeles, CA</name>
+            <rate>10</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>Phoenix, AZ</name>
+            <rate>8</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>Denver, CO</name>
+            <rate>10</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>Santa Fe, NM</name>
+            <rate>8</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>Fargo, ND</name>
+            <rate>8</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>Austin, TX</name>
+            <rate>10</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>St. Louis, MO</name>
+            <rate>12</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>Chicago, IL</name>
+            <rate>10</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>New Orleans, LA</name>
+            <rate>10</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>Nashville, TN</name>
+            <rate>8</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>Detroit, MI</name>
+            <rate>10</rate>
+            <cost>300</cost>
+        </facility>
+
+        <facility>
+            <name>Boston, MA</name>
+            <rate>10</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>New York City, NY</name>
+            <rate>14</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>Norfolk, VA</name>
+            <rate>10</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>Atlanta, GA</name>
+            <rate>10</rate>
+            <cost>300</cost>
+        </facility>
+        <facility>
+            <name>Miami, FL</name>
+            <rate>12</rate>
+            <cost>300</cost>
+        </facility>
+    </facilities>
+
+
+    <facility_network>
+        <facility>
+            <name>Seattle, WA</name>
+            <link>
+                <name>Fargo, ND</name>
+                <distance>1426</distance>
+            </link>
+            <link>
+                <name>San Francisco, CA</name>
+                <distance>808</distance>
+            </link>
+        </facility>
+
+        <facility>
+            <name>San Francisco, CA</name>
+            <link>
+                <name>Seattle, WA</name>
+                <distance>808</distance>
+            </link>
+            <link>
+                <name>Denver, CO</name>
+                <distance>1249</distance>
+            </link>
+            <link>
+                <name>Los Angeles, CA</name>
+                <distance>382</distance>
+            </link>
+        </facility>
+
+        <facility>
+            <name>Los Angeles, CA</name>
+            <link>
+                <name>San Francisco, CA</name>
+                <distance>382</distance>
+            </link>
+            <link>
+                <name>Phoenix, AZ</name>
+                <distance>372</distance>
+            </link>
+        </facility>
+
+        <facility>
+            <name>Phoenix, AZ</name>
+            <link>
+                <name>Los Angeles, CA</name>
+                <distance>372</distance>
+            </link>
+            <link>
+                <name>Santa Fe, NM</name>
+                <distance>480</distance>
+            </link>
+        </facility>
+
+        <facility>
+            <name>Denver, CO</name>
+            <link>
+                <name>San Francisco, CA</name>
+                <distance>1249</distance>
+            </link>
+            <link>
+                <name>Santa Fe, NM</name>
+                <distance>392</distance>
+            </link>
+            <link>
+                <name>Fargo, ND</name>
+                <distance>889</distance>
+            </link>
+            <link>
+                <name>St. Louis, MO</name>
+                <distance>851</distance>
+            </link>
+        </facility>
+
+        <facility>
+            <name>Santa Fe, NM</name>
+            <link>
+                <name>Phoenix, AZ</name>
+                <distance>480</distance>
+            </link>
+            <link>
+                <name>Denver, CO</name>
+                <distance>392</distance>
+            </link>
+            <link>
+                <name>St. Louis, MO</name>
+                <distance>1032</distance>
+            </link>
+            <link>
+                <name>Austin, TX</name>
+                <distance>688</distance>
+            </link>
+        </facility>
+
+
+        <facility>
+            <name>Fargo, ND</name>
+            <link>
+                <name>Seattle, WA</name>
+                <distance>1426</distance>
+            </link>
+            <link>
+                <name>Denver, CO</name>
+                <distance>889</distance>
+            </link>
+            <link>
+                <name>Chicago, IL</name>
+                <distance>643</distance>
+            </link>
+        </facility>
+
+        <facility>
+            <name>Austin, TX</name>
+            <link>
+                <name>Santa Fe, NM</name>
+                <distance>688</distance>
+            </link>
+            <link>
+                <name>St. Louis, MO</name>
+                <distance>825</distance>
+            </link>
+            <link>
+                <name>New Orleans, LA</name>
+                <distance>512</distance>
+            </link>
+        </facility>
+
+        <facility>
+            <name>St. Louis, MO</name>
+            <link>
+                <name>Chicago, IL</name>
+                <distance>297</distance>
+            </link>
+            <link>
+                <name>Nashville, TN</name>
+                <distance>309</distance>
+            </link>
+            <link>
+                <name>Austin, TX</name>
+                <distance>825</distance>
+            </link>
+            <link>
+                <name>Santa Fe, NM</name>
+                <distance>1032</distance>
+            </link>
+            <link>
+                <name>Denver, CO</name>
+                <distance>851</distance>
+            </link>
+        </facility>
+
+        <facility>
+            <name>Chicago, IL</name>
+            <link>
+                <name>Fargo, ND</name>
+                <distance>643</distance>
+            </link>
+            <link>
+                <name>St. Louis, MO</name>
+                <distance>297</distance>
+            </link>
+            <link>
+                <name>New York City, NY</name>
+                <distance>790</distance>
+            </link>
+            <link>
+                <name>Detroit, MI</name>
+                <distance>282</distance>
+            </link>
+        </facility>
+
+        <facility>
+            <name>New Orleans, LA</name>
+            <link>
+                <name>Austin, TX</name>
+                <distance>512</distance>
+            </link>
+            <link>
+                <name>Nashville, TN</name>
+                <distance>532</distance>
+            </link>
+            <link>
+                <name>Atlanta, GA</name>
+                <distance>469</distance>
+            </link>
+            <link>
+                <name>Miami, FL</name>
+                <distance>864</distance>
+            </link>
+        </facility>
+
+        <facility>
+            <name>Nashville, TN</name>
+            <link>
+                <name>St. Louis, MO</name>
+                <distance>309</distance>
+            </link>
+            <link>
+                <name>New Orleans, LA</name>
+                <distance>532</distance>
+            </link>
+            <link>
+                <name>Norfolk, VA</name>
+                <distance>706</distance>
+            </link>
+        </facility>
+
+        <facility>
+            <name>Detroit, MI</name>
+            <link>
+                <name>Chicago, IL</name>
+                <distance>282</distance>
+            </link>
+            <link>
+                <name>New York City, NY</name>
+                <distance>614</distance>
+            </link>
+            <link>
+                <name>Boston, MA</name>
+                <distance>719</distance>
+            </link>
+        </facility>
+
+        <facility>
+            <name>Boston, MA</name>
+            <link>
+                <name>Detroit, MI</name>
+                <distance>719</distance>
+            </link>
+            <link>
+                <name>New York City, NY</name>
+                <distance>215</distance>
+            </link>
+        </facility>
+
+
+        <facility>
+            <name>New York City, NY</name>
+            <link>
+                <name>Boston, MA</name>
+                <distance>215</distance>
+            </link>
+            <link>
+                <name>Detroit, MI</name>
+                <distance>614</distance>
+            </link>
+            <link>
+                <name>Chicago, IL</name>
+                <distance>790</distance>
+            </link>
+            <link>
+                <name>Norfolk, VA</name>
+                <distance>363</distance>
+            </link>
+        </facility>
+
+
+        <facility>
+            <name>Norfolk, VA</name>
+            <link>
+                <name>New York City, NY</name>
+                <distance>363</distance>
+            </link>
+            <link>
+                <name>Nashville, TN</name>
+                <distance>706</distance>
+            </link>
+            <link>
+                <name>Atlanta, GA</name>
+                <distance>566</distance>
+            </link>
+        </facility>
+
+
+        <facility>
+            <name>Atlanta, GA</name>
+            <link>
+                <name>Norfolk, VA</name>
+                <distance>566</distance>
+            </link>
+            <link>
+                <name>New Orleans, LA</name>
+                <distance>469</distance>
+            </link>
+            <link>
+                <name>Miami, FL</name>
+                <distance>663</distance>
+            </link>
+        </facility>
+
+        <facility>
+            <name>Miami, FL</name>
+            <link>
+                <name>Atlanta, GA</name>
+                <distance>663</distance>
+            </link>
+            <link>
+                <name>New Orleans, LA</name>
+                <distance>864</distance>
+            </link>
+        </facility>
+    </facility_network>
+
+
+    <item_catalog>
+        <item id="ABC123">
+            <price>550</price>
+        </item>
+        <item id="CR2032">
+            <price>240</price>
+        </item>
+        <item id="CT1928">
+            <price>910</price>
+        </item>
+        <item id="E241i">
+            <price>10,400</price>
+        </item>
+        <item id="JBL3100">
+            <price>180</price>
+        </item>
+        <item id="MM35P">
+            <price>1,950</price>
+        </item>
+        <item id="PL132-C">
+            <price>440</price>
+        </item>
+        <item id="PU238">
+            <price>2,200</price>
+        </item>
+        <item id="RL123A">
+            <price>360</price>
+        </item>
+        <item id="RTF110">
+            <price>715</price>
+        </item>
+        <item id="RX100-3">
+            <price>642</price>
+        </item>
+        <item id="SN-241-L">
+            <price>620</price>
+        </item>
+        <item id="SR71-D">
+            <price>1,600</price>
+        </item>
+        <item id="XLK200B">
+            <price>820</price>
+        </item>
+        <item id="XTP202">
+            <price>345</price>
+        </item>
+        <item id="ZTF109">
+            <price>1,100</price>
+        </item>
+    </item_catalog>
+
+    <facility_inventory>
+        <facility>
+            <name>Seattle, WA</name>
+            <item>
+                <id>ABC123</id>
+                <quantity>45</quantity>
+            </item>
+            <item>
+                <id>JBL3100</id>
+                <quantity>52</quantity>
+            </item>
+            <item>
+                <id>52</id>
+                <quantity>PL132-C</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>San Francisco, CA</name>
+            <item>
+                <id>RL123A</id>
+                <quantity>40</quantity>
+            </item>
+            <item>
+                <id>XLK200B</id>
+                <quantity>8</quantity>
+            </item>
+            <item>
+                <id>8</id>
+                <quantity>SR71-D</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>Los Angeles, CA</name>
+            <item>
+                <id>RX100-3</id>
+                <quantity>57</quantity>
+            </item>
+            <item>
+                <id>JBL3100</id>
+                <quantity>60</quantity>
+            </item>
+            <item>
+                <id>60</id>
+                <quantity>E241i</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>Phoenix, AZ</name>
+            <item>
+                <id>RX100-3</id>
+                <quantity>18</quantity>
+            </item>
+            <item>
+                <id>SR71-D</id>
+                <quantity>55</quantity>
+            </item>
+            <item>
+                <id>55</id>
+                <quantity>SN-241-L</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>Denver, CO</name>
+            <item>
+                <id>ABC123</id>
+                <quantity>80</quantity>
+            </item>
+            <item>
+                <id>RL123A</id>
+                <quantity>110</quantity>
+            </item>
+            <item>
+                <id>110</id>
+                <quantity>RTF110</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>Santa Fe, NM</name>
+            <item>
+                <id>RX100-3</id>
+                <quantity>144</quantity>
+            </item>
+            <item>
+                <id>CR2032</id>
+                <quantity>280</quantity>
+            </item>
+            <item>
+                <id>280</id>
+                <quantity />
+            </item>
+        </facility>
+        <facility>
+            <name>Fargo, ND</name>
+            <item>
+                <id>ABC123</id>
+                <quantity>25</quantity>
+            </item>
+            <item>
+                <id>JBL3100</id>
+                <quantity>32</quantity>
+            </item>
+            <item>
+                <id>32</id>
+                <quantity>XLK200B</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>Austin, TX</name>
+            <item>
+                <id>RL123A</id>
+                <quantity>66</quantity>
+            </item>
+            <item>
+                <id>RX100-3</id>
+                <quantity>35</quantity>
+            </item>
+            <item>
+                <id>35</id>
+                <quantity>SN-241-L</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>St. Louis, MO</name>
+            <item>
+                <id>ABC123</id>
+                <quantity>70</quantity>
+            </item>
+            <item>
+                <id>SR71-D</id>
+                <quantity>45</quantity>
+            </item>
+            <item>
+                <id>45</id>
+                <quantity>PU238</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>Chicago, IL</name>
+            <item>
+                <id>ABC123</id>
+                <quantity>60</quantity>
+            </item>
+            <item>
+                <id>E241i</id>
+                <quantity>64</quantity>
+            </item>
+            <item>
+                <id>64</id>
+                <quantity>CT1928</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>New Orleans, LA</name>
+            <item>
+                <id>MM35P</id>
+                <quantity>100</quantity>
+            </item>
+            <item>
+                <id>PU238</id>
+                <quantity>49</quantity>
+            </item>
+            <item>
+                <id>49</id>
+                <quantity>ZTF109</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>Nashville, TN</name>
+            <item>
+                <id>RX100-3</id>
+                <quantity>78</quantity>
+            </item>
+            <item>
+                <id>XLK200B</id>
+                <quantity>28</quantity>
+            </item>
+            <item>
+                <id>28</id>
+                <quantity>CR2032</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>Detroit, MI</name>
+            <item>
+                <id>JBL3100</id>
+                <quantity>117</quantity>
+            </item>
+            <item>
+                <id>SR71-D</id>
+                <quantity>8</quantity>
+            </item>
+            <item>
+                <id>8</id>
+                <quantity>CT1928</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>Boston, MA</name>
+            <item>
+                <id>MM35P</id>
+                <quantity>47</quantity>
+            </item>
+            <item>
+                <id>PL132-C</id>
+                <quantity>3</quantity>
+            </item>
+            <item>
+                <id>3</id>
+                <quantity>CT1928</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>New York City, NY</name>
+            <item>
+                <id>RL123A</id>
+                <quantity>12</quantity>
+            </item>
+            <item>
+                <id>CR2032</id>
+                <quantity>132</quantity>
+            </item>
+            <item>
+                <id>132</id>
+                <quantity>E241i</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>Norfolk, VA</name>
+            <item>
+                <id>MM35P</id>
+                <quantity>66</quantity>
+            </item>
+            <item>
+                <id>RL123A</id>
+                <quantity>50</quantity>
+            </item>
+            <item>
+                <id>50</id>
+                <quantity>XLK200B</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>Atlanta, GA</name>
+            <item>
+                <id>RX100-3</id>
+                <quantity>90</quantity>
+            </item>
+            <item>
+                <id>E241i</id>
+                <quantity>32</quantity>
+            </item>
+            <item>
+                <id>32</id>
+                <quantity>PU238</quantity>
+            </item>
+        </facility>
+        <facility>
+            <name>Miami, FL</name>
+            <item>
+                <id>MM35P</id>
+                <quantity>16</quantity>
+            </item>
+            <item>
+                <id>JBL3100</id>
+                <quantity>44</quantity>
+            </item>
+            <item>
+                <id>44</id>
+                <quantity>SR71-D</quantity>
+            </item>
+        </facility>
+    </facility_inventory>
+    <orders>
+        <order id="TO-001">
+            <time>Day 1</time>
+            <destination>Miami, FL</destination>
+            <item>
+                <id>ABC123</id>
+                <quantity>180</quantity>
+            </item>
+            <item>
+                <id>CR2032</id>
+                <quantity>230</quantity>
+            </item>
+        </order>
+
+        <order id="TO-002">
+            <time>Day 1</time>
+            <destination>Boston, MA</destination>
+            <item>
+                <id>PL132-C</id>
+                <quantity>5</quantity>
+            </item>
+            <item>
+                <id>XLK200B</id>
+                <quantity>120</quantity>
+            </item>
+        </order>
+
+        <order id="TO-003">
+            <time>Day 4</time>
+            <destination>Seattle, WA</destination>
+            <item>
+                <id>XTP202</id>
+                <quantity>100</quantity>
+            </item>
+            <item>
+                <id>E241i</id>
+                <quantity>105</quantity>
+            </item>
+        </order>
+
+        <order id="TO-004">
+            <time>Day 10</time>
+            <destination>Phoenix, AZ</destination>
+            <item>
+                <id>CR2032</id>
+                <quantity>200</quantity>
+            </item>
+            <item>
+                <id>SR71-D</id>
+                <quantity>85</quantity>
+            </item>
+        </order>
+
+        <order id="TO-005">
+            <time>Day 7</time>
+            <destination>Chicago, IL</destination>
+            <item>
+                <id>XLK200B</id>
+                <quantity>120</quantity>
+            </item>
+            <item>
+                <id>RX100-3</id>
+                <quantity>200</quantity>
+            </item>
+        </order>
+
+
+        <order id="TO-006">
+            <time>Day 8</time>
+            <destination>Denver, CO</destination>
+            <item>
+                <id>CT1928</id>
+                <quantity>120</quantity>
+            </item>
+        </order>
+
+    </orders>
+</logistics>

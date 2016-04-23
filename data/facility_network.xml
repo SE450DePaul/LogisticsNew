@@ -1,0 +1,301 @@
+<facility_network>
+    <facility>
+        <name>Seattle, WA</name>
+        <link>
+            <name>Fargo, ND</name>
+            <distance>1426</distance>
+        </link>
+        <link>
+            <name>San Francisco, CA</name>
+            <distance>808</distance>
+        </link>
+    </facility>
+
+    <facility>
+        <name>San Francisco, CA</name>
+        <link>
+            <name>Seattle, WA</name>
+            <distance>808</distance>
+        </link>
+        <link>
+            <name>Denver, CO</name>
+            <distance>1249</distance>
+        </link>
+        <link>
+            <name>Los Angeles, CA</name>
+            <distance>382</distance>
+        </link>
+    </facility>
+
+    <facility>
+        <name>Los Angeles, CA</name>
+        <link>
+            <name>San Francisco, CA</name>
+            <distance>382</distance>
+        </link>
+        <link>
+            <name>Phoenix, AZ</name>
+            <distance>372</distance>
+        </link>
+    </facility>
+
+    <facility>
+        <name>Phoenix, AZ</name>
+        <link>
+            <name>Los Angeles, CA</name>
+            <distance>372</distance>
+        </link>
+        <link>
+            <name>Santa Fe, NM</name>
+            <distance>480</distance>
+        </link>
+    </facility>
+
+    <facility>
+        <name>Denver, CO</name>
+        <link>
+            <name>San Francisco, CA</name>
+            <distance>1249</distance>
+        </link>
+        <link>
+            <name>Santa Fe, NM</name>
+            <distance>392</distance>
+        </link>
+        <link>
+            <name>Fargo, ND</name>
+            <distance>889</distance>
+        </link>
+        <link>
+            <name>St. Louis, MO</name>
+            <distance>851</distance>
+        </link>
+    </facility>
+
+    <facility>
+        <name>Santa Fe, NM</name>
+        <link>
+            <name>Phoenix, AZ</name>
+            <distance>480</distance>
+        </link>
+        <link>
+            <name>Denver, CO</name>
+            <distance>392</distance>
+        </link>
+        <link>
+            <name>St. Louis, MO</name>
+            <distance>1032</distance>
+        </link>
+        <link>
+            <name>Austin, TX</name>
+            <distance>688</distance>
+        </link>
+    </facility>
+
+
+    <facility>
+        <name>Fargo, ND</name>
+        <link>
+            <name>Seattle, WA</name>
+            <distance>1426</distance>
+        </link>
+        <link>
+            <name>Denver, CO</name>
+            <distance>889</distance>
+        </link>
+        <link>
+            <name>Chicago, IL</name>
+            <distance>643</distance>
+        </link>
+    </facility>
+
+    <facility>
+        <name>Austin, TX</name>
+        <link>
+            <name>Santa Fe, NM</name>
+            <distance>688</distance>
+        </link>
+        <link>
+            <name>St. Louis, MO</name>
+            <distance>825</distance>
+        </link>
+        <link>
+            <name>New Orleans, LA</name>
+            <distance>512</distance>
+        </link>
+    </facility>
+
+    <facility>
+        <name>St. Louis, MO</name>
+        <link>
+            <name>Chicago, IL</name>
+            <distance>297</distance>
+        </link>
+        <link>
+            <name>Nashville, TN</name>
+            <distance>309</distance>
+        </link>
+        <link>
+            <name>Austin, TX</name>
+            <distance>825</distance>
+        </link>
+        <link>
+            <name>Santa Fe, NM</name>
+            <distance>1032</distance>
+        </link>
+        <link>
+            <name>Denver, CO</name>
+            <distance>851</distance>
+        </link>
+    </facility>
+
+    <facility>
+        <name>Chicago, IL</name>
+        <link>
+            <name>Fargo, ND</name>
+            <distance>643</distance>
+        </link>
+        <link>
+            <name>St. Louis, MO</name>
+            <distance>297</distance>
+        </link>
+        <link>
+            <name>New York City, NY</name>
+            <distance>790</distance>
+        </link>
+        <link>
+            <name>Detroit, MI</name>
+            <distance>282</distance>
+        </link>
+    </facility>
+
+    <facility>
+        <name>New Orleans, LA</name>
+        <link>
+            <name>Austin, TX</name>
+            <distance>512</distance>
+        </link>
+        <link>
+            <name>Nashville, TN</name>
+            <distance>532</distance>
+        </link>
+        <link>
+            <name>Atlanta, GA</name>
+            <distance>469</distance>
+        </link>
+        <link>
+            <name>Miami, FL</name>
+            <distance>864</distance>
+        </link>
+    </facility>
+
+    <facility>
+        <name>Nashville, TN</name>
+        <link>
+            <name>St. Louis, MO</name>
+            <distance>309</distance>
+        </link>
+        <link>
+            <name>New Orleans, LA</name>
+            <distance>532</distance>
+        </link>
+        <link>
+            <name>Norfolk, VA</name>
+            <distance>706</distance>
+        </link>
+    </facility>
+
+    <facility>
+        <name>Detroit, MI</name>
+        <link>
+            <name>Chicago, IL</name>
+            <distance>282</distance>
+        </link>
+        <link>
+            <name>New York City, NY</name>
+            <distance>614</distance>
+        </link>
+        <link>
+            <name>Boston, MA</name>
+            <distance>719</distance>
+        </link>
+    </facility>
+
+    <facility>
+        <name>Boston, MA</name>
+        <link>
+            <name>Detroit, MI</name>
+            <distance>719</distance>
+        </link>
+        <link>
+            <name>New York City, NY</name>
+            <distance>215</distance>
+        </link>
+    </facility>
+
+
+    <facility>
+        <name>New York City, NY</name>
+        <link>
+            <name>Boston, MA</name>
+            <distance>215</distance>
+        </link>
+        <link>
+            <name>Detroit, MI</name>
+            <distance>614</distance>
+        </link>
+        <link>
+            <name>Chicago, IL</name>
+            <distance>790</distance>
+        </link>
+        <link>
+            <name>Norfolk, VA</name>
+            <distance>363</distance>
+        </link>
+    </facility>
+
+
+    <facility>
+        <name>Norfolk, VA</name>
+        <link>
+            <name>New York City, NY</name>
+            <distance>363</distance>
+        </link>
+        <link>
+            <name>Nashville, TN</name>
+            <distance>706</distance>
+        </link>
+        <link>
+            <name>Atlanta, GA</name>
+            <distance>566</distance>
+        </link>
+    </facility>
+
+
+    <facility>
+        <name>Atlanta, GA</name>
+        <link>
+            <name>Norfolk, VA</name>
+            <distance>566</distance>
+        </link>
+        <link>
+            <name>New Orleans, LA</name>
+            <distance>469</distance>
+        </link>
+        <link>
+            <name>Miami, FL</name>
+            <distance>663</distance>
+        </link>
+    </facility>
+
+    <facility>
+        <name>Miami, FL</name>
+        <link>
+            <name>Atlanta, GA</name>
+            <distance>663</distance>
+        </link>
+        <link>
+            <name>New Orleans, LA</name>
+            <distance>864</distance>
+        </link>
+    </facility>
+</facility_network>
