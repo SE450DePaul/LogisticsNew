@@ -22,7 +22,7 @@ public class ItemXMLLoaderImpl implements ItemLoader{
         this.filepath = filepath;
     }
 
-    public Item[] load() throws LoaderFileNotFoundException {
+    public ArrayList<Item> load() throws LoaderFileNotFoundException {
 
         ArrayList<Item> items = new ArrayList<Item>();
 
@@ -57,14 +57,14 @@ public class ItemXMLLoaderImpl implements ItemLoader{
                 String id = namedItem.getNodeValue();
                 Element element = (Element) itemEntries.item(i);
                 NodeList priceNode = element.getElementsByTagName("price");
-                String price = priceNode.item(0).getTextContent();
-//
-//                Item item = new ItemImpl();
-//                item.setPrice(price);
-//                item.setId(id);
+                Double price = Double.parseDouble(priceNode.item(0).getTextContent());
 
-                System.out.println("No " + i + ": Item price: " + price + " Item Id: " + id);
-//                items.add(item);
+                Item item = new ItemImpl();
+                item.setPrice(price);
+                item.setId(id);
+
+//                System.out.println("No " + i + ": Item price: " + price + " Item Id: " + id);
+                items.add(item);
 
             }
 
@@ -78,7 +78,7 @@ public class ItemXMLLoaderImpl implements ItemLoader{
         }
 
 
-        return new Item[10];
+        return items;
     }
 
 
