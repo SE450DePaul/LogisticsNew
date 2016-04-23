@@ -1,7 +1,9 @@
-package logistics.itemservice;
+package logistics.utilities.loader;
 
 
 import logistics.exceptions.LoaderFileNotFoundException;
+import logistics.itemservice.Item;
+import logistics.itemservice.ItemFactory;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by uchennafokoye on 4/22/16.
  */
-public class ItemXMLLoaderImpl implements ItemLoader{
+public class ItemXMLLoaderImpl implements ItemLoader {
 
     private String filepath;
     public ItemXMLLoaderImpl(String filepath){

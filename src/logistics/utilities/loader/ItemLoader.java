@@ -1,6 +1,7 @@
-package logistics.itemservice;
+package logistics.utilities.loader;
 
 import logistics.exceptions.LoaderFileNotFoundException;
+import logistics.itemservice.Item;
 import logistics.utilities.loader.Loader;
 
 import java.util.ArrayList;

@@ -1,8 +1,5 @@
 package logistics.utilities.loader;
 
-import logistics.itemservice.ItemLoader;
-import logistics.itemservice.ItemXMLLoaderImpl;
-
 /**
  * Created by uchennafokoye on 4/23/16.
  */
