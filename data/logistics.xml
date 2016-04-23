@@ -409,13 +409,13 @@
             <price>910</price>
         </item>
         <item id="E241i">
-            <price>10,400</price>
+            <price>10400</price>
         </item>
         <item id="JBL3100">
             <price>180</price>
         </item>
         <item id="MM35P">
-            <price>1,950</price>
+            <price>1950</price>
         </item>
         <item id="PL132-C">
             <price>440</price>
@@ -436,7 +436,7 @@
             <price>620</price>
         </item>
         <item id="SR71-D">
-            <price>1,600</price>
+            <price>1600</price>
         </item>
         <item id="XLK200B">
             <price>820</price>
@@ -445,7 +445,7 @@
             <price>345</price>
         </item>
         <item id="ZTF109">
-            <price>1,100</price>
+            <price>1100</price>
         </item>
     </item_catalog>
 
