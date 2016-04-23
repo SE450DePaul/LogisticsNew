@@ -1,9 +1,8 @@
 package logistics.itemservice;
 
 import logistics.exceptions.LoaderFileNotFoundException;
-import logistics.utilities.loader.ItemLoaderFactory;
 import logistics.utilities.loader.Loader;
-import logistics.utilities.loader.LoaderFactory;
+import logistics.utilities.loader.factory.LoaderFactory;
 
 import java.util.ArrayList;
 
@@ -14,30 +13,31 @@ public final class ItemCatalogService {
 
     private volatile static ItemCatalogService instance;
     private Loader loader;
+    private ArrayList<Item> items = new ArrayList<>();
 
-    private ItemCatalogService(LoaderFactory loaderFactory) {
+    private ItemCatalogService() {
+            LoaderFactory loaderFactory = LoaderFactory.getLoaderFactory("item");
             loader = loaderFactory.createLoader("xml", "data/item_catalog.xml");
-            ArrayList<Item> items = new ArrayList<Item>();
+
             try {
                 items = loader.load();
             } catch (LoaderFileNotFoundException e) {
                 e.printStackTrace();
             }
 
-            int i = 1;
-            for (Item item : items) {
-                System.out.println("No " + i + " Item id: " + item.getId() + " Item price: " + item.getPrice());
-                i++;
-            }
-
-//            ItemDTO itemDTO = new ItemDTO(items);
+//         For debugging:
+//            int i = 1;
+//            for (Item item : items) {
+//                System.out.println("No " + i + " Item id: " + item.getId() + " Item price: " + item.getPrice());
+//                i++;
+//            }
     }
 
     public static ItemCatalogService getInstance() {
         if (instance == null){
             synchronized (ItemCatalogService.class){
                 if (instance == null){
-                    instance = new ItemCatalogService(new ItemLoaderFactory());
+                    instance = new ItemCatalogService();
                 }
             }
         }
@@ -46,9 +46,18 @@ public final class ItemCatalogService {
     }
 
 
+    public ItemDTO getItem(int i){
+        Item item = items.get(i);
+        if (item == null) return null;
+        return new ItemDTO(item.getId(), item.getPrice());
+    }
+
     public static void main(String[] args){
 
         ItemCatalogService itemCatalogService = ItemCatalogService.getInstance();
+        ItemDTO itemDTO = itemCatalogService.getItem(0);
+        System.out.println("Please get first item");
+        System.out.println(" Item id: " + itemDTO.id + " Item price: " + itemDTO.price);
 
     }
 
