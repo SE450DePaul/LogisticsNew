@@ -59,9 +59,7 @@ public class ItemXMLLoaderImpl implements ItemLoader{
                 NodeList priceNode = element.getElementsByTagName("price");
                 Double price = Double.parseDouble(priceNode.item(0).getTextContent());
 
-                Item item = new ItemImpl();
-                item.setPrice(price);
-                item.setId(id);
+                Item item = ItemFactory.build(id, price);
 
 //                System.out.println("No " + i + ": Item price: " + price + " Item Id: " + id);
                 items.add(item);
