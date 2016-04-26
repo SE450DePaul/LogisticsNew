@@ -1,6 +1,7 @@
 package logistics.facilityservice;
 
 import logistics.facilityservice.inventory.Inventory;
+import logistics.utilities.exceptions.IllegalParameterException;
 
 import java.util.ArrayList;
 
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 public class FacilityFactory 
 {
 
-    public static Facility build(String name, Double rate, Double cost, ArrayList<Inventory> inventories)
+    public static Facility build(String name, Double rate, Double cost, ArrayList<Inventory> inventories) throws IllegalParameterException
     {
         return new FacilityImpl(name, rate, cost, inventories);
     }

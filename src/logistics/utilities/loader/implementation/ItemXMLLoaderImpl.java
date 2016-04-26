@@ -1,6 +1,7 @@
 package logistics.utilities.loader.implementation;
 
 
+import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.itemservice.Item;
 import logistics.itemservice.ItemFactory;
@@ -75,6 +76,8 @@ public class ItemXMLLoaderImpl implements ItemLoader {
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        } catch (IllegalParameterException e) {
             e.printStackTrace();
         }
 

@@ -5,6 +5,7 @@ import logistics.utilities.loader.interfaces.Loader;
 import logistics.utilities.loader.factory.LoaderFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by uchennafokoye on 4/22/16.
@@ -14,6 +15,7 @@ public final class ItemCatalogService {
     private volatile static ItemCatalogService instance;
     private Loader loader;
     private ArrayList<Item> items = new ArrayList<>();
+    private HashMap<String, Item> itemsHash = new HashMap<>();
 
     private ItemCatalogService() {
             LoaderFactory loaderFactory = LoaderFactory.getLoaderFactory("item");
@@ -21,16 +23,14 @@ public final class ItemCatalogService {
 
             try {
                 items = loader.load();
+                for (Item item : items){
+                    itemsHash.put(item.getId(), item);
+                }
             } catch (LoaderFileNotFoundException e) {
                 e.printStackTrace();
             }
 
-//         For debugging:
-//            int i = 1;
-//            for (Item item : items) {
-//                System.out.println("No " + i + " Item id: " + item.getId() + " Item price: " + item.getPrice());
-//                i++;
-//            }
+
     }
 
     public static ItemCatalogService getInstance() {
@@ -46,8 +46,8 @@ public final class ItemCatalogService {
     }
 
 
-    public ItemDTO getItem(int i){
-        Item item = items.get(i);
+    public ItemDTO getItem(String itemId){
+        Item item = itemsHash.get(itemId);
         if (item == null) return null;
         return new ItemDTO(item.getId(), item.getPrice());
     }
@@ -55,7 +55,7 @@ public final class ItemCatalogService {
     public static void main(String[] args){
 
         ItemCatalogService itemCatalogService = ItemCatalogService.getInstance();
-        ItemDTO itemDTO = itemCatalogService.getItem(0);
+        ItemDTO itemDTO = itemCatalogService.getItem("ABC123");
         System.out.println("Please get first item");
         System.out.println(" Item id: " + itemDTO.id + " Item price: " + itemDTO.price);
 

@@ -4,6 +4,7 @@ import logistics.facilityservice.Facility;
 import logistics.facilityservice.FacilityFactory;
 import logistics.facilityservice.inventory.Inventory;
 import logistics.facilityservice.inventory.InventoryFactory;
+import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.utilities.loader.interfaces.FacilityLoader;
 import org.w3c.dom.Document;
@@ -122,9 +123,11 @@ public class FacilityInventoryXmlLoaderImpl implements FacilityLoader
 	        catch (IOException e) 
 	        {
 	            e.printStackTrace();
-	        }
+	        } catch (IllegalParameterException e) {
+				e.printStackTrace();
+			}
 
-	        return facilities;
+			return facilities;
 	    }
 
 

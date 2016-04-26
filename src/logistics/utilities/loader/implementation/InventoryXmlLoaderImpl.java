@@ -8,7 +8,8 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import logistics.inventoryservice.Inventory;
+import logistics.facilityservice.inventory.Inventory;
+import logistics.facilityservice.inventory.InventoryFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -16,7 +17,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
-import logistics.inventoryservice.InventoryFactory;
 
 /**
  * 
@@ -38,7 +38,7 @@ public class InventoryXmlLoaderImpl //implements XmlLoadable
 	        filepath = path;
 	 }
 	
-	    public void /*ArrayList<Inventory>*/ load() throws logistics.utilities.exceptions.LoaderFileNotFoundException
+	    public ArrayList<Inventory> load() throws LoaderFileNotFoundException
 	    {
 
 	        ArrayList<Inventory> facilityinvs = new ArrayList<Inventory>();
@@ -111,7 +111,7 @@ public class InventoryXmlLoaderImpl //implements XmlLoadable
 	                    itemDescriptions.add(itemId + "with Quantity " + itemQuantity);
 	                }    
 	                
-	                Inventory facilityinv = InventoryFactory.build(name, itemId, itemQty );
+	                Inventory facilityinv = InventoryFactory.build(itemId, itemQty);
 
 	                System.out.println("Facility " + i + " : " + name + "Items: " + itemId + " Quantity " + itemQty);
 	                facilityinvs.add(facilityinv);
@@ -130,7 +130,7 @@ public class InventoryXmlLoaderImpl //implements XmlLoadable
 	            e.printStackTrace();
 	        }
 
-	        //return facilityinvs;
+	        return facilityinvs;
 	    }
 
 
