@@ -56,7 +56,7 @@ public final class ItemCatalogService {
 
         ItemCatalogService itemCatalogService = ItemCatalogService.getInstance();
         ItemDTO itemDTO = itemCatalogService.getItem("ABC123");
-        System.out.println("Please get first item");
+        System.out.println("Please get item");
         System.out.println(" Item id: " + itemDTO.id + " Item price: " + itemDTO.price);
 
     }
