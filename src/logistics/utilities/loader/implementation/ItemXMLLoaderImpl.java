@@ -1,9 +1,10 @@
-package logistics.utilities.loader;
+package logistics.utilities.loader.implementation;
 
 
-import logistics.exceptions.LoaderFileNotFoundException;
+import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.itemservice.Item;
 import logistics.itemservice.ItemFactory;
+import logistics.utilities.loader.interfaces.ItemLoader;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 

@@ -1,7 +1,7 @@
 package logistics.utilities.loader.factory;
 
-import logistics.utilities.loader.ItemLoader;
-import logistics.utilities.loader.ItemXMLLoaderImpl;
+import logistics.utilities.loader.interfaces.ItemLoader;
+import logistics.utilities.loader.implementation.ItemXMLLoaderImpl;
 
 /**
  * Created by uchennafokoye on 4/23/16.

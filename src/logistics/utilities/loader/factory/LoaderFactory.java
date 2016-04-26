@@ -1,6 +1,6 @@
 package logistics.utilities.loader.factory;
 
-import logistics.utilities.loader.Loader;
+import logistics.utilities.loader.interfaces.Loader;
 
 /**
  * Created by uchennafokoye on 4/23/16.
@@ -12,7 +12,7 @@ public abstract class LoaderFactory {
         if (type == "item"){
             return new ItemLoaderFactory();
         } else if (type == "facility"){
-            return null;
+            return new FacilityLoaderFactory();
         }
 
         return null;
