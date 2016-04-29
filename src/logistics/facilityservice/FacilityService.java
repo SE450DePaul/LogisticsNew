@@ -1,11 +1,13 @@
 package logistics.facilityservice;
 
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
+import logistics.utilities.loader.LoaderConfig.FilePath;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
 
 import java.util.Collection;
 import java.util.HashMap;
+
 
 /**
  * @author David Olorundare and uchenna f. okoye
@@ -14,17 +16,16 @@ public final class FacilityService
 {
 
     private volatile static FacilityService instance;
-    private HashMap<String, Inventory> facilityHashMap = new HashMap<>();
-    private Loader<Inventory> loader;
+    private HashMap<String, Facility> facilityHashMap = new HashMap<>();
+    private Loader<Facility> loader;
 
 
     private FacilityService() {
-        LoaderFactory loaderFactory = LoaderFactory.getLoaderFactory("facility");
-        loader = loaderFactory.createLoader("xml", "data/facilities.xml");
+        loader = LoaderFactory.build("facility");
 
         try {
-            Collection<Inventory> facilities = loader.load();
-            for (Inventory facility : facilities){
+            Collection<Facility> facilities = loader.load();
+            for (Facility facility : facilities){
                 facilityHashMap.put(facility.getName(), facility);
             }
         } catch (LoaderFileNotFoundException e) {
@@ -48,7 +49,7 @@ public final class FacilityService
     }
 
     public FacilityDTO getFacility(String name) {
-        Inventory facility = facilityHashMap.get(name);
+        Facility facility = facilityHashMap.get(name);
         if (facility == null) return null;
         return new FacilityDTO(facility.getName(), facility.getCost(), facility.getRate());
     }

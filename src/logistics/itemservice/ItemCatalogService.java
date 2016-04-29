@@ -18,8 +18,7 @@ public final class ItemCatalogService {
     private HashMap<String, Item> itemsHash = new HashMap<>();
 
     private ItemCatalogService() {
-            LoaderFactory loaderFactory = LoaderFactory.getLoaderFactory("item");
-            loader = loaderFactory.createLoader("xml", "data/item_catalog.xml");
+            loader = LoaderFactory.build("item");
 
             try {
                 Collection<Item> items = loader.load();

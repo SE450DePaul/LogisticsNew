@@ -1,5 +1,6 @@
 package logistics.utilities.loader.factory;
 
+import logistics.utilities.loader.LoaderConfig;
 import logistics.utilities.loader.implementation.FacilityXmlLoaderImpl;
 import logistics.utilities.loader.interfaces.FacilityLoader;
 
@@ -8,13 +9,16 @@ import logistics.utilities.loader.interfaces.FacilityLoader;
  */
 public class FacilityLoaderFactory extends LoaderFactory {
 
-    public FacilityLoader createLoader(String type, String filepath) {
-        if (type.equals("xml")){
-            return new FacilityXmlLoaderImpl(filepath);
-        } else if (type.equals("json")){
-            return null;
+    public static FacilityLoader build() {
+        switch (LoaderConfig.FilePath.FILE_TYPE){
+            case "xml":
+                return new FacilityXmlLoaderImpl(LoaderConfig.FilePath.FACILITY);
+            case "json":
+                return null;
+            default:
+                return null;
         }
 
-        return null;
     }
+
 }

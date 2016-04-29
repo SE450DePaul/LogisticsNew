@@ -6,17 +6,17 @@ import logistics.utilities.loader.interfaces.Loader;
  * Created by uchennafokoye on 4/23/16.
  */
 public abstract class LoaderFactory {
-    public abstract Loader createLoader(String file_type, String file_path);
-    public static LoaderFactory getLoaderFactory(String type) {
-        type = type.toLowerCase();
+
+    public static Loader build(String type){
         if (type == "item"){
-            return new ItemLoaderFactory();
+            return ItemLoaderFactory.build();
         } else if (type == "facility"){
-            return new FacilityLoaderFactory();
+            return FacilityLoaderFactory.build();
         } else if (type == "inventory"){
-            return new InventoryLoaderFactory();
+            return InventoryLoaderFactory.build();
         }
 
         return null;
     }
+
 }

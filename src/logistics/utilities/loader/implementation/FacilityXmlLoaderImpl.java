@@ -8,7 +8,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import logistics.facilityservice.Inventory;
+import logistics.facilityservice.Facility;
 import logistics.facilityservice.FacilityFactory;
 import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.loader.interfaces.FacilityLoader;
@@ -34,10 +34,10 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 	        filepath = path;
 	 }
 	
-	    public ArrayList<Inventory> load() throws LoaderFileNotFoundException
+	    public ArrayList<Facility> load() throws LoaderFileNotFoundException
 	    {
 
-	        ArrayList<Inventory> facilities = new ArrayList<>();
+	        ArrayList<Facility> facilities = new ArrayList<>();
 
 	        try 
 	        {
@@ -80,7 +80,7 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 	                Double rate = Double.parseDouble(rateNode.item(0).getTextContent());
 	                Double cost = Double.parseDouble(costNode.item(0).getTextContent());
 	                
-	                Inventory facility = FacilityFactory.build(name, rate, cost);
+	                Facility facility = FacilityFactory.build(name, rate, cost);
 					facilities.add(facility);
 	            }
 	        } 
@@ -107,10 +107,10 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 	    public static void main(String[] args){
 
 	        FacilityXmlLoaderImpl xmlLoader =  new FacilityXmlLoaderImpl("data/facilities.xml");
-			ArrayList<Inventory> facilities;
+			ArrayList<Facility> facilities;
 			try {
 				facilities = xmlLoader.load();
-				for (Inventory f : facilities){
+				for (Facility f : facilities){
 
 					System.out.println(f.getName());
 					System.out.println("Cost: " + f.getCost());

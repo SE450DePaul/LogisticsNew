@@ -19,10 +19,10 @@ import java.util.ArrayList;
 /**
  * Created by uchennafokoye on 4/22/16.
  */
-public class ItemXMLLoaderImpl implements ItemLoader {
+public class ItemXmlLoaderImpl implements ItemLoader {
 
     private String filepath;
-    public ItemXMLLoaderImpl(String filepath){
+    public ItemXmlLoaderImpl(String filepath){
         this.filepath = filepath;
     }
 
@@ -89,7 +89,7 @@ public class ItemXMLLoaderImpl implements ItemLoader {
 
     public static void main(String[] args){
 
-        ItemXMLLoaderImpl xmlLoader =  new ItemXMLLoaderImpl("data/item_catalog.xml");
+        ItemXmlLoaderImpl xmlLoader =  new ItemXmlLoaderImpl("data/item_catalog.xml");
         try {
             xmlLoader.load();
         } catch (LoaderFileNotFoundException e) {

@@ -3,15 +3,17 @@ package logistics.utilities.loader;
 /**
  * Created by uchennafokoye on 4/28/16.
  */
-public abstract class LoaderConfig {
+public class LoaderConfig {
 
-    static final class FilePathInXML {
 
-        final String FACILITY = "data/facilities.xml";
-        final String ITEM = "data/item_catalog.xml";
-        final String NETWORK = "data/item_catalog.xml";
-        final String ORDERS = "data/orders.xml";
-        final String INVENTORY = "data/inventory.xml";
+    public static final class FilePath {
+
+        public static final String FILE_TYPE = "xml";
+        public static final String FACILITY = "data/facilities.xml";
+        public static final String ITEM = "data/item_catalog.xml";
+        public static final String NETWORK = "data/item_catalog.xml";
+        public static final String ORDERS = "data/orders.xml";
+        public static final String INVENTORY = "data/facility_inventory.xml";
 
     }
 

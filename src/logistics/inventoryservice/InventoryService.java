@@ -2,6 +2,7 @@ package logistics.inventoryservice;
 
 import logistics.inventoryservice.inventoryitem.InventoryItemDTO;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
+import logistics.utilities.loader.LoaderConfig.FilePath;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
 
@@ -20,8 +21,7 @@ public final class InventoryService
 
 
     private InventoryService() {
-        LoaderFactory loaderFactory = LoaderFactory.getLoaderFactory("inventory");
-        loader = loaderFactory.createLoader("xml", "data/facility_inventory.xml");
+        loader = LoaderFactory.build("inventory");
 
         try {
             Collection<Inventory> inventories = loader.load();

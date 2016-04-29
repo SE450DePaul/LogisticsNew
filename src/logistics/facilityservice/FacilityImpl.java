@@ -5,7 +5,7 @@ import logistics.utilities.exceptions.IllegalParameterException;
 /**
  * @author David Olorundare and uchenna f. okoye
  */
-public class FacilityImpl implements Inventory
+public class FacilityImpl implements Facility
 {
     private String name;
     private Double rate;

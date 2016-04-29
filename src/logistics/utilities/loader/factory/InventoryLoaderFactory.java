@@ -1,5 +1,6 @@
 package logistics.utilities.loader.factory;
 
+import logistics.utilities.loader.LoaderConfig;
 import logistics.utilities.loader.implementation.InventoryXmlLoaderImpl;
 import logistics.utilities.loader.interfaces.FacilityLoader;
 import logistics.utilities.loader.interfaces.InventoryLoader;
@@ -9,13 +10,17 @@ import logistics.utilities.loader.interfaces.InventoryLoader;
  */
 public class InventoryLoaderFactory extends LoaderFactory {
 
-    public InventoryLoader createLoader(String type, String filepath) {
-        if (type.equals("xml")){
-            return new InventoryXmlLoaderImpl(filepath);
-        } else if (type.equals("json")){
-            return null;
+
+    public static InventoryLoader build() {
+        switch (LoaderConfig.FilePath.FILE_TYPE){
+            case "xml":
+                return new InventoryXmlLoaderImpl(LoaderConfig.FilePath.INVENTORY);
+            case "json":
+                return null;
+            default:
+                return null;
         }
 
-        return null;
     }
+
 }

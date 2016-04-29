@@ -3,7 +3,7 @@ package logistics.facilityservice;
 /**
  * @author David Olorundare
  */
-public interface Inventory
+public interface Facility
 {
 
     String getName();

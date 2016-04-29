@@ -7,7 +7,7 @@ import logistics.utilities.exceptions.IllegalParameterException;
  */
 public class FacilityFactory 
 {
-    public static Inventory build(String name, Double rate, Double cost) throws IllegalParameterException
+    public static Facility build(String name, Double rate, Double cost) throws IllegalParameterException
     {
         return new FacilityImpl(name, rate, cost);
     }
