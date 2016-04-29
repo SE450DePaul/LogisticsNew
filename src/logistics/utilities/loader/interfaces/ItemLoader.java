@@ -1,14 +1,14 @@
 package logistics.utilities.loader.interfaces;
 
-import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.itemservice.Item;
+import logistics.utilities.exceptions.LoaderFileNotFoundException;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  * Created by uchennafokoye on 4/22/16.
  */
 public interface ItemLoader extends Loader<Item>
 {
-    ArrayList<Item> load() throws LoaderFileNotFoundException;
+    Collection<Item> load() throws LoaderFileNotFoundException;
 }

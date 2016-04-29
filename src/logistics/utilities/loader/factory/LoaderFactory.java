@@ -13,6 +13,8 @@ public abstract class LoaderFactory {
             return new ItemLoaderFactory();
         } else if (type == "facility"){
             return new FacilityLoaderFactory();
+        } else if (type == "inventory"){
+            return new InventoryLoaderFactory();
         }
 
         return null;

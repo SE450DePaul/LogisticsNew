@@ -1,23 +1,15 @@
 package logistics.facilityservice;
 
-import logistics.facilityservice.inventory.Inventory;
 import logistics.utilities.exceptions.IllegalParameterException;
 
-import java.util.ArrayList;
-
 /**
- * @author David Olorundare
+ * @author David Olorundare and uchenna f.okoye
  */
 public class FacilityFactory 
 {
-
-    public static Facility build(String name, Double rate, Double cost, ArrayList<Inventory> inventories) throws IllegalParameterException
+    public static Inventory build(String name, Double rate, Double cost) throws IllegalParameterException
     {
-        return new FacilityImpl(name, rate, cost, inventories);
+        return new FacilityImpl(name, rate, cost);
     }
 
-    public static Facility build(String name, Double rate, Double cost)
-    {
-        return null;
-    }
 }

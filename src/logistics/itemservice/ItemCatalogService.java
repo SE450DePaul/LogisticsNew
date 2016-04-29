@@ -4,7 +4,7 @@ import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.utilities.loader.interfaces.Loader;
 import logistics.utilities.loader.factory.LoaderFactory;
 
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 /**
@@ -14,7 +14,7 @@ public final class ItemCatalogService {
 
     private volatile static ItemCatalogService instance;
     private Loader loader;
-    private ArrayList<Item> items = new ArrayList<>();
+
     private HashMap<String, Item> itemsHash = new HashMap<>();
 
     private ItemCatalogService() {
@@ -22,7 +22,7 @@ public final class ItemCatalogService {
             loader = loaderFactory.createLoader("xml", "data/item_catalog.xml");
 
             try {
-                items = loader.load();
+                Collection<Item> items = loader.load();
                 for (Item item : items){
                     itemsHash.put(item.getId(), item);
                 }

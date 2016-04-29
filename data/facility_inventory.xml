@@ -10,8 +10,12 @@
             <quantity>52</quantity>
         </item>
         <item>
-            <id>52</id>
-            <quantity>PL132-C</quantity>
+            <id>PL132-C</id>
+            <quantity>4</quantity>
+        </item>
+        <item>
+            <id>PU238</id>
+            <quantity>60</quantity>
         </item>
     </facility>
     <facility>
@@ -25,8 +29,12 @@
             <quantity>8</quantity>
         </item>
         <item>
-            <id>8</id>
-            <quantity>SR71-D</quantity>
+            <id>SR71-D</id>
+            <quantity>81</quantity>
+        </item>
+        <item>
+            <id>CT1928</id>
+            <quantity>46</quantity>
         </item>
     </facility>
     <facility>
@@ -40,8 +48,12 @@
             <quantity>60</quantity>
         </item>
         <item>
-            <id>60</id>
-            <quantity>E241i</quantity>
+            <id>E241i</id>
+            <quantity>44</quantity>
+        </item>
+        <item>
+            <id>XTP202</id>
+            <quantity>32</quantity>
         </item>
     </facility>
     <facility>
@@ -55,8 +67,12 @@
             <quantity>55</quantity>
         </item>
         <item>
-            <id>55</id>
-            <quantity>SN-241-L</quantity>
+            <id>SN-241-L</id>
+            <quantity>22</quantity>
+        </item>
+        <item>
+            <id>ZTF109</id>
+            <quantity>54</quantity>
         </item>
     </facility>
     <facility>
@@ -70,8 +86,8 @@
             <quantity>110</quantity>
         </item>
         <item>
-            <id>110</id>
-            <quantity>RTF110</quantity>
+            <id>RTF110</id>
+            <quantity>100</quantity>
         </item>
     </facility>
     <facility>
@@ -83,10 +99,6 @@
         <item>
             <id>CR2032</id>
             <quantity>280</quantity>
-        </item>
-        <item>
-            <id>280</id>
-            <quantity />
         </item>
     </facility>
     <facility>
@@ -100,8 +112,8 @@
             <quantity>32</quantity>
         </item>
         <item>
-            <id>32</id>
-            <quantity>XLK200B</quantity>
+            <id>XLK200B</id>
+            <quantity>82</quantity>
         </item>
     </facility>
     <facility>
@@ -115,8 +127,8 @@
             <quantity>35</quantity>
         </item>
         <item>
-            <id>35</id>
-            <quantity>SN-241-L</quantity>
+            <id>SN-241-L</id>
+            <quantity>35</quantity>
         </item>
     </facility>
     <facility>
@@ -130,8 +142,8 @@
             <quantity>45</quantity>
         </item>
         <item>
-            <id>45</id>
-            <quantity>PU238</quantity>
+            <id>PU238</id>
+            <quantity>82</quantity>
         </item>
     </facility>
     <facility>
@@ -145,8 +157,16 @@
             <quantity>64</quantity>
         </item>
         <item>
-            <id>64</id>
-            <quantity>CT1928</quantity>
+            <id>CT1928</id>
+            <quantity>20</quantity>
+        </item>
+        <item>
+            <id>RTF110</id>
+            <quantity>110</quantity>
+        </item>
+        <item>
+            <id>XTP202</id>
+            <quantity>20</quantity>
         </item>
     </facility>
     <facility>
@@ -160,8 +180,8 @@
             <quantity>49</quantity>
         </item>
         <item>
-            <id>49</id>
-            <quantity>ZTF109</quantity>
+            <id>ZTF109</id>
+            <quantity>120</quantity>
         </item>
     </facility>
     <facility>
@@ -175,8 +195,12 @@
             <quantity>28</quantity>
         </item>
         <item>
-            <id>28</id>
-            <quantity>CR2032</quantity>
+            <id>CR2032</id>
+            <quantity>366</quantity>
+        </item>
+        <item>
+            <id>SN-241-L</id>
+            <quantity>16</quantity>
         </item>
     </facility>
     <facility>
@@ -190,8 +214,8 @@
             <quantity>8</quantity>
         </item>
         <item>
-            <id>8</id>
-            <quantity>CT1928</quantity>
+            <id>CT1928</id>
+            <quantity>72</quantity>
         </item>
     </facility>
     <facility>
@@ -205,8 +229,8 @@
             <quantity>3</quantity>
         </item>
         <item>
-            <id>3</id>
-            <quantity>CT1928</quantity>
+            <id>CT1928</id>
+            <quantity>65</quantity>
         </item>
     </facility>
     <facility>
@@ -220,8 +244,12 @@
             <quantity>132</quantity>
         </item>
         <item>
-            <id>132</id>
-            <quantity>E241i</quantity>
+            <id>E241i</id>
+            <quantity>72</quantity>
+        </item>
+        <item>
+            <id>ZTF109</id>
+            <quantity>28</quantity>
         </item>
     </facility>
     <facility>
@@ -235,8 +263,8 @@
             <quantity>50</quantity>
         </item>
         <item>
-            <id>50</id>
-            <quantity>XLK200B</quantity>
+            <id>XLK200B</id>
+            <quantity>14</quantity>
         </item>
     </facility>
     <facility>
@@ -250,8 +278,8 @@
             <quantity>32</quantity>
         </item>
         <item>
-            <id>32</id>
-            <quantity>PU238</quantity>
+            <id>PU238</id>
+            <quantity>120</quantity>
         </item>
     </facility>
     <facility>
@@ -265,8 +293,16 @@
             <quantity>44</quantity>
         </item>
         <item>
-            <id>44</id>
-            <quantity>SR71-D</quantity>
+            <id>SR71-D</id>
+            <quantity>15</quantity>
+        </item>
+        <item>
+            <id>SN-241-L</id>
+            <quantity>28</quantity>
+        </item>
+        <item>
+            <id>XTP202</id>
+            <quantity>88</quantity>
         </item>
     </facility>
 </facility_inventory>

@@ -1,85 +1,74 @@
 package logistics.facilityservice;
 
-import logistics.facilityservice.inventory.Inventory;
 import logistics.utilities.exceptions.IllegalParameterException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 /**
- * @author David Olorundare
+ * @author David Olorundare and uchenna f. okoye
  */
-public class FacilityImpl implements Facility
+public class FacilityImpl implements Inventory
 {
     private String name;
-    private Double facilityRate;
-    private Double facilityCost;
-	private HashMap<String, Inventory> inventories;
+    private Double rate;
+    private Double cost;
 
-    public FacilityImpl(String name, Double rate, Double cost, ArrayList<Inventory> inventory_list) throws IllegalParameterException
+    public FacilityImpl(String name, Double rate, Double cost) throws IllegalParameterException
     {
         setName(name);
         setRate(rate);
         setCost(cost);
-		inventories = new HashMap<>();
-		setInventories(inventory_list);
     }
 
-	public void setName(String name) throws IllegalParameterException
-	{
-		if (name == null){
-			throw new IllegalParameterException();
-		}
-		this.name = name;
-	}
-
-	public String getName() 
-	{
+	public String getName() {
 		return name;
-	}
-
-	public void setRate(Double rate) throws IllegalParameterException
-	{
-		if (rate == null){
-			throw new IllegalParameterException();
-		}
-		facilityRate = rate;
 	}
 
 	public Double getRate() 
 	{
-		return facilityRate;
+		return rate;
 	}
-	
-	public void setCost(Double cost) throws IllegalParameterException
-	{
-		if (cost == null){
-			throw new IllegalParameterException();
-		}
-		facilityCost = cost;
-	}
+
 
 	public Double getCost()
 	{
-		return facilityCost;
+		return cost;
 	}
 
-	public void setInventories(ArrayList<Inventory> inventory_list){
-		for (Inventory i : inventory_list){
+	private void setName(String facilityName) throws IllegalParameterException
+	{
+		validateName(facilityName);
+		name = facilityName;
+	}
 
-			inventories.put(i.getItemId(), i);
+	private void setRate(Double facilityRate) throws IllegalParameterException
+	{
+		validateRate(facilityRate);
+		rate = facilityRate;
+	}
 
+	private void setCost(Double facilityCost) throws IllegalParameterException
+	{
+		validateCost(facilityCost);
+		cost = facilityCost;
+	}
+
+	private void validateName(String name) throws IllegalParameterException {
+		if (name == null){
+			throw new IllegalParameterException();
 		}
 	}
 
-	public int getQuantity(String itemId){
-		Inventory inventory = inventories.get(itemId);
-		if (inventory == null) {
-			return -1;
-		} else {
-			return inventory.getQuantity();
+	private void validateRate(Double rate) throws IllegalParameterException {
+		if (rate == null){
+			throw new IllegalParameterException();
 		}
 	}
+
+	private void validateCost(Double cost) throws IllegalParameterException {
+		if (cost == null){
+			throw new IllegalParameterException();
+		}
+	}
+
 
 
 

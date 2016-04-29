@@ -9,9 +9,7 @@ import logistics.utilities.exceptions.IllegalParameterException;
 public interface Item
 {
 
-    void setId(String id) throws IllegalParameterException;
     String getId();
-    void setPrice(Double price) throws IllegalParameterException;
     Double getPrice();
 
 }
