@@ -7,7 +7,7 @@ import logistics.utilities.loader.implementation.ItemXmlLoaderImpl;
 /**
  * Created by uchennafokoye on 4/23/16.
  */
-public class ItemLoaderFactory extends LoaderFactory {
+public class ItemLoaderFactory {
 
     public static ItemLoader build() {
         switch (FilePath.FILE_TYPE){
@@ -20,4 +20,6 @@ public class ItemLoaderFactory extends LoaderFactory {
         }
 
     }
+
+
 }

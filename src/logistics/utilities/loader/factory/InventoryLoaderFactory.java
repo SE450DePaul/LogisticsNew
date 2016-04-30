@@ -2,13 +2,12 @@ package logistics.utilities.loader.factory;
 
 import logistics.utilities.loader.LoaderConfig;
 import logistics.utilities.loader.implementation.InventoryXmlLoaderImpl;
-import logistics.utilities.loader.interfaces.FacilityLoader;
 import logistics.utilities.loader.interfaces.InventoryLoader;
 
 /**
  * Created by uchennafokoye on 4/23/16.
  */
-public class InventoryLoaderFactory extends LoaderFactory {
+public class InventoryLoaderFactory {
 
 
     public static InventoryLoader build() {

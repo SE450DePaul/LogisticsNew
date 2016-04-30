@@ -5,7 +5,7 @@ import logistics.utilities.loader.interfaces.Loader;
 /**
  * Created by uchennafokoye on 4/23/16.
  */
-public abstract class LoaderFactory {
+public class LoaderFactory {
 
     public static Loader build(String type){
         if (type == "item"){

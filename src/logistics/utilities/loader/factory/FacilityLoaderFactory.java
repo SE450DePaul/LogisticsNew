@@ -7,7 +7,7 @@ import logistics.utilities.loader.interfaces.FacilityLoader;
 /**
  * Created by uchennafokoye on 4/23/16.
  */
-public class FacilityLoaderFactory extends LoaderFactory {
+public class FacilityLoaderFactory {
 
     public static FacilityLoader build() {
         switch (LoaderConfig.FilePath.FILE_TYPE){

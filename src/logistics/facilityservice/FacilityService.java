@@ -1,7 +1,6 @@
 package logistics.facilityservice;
 
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
-import logistics.utilities.loader.LoaderConfig.FilePath;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
 
