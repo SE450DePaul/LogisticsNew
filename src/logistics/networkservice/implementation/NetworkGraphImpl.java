@@ -1,6 +1,5 @@
 package logistics.networkservice.implementation;
 
-import logistics.facilityservice.Facility;
 import logistics.networkservice.factory.FacilityVertexFactory;
 import logistics.networkservice.interfaces.FacilityVertex;
 import logistics.networkservice.interfaces.NetworkGraph;
@@ -39,9 +38,9 @@ public class NetworkGraphImpl implements NetworkGraph {
   public void addNeighbor(String facility, String neighbor, int distance) throws FacilityNotFoundInNetworkException, IllegalParameterException, SelfLoopNetworkException {
       validateAddNeighbor(facility, neighbor);
       FacilityVertex facilityVertex = facilityHashMap.get(facility);
-      FacilityVertex neighborVertex = facilityHashMap.get(neighbor);
+//      FacilityVertex neighborVertex = facilityHashMap.get(neighbor);
       facilityVertex.addNeighbor(neighbor, distance);
-      neighborVertex.addNeighbor(facility, distance);
+//      neighborVertex.addNeighbor(facility, distance);
   }
 
   @Override
@@ -82,7 +81,7 @@ public class NetworkGraphImpl implements NetworkGraph {
 
   private void validateAddNeighbor(String facility, String neighbor) throws FacilityNotFoundInNetworkException, SelfLoopNetworkException {
     validateFacilityExists(facility);
-    validateFacilityExists(neighbor);
+//    validateFacilityExists(neighbor);
     validateSelfLoop(facility, neighbor);
   }
 

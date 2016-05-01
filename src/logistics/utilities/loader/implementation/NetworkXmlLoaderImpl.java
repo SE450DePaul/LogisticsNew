@@ -5,6 +5,8 @@ import logistics.networkservice.factory.FacilityVertexFactory;
 import logistics.networkservice.interfaces.FacilityVertex;
 import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
+import logistics.utilities.loader.factory.LoaderFactory;
+import logistics.utilities.loader.interfaces.Loader;
 import logistics.utilities.loader.interfaces.NetworkLoader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -113,9 +115,9 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 
 	public static void main(String[] args){
 
-		NetworkXmlLoaderImpl xmlLoader =  new NetworkXmlLoaderImpl("data/facility_network.xml");
+		Loader loader = LoaderFactory.build("network");
 		try {
-			Collection<FacilityVertex> facilityVertexCollection = xmlLoader.load();
+			Collection<FacilityVertex> facilityVertexCollection = loader.load();
 
 			for (FacilityVertex facilityVertex : facilityVertexCollection){
 				System.out.println(facilityVertex.getFacilityName());
@@ -125,7 +127,7 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 				while (iterator.hasNext()){
 					String current = iterator.next();
 					System.out.println(current);
-					System.out.println("weight: " + facilityVertex.distanceTo(current));
+					System.out.println("distance: " + facilityVertex.distanceTo(current));
 				}
 
 			}

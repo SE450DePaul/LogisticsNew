@@ -13,7 +13,7 @@ public class NetworkLoaderFactory {
     public static NetworkLoader build() {
         switch (LoaderConfig.FilePath.FILE_TYPE){
             case "xml":
-                return new NetworkXmlLoaderImpl(LoaderConfig.FilePath.INVENTORY);
+                return new NetworkXmlLoaderImpl(LoaderConfig.FilePath.NETWORK);
             case "json":
                 return null;
             default:

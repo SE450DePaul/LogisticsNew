@@ -27,31 +27,7 @@ public final class NetworkService {
     private NetworkService() {
             loader = LoaderFactory.build("network");
             networkGraph = NetworkGraphFactory.build();
-            try {
-                Collection<FacilityVertex> facilityVertices = loader.load();
-                for (FacilityVertex facilityVertex : facilityVertices){
-                    String facilityName = facilityVertex.getFacilityName();
-                    networkGraph.addFacility(facilityName);
-
-                    Iterator<String> iterator = facilityVertex.neighbor();
-                    while (iterator.hasNext()){
-                        String neighbor = iterator.next();
-                        int distance = facilityVertex.distanceTo(neighbor);
-                        networkGraph.addNeighbor(facilityName, neighbor, distance);
-                    }
-
-                }
-            } catch (LoaderFileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IllegalParameterException e) {
-                e.printStackTrace();
-            } catch (FacilityNotFoundInNetworkException e) {
-                e.printStackTrace();
-            } catch (SelfLoopNetworkException e) {
-                e.printStackTrace();
-            }
-
-
+            buildGraph();
     }
 
     public static NetworkService getInstance() {
@@ -66,10 +42,46 @@ public final class NetworkService {
         return instance;
     }
 
+    public int distance (String facility, String neighbor) throws FacilityNotFoundInNetworkException {
+        return networkGraph.distanceToNeighbor(facility, neighbor);
+    }
+
+
+    private void buildGraph() {
+        try {
+            Collection<FacilityVertex> facilityVertices = loader.load();
+            for (FacilityVertex facilityVertex : facilityVertices){
+                String facilityName = facilityVertex.getFacilityName();
+                networkGraph.addFacility(facilityName);
+
+                Iterator<String> iterator = facilityVertex.neighbor();
+                while (iterator.hasNext()){
+                    String neighbor = iterator.next();
+                    int distance = facilityVertex.distanceTo(neighbor);
+                    networkGraph.addNeighbor(facilityName, neighbor, distance);
+                }
+
+            }
+        } catch (LoaderFileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IllegalParameterException e) {
+            e.printStackTrace();
+        } catch (FacilityNotFoundInNetworkException e) {
+            e.printStackTrace();
+        } catch (SelfLoopNetworkException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void main(String[] args){
 
-        NetworkService itemCatalogService = NetworkService.getInstance();
+        NetworkService networkService = NetworkService.getInstance();
+        try {
+            System.out.println("Distance from Seattle to Fargo: " + networkService.distance("Seattle, WA", "Fargo, ND"));
+        } catch (FacilityNotFoundInNetworkException e) {
+            e.printStackTrace();
+        }
 
 
     }
