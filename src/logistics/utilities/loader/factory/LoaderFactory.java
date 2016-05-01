@@ -14,6 +14,8 @@ public class LoaderFactory {
             return FacilityLoaderFactory.build();
         } else if (type == "inventory"){
             return InventoryLoaderFactory.build();
+        } else if (type == "network"){
+            return NetworkLoaderFactory.build();
         }
 
         return null;
