@@ -18,8 +18,8 @@ import java.util.Iterator;
  */
 public class NetworkGraphImpl implements NetworkGraph {
 
-  private Collection<Facility> facilities;
-  private HashMap<Facility, FacilityVertex> facilityHashMap;
+  private Collection<String> facilities;
+  private HashMap<String, FacilityVertex> facilityHashMap;
 
 
 
@@ -29,14 +29,14 @@ public class NetworkGraphImpl implements NetworkGraph {
   }
 
   @Override
-  public void addFacility(Facility facility) throws IllegalParameterException {
+  public void addFacility(String facility) throws IllegalParameterException {
       validateFacility(facility);
       FacilityVertex facilityVertex = FacilityVertexFactory.build(facility);
       facilityHashMap.put(facility, facilityVertex);
   }
 
   @Override
-  public void addNeighbor(Facility facility, Facility neighbor, int distance) throws FacilityNotFoundInNetworkException, IllegalParameterException, SelfLoopNetworkException {
+  public void addNeighbor(String facility, String neighbor, int distance) throws FacilityNotFoundInNetworkException, IllegalParameterException, SelfLoopNetworkException {
       validateAddNeighbor(facility, neighbor);
       FacilityVertex facilityVertex = facilityHashMap.get(facility);
       FacilityVertex neighborVertex = facilityHashMap.get(neighbor);
@@ -45,13 +45,13 @@ public class NetworkGraphImpl implements NetworkGraph {
   }
 
   @Override
-  public Iterator<Facility> neighbors(Facility facility) {
+  public Iterator<String> neighbors(String facility) {
     FacilityVertex facilityVertex = facilityHashMap.get(facility);
     return facilityVertex.neighbor();
   }
 
   @Override
-  public int distanceToNeighbor(Facility facility, Facility neighbor) throws FacilityNotFoundInNetworkException {
+  public int distanceToNeighbor(String facility, String neighbor) throws FacilityNotFoundInNetworkException {
     validateFacilityExists(facility);
     FacilityVertex facilityVertex = facilityHashMap.get(facility);
     return facilityVertex.distanceTo(neighbor);
@@ -59,28 +59,28 @@ public class NetworkGraphImpl implements NetworkGraph {
 
   @Override
   public int noOfVertices() {
-    return facilities.size();
+    return 0;
   }
 
-  private void validateFacility(Facility fac) throws IllegalParameterException {
+  private void validateFacility(String fac) throws IllegalParameterException {
     if (fac == null){
       throw new IllegalParameterException("Facility cannot be null");
     }
   }
 
-  private void validateFacilityExists(Facility fac) throws FacilityNotFoundInNetworkException {
+  private void validateFacilityExists(String fac) throws FacilityNotFoundInNetworkException {
     if (!facilityHashMap.containsKey(fac)) {
       throw new FacilityNotFoundInNetworkException("Please add facility before add neighbors");
     };
   }
 
-  private void validateSelfLoop(Facility fac, Facility neighbor) throws SelfLoopNetworkException {
+  private void validateSelfLoop(String fac, String neighbor) throws SelfLoopNetworkException {
     if (fac == neighbor){
       throw new SelfLoopNetworkException("Facility cannot be neighbors to itself");
     }
   }
 
-  private void validateAddNeighbor(Facility facility, Facility neighbor) throws FacilityNotFoundInNetworkException, SelfLoopNetworkException {
+  private void validateAddNeighbor(String facility, String neighbor) throws FacilityNotFoundInNetworkException, SelfLoopNetworkException {
     validateFacilityExists(facility);
     validateFacilityExists(neighbor);
     validateSelfLoop(facility, neighbor);

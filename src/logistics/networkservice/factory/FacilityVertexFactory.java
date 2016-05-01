@@ -1,6 +1,5 @@
 package logistics.networkservice.factory;
 
-import logistics.facilityservice.Facility;
 import logistics.networkservice.implementation.FacilityVertexImpl;
 import logistics.networkservice.interfaces.FacilityVertex;
 import logistics.utilities.exceptions.IllegalParameterException;
@@ -10,9 +9,9 @@ import logistics.utilities.exceptions.IllegalParameterException;
  */
 public class FacilityVertexFactory {
 
-    public static FacilityVertex build(Facility facility) throws IllegalParameterException {
+    public static FacilityVertex build(String facilityName) throws IllegalParameterException {
 
-        return new FacilityVertexImpl(facility);
+        return new FacilityVertexImpl(facilityName);
 
     }
 

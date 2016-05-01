@@ -1,6 +1,5 @@
 package logistics.networkservice.interfaces;
 
-import logistics.facilityservice.Facility;
 import logistics.utilities.exceptions.FacilityNotFoundInNetworkException;
 import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.SelfLoopNetworkException;
@@ -12,10 +11,10 @@ import java.util.Iterator;
  */
 public interface NetworkGraph {
 
-    void addFacility(Facility facility) throws IllegalParameterException;
-    void addNeighbor(Facility facility, Facility neighbor, int distance) throws FacilityNotFoundInNetworkException, IllegalParameterException, SelfLoopNetworkException;
-    Iterator<Facility> neighbors(Facility facility);
-    int distanceToNeighbor(Facility facility, Facility neighbor) throws FacilityNotFoundInNetworkException;
+    void addFacility(String facility) throws IllegalParameterException;
+    void addNeighbor(String facility, String neighbor, int distance) throws FacilityNotFoundInNetworkException, IllegalParameterException, SelfLoopNetworkException;
+    Iterator<String> neighbors(String facility);
+    int distanceToNeighbor(String facility, String neighbor) throws FacilityNotFoundInNetworkException;
     int noOfVertices();
 
 

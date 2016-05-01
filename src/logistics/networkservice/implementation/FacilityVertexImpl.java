@@ -1,6 +1,5 @@
 package logistics.networkservice.implementation;
 
-import logistics.facilityservice.Facility;
 import logistics.networkservice.interfaces.FacilityVertex;
 import logistics.utilities.exceptions.IllegalParameterException;
 
@@ -13,18 +12,18 @@ import java.util.Iterator;
  */
 public class FacilityVertexImpl implements FacilityVertex {
 
-    private Facility facility;
-    private HashMap<Facility, Integer> weights;
-    private HashSet<Facility> neighbors;
+    private String facility;
+    private HashMap<String, Integer> weights;
+    private HashSet<String> neighbors;
 
-    public FacilityVertexImpl(Facility fac) throws IllegalParameterException {
+    public FacilityVertexImpl(String fac) throws IllegalParameterException {
         setFacility(fac);
         weights = new HashMap<>();
         neighbors = new HashSet<>();
     }
 
     @Override
-    public void addNeighbor(Facility facility, int distance) throws IllegalParameterException {
+    public void addNeighbor(String facility, int distance) throws IllegalParameterException {
         validateFacility(facility);
         validateDistance(distance);
         weights.put(facility, distance);
@@ -32,7 +31,7 @@ public class FacilityVertexImpl implements FacilityVertex {
     }
 
     @Override
-    public int distanceTo(Facility facility) {
+    public int distanceTo(String facility) {
         Integer distance = weights.get(facility);
         if (distance == null){
             return -1;
@@ -41,23 +40,28 @@ public class FacilityVertexImpl implements FacilityVertex {
     }
 
     @Override
-    public boolean isANeighbor(Facility facility) {
+    public boolean isANeighbor(String facility) {
         return neighbors.contains(facility);
     }
 
     @Override
-    public Iterator<Facility> neighbor() {
+    public Iterator<String> neighbor() {
         return neighbors.iterator();
     }
 
+    @Override
+    public String getFacilityName() {
+        return facility;
+    }
 
-    private void setFacility(Facility fac) throws IllegalParameterException {
+
+    private void setFacility(String fac) throws IllegalParameterException {
         validateFacility(fac);
         facility = fac;
     }
 
 
-    private void validateFacility(Facility fac) throws IllegalParameterException {
+    private void validateFacility(String fac) throws IllegalParameterException {
         if (fac == null){
             throw new IllegalParameterException("Facility cannot be null");
         }

@@ -1,0 +1,142 @@
+package logistics.utilities.loader.implementation;
+
+
+import logistics.networkservice.factory.FacilityVertexFactory;
+import logistics.networkservice.interfaces.FacilityVertex;
+import logistics.utilities.exceptions.IllegalParameterException;
+import logistics.utilities.exceptions.LoaderFileNotFoundException;
+import logistics.utilities.loader.interfaces.NetworkLoader;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+
+/**
+ * Created by uchennafokoye on 4/22/16.
+ */
+public class NetworkXmlLoaderImpl implements NetworkLoader {
+
+	private String filepath;
+
+	public NetworkXmlLoaderImpl(String filepath){
+		this.filepath = filepath;
+	}
+
+	public ArrayList<FacilityVertex> load() throws LoaderFileNotFoundException {
+
+		ArrayList<FacilityVertex> facilityVertices = new ArrayList<FacilityVertex>();
+
+		try {
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
+
+			File xml = new File(filepath);
+			if (!xml.exists()) {
+				throw new LoaderFileNotFoundException();
+			}
+
+			Document doc = db.parse(xml);
+			Element documentElement = doc.getDocumentElement();
+			documentElement.normalize();
+
+			NodeList networkEntries = documentElement.getChildNodes();
+			for (int i = 0; i < networkEntries.getLength(); i++) {
+				Node node = networkEntries.item(i);
+				if (node.getNodeType() == Node.TEXT_NODE) {
+					continue;
+				}
+
+				String entryName = node.getNodeName();
+				if (!entryName.equals("facility")) {
+					continue;
+//                    Or perhaps throw an error
+				}
+
+				// Get some named nodes
+				Element element = (Element) networkEntries.item(i);
+				String facilityName = element.getElementsByTagName("name").item(0).getTextContent();
+
+				FacilityVertex facilityVertex = FacilityVertexFactory.build(facilityName);
+
+				NodeList linkNodes = element.getElementsByTagName("link");
+
+				for (int j = 0; j < linkNodes.getLength(); j++){
+
+					node = linkNodes.item(j);
+					if (node.getNodeType() == Node.TEXT_NODE){
+						continue;
+					}
+
+					entryName = node.getNodeName();
+					if (!entryName.equals("link")){
+						continue;
+					}
+
+					element = (Element) linkNodes.item(j);
+					String neighborName = element.getElementsByTagName("name").item(0).getTextContent();
+					String distanceString = element.getElementsByTagName("distance").item(0).getTextContent();
+					int distance = Integer.parseInt(distanceString);
+					facilityVertex.addNeighbor(neighborName, distance);
+
+				}
+
+				facilityVertices.add(facilityVertex);
+
+			}
+
+
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (IllegalParameterException e) {
+			e.printStackTrace();
+		}
+
+
+		return facilityVertices;
+	}
+
+
+
+	public static void main(String[] args){
+
+		NetworkXmlLoaderImpl xmlLoader =  new NetworkXmlLoaderImpl("data/facility_network.xml");
+		try {
+			Collection<FacilityVertex> facilityVertexCollection = xmlLoader.load();
+
+			for (FacilityVertex facilityVertex : facilityVertexCollection){
+				System.out.println(facilityVertex.getFacilityName());
+				Iterator<String> iterator = facilityVertex.neighbor();
+
+				System.out.println("Neighbors: ");
+				while (iterator.hasNext()){
+					String current = iterator.next();
+					System.out.println(current);
+					System.out.println("weight: " + facilityVertex.distanceTo(current));
+				}
+
+			}
+
+		} catch (LoaderFileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+
+
+
+
+	}
+}
