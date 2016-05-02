@@ -19,23 +19,28 @@ import java.util.ArrayList;
 /**
  * Created by uchennafokoye on 4/22/16.
  */
-public class ItemXmlLoaderImpl implements ItemLoader {
+public class ItemXmlLoaderImpl implements ItemLoader 
+{
 
     private String filepath;
-    public ItemXmlLoaderImpl(String filepath){
+    public ItemXmlLoaderImpl(String filepath)
+    {
         this.filepath = filepath;
     }
 
-    public ArrayList<Item> load() throws LoaderFileNotFoundException {
-
+    public ArrayList<Item> load() throws LoaderFileNotFoundException 
+    {
+    	
         ArrayList<Item> items = new ArrayList<Item>();
 
-        try {
+        try 
+        {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
 
             File xml = new File(filepath);
-            if (!xml.exists()) {
+            if (!xml.exists()) 
+            {
                 throw new LoaderFileNotFoundException();
             }
 
@@ -44,14 +49,17 @@ public class ItemXmlLoaderImpl implements ItemLoader {
             documentElement.normalize();
 
             NodeList itemEntries = documentElement.getChildNodes();
-            for (int i = 0; i < itemEntries.getLength(); i++) {
+            for (int i = 0; i < itemEntries.getLength(); i++) 
+            {
                 Node node = itemEntries.item(i);
-                if (node.getNodeType() == Node.TEXT_NODE) {
+                if (node.getNodeType() == Node.TEXT_NODE) 
+                {
                     continue;
                 }
 
                 String entryName = node.getNodeName();
-                if (!entryName.equals("item")) {
+                if (!entryName.equals("item")) 
+                {
                     continue;
 //                    Or perhaps throw an error
                 }
@@ -70,32 +78,38 @@ public class ItemXmlLoaderImpl implements ItemLoader {
 
             }
 
-
-        } catch (ParserConfigurationException e) {
+        } catch (ParserConfigurationException e) 
+        {
             e.printStackTrace();
-        } catch (SAXException e) {
+        } 
+        catch (SAXException e) 
+        {
             e.printStackTrace();
-        } catch (IOException e) {
+        } 
+        catch (IOException e) 
+        {
             e.printStackTrace();
-        } catch (IllegalParameterException e) {
+        } 
+        catch (IllegalParameterException e) 
+        {
             e.printStackTrace();
         }
-
 
         return items;
     }
 
 
-
-    public static void main(String[] args){
+    public static void main(String[] args)
+    {
 
         ItemXmlLoaderImpl xmlLoader =  new ItemXmlLoaderImpl("data/item_catalog.xml");
-        try {
+        try 
+        {
             xmlLoader.load();
-        } catch (LoaderFileNotFoundException e) {
+        } 
+        catch (LoaderFileNotFoundException e)
+        {
             e.printStackTrace();
         }
-
-
     }
 }

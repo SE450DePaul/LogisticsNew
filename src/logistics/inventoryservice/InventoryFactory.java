@@ -6,7 +6,8 @@ import logistics.utilities.exceptions.IllegalParameterException;
  */
 public class InventoryFactory
 {
-    public static Inventory build(String facilityName) throws IllegalParameterException {
+    public static Inventory build(String facilityName) throws IllegalParameterException 
+    {
         return new InventoryImpl(facilityName);
     }
 }

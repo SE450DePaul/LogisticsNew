@@ -9,7 +9,8 @@ import java.util.Iterator;
 /**
  * Created by uchennafokoye on 4/29/16.
  */
-public interface NetworkGraph {
+public interface NetworkGraph 
+{
 
     void addFacility(String facility) throws IllegalParameterException;
     void addNeighbor(String facility, String neighbor, int distance) throws FacilityNotFoundInNetworkException, IllegalParameterException, SelfLoopNetworkException;

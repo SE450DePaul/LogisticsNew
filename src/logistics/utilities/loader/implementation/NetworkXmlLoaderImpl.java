@@ -26,24 +26,29 @@ import java.util.Iterator;
 /**
  * Created by uchennafokoye on 4/22/16.
  */
-public class NetworkXmlLoaderImpl implements NetworkLoader {
+public class NetworkXmlLoaderImpl implements NetworkLoader 
+{
 
 	private String filepath;
 
-	public NetworkXmlLoaderImpl(String filepath){
+	public NetworkXmlLoaderImpl(String filepath)
+	{
 		this.filepath = filepath;
 	}
 
-	public ArrayList<FacilityVertex> load() throws LoaderFileNotFoundException {
+	public ArrayList<FacilityVertex> load() throws LoaderFileNotFoundException 
+	{
 
 		ArrayList<FacilityVertex> facilityVertices = new ArrayList<FacilityVertex>();
 
-		try {
+		try 
+		{
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
 			File xml = new File(filepath);
-			if (!xml.exists()) {
+			if (!xml.exists()) 
+			{
 				throw new LoaderFileNotFoundException();
 			}
 
@@ -52,16 +57,19 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 			documentElement.normalize();
 
 			NodeList networkEntries = documentElement.getChildNodes();
-			for (int i = 0; i < networkEntries.getLength(); i++) {
+			for (int i = 0; i < networkEntries.getLength(); i++) 
+			{
 				Node node = networkEntries.item(i);
-				if (node.getNodeType() == Node.TEXT_NODE) {
+				if (node.getNodeType() == Node.TEXT_NODE) 
+				{
 					continue;
 				}
 
 				String entryName = node.getNodeName();
-				if (!entryName.equals("facility")) {
+				if (!entryName.equals("facility")) 
+				{
 					continue;
-//                    Or perhaps throw an error
+				// Or perhaps throw an error
 				}
 
 				// Get some named nodes
@@ -72,15 +80,18 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 
 				NodeList linkNodes = element.getElementsByTagName("link");
 
-				for (int j = 0; j < linkNodes.getLength(); j++){
+				for (int j = 0; j < linkNodes.getLength(); j++)
+				{
 
 					node = linkNodes.item(j);
-					if (node.getNodeType() == Node.TEXT_NODE){
+					if (node.getNodeType() == Node.TEXT_NODE)
+					{
 						continue;
 					}
 
 					entryName = node.getNodeName();
-					if (!entryName.equals("link")){
+					if (!entryName.equals("link"))
+					{
 						continue;
 					}
 
@@ -91,35 +102,40 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 					facilityVertex.addNeighbor(neighborName, distance);
 
 				}
-
+				
 				facilityVertices.add(facilityVertex);
-
 			}
-
-
-		} catch (ParserConfigurationException e) {
+		} 
+		catch (ParserConfigurationException e) 
+		{
 			e.printStackTrace();
-		} catch (SAXException e) {
+		} 
+		catch (SAXException e) 
+		{
 			e.printStackTrace();
-		} catch (IOException e) {
+		} 
+		catch (IOException e) 
+		{
 			e.printStackTrace();
-		} catch (IllegalParameterException e) {
+		} 
+		catch (IllegalParameterException e) 
+		{
 			e.printStackTrace();
 		}
-
-
+		
 		return facilityVertices;
 	}
 
 
-
-	public static void main(String[] args){
-
+	public static void main(String[] args)
+	{
 		Loader loader = LoaderFactory.build("network");
-		try {
+		try 
+		{
 			Collection<FacilityVertex> facilityVertexCollection = loader.load();
 
-			for (FacilityVertex facilityVertex : facilityVertexCollection){
+			for (FacilityVertex facilityVertex : facilityVertexCollection)
+			{
 				System.out.println(facilityVertex.getFacilityName());
 				Iterator<String> iterator = facilityVertex.neighbor();
 
@@ -129,16 +145,11 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 					System.out.println(current);
 					System.out.println("distance: " + facilityVertex.distanceTo(current));
 				}
-
 			}
-
-		} catch (LoaderFileNotFoundException e) {
+		} 
+		catch (LoaderFileNotFoundException e) 
+		{
 			e.printStackTrace();
 		}
-
-
-
-
-
 	}
 }

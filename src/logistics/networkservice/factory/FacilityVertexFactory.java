@@ -7,9 +7,11 @@ import logistics.utilities.exceptions.IllegalParameterException;
 /**
  * Created by uchennafokoye on 4/30/16.
  */
-public class FacilityVertexFactory {
+public class FacilityVertexFactory 
+{
 
-    public static FacilityVertex build(String facilityName) throws IllegalParameterException {
+    public static FacilityVertex build(String facilityName) throws IllegalParameterException 
+    {
 
         return new FacilityVertexImpl(facilityName);
 

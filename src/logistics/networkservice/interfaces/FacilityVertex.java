@@ -7,7 +7,8 @@ import java.util.Iterator;
 /**
  * Created by uchennafokoye on 4/29/16.
  */
-public interface FacilityVertex {
+public interface FacilityVertex 
+{
 
     void addNeighbor(String facility, int distance) throws IllegalParameterException;
 

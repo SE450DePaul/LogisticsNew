@@ -5,9 +5,7 @@ package logistics.facilityservice;
  */
 public interface Facility
 {
-
     String getName();
     Double getRate();
     Double getCost();
-
 }

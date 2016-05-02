@@ -8,8 +8,6 @@ import logistics.utilities.exceptions.IllegalParameterException;
  */
 public interface Item
 {
-
     String getId();
     Double getPrice();
-
 }

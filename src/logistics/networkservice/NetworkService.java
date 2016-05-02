@@ -16,7 +16,8 @@ import java.util.Iterator;
 /**
  * Created by uchennafokoye on 4/22/16.
  */
-public final class NetworkService {
+public final class NetworkService 
+{
 
     private volatile static NetworkService instance;
     private Loader loader;
@@ -24,15 +25,19 @@ public final class NetworkService {
 
     private NetworkGraph networkGraph;
 
-    private NetworkService() {
+    private NetworkService() 
+    {
             loader = LoaderFactory.build("network");
             networkGraph = NetworkGraphFactory.build();
             buildGraph();
     }
 
-    public static NetworkService getInstance() {
-        if (instance == null){
-            synchronized (NetworkService.class){
+    public static NetworkService getInstance() 
+    {
+        if (instance == null)
+        {
+            synchronized (NetworkService.class)
+            {
                 if (instance == null){
                     instance = new NetworkService();
                 }
@@ -42,15 +47,19 @@ public final class NetworkService {
         return instance;
     }
 
-    public int distance (String facility, String neighbor) throws FacilityNotFoundInNetworkException {
+    public int distance (String facility, String neighbor) throws FacilityNotFoundInNetworkException 
+    {
         return networkGraph.distanceToNeighbor(facility, neighbor);
     }
 
 
-    private void buildGraph() {
-        try {
+    private void buildGraph() 
+    {
+        try 
+        {
             Collection<FacilityVertex> facilityVertices = loader.load();
-            for (FacilityVertex facilityVertex : facilityVertices){
+            for (FacilityVertex facilityVertex : facilityVertices)
+            {
                 String facilityName = facilityVertex.getFacilityName();
                 networkGraph.addFacility(facilityName);
 
@@ -62,24 +71,36 @@ public final class NetworkService {
                 }
 
             }
-        } catch (LoaderFileNotFoundException e) {
+        } 
+        catch (LoaderFileNotFoundException e) 
+        {
             e.printStackTrace();
-        } catch (IllegalParameterException e) {
+        } 
+        catch (IllegalParameterException e) 
+        {
             e.printStackTrace();
-        } catch (FacilityNotFoundInNetworkException e) {
+        } 
+        catch (FacilityNotFoundInNetworkException e) 
+        {
             e.printStackTrace();
-        } catch (SelfLoopNetworkException e) {
+        } 
+        catch (SelfLoopNetworkException e) 
+        {
             e.printStackTrace();
         }
     }
 
 
-    public static void main(String[] args){
+    public static void main(String[] args)
+    {
 
         NetworkService networkService = NetworkService.getInstance();
-        try {
+        try 
+        {
             System.out.println("Distance from Seattle to Fargo: " + networkService.distance("Seattle, WA", "Fargo, ND"));
-        } catch (FacilityNotFoundInNetworkException e) {
+        } 
+        catch (FacilityNotFoundInNetworkException e) 
+        {
             e.printStackTrace();
         }
 

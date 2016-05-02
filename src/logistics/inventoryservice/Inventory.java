@@ -7,12 +7,9 @@ import logistics.utilities.exceptions.IllegalParameterException;
  */
 public interface Inventory
 {
-
     void updateInventory(String itemId, int quantity) throws IllegalParameterException;
     void addInventoryItem(String itemId, int quantity) throws IllegalParameterException;
     Integer getQuantity(String itemId);
     String getFacilityName();
     String getInventoryOutput();
-
-
 }
