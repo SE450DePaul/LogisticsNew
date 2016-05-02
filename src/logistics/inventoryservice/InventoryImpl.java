@@ -1,9 +1,9 @@
 package logistics.inventoryservice;
 
-import logistics.itemservice.Item;
 import logistics.utilities.exceptions.IllegalParameterException;
 
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * @author uchenna f. okoye and David Olorundare
@@ -45,6 +45,24 @@ public class InventoryImpl implements Inventory
 
 	public String getFacilityName() {
 		return facilityName;
+	}
+
+	@Override
+	public String getInventoryOutput() {
+
+		Set<String> items = inventoryHash.keySet();
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append("Active Inventory: ");
+		stringBuffer.append("\n");
+		stringBuffer.append("\tItem Id\tQuantity");
+		for (String item : items){
+			int quantity = inventoryHash.get(item);
+			stringBuffer.append("\n");
+			stringBuffer.append("\t" + item + "\t" + quantity);
+		}
+		stringBuffer.append("\n\n");
+		stringBuffer.append("Depleted (Used-Up) Inventory: None");
+		return stringBuffer.toString();
 	}
 
 	private void validateFacility(String facilityName) throws IllegalParameterException {

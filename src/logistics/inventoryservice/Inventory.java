@@ -12,6 +12,7 @@ public interface Inventory
     void addInventoryItem(String itemId, int quantity) throws IllegalParameterException;
     Integer getQuantity(String itemId);
     String getFacilityName();
+    String getInventoryOutput();
 
 
 }

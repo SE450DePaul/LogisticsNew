@@ -2,7 +2,6 @@ package logistics.inventoryservice;
 
 import logistics.inventoryservice.inventoryitem.InventoryItemDTO;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
-import logistics.utilities.loader.LoaderConfig.FilePath;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
 
@@ -58,12 +57,23 @@ public final class InventoryService
 
     }
 
+
+    public String getOutput(String facilityName){
+        Inventory inventory = inventoryHashMap.get(facilityName);
+        if (inventory == null) { return ""; }
+        return inventory.getInventoryOutput();
+
+    }
+
     public static void main(String[] args) {
 
         InventoryService instance = InventoryService.getInstance();
-        InventoryItemDTO inventoryItemDTO = instance.getInventoryItem("San Francisco, CA", "RL123A");
-        System.out.println("Please get Inventory Item");
-        System.out.println(" Item ID " + inventoryItemDTO.id  + " quantity: " + inventoryItemDTO.quantity);
+//        InventoryItemDTO inventoryItemDTO = instance.getInventoryItem("San Francisco, CA", "RL123A");
+//        System.out.println("Please get Inventory Item");
+//        System.out.println(" Item ID " + inventoryItemDTO.id  + " quantity: " + inventoryItemDTO.quantity);
+
+        String output = instance.getOutput("San Francisco, CA");
+        System.out.println(output);
 
 
     }

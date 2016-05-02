@@ -53,15 +53,31 @@ public final class FacilityService
         return new FacilityDTO(facility.getName(), facility.getCost(), facility.getRate());
     }
 
+    public String getOutput(String name){
+        Facility facility = facilityHashMap.get(name);
+        if (facility == null) return "";
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(facility.getName());
+        stringBuffer.append("\n");
+        stringBuffer.append("Rate per Day: " + facility.getRate());
+        stringBuffer.append("\n");
+        stringBuffer.append("Cost per day: " + facility.getCost());
+        stringBuffer.append("\n");
+        return stringBuffer.toString();
+    }
+
 
 
 
     public static void main(String[] args) {
 
         FacilityService instance = FacilityService.getInstance();
-        FacilityDTO facilityDTO = instance.getFacility("San Francisco, CA");
-        System.out.println("Please get Facility");
-        System.out.println(" Facility name " + facilityDTO.name + " Facility cost " + facilityDTO.cost);
+//        FacilityDTO facilityDTO = instance.getFacility("San Francisco, CA");
+//        System.out.println("Please get Facility");
+//        System.out.println(" Facility name " + facilityDTO.name + " Facility cost " + facilityDTO.cost);
+
+        String output = instance.getOutput("San Francisco, CA");
+        System.out.println(output);
 
 
     }
