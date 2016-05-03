@@ -6,7 +6,8 @@ import logistics.utilities.exceptions.NullParameterException;
  */
 public class InventoryFactory
 {
-    public static Inventory build(String facilityName) throws NullParameterException {
+    public static Inventory build(String facilityName) throws NullParameterException 
+    {
         return new InventoryImpl(facilityName);
     }
 }

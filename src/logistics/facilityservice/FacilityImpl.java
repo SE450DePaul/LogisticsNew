@@ -18,7 +18,8 @@ public class FacilityImpl implements Facility
         setCost(cost);
     }
 
-	public String getName() {
+	public String getName() 
+	{
 		return name;
 	}
 
@@ -26,7 +27,6 @@ public class FacilityImpl implements Facility
 	{
 		return rate;
 	}
-
 
 	public Double getCost()
 	{
@@ -51,25 +51,27 @@ public class FacilityImpl implements Facility
 		cost = facilityCost;
 	}
 
-	private void validateName(String name) throws NullParameterException {
-		if (name == null){
+	private void validateName(String name) throws NullParameterException 
+	{
+		if (name == null)
+		{
 			throw new NullParameterException();
 		}
 	}
 
-	private void validateRate(Double rate) throws NullParameterException {
-		if (rate == null){
+	private void validateRate(Double rate) throws NullParameterException 
+	{
+		if (rate == null)
+		{
 			throw new NullParameterException();
 		}
 	}
 
-	private void validateCost(Double cost) throws NullParameterException {
-		if (cost == null){
+	private void validateCost(Double cost) throws NullParameterException 
+	{
+		if (cost == null)
+		{
 			throw new NullParameterException();
 		}
 	}
-
-
-
-
 }

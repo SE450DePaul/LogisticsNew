@@ -6,8 +6,6 @@ package logistics.itemservice;
  */
 public interface Item
 {
-
     String getId();
     Double getPrice();
-
 }

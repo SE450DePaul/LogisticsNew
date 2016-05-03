@@ -5,7 +5,6 @@ package logistics.facilityservice;
  */
 public class FacilityDTO
 {
-
     public String name;
     public Double cost;
     public Double rate;
@@ -16,6 +15,4 @@ public class FacilityDTO
         cost = facilityCost;
         rate = facilityRate;
     }
-
-
 }

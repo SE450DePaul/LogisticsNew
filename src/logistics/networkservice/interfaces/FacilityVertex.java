@@ -8,8 +8,8 @@ import java.util.Iterator;
 /**
  * Created by uchennafokoye on 4/29/16.
  */
-public interface FacilityVertex {
-
+public interface FacilityVertex 
+{
     void addNeighbor(String facility, int distance) throws NullParameterException;
 
     int distanceTo(String facility) throws NeighborNotFoundInNetworkException;
@@ -17,5 +17,4 @@ public interface FacilityVertex {
     Iterator<String> neighbors();
 
     String getFacilityName();
-
 }

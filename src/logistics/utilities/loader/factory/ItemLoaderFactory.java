@@ -7,10 +7,12 @@ import logistics.utilities.loader.implementation.ItemXmlLoaderImpl;
 /**
  * Created by uchennafokoye on 4/23/16.
  */
-public class ItemLoaderFactory {
-
-    public static ItemLoader build() {
-        switch (FilePath.FILE_TYPE){
+public class ItemLoaderFactory 
+{
+    public static ItemLoader build()
+    {
+        switch (FilePath.FILE_TYPE)
+        {
             case "xml":
                 return new ItemXmlLoaderImpl(FilePath.ITEM);
             case "json":
@@ -18,8 +20,5 @@ public class ItemLoaderFactory {
             default:
                 return null;
         }
-
     }
-
-
 }

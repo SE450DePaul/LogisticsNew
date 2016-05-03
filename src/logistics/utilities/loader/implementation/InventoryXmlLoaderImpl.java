@@ -29,7 +29,6 @@ import logistics.utilities.exceptions.LoaderFileNotFoundException;
 
 public class InventoryXmlLoaderImpl implements InventoryLoader
 {
-
 	private String name;
 	private String itemId;
 	private int itemQty;
@@ -119,7 +118,6 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 					itemDescriptions.add(itemId + "with Quantity " + itemQuantity);
 				}
 
-
 				inventories.add(inventory);
 //				System.out.println("Facility " + i + " : " + name + "Items: " + itemId + " Quantity " + itemQty);
 			}
@@ -135,7 +133,9 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		} catch (NullParameterException e) {
+		}
+		catch (NullParameterException e) 
+		{
 			e.printStackTrace();
 		}
 
@@ -143,9 +143,8 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 	}
 
 
-
-	public static void main(String[] args){
-
+	public static void main(String[] args)
+	{
 		InventoryXmlLoaderImpl xmlLoader =  new InventoryXmlLoaderImpl("src/data/facility_inventory.xml");
 		try
 		{
@@ -156,5 +155,4 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 			e.printStackTrace();
 		}
 	}
-
 }

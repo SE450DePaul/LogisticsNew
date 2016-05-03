@@ -15,27 +15,30 @@ import java.util.TreeSet;
  */
 public final class FacilityService
 {
-
     private volatile static FacilityService instance;
     private HashMap<String, Facility> facilityHashMap = new HashMap<>();
     private Loader<Facility> loader;
 
-
-    private FacilityService() {
+    private FacilityService() 
+    {
         loader = LoaderFactory.build("facility");
 
-        try {
+        try 
+        {
             Collection<Facility> facilities = loader.load();
-            for (Facility facility : facilities){
+            for (Facility facility : facilities)
+            {
                 facilityHashMap.put(facility.getName(), facility);
             }
-        } catch (LoaderFileNotFoundException e) {
+        } 
+        catch (LoaderFileNotFoundException e) 
+        {
             e.printStackTrace();
         }
-
     }
     
-    public static FacilityService getInstance() {
+    public static FacilityService getInstance()
+    {
         if (instance == null)
         {
             synchronized (FacilityService.class)
@@ -49,18 +52,20 @@ public final class FacilityService
         return instance;
     }
 
-    public FacilityDTO getFacility(String name) {
+    public FacilityDTO getFacility(String name) 
+    {
         Facility facility = facilityHashMap.get(name);
         if (facility == null) return null;
         return new FacilityDTO(facility.getName(), facility.getCost(), facility.getRate());
     }
 
-    public Set<String> getFacilities(){
+    public Set<String> getFacilities()
+    {
         return new TreeSet<String>(facilityHashMap.keySet());
     }
 
-
-    public String getOutput(String name){
+    public String getOutput(String name)
+    {
         Facility facility = facilityHashMap.get(name);
         if (facility == null) return "";
         StringBuffer stringBuffer = new StringBuffer();
@@ -73,10 +78,8 @@ public final class FacilityService
         return stringBuffer.toString();
     }
 
-
-
-
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
 
         FacilityService instance = FacilityService.getInstance();
 //        FacilityDTO facilityDTO = instance.getFacility("San Francisco, CA");
@@ -88,10 +91,9 @@ public final class FacilityService
 
         System.out.println("Facilities: ");
         Set<String> facilities = instance.getFacilities();
-        for (String facility : facilities){
+        for (String facility : facilities)
+        {
             System.out.println(facility);
         }
-
-
     }
 }

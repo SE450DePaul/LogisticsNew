@@ -7,11 +7,12 @@ import logistics.utilities.loader.interfaces.InventoryLoader;
 /**
  * Created by uchennafokoye on 4/23/16.
  */
-public class InventoryLoaderFactory {
-
-
-    public static InventoryLoader build() {
-        switch (LoaderConfig.FilePath.FILE_TYPE){
+public class InventoryLoaderFactory 
+{
+    public static InventoryLoader build() 
+    {
+        switch (LoaderConfig.FilePath.FILE_TYPE)
+        {
             case "xml":
                 return new InventoryXmlLoaderImpl(LoaderConfig.FilePath.INVENTORY);
             case "json":
@@ -19,7 +20,5 @@ public class InventoryLoaderFactory {
             default:
                 return null;
         }
-
     }
-
 }

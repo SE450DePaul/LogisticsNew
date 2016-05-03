@@ -12,7 +12,8 @@ public final class ScheduleManager
 
 
 
-    private ScheduleManager() {
+    private ScheduleManager() 
+    {
 
 
 

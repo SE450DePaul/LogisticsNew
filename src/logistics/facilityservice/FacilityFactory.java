@@ -11,5 +11,4 @@ public class FacilityFactory
     {
         return new FacilityImpl(name, rate, cost);
     }
-
 }

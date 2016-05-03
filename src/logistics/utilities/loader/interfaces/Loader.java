@@ -7,7 +7,8 @@ import java.util.Collection;
 /**
  * Created by uchennafokoye on 4/23/16.
  */
-public interface Loader<Type> {
+public interface Loader<Type> 
+{
     Collection<Type> load() throws LoaderFileNotFoundException;
 
 }
