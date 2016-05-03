@@ -1,4 +1,4 @@
-package logistics.ScheduleService;
+package logistics.scheduleservice;
 
 /**
  * @author David Olorundare
@@ -6,8 +6,8 @@ package logistics.ScheduleService;
 public interface Schedule
 {
 
-    String getName();
-    Double getRate();
-    Double getCost();
+    // ability to adjust schedule
+    // perhaps generate the schedule for the next few days
+
 
 }
