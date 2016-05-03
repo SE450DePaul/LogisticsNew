@@ -52,7 +52,7 @@ public class ReportService
 	// iterate and output facility and inventory details for EACH facility
 	public static void facilityOutput()
 	{
-		// Facility output should use an iterator of some sort
+		// Facility output should use an iterator of some sort,
 		// make use of the Facility and Inventory Service APIs
 				System.out.println("--------------------------------------------------------------------------");
 				
@@ -108,13 +108,13 @@ public class ReportService
 	// for a given FACILITY -to- another FACILITY
 	public static void shortestPathOutput() 
 	{
-		// needs to output 10 pairs of facility, but ideal should
-		// be able to output any number of pairs given two facilities.
+		// needs to output 10 pairs of facility, but ideally should
+		// be able to output any number of pairs, given two facilities.
 		System.out.println("\nShortest Path Tests:\n");
 
-		// these are the only three lines you need, an iterator
-		// should cycle through the variable parts and dynamically
-		// fill them in using the Network Service APIs
+		// these are the only four lines you need, an iterator
+		// should cycle through the variable parts in these lines
+		// and dynamically fill them in using the Network Service APIs
 		
 		// facilityNameA -to- facilityNameB
 		System.out.println("a) Santa Fe, NM to Chicago, IL:");
@@ -123,8 +123,11 @@ public class ReportService
 		// total distance between A and B, (in hours per day), in days
 		System.out.println("    - %d mi / (%d hours per day * %d mph) = %d days");
 		System.out.println();
-		// The rest below are just exemplary
 		
+		
+		
+		// The rest below are just exemplary to show
+		// the kind of output formatting.
 		
 		// facilityNameA -to- facilityNameB
 		System.out.println("b) Atlanta, GA to Louis, MO:");
@@ -200,11 +203,10 @@ public class ReportService
 		
 	}
 	
-	
 	public static void main(String[] args)
 	{
 		//TO-DO: Need to create a dedicated display 
-		// method for each of the three parts the output
+		// method for each of the three parts of the output
 		
 		// needs to be able to iterate for each facility, dynamically
 		facilityOutput();
