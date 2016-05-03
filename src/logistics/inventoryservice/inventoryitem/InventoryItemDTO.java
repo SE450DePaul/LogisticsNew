@@ -5,12 +5,12 @@ package logistics.inventoryservice.inventoryitem;
  */
 public class InventoryItemDTO
 {
-    public String id;
-    public int quantity;
+    public String inventoryId;
+    public int inventoryQuantity;
 
     public InventoryItemDTO(String id, int quantity)
     {
-        this.id = id;
-        this.quantity = quantity;
+        inventoryId = id;
+        inventoryQuantity = quantity;
     }
 }

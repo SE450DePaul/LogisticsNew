@@ -11,7 +11,7 @@ import java.util.TreeSet;
 
 
 /**
- * @author uchenna f. okoye
+ * @author Uchenna F. Okoye
  */
 public final class FacilityService
 {
@@ -80,7 +80,6 @@ public final class FacilityService
 
     public static void main(String[] args) 
     {
-
         FacilityService instance = FacilityService.getInstance();
 //        FacilityDTO facilityDTO = instance.getFacility("San Francisco, CA");
 //        System.out.println("Please get Facility");

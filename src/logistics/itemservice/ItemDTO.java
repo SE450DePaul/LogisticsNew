@@ -5,12 +5,12 @@ package logistics.itemservice;
  */
 public class ItemDTO 
 {
-    public String id;
-    public Double price;
+    public String itemId;
+    public Double itemPrice;
 
     public ItemDTO(String id, Double price)
     {
-        this.id = id;
-        this.price = price;
+        itemId = id;
+        itemPrice = price;
     }
 }

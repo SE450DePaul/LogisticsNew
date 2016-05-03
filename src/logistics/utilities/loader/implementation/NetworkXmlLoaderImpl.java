@@ -128,7 +128,7 @@ public class NetworkXmlLoaderImpl implements NetworkLoader
 		return facilityVertices;
 	}
 
-	public static void main(String[] args
+	public static void main(String[] args)
 {
 
 		Loader loader = LoaderFactory.build("network");

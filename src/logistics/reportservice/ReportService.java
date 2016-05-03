@@ -1,5 +1,12 @@
 package logistics.reportservice;
 
+
+/**
+ * 
+ * @author David Olorundare
+ *
+ */
+
 //Strategy: First hardcode this, test it works, and then work 
 // backwards till it works un-hardcoded/dynamically and is properly structured.
 
@@ -8,10 +15,38 @@ public class ReportService
 {
 	// Initialize and setup a bunch of stuff
 	
+	private volatile static ReportService instance;
+	
+	
 	String facilityName = "Chicago";
 	
 	int ratePerDay = 10;
 	float costPerDay = 300;
+	
+	
+	
+	
+	public static ReportService getInstance()
+    {
+        if (instance == null)
+        {
+            synchronized (ReportService.class)
+            {
+                if (instance == null)
+                {
+                    instance = new ReportService();
+                }
+            }
+        }
+        return instance;
+    }
+
+	
+	
+	
+	
+	
+	
 	
 	// will probably make this its own class.
 	// iterate and output facility and inventory details for EACH facility
