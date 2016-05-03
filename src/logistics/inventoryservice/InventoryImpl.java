@@ -11,12 +11,14 @@ import java.util.Set;
 public class InventoryImpl implements Inventory
 {
 
-	private HashMap<String, Integer> inventoryHash;
+	private HashMap<String, Integer> activeItemHash;
+	private HashMap<String, Integer> depletedItemHash;
 	private String facilityName;
 
 	public InventoryImpl(String facilityName) throws NullParameterException {
 		setFacilityName(facilityName);
-		inventoryHash = new HashMap<>();
+		activeItemHash = new HashMap<>();
+		depletedItemHash = new HashMap<>();
 	}
 
 	private void setFacilityName(String nameOfFacility) throws NullParameterException {
@@ -28,19 +30,19 @@ public class InventoryImpl implements Inventory
 	public void updateInventory(String itemId, int quantity) throws NullParameterException {
 		validateItem(itemId);
 		validateQuantity(quantity);
-		inventoryHash.put(itemId, quantity);
+		updateInventoryHelper(itemId, quantity);
 	}
 
 	@Override
 	public void addInventoryItem(String itemId, int quantity) throws NullParameterException {
 		validateItem(itemId);
 		validateQuantity(quantity);
-		inventoryHash.put(itemId, quantity);
+		updateInventoryHelper(itemId, quantity);
 	}
 
 	@Override
 	public Integer getQuantity(String itemId) {
-		return inventoryHash.get(itemId);
+		return activeItemHash.get(itemId);
 	}
 
 	public String getFacilityName() {
@@ -50,19 +52,46 @@ public class InventoryImpl implements Inventory
 	@Override
 	public String getInventoryOutput() {
 
-		Set<String> items = inventoryHash.keySet();
+		Set<String> activeItems = activeItemHash.keySet();
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append("Active Inventory: ");
 		stringBuffer.append("\n");
 		stringBuffer.append("\tItem Id\tQuantity");
-		for (String item : items){
-			int quantity = inventoryHash.get(item);
+
+		if (activeItems.isEmpty()){
+			stringBuffer.append("None");
+		}
+
+		for (String item : activeItems){
+			int quantity = activeItemHash.get(item);
 			stringBuffer.append("\n");
 			stringBuffer.append("\t" + item + "\t" + quantity);
 		}
+
 		stringBuffer.append("\n\n");
-		stringBuffer.append("Depleted (Used-Up) Inventory: None");
+		stringBuffer.append("Depleted (Used-Up) Inventory: ");
+
+		Set<String> depletedItems = depletedItemHash.keySet();
+		if (depletedItems.isEmpty()){
+			stringBuffer.append("None");
+		}
+
+		for (String item : depletedItems){
+			stringBuffer.append("\n");
+			stringBuffer.append("\t" + item);
+		}
+
 		return stringBuffer.toString();
+	}
+
+	private void updateInventoryHelper(String itemId, int quantity) {
+		if (quantity == 0) {
+			activeItemHash.remove(itemId);
+			depletedItemHash.put(itemId, quantity);
+		} else {
+			activeItemHash.put(itemId, quantity);
+			depletedItemHash.remove(itemId);
+		}
 	}
 
 	private void validateFacility(String facilityName) throws NullParameterException {

@@ -70,6 +70,9 @@ public final class NetworkService {
     public String getOutput(String facility) throws FacilityNotFoundInNetworkException {
         StringBuffer stringBuffer = new StringBuffer();
         Iterator<String> iterator = networkGraph.neighbors(facility);
+        stringBuffer.append("\n");
+        stringBuffer.append("Direct links: ");
+        stringBuffer.append("\n");
         while (iterator.hasNext()) {
             String neighbor = iterator.next();
             stringBuffer.append(neighbor);
@@ -86,6 +89,8 @@ public final class NetworkService {
             stringBuffer.append("; ");
 
         }
+
+        stringBuffer.append("\n");
         return stringBuffer.toString();
     }
 
@@ -163,8 +168,15 @@ public final class NetworkService {
             Collection<String> shortestPath = networkService.shortestPath("Chicago, IL", "Denver, CO");
 
             System.out.println("Shortest path from Chicago to Denver");
+
+            int i = 0;
+            int size = shortestPath.size() - 1;
             for (String link : shortestPath){
-                System.out.print(link + "-> ");
+                System.out.print(link);
+                if (i < size){
+                    System.out.print(" -> ");
+                }
+                i++;
             }
 
             System.out.println("");
@@ -177,22 +189,7 @@ public final class NetworkService {
             e.printStackTrace();
         }
 
-        try {
-            Collection<String> shortestPath = networkService.shortestPath("Chicago, IL", "Jamaica");
-            System.out.println("Shortest path from Chicago to Jamaica");
-            for (String link : shortestPath){
-                System.out.print(link + "-> ");
-            }
 
-            System.out.println("");
-
-        } catch (FacilityNotFoundInNetworkException e) {
-            e.printStackTrace();
-        } catch (NeighborNotFoundInNetworkException e) {
-            e.printStackTrace();
-        } catch (NullParameterException e) {
-            e.printStackTrace();
-        }
 
     }
 
