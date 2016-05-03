@@ -3,7 +3,7 @@ package logistics.facilityservice;
 import logistics.utilities.exceptions.NullParameterException;
 
 /**
- * @author David Olorundare and uchenna f.okoye
+ * @authors David Olorundare and Uchenna F.Okoye
  */
 public class FacilityFactory 
 {

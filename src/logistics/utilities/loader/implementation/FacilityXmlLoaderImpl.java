@@ -112,9 +112,9 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 				facilities = xmlLoader.load();
 				for (Facility f : facilities)
 				{
-					System.out.println(f.getName());
-					System.out.println("Cost: " + f.getCost());
-					System.out.println("Rate: " + f.getRate());
+					System.out.println(f.getFacilityName());
+					System.out.println("Cost: " + f.getFacilityCost());
+					System.out.println("Rate: " + f.getFacilityRate());
 					System.out.println("");
 				}
 			} 

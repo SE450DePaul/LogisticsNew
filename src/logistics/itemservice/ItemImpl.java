@@ -7,49 +7,50 @@ import logistics.utilities.exceptions.NullParameterException;
  */
 public class ItemImpl implements Item
 {
-    private String id;
-    private Double price;
+    private String itemId;
+    private Double itemPrice;
 
     public ItemImpl(String id, Double price) throws NullParameterException 
     {
-        setId(id);
-        setPrice(price);
+        setItemId(id);
+        setItemPrice(price);
     }
 
-    public String getId() 
+    public String getItemId() 
     {
-        return id;
+        return itemId;
     }
 
-    public Double getPrice() 
+    public Double getItemPrice() 
     {
-        return price;
+        return itemPrice;
     }
 
-    private void setId(String itemId) throws NullParameterException 
+    private void setItemId(String id) throws NullParameterException 
     {
-        validateId(itemId);
-        id = itemId;
+        validateItemId(id);
+        itemId = id;
     }
 
-    private void setPrice(Double itemPrice) throws NullParameterException 
+    private void setItemPrice(Double price) throws NullParameterException 
     {
-        validatePrice(itemPrice);
-        price = itemPrice;
+        validateItemPrice(price);
+        itemPrice = price;
     }
 
-    private void validateId(String id) throws NullParameterException 
+    private void validateItemId(String id) throws NullParameterException 
     {
-        if (id == null){
-            throw new NullParameterException();
+        if (id == null)
+        {
+            throw new NullParameterException("Item ID cannot be null");
         }
     }
 
-    private void validatePrice(Double price) throws NullParameterException 
+    private void validateItemPrice(Double price) throws NullParameterException 
     {
         if (price == null)
         {
-            throw new NullParameterException("Price cannot be null");
+            throw new NullParameterException("Item Price cannot be null");
         }
     }
 }

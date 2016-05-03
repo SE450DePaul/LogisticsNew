@@ -59,7 +59,6 @@ public final class InventoryService
         return new InventoryItemDTO(itemId, quantity);
     }
 
-
     public String getOutput(String facilityName)
     {
         Inventory inventory = inventoryHashMap.get(facilityName);

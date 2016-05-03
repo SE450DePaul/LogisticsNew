@@ -3,75 +3,75 @@ package logistics.facilityservice;
 import logistics.utilities.exceptions.NullParameterException;
 
 /**
- * @author David Olorundare and uchenna f. okoye
+ * @authors David Olorundare and Uchenna F. Okoye
  */
 public class FacilityImpl implements Facility
 {
-    private String name;
-    private Double rate;
-    private Double cost;
+    private String facilityName;
+    private Double facilityRate;
+    private Double facilityCost;
 
     public FacilityImpl(String name, Double rate, Double cost) throws NullParameterException
     {
-        setName(name);
-        setRate(rate);
-        setCost(cost);
+        setFacilityName(name);
+        setFacilityRate(rate);
+        setFacilityCost(cost);
     }
 
-	public String getName() 
+	public String getFacilityName() 
 	{
-		return name;
+		return facilityName;
 	}
 
-	public Double getRate() 
+	public Double getFacilityRate() 
 	{
-		return rate;
+		return facilityRate;
 	}
 
-	public Double getCost()
+	public Double getFacilityCost()
 	{
-		return cost;
+		return facilityCost;
 	}
 
-	private void setName(String facilityName) throws NullParameterException
+	private void setFacilityName(String name) throws NullParameterException
 	{
-		validateName(facilityName);
-		name = facilityName;
+		validateFacilityName(facilityName);
+		facilityName = name;
 	}
 
-	private void setRate(Double facilityRate) throws NullParameterException
+	private void setFacilityRate(Double rate) throws NullParameterException
 	{
-		validateRate(facilityRate);
-		rate = facilityRate;
+		validateFacilityRate(rate);
+		facilityRate = rate;
 	}
 
-	private void setCost(Double facilityCost) throws NullParameterException
+	private void setFacilityCost(Double cost) throws NullParameterException
 	{
-		validateCost(facilityCost);
-		cost = facilityCost;
+		validateFacilityCost(cost);
+		facilityCost = cost;
 	}
 
-	private void validateName(String name) throws NullParameterException 
+	private void validateFacilityName(String name) throws NullParameterException 
 	{
 		if (name == null)
 		{
-			throw new NullParameterException();
+			throw new NullParameterException("Facility Name cannot be null");
 		}
 	}
 
-	private void validateRate(Double rate) throws NullParameterException 
+	private void validateFacilityRate(Double rate) throws NullParameterException 
 	{
 		if (rate == null)
 		{
-			throw new NullParameterException();
+			throw new NullParameterException("Facility Rate cannot be null");
 		}
 	}
 
-	private void validateCost(Double cost) throws NullParameterException 
+	private void validateFacilityCost(Double cost) throws NullParameterException 
 	{
 		if (cost == null)
 		{
-			throw new NullParameterException();
+			throw new NullParameterException("Facility Cost cannot be null");
 		}
 	}
 }

@@ -25,9 +25,10 @@ public final class ItemCatalogService
             try 
             {
                 Collection<Item> items = loader.load();
-                for (Item item : items){
-                    itemsHash.put(item.getId(), item);
-            }
+                for (Item item : items)
+                {
+                    itemsHash.put(item.getItemId(), item);
+                }
             } 
             catch (LoaderFileNotFoundException e) 
             {
@@ -55,14 +56,14 @@ public final class ItemCatalogService
     {
         Item item = itemsHash.get(itemId);
         if (item == null) return null;
-        return new ItemDTO(item.getId(), item.getPrice());
+        return new ItemDTO(item.getItemId(), item.getItemPrice());
     }
 
     public static void main(String[] args)
     {
         ItemCatalogService itemCatalogService = ItemCatalogService.getInstance();
         ItemDTO itemDTO = itemCatalogService.getItem("ABC123");
-        System.out.println("Please get item");
+        System.out.println("Please get item:");
         System.out.println(" Item id: " + itemDTO.itemId + " Item price: " + itemDTO.itemPrice);
     }
 }

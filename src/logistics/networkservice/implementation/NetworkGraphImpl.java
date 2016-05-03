@@ -75,7 +75,7 @@ public class NetworkGraphImpl implements NetworkGraph
   {
     if (!facilityHashMap.containsKey(fac)) 
     {
-      throw new FacilityNotFoundInNetworkException("Please add facility before add neighbors");
+      throw new FacilityNotFoundInNetworkException("Please add facility before adding neighbors");
     }
   }
 
@@ -83,7 +83,7 @@ public class NetworkGraphImpl implements NetworkGraph
   {
     if (fac == neighbor)
     {
-      throw new SelfLoopNetworkException("Facility cannot be neighbors to itself");
+      throw new SelfLoopNetworkException("Facility cannot be a neighbor to itself");
     }
   }
 

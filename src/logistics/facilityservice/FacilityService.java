@@ -28,7 +28,7 @@ public final class FacilityService
             Collection<Facility> facilities = loader.load();
             for (Facility facility : facilities)
             {
-                facilityHashMap.put(facility.getName(), facility);
+                facilityHashMap.put(facility.getFacilityName(), facility);
             }
         } 
         catch (LoaderFileNotFoundException e) 
@@ -56,7 +56,7 @@ public final class FacilityService
     {
         Facility facility = facilityHashMap.get(name);
         if (facility == null) return null;
-        return new FacilityDTO(facility.getName(), facility.getCost(), facility.getRate());
+        return new FacilityDTO(facility.getFacilityName(), facility.getFacilityCost(), facility.getFacilityRate());
     }
 
     public Set<String> getFacilities()
@@ -69,11 +69,11 @@ public final class FacilityService
         Facility facility = facilityHashMap.get(name);
         if (facility == null) return "";
         StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(facility.getName());
+        stringBuffer.append(facility.getFacilityName());
         stringBuffer.append("\n");
-        stringBuffer.append("Rate per Day: " + facility.getRate());
+        stringBuffer.append("Rate per Day: " + facility.getFacilityRate());
         stringBuffer.append("\n");
-        stringBuffer.append("Cost per day: " + facility.getCost());
+        stringBuffer.append("Cost per day: " + facility.getFacilityCost());
         stringBuffer.append("\n");
         return stringBuffer.toString();
     }

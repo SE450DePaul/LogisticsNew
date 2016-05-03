@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * @author uchenna f. okoye
+ * @author Uchenna F. Okoye
  */
 public class InventoryImpl implements Inventory
 {
@@ -71,7 +71,7 @@ public class InventoryImpl implements Inventory
 	{
 		if (facilityName == null)
 		{
-			throw new NullParameterException();
+			throw new NullParameterException("Facility Name cannot be null");
 		}
 	}
 
@@ -79,7 +79,7 @@ public class InventoryImpl implements Inventory
 	{
 		if (quantity < 0)
 		{
-			throw new NullParameterException();
+			throw new NullParameterException("Quantity cannot be null");
 		}
 	}
 
@@ -87,7 +87,7 @@ public class InventoryImpl implements Inventory
 	{
 		if (itemId == null)
 		{
-			throw new NullParameterException();
+			throw new NullParameterException("Item ID cannot be null");
 		}
 	}
 }
