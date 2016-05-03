@@ -164,6 +164,8 @@ public class ReportService
 		System.out.println();			
 		
 	}
+	
+	
 	public static void main(String[] args)
 	{
 		//TO-DO: Need to create a dedicated display 
@@ -172,11 +174,12 @@ public class ReportService
 		// needs to be able to iterate for each facility, dynamically
 		facilityOutput();
 		
+		// needs to be able to iterate for each facility's item catalog, dynamically
 		itemCatalogOutput();
 		
 		// this output is separate from the first two, given that
 		// it is not outputed per facility, but rather shows the 
-		// works for different facility-to-facility inputs.
+		// works for (10) different facility-to-facility inputs.
 		shortestPathOutput();
 	}
 }
