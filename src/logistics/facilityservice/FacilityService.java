@@ -78,6 +78,7 @@ public final class FacilityService
         return stringBuffer.toString();
     }
 
+    // Test that the service works
     public static void main(String[] args) 
     {
         FacilityService instance = FacilityService.getInstance();

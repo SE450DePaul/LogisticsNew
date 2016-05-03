@@ -66,6 +66,7 @@ public final class InventoryService
         return inventory.getInventoryOutput();
     }
 
+    // Test that the service works
     public static void main(String[] args) 
     {
         InventoryService instance = InventoryService.getInstance();

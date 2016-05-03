@@ -46,5 +46,10 @@ public final class ScheduleService
 
     }
 
-
+    // Test that the service works
+    public static void main(String[] args)
+    {
+    	
+    }
+    
 }

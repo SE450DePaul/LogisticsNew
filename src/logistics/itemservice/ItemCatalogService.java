@@ -59,6 +59,7 @@ public final class ItemCatalogService
         return new ItemDTO(item.getItemId(), item.getItemPrice());
     }
 
+    // Test that the service works
     public static void main(String[] args)
     {
         ItemCatalogService itemCatalogService = ItemCatalogService.getInstance();
