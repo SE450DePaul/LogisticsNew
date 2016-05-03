@@ -1,4 +1,4 @@
-package logistics.utilities.loader;
+package logistics.utilities.loader.config;
 
 /**
  * Created by uchennafokoye on 4/28/16.

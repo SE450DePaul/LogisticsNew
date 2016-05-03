@@ -45,7 +45,7 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 	            File xml = new File(filepath);
 	            if (!xml.exists()) 
 	            {
-	                throw new LoaderFileNotFoundException();
+	                throw new LoaderFileNotFoundException("File: " + filepath + " does not exist");
 	            }
 
 	            Document doc = db.parse(xml);

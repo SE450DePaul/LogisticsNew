@@ -21,7 +21,6 @@ import java.util.ArrayList;
  */
 public class ItemXmlLoaderImpl implements ItemLoader 
 {
-
     private String filepath;
     public ItemXmlLoaderImpl(String filepath)
     {
@@ -41,7 +40,7 @@ public class ItemXmlLoaderImpl implements ItemLoader
             File xml = new File(filepath);
             if (!xml.exists()) 
             {
-                throw new LoaderFileNotFoundException();
+                throw new LoaderFileNotFoundException("File: " + filepath + " does not exist");
             }
 
             Document doc = db.parse(xml);
@@ -72,8 +71,8 @@ public class ItemXmlLoaderImpl implements ItemLoader
                 Double price = Double.parseDouble(priceNode.item(0).getTextContent());
 
                 Item item = ItemFactory.build(id, price);
-
-//                System.out.println("No " + i + ": Item price: " + price + " Item Id: " + id);
+              //TO TEST MODULE REMOVE THIS COMMENT BELOW
+                // System.out.println("No " + i + ": Item price: " + price + " Item Id: " + id);
                 items.add(item);
             }
 
@@ -99,7 +98,6 @@ public class ItemXmlLoaderImpl implements ItemLoader
 
     public static void main(String[] args)
     {
-
         ItemXmlLoaderImpl xmlLoader =  new ItemXmlLoaderImpl("data/item_catalog.xml");
         try 
         {

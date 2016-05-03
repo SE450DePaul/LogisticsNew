@@ -1,6 +1,6 @@
 package logistics.utilities.loader.factory;
 
-import logistics.utilities.loader.LoaderConfig;
+import logistics.utilities.loader.config.LoaderConfig;
 import logistics.utilities.loader.implementation.NetworkXmlLoaderImpl;
 import logistics.utilities.loader.interfaces.NetworkLoader;
 

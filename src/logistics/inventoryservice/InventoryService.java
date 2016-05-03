@@ -28,7 +28,8 @@ public final class InventoryService
             {
                 inventoryHashMap.put(inventory.getFacilityName(), inventory);
             }
-        } catch (LoaderFileNotFoundException e) 
+        } 
+        catch (LoaderFileNotFoundException e) 
         {
             e.printStackTrace();
         }

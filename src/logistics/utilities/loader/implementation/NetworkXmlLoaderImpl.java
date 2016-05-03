@@ -29,7 +29,6 @@ import java.util.Iterator;
  */
 public class NetworkXmlLoaderImpl implements NetworkLoader 
 {
-
 	private String filepath;
 
 	public NetworkXmlLoaderImpl(String filepath)
@@ -39,7 +38,6 @@ public class NetworkXmlLoaderImpl implements NetworkLoader
 
 	public ArrayList<FacilityVertex> load() throws LoaderFileNotFoundException 
 	{
-
 		ArrayList<FacilityVertex> facilityVertices = new ArrayList<FacilityVertex>();
 
 		try 
@@ -50,7 +48,7 @@ public class NetworkXmlLoaderImpl implements NetworkLoader
 			File xml = new File(filepath);
 			if (!xml.exists()) 
 			{
-				throw new LoaderFileNotFoundException();
+				throw new LoaderFileNotFoundException("File: " + filepath + " does not exist");
 			}
 
 			Document doc = db.parse(xml);
@@ -83,13 +81,12 @@ public class NetworkXmlLoaderImpl implements NetworkLoader
 
 				for (int j = 0; j < linkNodes.getLength(); j++)
 				{
-
 					node = linkNodes.item(j);
 					if (node.getNodeType() == Node.TEXT_NODE)
 					{
 						continue;
 					}
-
+					
 					entryName = node.getNodeName();
 					if (!entryName.equals("link"))
 					{
@@ -101,12 +98,10 @@ public class NetworkXmlLoaderImpl implements NetworkLoader
 					String distanceString = element.getElementsByTagName("distance").item(0).getTextContent();
 					int distance = Integer.parseInt(distanceString);
 					facilityVertex.addNeighbor(neighborName, distance);
-
 				}
 
 				facilityVertices.add(facilityVertex);
 			}
-
 		} 
 		catch (ParserConfigurationException e) 
 		{
@@ -145,7 +140,7 @@ public class NetworkXmlLoaderImpl implements NetworkLoader
 				while (iterator.hasNext()){
 					String current = iterator.next();
 					System.out.println(current);
-					System.out.println("distance: " + facilityVertex.distanceTo(current));
+					System.out.println("Distance: " + facilityVertex.distanceTo(current) + "\n");
 				}
 			}
 

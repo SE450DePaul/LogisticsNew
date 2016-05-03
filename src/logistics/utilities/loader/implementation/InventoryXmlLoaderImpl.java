@@ -42,8 +42,6 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 
 	public ArrayList<Inventory> load() throws LoaderFileNotFoundException
 	{
-
-
 		ArrayList<Inventory> inventories = new ArrayList<>();
 
 		try
@@ -54,7 +52,7 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 			File xml = new File(filepath);
 			if (!xml.exists())
 			{
-				System.out.println("File does not exist"); /*throw new LoaderFileNotFoundException();*/
+				throw new LoaderFileNotFoundException("File: " + filepath + " does not exist");
 			}
 
 			Document doc = db.parse(xml);
@@ -89,7 +87,6 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 
 				Inventory inventory = InventoryFactory.build(name);
 
-
 				ArrayList<String> itemDescriptions = new ArrayList<>();
 				NodeList itemList = element.getElementsByTagName("item");
 				for (int j = 0; j < itemList.getLength(); j++)
@@ -119,7 +116,8 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 				}
 
 				inventories.add(inventory);
-//				System.out.println("Facility " + i + " : " + name + "Items: " + itemId + " Quantity " + itemQty);
+				//TO TEST MODULE REMOVE THIS COMMENT BELOW
+				// System.out.println("Facility " + i + " : " + name + "Items: " + itemId + " Quantity " + itemQty);
 			}
 		}
 		catch (ParserConfigurationException e)
@@ -142,10 +140,9 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 		return inventories;
 	}
 
-
 	public static void main(String[] args)
 	{
-		InventoryXmlLoaderImpl xmlLoader =  new InventoryXmlLoaderImpl("src/data/facility_inventory.xml");
+		InventoryXmlLoaderImpl xmlLoader =  new InventoryXmlLoaderImpl("data/facility_inventory.xml");
 		try
 		{
 			xmlLoader.load();
