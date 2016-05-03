@@ -6,6 +6,6 @@ package logistics.facilityservice;
 public interface Facility
 {
     String getFacilityName();
-    Double getFacilityRate();
+    Integer getFacilityRate();
     Double getFacilityCost();
 }

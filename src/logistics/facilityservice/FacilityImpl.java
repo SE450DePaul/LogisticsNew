@@ -8,10 +8,10 @@ import logistics.utilities.exceptions.NullParameterException;
 public class FacilityImpl implements Facility
 {
     private String facilityName;
-    private Double facilityRate;
+    private Integer facilityRate;
     private Double facilityCost;
 
-    public FacilityImpl(String name, Double rate, Double cost) throws NullParameterException
+    public FacilityImpl(String name, Integer rate, Double cost) throws NullParameterException
     {
         setFacilityName(name);
         setFacilityRate(rate);
@@ -23,7 +23,7 @@ public class FacilityImpl implements Facility
 		return facilityName;
 	}
 
-	public Double getFacilityRate() 
+	public Integer getFacilityRate() 
 	{
 		return facilityRate;
 	}
@@ -39,7 +39,7 @@ public class FacilityImpl implements Facility
 		facilityName = name;
 	}
 
-	private void setFacilityRate(Double rate) throws NullParameterException
+	private void setFacilityRate(Integer rate) throws NullParameterException
 	{
 		validateFacilityRate(rate);
 		facilityRate = rate;
@@ -59,7 +59,7 @@ public class FacilityImpl implements Facility
 		}
 	}
 
-	private void validateFacilityRate(Double rate) throws NullParameterException 
+	private void validateFacilityRate(Integer rate) throws NullParameterException 
 	{
 		if (rate == null)
 		{

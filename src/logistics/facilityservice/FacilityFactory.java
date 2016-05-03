@@ -7,7 +7,7 @@ import logistics.utilities.exceptions.NullParameterException;
  */
 public class FacilityFactory 
 {
-    public static Facility build(String facilityName, Double facilityRate, Double facilityCost) throws NullParameterException
+    public static Facility build(String facilityName, Integer facilityRate, Double facilityCost) throws NullParameterException
     {
         return new FacilityImpl(facilityName, facilityRate, facilityCost);
     }

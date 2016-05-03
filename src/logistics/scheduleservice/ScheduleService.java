@@ -14,9 +14,7 @@ public final class ScheduleService
 
     private volatile static ScheduleService instance;
 
-    int numberToProcess = 26;
-    int daysUsed;
-
+  
     private ScheduleService() 
     {
 
@@ -41,18 +39,14 @@ public final class ScheduleService
         return instance;
     }
 
-    public void computeRemaingDay()
-    {
-    	
-    }
     
-    // should be rename to generate Schedule
+    // should be renamed to generate Schedule
     public String getOutput(String facility)
     {
     	return "";
     }
     
-    
+    // generate SCHEDULE for facility using Schedule Manager API
     public void getSchedule()//Facility facility)
     {
     	//daysUsed = 	(int) Math.abs(numberToProcess - facility.getFacilityRate());
@@ -64,6 +58,8 @@ public final class ScheduleService
     		
     	}
     	System.out.print("\nAvailable: \t");
+    	
+    	// j should be the remaining number of days available
     	for (int j = 1; j < 21; j++)
     	{
     		System.out.print(10 + " ");
@@ -71,17 +67,7 @@ public final class ScheduleService
     	
     }
 
-    /*
-	// generate SCHEDULE for facility using Schedule Manager API
-	System.out.println("\nSchedule: ");
-	// generate SCHEDULE day using API
-	System.out.println("Day: \t\t1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20");
-	// generate SCHEDULE availability using API
-	System.out.println("Available: \t10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10");
-	// facility output ends here
-	System.out.print("------------------------------------------------------------------------------");
-	*/
-    
+    // generate SCHEDULE availability using API
     private void generateSchedule()
     {
 
