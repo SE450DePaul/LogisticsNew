@@ -1,52 +1,56 @@
-package logistics.facilityservice;
+package logistics.ScheduleService;
 
-import logistics.utilities.exceptions.LoaderFileNotFoundException;
-import logistics.utilities.loader.factory.LoaderFactory;
+import logistics.facilityservice.Facility;
+import logistics.facilityservice.FacilityDTO;
+import logistics.facilityservice.FacilityService;
 import logistics.utilities.loader.interfaces.Loader;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.TreeSet;
 
 
 /**
  * @author uchenna f. okoye
  */
-public final class FacilityService
+public final class ScheduleManager
 {
 
-    private volatile static FacilityService instance;
+    private volatile static ScheduleManager instance;
     private HashMap<String, Facility> facilityHashMap = new HashMap<>();
     private Loader<Facility> loader;
+    private FacilityService facilityService;
+    private Set<String> facilities;
 
 
-    private FacilityService() {
-        loader = LoaderFactory.build("facility");
+    private ScheduleManager() {
 
-        try {
-            Collection<Facility> facilities = loader.load();
-            for (Facility facility : facilities){
-                facilityHashMap.put(facility.getName(), facility);
-            }
-        } catch (LoaderFileNotFoundException e) {
-            e.printStackTrace();
-        }
+        facilityService = FacilityService.getInstance();
+        facilities = facilityService.getFacilities();
 
     }
+
+
     
-    public static FacilityService getInstance() {
+    public static ScheduleManager getInstance() {
         if (instance == null)
         {
-            synchronized (FacilityService.class)
+            synchronized (ScheduleManager.class)
             {
                 if (instance == null)
                 {
-                    instance = new FacilityService();
+                    instance = new ScheduleManager();
                 }
             }
         }
         return instance;
+    }
+
+    public void getSchedule(){
+
+    }
+
+    private void generateSchedule(){
+
     }
 
     public FacilityDTO getFacility(String name) {
@@ -54,11 +58,6 @@ public final class FacilityService
         if (facility == null) return null;
         return new FacilityDTO(facility.getName(), facility.getCost(), facility.getRate());
     }
-
-    public Set<String> getFacilities(){
-        return new TreeSet<String>(facilityHashMap.keySet());
-    }
-
 
     public String getOutput(String name){
         Facility facility = facilityHashMap.get(name);
@@ -78,19 +77,13 @@ public final class FacilityService
 
     public static void main(String[] args) {
 
-        FacilityService instance = FacilityService.getInstance();
+        ScheduleManager instance = ScheduleManager.getInstance();
 //        FacilityDTO facilityDTO = instance.getFacility("San Francisco, CA");
 //        System.out.println("Please get Facility");
 //        System.out.println(" Facility name " + facilityDTO.name + " Facility cost " + facilityDTO.cost);
 
         String output = instance.getOutput("San Francisco, CA");
         System.out.println(output);
-
-        System.out.println("Facilities: ");
-        Set<String> facilities = instance.getFacilities();
-        for (String facility : facilities){
-            System.out.println(facility);
-        }
 
 
     }

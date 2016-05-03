@@ -1,6 +1,6 @@
 package logistics.itemservice;
 
-import logistics.utilities.exceptions.IllegalParameterException;
+import logistics.utilities.exceptions.NullParameterException;
 
 /**
  * Created by uchennafokoye on 4/22/16.
@@ -10,7 +10,7 @@ public class ItemImpl implements Item
     private String id;
     private Double price;
 
-    public ItemImpl(String id, Double price) throws IllegalParameterException {
+    public ItemImpl(String id, Double price) throws NullParameterException {
         setId(id);
         setPrice(price);
     }
@@ -23,25 +23,25 @@ public class ItemImpl implements Item
         return price;
     }
 
-    private void setId(String itemId) throws IllegalParameterException{
+    private void setId(String itemId) throws NullParameterException {
         validateId(itemId);
         id = itemId;
     }
 
-    private void setPrice(Double itemPrice) throws IllegalParameterException{
+    private void setPrice(Double itemPrice) throws NullParameterException {
         validatePrice(itemPrice);
         price = itemPrice;
     }
 
-    private void validateId(String id) throws IllegalParameterException {
+    private void validateId(String id) throws NullParameterException {
         if (id == null){
-            throw new IllegalParameterException();
+            throw new NullParameterException();
         }
     }
 
-    private void validatePrice(Double price) throws IllegalParameterException {
+    private void validatePrice(Double price) throws NullParameterException {
         if (price == null){
-            throw new IllegalParameterException("Price cannot be null");
+            throw new NullParameterException("Price cannot be null");
         }
     }
 

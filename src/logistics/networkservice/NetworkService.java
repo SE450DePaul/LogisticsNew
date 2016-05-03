@@ -3,14 +3,15 @@ package logistics.networkservice;
 import logistics.networkservice.factory.NetworkGraphFactory;
 import logistics.networkservice.interfaces.FacilityVertex;
 import logistics.networkservice.interfaces.NetworkGraph;
-import logistics.utilities.exceptions.FacilityNotFoundInNetworkException;
-import logistics.utilities.exceptions.IllegalParameterException;
-import logistics.utilities.exceptions.LoaderFileNotFoundException;
-import logistics.utilities.exceptions.SelfLoopNetworkException;
+import logistics.networkservice.shortestpath.ShortestPathFactory;
+import logistics.networkservice.shortestpath.ShortestPathStrategy;
+import logistics.utilities.exceptions.*;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
 
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 
 /**
@@ -19,14 +20,20 @@ import java.util.Iterator;
 public final class NetworkService {
 
     private volatile static NetworkService instance;
+    private HashSet<String> facilities;
     private Loader loader;
+    private Double DEFAULT_DRIVING_HOURS_PER_DAY = 8.0;
+    private Double DEFAULT_DRIVING_MILES_PER_HOUR = 50.0;
+    private HashMap<String, ShortestPathStrategy> shortestPathHash;
 
 
     private NetworkGraph networkGraph;
 
     private NetworkService() {
             loader = LoaderFactory.build("network");
+            facilities = new HashSet<>();
             networkGraph = NetworkGraphFactory.build();
+            shortestPathHash = new HashMap<>();
             buildGraph();
     }
 
@@ -42,8 +49,50 @@ public final class NetworkService {
         return instance;
     }
 
-    public int distance (String facility, String neighbor) throws FacilityNotFoundInNetworkException {
-        return networkGraph.distanceToNeighbor(facility, neighbor);
+    public int distance (String facility, String destination) throws FacilityNotFoundInNetworkException, NeighborNotFoundInNetworkException, NullParameterException {
+        if (shortestPathHash.get(facility) == null) {
+            ShortestPathStrategy shortestPaths = ShortestPathFactory.build(networkGraph, facility);
+            shortestPathHash.put(facility, shortestPaths);
+        }
+        return shortestPathHash.get(facility).distanceTo(destination);
+    }
+
+
+    public Collection<String> shortestPath (String facility, String destination) throws FacilityNotFoundInNetworkException, NeighborNotFoundInNetworkException, NullParameterException {
+        if (shortestPathHash.get(facility) == null) {
+            ShortestPathStrategy shortestPaths = ShortestPathFactory.build(networkGraph, facility);
+            shortestPathHash.put(facility, shortestPaths);
+        }
+
+        return shortestPathHash.get(facility).shortestPathTo(destination);
+    }
+
+    public String getOutput(String facility) throws FacilityNotFoundInNetworkException {
+        StringBuffer stringBuffer = new StringBuffer();
+        Iterator<String> iterator = networkGraph.neighbors(facility);
+        while (iterator.hasNext()) {
+            String neighbor = iterator.next();
+            stringBuffer.append(neighbor);
+
+            int distance = 0;
+            try {
+                distance = networkGraph.distanceToNeighbor(facility, neighbor);
+            } catch (NeighborNotFoundInNetworkException e) {
+                e.printStackTrace();
+            }
+            Double travelTime = travelTime(distance, DEFAULT_DRIVING_HOURS_PER_DAY, DEFAULT_DRIVING_MILES_PER_HOUR);
+
+            stringBuffer.append(" (" + String.format("%1.1f", travelTime) + "d)");
+            stringBuffer.append("; ");
+
+        }
+        return stringBuffer.toString();
+    }
+
+
+    private Double travelTime(int distance, double drivingHours, double mph){
+        Double time = distance / drivingHours / mph;
+        return time;
     }
 
 
@@ -53,8 +102,9 @@ public final class NetworkService {
             for (FacilityVertex facilityVertex : facilityVertices){
                 String facilityName = facilityVertex.getFacilityName();
                 networkGraph.addFacility(facilityName);
+                facilities.add(facilityName);
 
-                Iterator<String> iterator = facilityVertex.neighbor();
+                Iterator<String> iterator = facilityVertex.neighbors();
                 while (iterator.hasNext()){
                     String neighbor = iterator.next();
                     int distance = facilityVertex.distanceTo(neighbor);
@@ -64,25 +114,85 @@ public final class NetworkService {
             }
         } catch (LoaderFileNotFoundException e) {
             e.printStackTrace();
-        } catch (IllegalParameterException e) {
+        } catch (NullParameterException e) {
             e.printStackTrace();
         } catch (FacilityNotFoundInNetworkException e) {
             e.printStackTrace();
         } catch (SelfLoopNetworkException e) {
             e.printStackTrace();
+        } catch (NeighborNotFoundInNetworkException e) {
+            e.printStackTrace();
         }
     }
+
+
+
+
 
 
     public static void main(String[] args){
 
         NetworkService networkService = NetworkService.getInstance();
+//        try {
+//            System.out.println("Distance from Seattle to Fargo: " + networkService.distance("Seattle, WA", "Fargo, ND"));
+//        } catch (FacilityNotFoundInNetworkException e) {
+//            e.printStackTrace();
+//        } catch (NeighborNotFoundInNetworkException e) {
+//            e.printStackTrace();
+//        }
+
         try {
-            System.out.println("Distance from Seattle to Fargo: " + networkService.distance("Seattle, WA", "Fargo, ND"));
+            System.out.println(networkService.getOutput("Chicago, IL"));
         } catch (FacilityNotFoundInNetworkException e) {
             e.printStackTrace();
         }
 
+
+        try {
+            System.out.println("Distance from Chicago to Denver, CO: ");
+            System.out.println(networkService.distance("Chicago, IL", "Denver, CO"));
+        } catch (FacilityNotFoundInNetworkException e) {
+            e.printStackTrace();
+        } catch (NeighborNotFoundInNetworkException e) {
+            e.printStackTrace();
+        } catch (NullParameterException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Collection<String> shortestPath = networkService.shortestPath("Chicago, IL", "Denver, CO");
+
+            System.out.println("Shortest path from Chicago to Denver");
+            for (String link : shortestPath){
+                System.out.print(link + "-> ");
+            }
+
+            System.out.println("");
+
+        } catch (FacilityNotFoundInNetworkException e) {
+            e.printStackTrace();
+        } catch (NeighborNotFoundInNetworkException e) {
+            e.printStackTrace();
+        } catch (NullParameterException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Collection<String> shortestPath = networkService.shortestPath("Chicago, IL", "Jamaica");
+            System.out.println("Shortest path from Chicago to Jamaica");
+            for (String link : shortestPath){
+                System.out.print(link + "-> ");
+            }
+
+            System.out.println("");
+
+        } catch (FacilityNotFoundInNetworkException e) {
+            e.printStackTrace();
+        } catch (NeighborNotFoundInNetworkException e) {
+            e.printStackTrace();
+        } catch (NullParameterException e) {
+            e.printStackTrace();
+        }
 
     }
 

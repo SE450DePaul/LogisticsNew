@@ -1,6 +1,7 @@
 package logistics.networkservice.interfaces;
 
-import logistics.utilities.exceptions.IllegalParameterException;
+import logistics.utilities.exceptions.NullParameterException;
+import logistics.utilities.exceptions.NeighborNotFoundInNetworkException;
 
 import java.util.Iterator;
 
@@ -9,13 +10,11 @@ import java.util.Iterator;
  */
 public interface FacilityVertex {
 
-    void addNeighbor(String facility, int distance) throws IllegalParameterException;
+    void addNeighbor(String facility, int distance) throws NullParameterException;
 
-    int distanceTo(String facility);
+    int distanceTo(String facility) throws NeighborNotFoundInNetworkException;
 
-    boolean isANeighbor(String facility);
-
-    Iterator<String> neighbor();
+    Iterator<String> neighbors();
 
     String getFacilityName();
 

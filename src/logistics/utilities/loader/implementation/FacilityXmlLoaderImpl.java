@@ -10,7 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import logistics.facilityservice.Facility;
 import logistics.facilityservice.FacilityFactory;
-import logistics.utilities.exceptions.IllegalParameterException;
+import logistics.utilities.exceptions.NullParameterException;
 import logistics.utilities.loader.interfaces.FacilityLoader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -95,7 +95,7 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 	        catch (IOException e) 
 	        {
 	            e.printStackTrace();
-	        } catch (IllegalParameterException e) {
+	        } catch (NullParameterException e) {
 				e.printStackTrace();
 			}
 

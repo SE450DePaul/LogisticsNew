@@ -1,6 +1,6 @@
 package logistics.facilityservice;
 
-import logistics.utilities.exceptions.IllegalParameterException;
+import logistics.utilities.exceptions.NullParameterException;
 
 /**
  * @author David Olorundare and uchenna f. okoye
@@ -11,7 +11,7 @@ public class FacilityImpl implements Facility
     private Double rate;
     private Double cost;
 
-    public FacilityImpl(String name, Double rate, Double cost) throws IllegalParameterException
+    public FacilityImpl(String name, Double rate, Double cost) throws NullParameterException
     {
         setName(name);
         setRate(rate);
@@ -33,39 +33,39 @@ public class FacilityImpl implements Facility
 		return cost;
 	}
 
-	private void setName(String facilityName) throws IllegalParameterException
+	private void setName(String facilityName) throws NullParameterException
 	{
 		validateName(facilityName);
 		name = facilityName;
 	}
 
-	private void setRate(Double facilityRate) throws IllegalParameterException
+	private void setRate(Double facilityRate) throws NullParameterException
 	{
 		validateRate(facilityRate);
 		rate = facilityRate;
 	}
 
-	private void setCost(Double facilityCost) throws IllegalParameterException
+	private void setCost(Double facilityCost) throws NullParameterException
 	{
 		validateCost(facilityCost);
 		cost = facilityCost;
 	}
 
-	private void validateName(String name) throws IllegalParameterException {
+	private void validateName(String name) throws NullParameterException {
 		if (name == null){
-			throw new IllegalParameterException();
+			throw new NullParameterException();
 		}
 	}
 
-	private void validateRate(Double rate) throws IllegalParameterException {
+	private void validateRate(Double rate) throws NullParameterException {
 		if (rate == null){
-			throw new IllegalParameterException();
+			throw new NullParameterException();
 		}
 	}
 
-	private void validateCost(Double cost) throws IllegalParameterException {
+	private void validateCost(Double cost) throws NullParameterException {
 		if (cost == null){
-			throw new IllegalParameterException();
+			throw new NullParameterException();
 		}
 	}
 

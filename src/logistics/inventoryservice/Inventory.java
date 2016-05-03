@@ -1,6 +1,6 @@
 package logistics.inventoryservice;
 
-import logistics.utilities.exceptions.IllegalParameterException;
+import logistics.utilities.exceptions.NullParameterException;
 
 /**
  * @author David Olorundare
@@ -8,8 +8,8 @@ import logistics.utilities.exceptions.IllegalParameterException;
 public interface Inventory
 {
 
-    void updateInventory(String itemId, int quantity) throws IllegalParameterException;
-    void addInventoryItem(String itemId, int quantity) throws IllegalParameterException;
+    void updateInventory(String itemId, int quantity) throws NullParameterException;
+    void addInventoryItem(String itemId, int quantity) throws NullParameterException;
     Integer getQuantity(String itemId);
     String getFacilityName();
     String getInventoryOutput();

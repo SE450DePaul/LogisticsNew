@@ -11,7 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import logistics.inventoryservice.Inventory;
 import logistics.inventoryservice.InventoryFactory;
 import logistics.inventoryservice.inventoryitem.InventoryItemDTO;
-import logistics.utilities.exceptions.IllegalParameterException;
+import logistics.utilities.exceptions.NullParameterException;
 import logistics.utilities.loader.interfaces.InventoryLoader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -135,7 +135,7 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		} catch (IllegalParameterException e) {
+		} catch (NullParameterException e) {
 			e.printStackTrace();
 		}
 

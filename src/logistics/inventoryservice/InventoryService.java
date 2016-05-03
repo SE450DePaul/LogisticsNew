@@ -9,7 +9,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 /**
- * @author David Olorundare and uchenna f. okoye
+ * @author uchenna f. okoye
  */
 public final class InventoryService
 {

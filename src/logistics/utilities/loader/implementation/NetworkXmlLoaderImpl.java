@@ -3,8 +3,9 @@ package logistics.utilities.loader.implementation;
 
 import logistics.networkservice.factory.FacilityVertexFactory;
 import logistics.networkservice.interfaces.FacilityVertex;
-import logistics.utilities.exceptions.IllegalParameterException;
+import logistics.utilities.exceptions.NullParameterException;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
+import logistics.utilities.exceptions.NeighborNotFoundInNetworkException;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
 import logistics.utilities.loader.interfaces.NetworkLoader;
@@ -103,7 +104,7 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (IllegalParameterException e) {
+		} catch (NullParameterException e) {
 			e.printStackTrace();
 		}
 
@@ -121,7 +122,7 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 
 			for (FacilityVertex facilityVertex : facilityVertexCollection){
 				System.out.println(facilityVertex.getFacilityName());
-				Iterator<String> iterator = facilityVertex.neighbor();
+				Iterator<String> iterator = facilityVertex.neighbors();
 
 				System.out.println("Neighbors: ");
 				while (iterator.hasNext()){
@@ -134,10 +135,9 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 
 		} catch (LoaderFileNotFoundException e) {
 			e.printStackTrace();
+		} catch (NeighborNotFoundInNetworkException e) {
+			e.printStackTrace();
 		}
-
-
-
 
 
 	}

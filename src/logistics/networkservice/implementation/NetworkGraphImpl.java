@@ -4,66 +4,69 @@ import logistics.networkservice.factory.FacilityVertexFactory;
 import logistics.networkservice.interfaces.FacilityVertex;
 import logistics.networkservice.interfaces.NetworkGraph;
 import logistics.utilities.exceptions.FacilityNotFoundInNetworkException;
-import logistics.utilities.exceptions.IllegalParameterException;
+import logistics.utilities.exceptions.NullParameterException;
+import logistics.utilities.exceptions.NeighborNotFoundInNetworkException;
 import logistics.utilities.exceptions.SelfLoopNetworkException;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.TreeSet;
 
 /**
  * Created by uchennafokoye on 4/29/16.
  */
 public class NetworkGraphImpl implements NetworkGraph {
 
-  private Collection<String> facilities;
   private HashMap<String, FacilityVertex> facilityHashMap;
 
 
 
   public NetworkGraphImpl() {
-    facilities = new ArrayList<>();
     facilityHashMap = new HashMap<>();
   }
 
   @Override
-  public void addFacility(String facility) throws IllegalParameterException {
+  public void addFacility(String facility) throws NullParameterException {
       validateFacility(facility);
       FacilityVertex facilityVertex = FacilityVertexFactory.build(facility);
       facilityHashMap.put(facility, facilityVertex);
   }
 
   @Override
-  public void addNeighbor(String facility, String neighbor, int distance) throws FacilityNotFoundInNetworkException, IllegalParameterException, SelfLoopNetworkException {
+  public void addNeighbor(String facility, String neighbor, int distance) throws FacilityNotFoundInNetworkException, NullParameterException, SelfLoopNetworkException {
       validateAddNeighbor(facility, neighbor);
       FacilityVertex facilityVertex = facilityHashMap.get(facility);
-//      FacilityVertex neighborVertex = facilityHashMap.get(neighbor);
       facilityVertex.addNeighbor(neighbor, distance);
-//      neighborVertex.addNeighbor(facility, distance);
   }
 
   @Override
-  public Iterator<String> neighbors(String facility) {
+  public Iterator<String> neighbors(String facility) throws FacilityNotFoundInNetworkException {
+    validateFacilityExists(facility);
     FacilityVertex facilityVertex = facilityHashMap.get(facility);
-    return facilityVertex.neighbor();
+    return facilityVertex.neighbors();
   }
 
   @Override
-  public int distanceToNeighbor(String facility, String neighbor) throws FacilityNotFoundInNetworkException {
+  public int distanceToNeighbor(String facility, String neighbor) throws FacilityNotFoundInNetworkException, NeighborNotFoundInNetworkException {
     validateFacilityExists(facility);
     FacilityVertex facilityVertex = facilityHashMap.get(facility);
     return facilityVertex.distanceTo(neighbor);
   }
 
   @Override
-  public int noOfVertices() {
-    return 0;
+  public boolean contains(String facility) {
+    return facilityHashMap.containsKey(facility);
   }
 
-  private void validateFacility(String fac) throws IllegalParameterException {
+  @Override
+  public Collection<String> vertices() {
+    return new TreeSet<>(facilityHashMap.keySet());
+  }
+
+  private void validateFacility(String fac) throws NullParameterException {
     if (fac == null){
-      throw new IllegalParameterException("Facility cannot be null");
+      throw new NullParameterException("Facility cannot be null");
     }
   }
 
@@ -81,7 +84,6 @@ public class NetworkGraphImpl implements NetworkGraph {
 
   private void validateAddNeighbor(String facility, String neighbor) throws FacilityNotFoundInNetworkException, SelfLoopNetworkException {
     validateFacilityExists(facility);
-//    validateFacilityExists(neighbor);
     validateSelfLoop(facility, neighbor);
   }
 
