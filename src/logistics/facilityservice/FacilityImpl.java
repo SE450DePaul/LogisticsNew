@@ -35,7 +35,7 @@ public class FacilityImpl implements Facility
 
 	private void setFacilityName(String name) throws NullParameterException
 	{
-		validateFacilityName(facilityName);
+		validateFacilityName(name);
 		facilityName = name;
 	}
 

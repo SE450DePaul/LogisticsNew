@@ -71,6 +71,13 @@ public final class FacilityService
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(facility.getFacilityName());
         stringBuffer.append("\n");
+        
+        for (int i = 0; i < name.length(); i++)
+		{
+			stringBuffer.append("-");
+		}
+        
+		stringBuffer.append("\n");
         stringBuffer.append("Rate per Day: " + facility.getFacilityRate());
         stringBuffer.append("\n");
         stringBuffer.append("Cost per day: " + facility.getFacilityCost());

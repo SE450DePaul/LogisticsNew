@@ -1,11 +1,14 @@
 package logistics.itemservice;
 
+import logistics.facilityservice.Facility;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.utilities.loader.interfaces.Loader;
 import logistics.utilities.loader.factory.LoaderFactory;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * Created by uchennafokoye on 4/22/16.
@@ -59,6 +62,29 @@ public final class ItemCatalogService
         return new ItemDTO(item.getItemId(), item.getItemPrice());
     }
 
+    public Set<String> getItems()
+    {
+        return new TreeSet<String>(itemsHash.keySet());
+    }
+    
+    public String getItemOutput(String itemName)
+    {
+        Item itemId = itemsHash.get(itemName);
+        if (itemId == null) return "";
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(itemId.getItemId());
+        stringBuffer.append("\t");
+        stringBuffer.append(":  ");
+        stringBuffer.append(itemId.getItemPrice());
+        stringBuffer.append("\t");
+        return stringBuffer.toString();
+    }
+    
+    
+    //public ItemDTO getOutput(String itemId)
+    //{
+    	
+    // }
     // Test that the service works
     public static void main(String[] args)
     {
@@ -66,5 +92,19 @@ public final class ItemCatalogService
         ItemDTO itemDTO = itemCatalogService.getItem("ABC123");
         System.out.println("Please get item:");
         System.out.println(" Item id: " + itemDTO.itemId + " Item price: " + itemDTO.itemPrice);
+        System.out.println("Print out all items: ");
+        
+        
+        Set<String> items = itemCatalogService.getItems();
+        //
+        //for (int i = 0; i < items.size(); i++)
+        for (String item : items)
+        {
+            //for (ItemDTO itm : itemCatalogService.getItem(item) )
+        	System.out.println(itemCatalogService.getItemOutput(item));
+        	
+        }
+        
+        
     }
 }

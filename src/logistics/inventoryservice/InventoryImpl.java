@@ -49,11 +49,12 @@ public class InventoryImpl implements Inventory
 		return facilityName;
 	}
 
+	// schedule service needs to calculate amount depleted
 	public String getInventoryOutput() 
 	{
 		Set<String> items = inventoryHash.keySet();
 		StringBuffer stringBuffer = new StringBuffer();
-		stringBuffer.append("Active Inventory: ");
+		stringBuffer.append("\nActive Inventory: ");
 		stringBuffer.append("\n");
 		stringBuffer.append("\tItem Id\tQuantity");
 		for (String item : items)
@@ -63,7 +64,7 @@ public class InventoryImpl implements Inventory
 			stringBuffer.append("\t" + item + "\t" + quantity);
 		}
 		stringBuffer.append("\n\n");
-		stringBuffer.append("Depleted (Used-Up) Inventory: None");
+		stringBuffer.append("Depleted (Used-Up) Inventory: None\n");
 		return stringBuffer.toString();
 	}
 

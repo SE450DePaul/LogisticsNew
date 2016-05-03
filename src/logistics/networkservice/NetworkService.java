@@ -9,6 +9,7 @@ import logistics.utilities.exceptions.*;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
 
+import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -62,6 +63,15 @@ public final class NetworkService
         return shortestPathHash.get(facility).distanceTo(destination);
     }
 
+    public double getDistanceDays(int distance) throws NullParameterException
+    {
+    	DecimalFormat inputFormat = new DecimalFormat(".##"); 
+    	if (distance == 0)
+    		throw new NullParameterException("Distance cannot be Zero");
+    	
+    	double distanceDays = travelTime(distance, 8, 50);	
+        return Double.valueOf(inputFormat.format(distanceDays));	
+    }
 
     public Collection<String> shortestPath (String facility, String destination) throws FacilityNotFoundInNetworkException, NeighborNotFoundInNetworkException, NullParameterException 
     {
@@ -99,13 +109,94 @@ public final class NetworkService
         return stringBuffer.toString();
     }
 
-    private Double travelTime(int distance, double drivingHours, double mph)
+    private Double travelTime(int distance, double drivingHours, double mph) 
     {
-        Double time = distance / drivingHours / mph;
+    	
+    	Double time = distance / drivingHours / mph;
         return time;
     }
 
+    
+    public void displayFacilityPathInfo(String facility, String destination)
+    {
+    	NetworkService networkService = NetworkService.getInstance();
+    	
+    	// display facilityNameA -to- facilityNameB information
+    	
+    	System.out.print("    - ");
+    	networkService.getLink(facility, destination);
+    	System.out.print("    - ");
+    	try 
+    	{
+    		System.out.print(networkService.distance(facility, destination));
+    	} 
+    	catch (FacilityNotFoundInNetworkException e) 
+    	{
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	} 
+    	catch (NeighborNotFoundInNetworkException e) 
+    	{
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	} 
+    	catch (NullParameterException e) 
+    	{
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+    	try 
+    	{
+    		System.out.print(" / 8 hours per day * 50mph = " + networkService.getDistanceDays(networkService.distance(facility, destination)) + " days\n\n");
+    	} 
+    	catch (NullParameterException e) 
+    	{
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	} 
+    	catch (FacilityNotFoundInNetworkException e) 
+    	{
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	} 
+    	catch (NeighborNotFoundInNetworkException e) 
+    	{
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
+    }
+    
+    public void getLink(String firstFacility, String secondFacility )
+    {
+    	NetworkService networkService = NetworkService.getInstance();
+    	
+    	try 
+        {
+            Collection<String> shortestPath = networkService.shortestPath(firstFacility, secondFacility);
 
+            
+            for (String link : shortestPath)
+            {
+                System.out.print(link + "->");
+            }
+
+            System.out.println("");
+
+        } 
+        catch (FacilityNotFoundInNetworkException e) 
+        {
+            e.printStackTrace();
+        } 
+        catch (NeighborNotFoundInNetworkException e) 
+        {
+            e.printStackTrace();
+        } 
+        catch (NullParameterException e) 
+        {
+            e.printStackTrace();
+        }
+    }
+    
     private void buildGraph() 
     {
         try
@@ -198,10 +289,10 @@ public final class NetworkService
             System.out.println("Shortest path from Chicago to Denver");
             for (String link : shortestPath)
             {
-                System.out.print(link + "-> ");
+                System.out.print(link + "->");
             }
 
-            System.out.println("");
+            System.out.println("\n");
 
         } 
         catch (FacilityNotFoundInNetworkException e) 
@@ -216,11 +307,11 @@ public final class NetworkService
         {
             e.printStackTrace();
         }
-
-        try 
+        
+       /* try 
         {
-            Collection<String> shortestPath = networkService.shortestPath("Chicago, IL", "Jamaica");
-            System.out.println("Shortest path from Chicago to Jamaica");
+            Collection<String> shortestPath = networkService.shortestPath("Chicago, IL", "Denver, CO");
+            System.out.println("Shortest path from Chicago to Denver");
             for (String link : shortestPath)
             {
                 System.out.print(link + "-> ");
@@ -240,7 +331,7 @@ public final class NetworkService
         catch (NullParameterException e) 
         {
             e.printStackTrace();
-        }
+        }*/
       }
    }
 }
