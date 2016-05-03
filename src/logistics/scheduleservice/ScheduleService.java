@@ -1,5 +1,9 @@
 package logistics.scheduleservice;
 
+import logistics.facilityservice.Facility;
+import logistics.facilityservice.FacilityDTO;
+import logistics.itemservice.ItemCatalogService;
+
 /**
  * @author David Olorundare
 
@@ -10,7 +14,8 @@ public final class ScheduleService
 
     private volatile static ScheduleService instance;
 
-
+    int numberToProcess = 26;
+    int daysUsed;
 
     private ScheduleService() 
     {
@@ -36,9 +41,34 @@ public final class ScheduleService
         return instance;
     }
 
-    public void getSchedule()
+    public void computeRemaingDay()
     {
-
+    	
+    }
+    
+    // should be rename to generate Schedule
+    public String getOutput(String facility)
+    {
+    	return "";
+    }
+    
+    
+    public void getSchedule()//Facility facility)
+    {
+    	//daysUsed = 	(int) Math.abs(numberToProcess - facility.getFacilityRate());
+    	
+    	System.out.print("Day: \t\t");
+    	for (int i = 1; i < 21; i++)
+    	{
+    		System.out.print(i + "  ");
+    		
+    	}
+    	System.out.print("\nAvailable: \t");
+    	for (int j = 1; j < 21; j++)
+    	{
+    		System.out.print(10 + " ");
+    	}
+    	
     }
 
     /*
@@ -60,6 +90,10 @@ public final class ScheduleService
     // Test that the service works
     public static void main(String[] args)
     {
+    	ScheduleService scheduleService = ScheduleService.getInstance();
+    	
+    	scheduleService.getSchedule();
+    	//scheduleService.generateSchedule();
     	
     }
     

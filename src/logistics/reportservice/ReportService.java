@@ -64,8 +64,10 @@ public class ReportService
 			    System.out.println("Direct Links:");
 			    System.out.println(networkService.getOutput(facility));
 			    System.out.println(inventoryService.getOutput(facility));
+			    
 			    // Schedule Manager getOutput code goes here
 			    System.out.println("Schedule: \n");
+			    System.out.println(scheduleService.getOutput(facility));
 			 }
 			}
 		catch (FacilityNotFoundInNetworkException e) 
