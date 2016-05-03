@@ -40,7 +40,7 @@ public class ReportService
 				System.out.println(" ABC123\t\t60\n CT1928\t\t20\n E241i\t\t64\n RTF110\t\t110\n XTP202\t\t20\n");
 				
 				// get number of used-up inventory in facility
-				System.out.println("Depleted (Used-Up) Inventory: s% if none OR %d if remaining");
+				System.out.println("Depleted (Used-Up) Inventory: s% if 'None' OR %d if remaining");
 				
 				// generate SCHEDULE for facility using Schedule Manager API
 				System.out.println("\nSchedule: ");
@@ -84,9 +84,9 @@ public class ReportService
 		// facilityNameA -to- facilityNameB
 		System.out.println("a) Santa Fe, NM to Chicago, IL:");
 		// facilityLinks and total distance between A and B
-		System.out.println("\t- Santa Fe, NM->St.Louis, MO->Chicago, IL = %d mi");
+		System.out.println("    - Santa Fe, NM->St.Louis, MO->Chicago, IL = %d mi");
 		// total distance between A and B, (in hours per day), in days
-		System.out.println("\t- %d mi / (%d hours per day * %d mph) = %d days");
+		System.out.println("    - %d mi / (%d hours per day * %d mph) = %d days");
 		System.out.println();
 		// The rest below are just exemplary
 		
@@ -94,73 +94,73 @@ public class ReportService
 		// facilityNameA -to- facilityNameB
 		System.out.println("b) Atlanta, GA to Louis, MO:");
 		// facilityLinks and total distance between A and B
-		System.out.println("\t- Atlanta, GA->New Orleans, LA->Nashville, TN->St. Louis, MO = %d mi");
+		System.out.println("    - Atlanta, GA->New Orleans, LA->Nashville, TN->St. Louis, MO = %d mi");
 		// total distance between A and B, (in hours per day), in days
-		System.out.println("\t- %d mi / (%d hours per day * %d mph) = %d days");
+		System.out.println("    - %d mi / (%d hours per day * %d mph) = %d days");
 		System.out.println();
 		
 		// facilityNameA -to- facilityNameB
 		System.out.println("c) Seattle, WA to Nashville, TN:");
 		// facilityLinks and total distance between A and B
-		System.out.println("\t- Seattle, WA->Fargo, ND->Chicago, IL->St. Louis, MO->Nashville, TN = %d mi");
+		System.out.println("    - Seattle, WA->Fargo, ND->Chicago, IL->St. Louis, MO->Nashville, TN = %d mi");
 		// total distance between A and B, (in hours per day), in days
-		System.out.println("\t- %d mi / (%d hours per day * %d mph) = %d days");
+		System.out.println("    - %d mi / (%d hours per day * %d mph) = %d days");
 		System.out.println();
 		
 		// facilityNameA -to- facilityNameB
 		System.out.println("d) New York City, NY to Phoenix, AZ:");
 		// facilityLinks and total distance between A and B
-		System.out.println("\t- New York, NY->Chicago, Il->St. Louis, MO->Santa Fe, NM->Phoenix, AZ = %d mi");
+		System.out.println("    - New York, NY->Chicago, Il->St. Louis, MO->Santa Fe, NM->Phoenix, AZ = %d mi");
 		// total distance between A and B, (in hours per day), in days
-		System.out.println("\t- %d mi / (%d hours per day * %d mph) = %d days");
+		System.out.println("    - %d mi / (%d hours per day * %d mph) = %d days");
 		System.out.println();	
 		
 		// facilityNameA -to- facilityNameB
 		System.out.println("e) Fargo, ND to Austin, TX:");
 		// facilityLinks and total distance between A and B
-		System.out.println("\t- Fargo, ND->Chicago, IL->St. Louis, MO->Austin, TX = %d mi");
+		System.out.println("    - Fargo, ND->Chicago, IL->St. Louis, MO->Austin, TX = %d mi");
 		// total distance between A and B, (in hours per day), in days
-		System.out.println("\t- %d mi / (%d hours per day * %d mph) = %d days");
+		System.out.println("    - %d mi / (%d hours per day * %d mph) = %d days");
 		System.out.println();
 		
 		// facilityNameA -to- facilityNameB
 		System.out.println("f) Denver, CO to Miami, FL:");
 		// facilityLinks and total distance between A and B
-		System.out.println("\t- Denver, CO->Santa, Fe, NM->Austin, TX->New Orleans, LA->Miami, FL = %d mi");
+		System.out.println("    - Denver, CO->Santa, Fe, NM->Austin, TX->New Orleans, LA->Miami, FL = %d mi");
 		// total distance between A and B, (in hours per day), in days
-		System.out.println("\t- %d mi / (%d hours per day * %d mph) = %d days");
+		System.out.println("    - %d mi / (%d hours per day * %d mph) = %d days");
 		System.out.println();			
 		
 		// facilityNameA -to- facilityNameB
 		System.out.println("g) Austin, TX to Norfolk, VA:");
 		// facilityLinks and total distance between A and B
-		System.out.println("\t- Austin, TX->New Orleans, LA->Atlanta, GA->Norfolk, VA = %d mi");
+		System.out.println("    - Austin, TX->New Orleans, LA->Atlanta, GA->Norfolk, VA = %d mi");
 		// total distance between A and B, (in hours per day), in days
-		System.out.println("\t- %d mi / (%d hours per day * %d mph) = %d days");
+		System.out.println("    - %d mi / (%d hours per day * %d mph) = %d days");
 		System.out.println();			
 		
 		// facilityNameA -to- facilityNameB
 		System.out.println("h) Miami, FL to Seattle, WA:");
 		// facilityLinks and total distance between A and B
-		System.out.println("\t- Miami, FL->New Orleans, LA->Nashville, TN->St.Louis, MO->Chicago, IL->Fargo, ND->Seattle, WA = %d mi");
+		System.out.println("    - Miami, FL->New Orleans, LA->Nashville, TN->St.Louis, MO->Chicago, IL->Fargo, ND->Seattle, WA = %d mi");
 		// total distance between A and B, (in hours per day), in days
-		System.out.println("\t- %d mi / (%d hours per day * %d mph) = %d days");
+		System.out.println("    - %d mi / (%d hours per day * %d mph) = %d days");
 		System.out.println();	
 
 		// facilityNameA -to- facilityNameB
 		System.out.println("i) Los Angeles, CA to Chicago, IL:");
 		// facilityLinks and total distance between A and B
-		System.out.println("\t- Los Angeles, CA->Phoenix, AZ->Santa Fe, NM->St. Louis, MO->Chicago, IL = %d mi");
+		System.out.println("    - Los Angeles, CA->Phoenix, AZ->Santa Fe, NM->St. Louis, MO->Chicago, IL = %d mi");
 		// total distance between A and B, (in hours per day), in days
-		System.out.println("\t- %d mi / (%d hours per day * %d mph) = %d days");
+		System.out.println("    - %d mi / (%d hours per day * %d mph) = %d days");
 		System.out.println();			
 		
 		// facilityNameA -to- facilityNameB
 		System.out.println("j) Detroit, MI to Nashville, TN:");
 		// facilityLinks and total distance between A and B
-		System.out.println("\t- Detroit, MI->Chicago, IL->St. Louis, MO->Nashville, TN = %d mi");
+		System.out.println("    - Detroit, MI->Chicago, IL->St. Louis, MO->Nashville, TN = %d mi");
 		// total distance between A and B, (in hours per day), in days
-		System.out.println("\t- %d mi / (%d hours per day * %d mph) = %d days");
+		System.out.println("    - %d mi / (%d hours per day * %d mph) = %d days");
 		System.out.println();			
 		
 	}
