@@ -7,8 +7,8 @@ import logistics.utilities.exceptions.NullParameterException;
  */
 public class ItemFactory 
 {
-    public static Item build(String id, Double price) throws NullParameterException 
+    public static Item build(String itemId, Double itemPrice) throws NullParameterException 
     {
-        return new ItemImpl(id, price);
+        return new ItemImpl(itemId, itemPrice);
     }
 }

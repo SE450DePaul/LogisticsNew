@@ -14,22 +14,32 @@ public class DijkstraImpl implements ShortestPathStrategy
 {
     private HashMap<String, Integer> dist;
     private HashMap<String, String> parentHash;
-    private NetworkGraph graph;
+    private NetworkGraph netGraph;
 
-    public DijkstraImpl(NetworkGraph g, String start) throws NullParameterException, FacilityNotFoundInNetworkException 
+    public NetworkGraph getNetGraph() 
     {
-        validateGraph(g);
-        validateVertexExists(g, start);
-        dijkstra(g, start);
-        graph = g;
-    }
+		return netGraph;
+	}
 
+	public void setNetGraph(NetworkGraph graph) 
+	{
+		netGraph = graph;
+	}
+
+	public DijkstraImpl(NetworkGraph graph, String start) throws NullParameterException, FacilityNotFoundInNetworkException 
+    {
+        validateGraph(graph);
+        validateVertexExists(graph, start);
+        dijkstra(graph, start);
+        setNetGraph(graph);
+    }
 
     public Collection<String> shortestPathTo(String destination) throws FacilityNotFoundInNetworkException 
     {
-        validateVertexExists(graph, destination);
+        validateVertexExists(getNetGraph(), destination);
         Collection<String> path = recursivePathTo(destination, new ArrayList<>());
-        if (path.isEmpty()){
+        if (path.isEmpty())
+        {
             return null;
         }
         return path;
@@ -37,7 +47,7 @@ public class DijkstraImpl implements ShortestPathStrategy
 
     public int distanceTo(String destination) throws FacilityNotFoundInNetworkException 
     {
-        validateVertexExists(graph, destination);
+        validateVertexExists(netGraph, destination);
         return dist.get(destination);
     }
 
@@ -101,17 +111,17 @@ public class DijkstraImpl implements ShortestPathStrategy
         return path;
     }
 
-    private void validateVertexExists(NetworkGraph g, String facility) throws FacilityNotFoundInNetworkException 
+    private void validateVertexExists(NetworkGraph graph, String facility) throws FacilityNotFoundInNetworkException 
     {
-        if (!g.contains(facility)) 
+        if (!graph.contains(facility)) 
         {
-            throw new FacilityNotFoundInNetworkException();
+            throw new FacilityNotFoundInNetworkException("The Facility: " + facility + " cannot be found in the Network");
         }
     }
 
-    private void validateGraph(NetworkGraph g) throws NullParameterException 
+    private void validateGraph(NetworkGraph graph) throws NullParameterException 
     {
-        if (g == null)
+        if (graph == null)
         {
             throw new NullParameterException("Graph cannot be null");
         }
