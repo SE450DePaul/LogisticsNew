@@ -70,6 +70,7 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 	                    //Or perhaps throw an error
 	                }
 
+
 	                Element element = (Element) facilityEntries.item(i);
 	                NodeList nameNode = element.getElementsByTagName("name");
 	                NodeList rateNode = element.getElementsByTagName("rate");
@@ -94,9 +95,7 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 	        catch (IOException e) 
 	        {
 	            e.printStackTrace();
-	        } 
-	        catch (IllegalParameterException e) 
-	        {
+	        } catch (IllegalParameterException e) {
 				e.printStackTrace();
 			}
 
@@ -104,25 +103,24 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 	    }
 
 
-	    public static void main(String[] args)
-	    {
+
+	    public static void main(String[] args){
 
 	        FacilityXmlLoaderImpl xmlLoader =  new FacilityXmlLoaderImpl("data/facilities.xml");
 			ArrayList<Facility> facilities;
-			try 
-			{
+			try {
 				facilities = xmlLoader.load();
-				for (Facility f : facilities)
-				{
+				for (Facility f : facilities){
+
 					System.out.println(f.getName());
 					System.out.println("Cost: " + f.getCost());
 					System.out.println("Rate: " + f.getRate());
 					System.out.println("");
+
 				}
-			} 
-			catch (LoaderFileNotFoundException e) 
-			{
+			} catch (LoaderFileNotFoundException e) {
 				e.printStackTrace();
 			}
 	    }
+
 }

@@ -10,78 +10,65 @@ import java.util.Iterator;
 /**
  * Created by uchennafokoye on 4/29/16.
  */
-public class FacilityVertexImpl implements FacilityVertex 
-{
+public class FacilityVertexImpl implements FacilityVertex {
 
     private String facility;
     private HashMap<String, Integer> weights;
     private HashSet<String> neighbors;
 
-    public FacilityVertexImpl(String fac) throws IllegalParameterException 
-    {
+    public FacilityVertexImpl(String fac) throws IllegalParameterException {
         setFacility(fac);
         weights = new HashMap<>();
         neighbors = new HashSet<>();
     }
 
-    
-    public void addNeighbor(String facility, int distance) throws IllegalParameterException 
-    {
+    @Override
+    public void addNeighbor(String facility, int distance) throws IllegalParameterException {
         validateFacility(facility);
         validateDistance(distance);
         weights.put(facility, distance);
         neighbors.add(facility);
     }
 
-    
-    public int distanceTo(String facility) 
-    {
+    @Override
+    public int distanceTo(String facility) {
         Integer distance = weights.get(facility);
-        if (distance == null)
-        {
+        if (distance == null){
             return -1;
         }
         return distance;
     }
 
-    
-    public boolean isANeighbor(String facility) 
-    {
+    @Override
+    public boolean isANeighbor(String facility) {
         return neighbors.contains(facility);
     }
 
-    
-    public Iterator<String> neighbor() 
-    {
+    @Override
+    public Iterator<String> neighbor() {
         return neighbors.iterator();
     }
 
-    
-    public String getFacilityName() 
-    {
+    @Override
+    public String getFacilityName() {
         return facility;
     }
 
 
-    private void setFacility(String fac) throws IllegalParameterException 
-    {
+    private void setFacility(String fac) throws IllegalParameterException {
         validateFacility(fac);
         facility = fac;
     }
 
 
-    private void validateFacility(String fac) throws IllegalParameterException 
-    {
-        if (fac == null)
-        {
+    private void validateFacility(String fac) throws IllegalParameterException {
+        if (fac == null){
             throw new IllegalParameterException("Facility cannot be null");
         }
     }
 
-    private void validateDistance(int distance) throws IllegalParameterException 
-    {
-        if (distance < 0)
-        {
+    private void validateDistance(int distance) throws IllegalParameterException {
+        if (distance < 0){
             throw new IllegalParameterException("Distance cannot be null");
         }
     }

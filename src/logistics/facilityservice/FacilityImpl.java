@@ -3,7 +3,7 @@ package logistics.facilityservice;
 import logistics.utilities.exceptions.IllegalParameterException;
 
 /**
- * @author David Olorundare and Uchenna F. Okoye
+ * @author David Olorundare and uchenna f. okoye
  */
 public class FacilityImpl implements Facility
 {
@@ -18,8 +18,7 @@ public class FacilityImpl implements Facility
         setCost(cost);
     }
 
-	public String getName() 
-	{
+	public String getName() {
 		return name;
 	}
 
@@ -52,26 +51,20 @@ public class FacilityImpl implements Facility
 		cost = facilityCost;
 	}
 
-	private void validateName(String name) throws IllegalParameterException 
-	{
-		if (name == null)
-		{
+	private void validateName(String name) throws IllegalParameterException {
+		if (name == null){
 			throw new IllegalParameterException();
 		}
 	}
 
-	private void validateRate(Double rate) throws IllegalParameterException 
-	{
-		if (rate == null)
-		{
+	private void validateRate(Double rate) throws IllegalParameterException {
+		if (rate == null){
 			throw new IllegalParameterException();
 		}
 	}
 
-	private void validateCost(Double cost) throws IllegalParameterException 
-	{
-		if (cost == null)
-		{
+	private void validateCost(Double cost) throws IllegalParameterException {
+		if (cost == null){
 			throw new IllegalParameterException();
 		}
 	}

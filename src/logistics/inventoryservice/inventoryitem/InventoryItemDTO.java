@@ -5,6 +5,7 @@ package logistics.inventoryservice.inventoryitem;
  */
 public class InventoryItemDTO
 {
+
     public String id;
     public int quantity;
 

@@ -44,6 +44,7 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 	public ArrayList<Inventory> load() throws LoaderFileNotFoundException
 	{
 
+
 		ArrayList<Inventory> inventories = new ArrayList<>();
 
 		try
@@ -134,9 +135,7 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		} 
-		catch (IllegalParameterException e) 
-		{
+		} catch (IllegalParameterException e) {
 			e.printStackTrace();
 		}
 
@@ -145,8 +144,7 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 
 
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args){
 
 		InventoryXmlLoaderImpl xmlLoader =  new InventoryXmlLoaderImpl("src/data/facility_inventory.xml");
 		try

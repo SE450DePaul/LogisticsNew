@@ -10,45 +10,40 @@ public class ItemImpl implements Item
     private String id;
     private Double price;
 
-    public ItemImpl(String id, Double price) throws IllegalParameterException 
-    {
+    public ItemImpl(String id, Double price) throws IllegalParameterException {
         setId(id);
         setPrice(price);
     }
 
-    public String getId() 
-    {
+    public String getId() {
         return id;
     }
 
-    public Double getPrice() 
-    {
+    public Double getPrice() {
         return price;
     }
 
-    private void setId(String itemId) throws IllegalParameterException
-    {
+    private void setId(String itemId) throws IllegalParameterException{
         validateId(itemId);
         id = itemId;
     }
 
-    private void setPrice(Double itemPrice) throws IllegalParameterException
-    {
+    private void setPrice(Double itemPrice) throws IllegalParameterException{
         validatePrice(itemPrice);
         price = itemPrice;
     }
 
-    private void validateId(String id) throws IllegalParameterException 
-    {
+    private void validateId(String id) throws IllegalParameterException {
         if (id == null){
             throw new IllegalParameterException();
         }
     }
 
-    private void validatePrice(Double price) throws IllegalParameterException 
-    {
+    private void validatePrice(Double price) throws IllegalParameterException {
         if (price == null){
             throw new IllegalParameterException("Price cannot be null");
         }
     }
+
+
 }

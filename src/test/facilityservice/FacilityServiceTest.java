@@ -12,42 +12,36 @@ import static org.junit.Assert.*;
  * Created by uchennafokoye on 4/28/16.
  */
 
-public class FacilityServiceTest 
-{
+public class FacilityServiceTest {
 
     FacilityService instance = null;
 
     @Before
-    public void setUp()  
-    {
+    public void setUp()  {
          instance = FacilityService.getInstance();
     }
 
     @Test
-    public void getInstance() 
-    {
+    public void getInstance() {
         assertNotNull(FacilityService.getInstance());
     }
 
     @Test
-    public void getFacilityName() 
-    {
+    public void getFacilityName() {
         assertNotNull(FacilityService.getInstance());
         FacilityDTO facility = instance.getFacility("San Francisco, CA");
         assertEquals("San Francisco, CA", facility.name);
     }
 
     @Test
-    public void getFacilityCost() 
-    {
+    public void getFacilityCost() {
         assertNotNull(FacilityService.getInstance());
         FacilityDTO facility = instance.getFacility("San Francisco, CA");
         assertEquals(facility.cost, 300, 0.002);
     }
 
     @Test
-    public void getFacilityNull() 
-    {
+    public void getFacilityNull() {
         assertNotNull(FacilityService.getInstance());
         FacilityDTO facility = instance.getFacility(null);
         assertNull(facility);

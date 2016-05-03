@@ -9,34 +9,31 @@ import java.util.Collection;
 import java.util.HashMap;
 
 /**
- * @author David Olorundare and Uchenna F. Okoye
+ * @author David Olorundare and uchenna f. okoye
  */
 public final class InventoryService
 {
+
     private volatile static InventoryService instance;
     private HashMap<String, Inventory> inventoryHashMap = new HashMap<>();
     private Loader<Inventory> loader;
 
-    private InventoryService() 
-    {
+
+    private InventoryService() {
         loader = LoaderFactory.build("inventory");
 
-        try 
-        {
+        try {
             Collection<Inventory> inventories = loader.load();
-            for (Inventory inventory : inventories)
-            {
+            for (Inventory inventory : inventories){
                 inventoryHashMap.put(inventory.getFacilityName(), inventory);
             }
-        } 
-        catch (LoaderFileNotFoundException e) 
-        {
+        } catch (LoaderFileNotFoundException e) {
             e.printStackTrace();
         }
+
     }
     
-    public static InventoryService getInstance() 
-    {
+    public static InventoryService getInstance() {
         if (instance == null)
         {
             synchronized (InventoryService.class)
@@ -50,24 +47,26 @@ public final class InventoryService
         return instance;
     }
 
-    public InventoryItemDTO getInventoryItem(String facilityName, String itemId) 
-    {
+    public InventoryItemDTO getInventoryItem(String facilityName, String itemId) {
+
         Inventory inventory = inventoryHashMap.get(facilityName);
         if (inventory == null) { return null; }
         Integer quantity = inventory.getQuantity(itemId);
         if (quantity == null) { return null; }
         return new InventoryItemDTO(itemId, quantity);
+
     }
 
-    public String getOutput(String facilityName)
-    {
+
+    public String getOutput(String facilityName){
         Inventory inventory = inventoryHashMap.get(facilityName);
         if (inventory == null) { return ""; }
         return inventory.getInventoryOutput();
+
     }
 
-    public static void main(String[] args) 
-    {
+    public static void main(String[] args) {
+
         InventoryService instance = InventoryService.getInstance();
 //        InventoryItemDTO inventoryItemDTO = instance.getInventoryItem("San Francisco, CA", "RL123A");
 //        System.out.println("Please get Inventory Item");
@@ -75,5 +74,7 @@ public final class InventoryService
 
         String output = instance.getOutput("San Francisco, CA");
         System.out.println(output);
+
+
     }
 }
