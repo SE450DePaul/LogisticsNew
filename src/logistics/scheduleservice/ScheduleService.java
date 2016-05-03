@@ -41,6 +41,17 @@ public final class ScheduleService
 
     }
 
+    /*
+	// generate SCHEDULE for facility using Schedule Manager API
+	System.out.println("\nSchedule: ");
+	// generate SCHEDULE day using API
+	System.out.println("Day: \t\t1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20");
+	// generate SCHEDULE availability using API
+	System.out.println("Available: \t10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10");
+	// facility output ends here
+	System.out.print("------------------------------------------------------------------------------");
+	*/
+    
     private void generateSchedule()
     {
 

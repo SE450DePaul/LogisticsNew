@@ -76,7 +76,7 @@ public final class ItemCatalogService
         stringBuffer.append("\t");
         stringBuffer.append(":  ");
         stringBuffer.append(itemId.getItemPrice());
-        stringBuffer.append("\t");
+        stringBuffer.append("\t\r");
         return stringBuffer.toString();
     }
     
@@ -96,12 +96,13 @@ public final class ItemCatalogService
         
         
         Set<String> items = itemCatalogService.getItems();
-        //
-        //for (int i = 0; i < items.size(); i++)
+        
+        // TO-DO: need to format it to use carriage return \r
+        // after each fourth item. Would give four columns of items
         for (String item : items)
-        {
-            //for (ItemDTO itm : itemCatalogService.getItem(item) )
-        	System.out.println(itemCatalogService.getItemOutput(item));
+        {	
+        	System.out.print(itemCatalogService.getItemOutput(item) + "\r");
+        	
         	
         }
         

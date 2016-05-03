@@ -63,7 +63,7 @@ public final class NetworkService
         return shortestPathHash.get(facility).distanceTo(destination);
     }
 
-    public double getDistanceDays(int distance) throws NullParameterException
+    public double getDistanceInDays(int distance) throws NullParameterException
     {
     	DecimalFormat inputFormat = new DecimalFormat(".##"); 
     	if (distance == 0)
@@ -124,7 +124,7 @@ public final class NetworkService
     	// display facilityNameA -to- facilityNameB information
     	
     	System.out.print("    - ");
-    	networkService.getLink(facility, destination);
+    	networkService.getFacilityLinks(facility, destination);
     	System.out.print("    - ");
     	try 
     	{
@@ -147,7 +147,7 @@ public final class NetworkService
     	}
     	try 
     	{
-    		System.out.print(" / 8 hours per day * 50mph = " + networkService.getDistanceDays(networkService.distance(facility, destination)) + " days\n\n");
+    		System.out.print(" / 8 hours per day * 50mph = " + networkService.getDistanceInDays(networkService.distance(facility, destination)) + " days\n\n");
     	} 
     	catch (NullParameterException e) 
     	{
@@ -166,7 +166,7 @@ public final class NetworkService
     	}
     }
     
-    public void getLink(String firstFacility, String secondFacility )
+    public void getFacilityLinks(String firstFacility, String secondFacility )
     {
     	NetworkService networkService = NetworkService.getInstance();
     	

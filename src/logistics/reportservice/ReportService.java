@@ -1,15 +1,13 @@
 package logistics.reportservice;
 
-import java.text.DecimalFormat;
 import java.util.Set;
-
 import logistics.facilityservice.FacilityService;
 import logistics.inventoryservice.InventoryService;
 import logistics.itemservice.ItemCatalogService;
 import logistics.networkservice.NetworkService;
+import logistics.scheduleservice.ScheduleService;
 import logistics.utilities.exceptions.FacilityNotFoundInNetworkException;
-import logistics.utilities.exceptions.NeighborNotFoundInNetworkException;
-import logistics.utilities.exceptions.NullParameterException;
+
 
 /**
  * 
@@ -30,6 +28,7 @@ public class ReportService
 	NetworkService networkService = NetworkService.getInstance();
 	FacilityService facilityService = FacilityService.getInstance();
 	InventoryService inventoryService = InventoryService.getInstance();
+	ScheduleService scheduleService = ScheduleService.getInstance();
 		
 	
 	public static ReportService getInstance()
@@ -47,52 +46,34 @@ public class ReportService
         return instance;
     }
 
-	
-	
-	
-	
-	
-	
-	
-	// will probably make this its own class.
-	// iterate and output facility and inventory details for EACH facility
+	// display facility information
 	public void facilityOutput()
 	{
 		// Facility output should use an iterator of some sort,
 		// make use of the Facility and Inventory Service APIs
-				System.out.println("--------------------------------------------------------------------------");
+		System.out.println("--------------------------------------------------------------------------");
 				
-				//this should be in a try block
-				Set<String> facilities = facilityService.getFacilities();
+		//this should be in a try block
+		Set<String> facilities = facilityService.getFacilities();
 				
-				try
-				{
-					for (String facility : facilities)
-			        {
-			        	System.out.println(facilityService.getOutput(facility));
-			        	System.out.println("Direct Links:");
-						System.out.println(networkService.getOutput(facility));
-						System.out.println(inventoryService.getOutput(facility));
-						// Schedule Manager getOutput code goes here
-						System.out.println("Schedule: \n");
-			        }
-				}
-				catch (FacilityNotFoundInNetworkException e) 
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+		try
+		{
+			for (String facility : facilities)
+			{
+			    System.out.println(facilityService.getOutput(facility));
+			    System.out.println("Direct Links:");
+			    System.out.println(networkService.getOutput(facility));
+			    System.out.println(inventoryService.getOutput(facility));
+			    // Schedule Manager getOutput code goes here
+			    System.out.println("Schedule: \n");
+			 }
+			}
+		catch (FacilityNotFoundInNetworkException e) 
+		{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+		}
 				
-				/*
-				
-				// generate SCHEDULE for facility using Schedule Manager API
-				System.out.println("\nSchedule: ");
-				// generate SCHEDULE day using API
-				System.out.println("Day: \t\t1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20");
-				// generate SCHEDULE availability using API
-				System.out.println("Available: \t10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10 10");
-				// facility output ends here
-				System.out.print("------------------------------------------------------------------------------");
 				
 		//facilityService.getOutput(name)*/
 	}
@@ -100,19 +81,17 @@ public class ReportService
 	// display item catalog output
 	public void itemCatalogOutput()
 	{
-		System.out.println("\n\nItem Catalog: ");
+		System.out.println("\nItem Catalog: \n");
 		
+		//TO-DO: this should not be hardcoded  
 		
-		/*// don't forget to make the formatting dynamic
-		
-		System.out.println("\n\nItem Catalog: ");
 		// use an iterator structure to generate item details using ItemCatalog Service APIs
 		System.out.println("ABC123\t: $550\t\tCR2032\t: $240\t\tCT1928\t: $910\t\tE241i\t: $10,400");
 		System.out.println("JBL3100\t: $180\t\tMM35P\t: $1,950\tPL132-C\t: $440\t\tPU238\t: $2,200");
 		System.out.println("JBL3100\t: $180\t\tMM35P\t: $1,950\tPL132-C\t: $440\t\tPU238\t: $2,200");
 		System.out.println("RL123A\t: $360\t\tRTF110\t: $715\t\tRX100-3\t: $642\t\tSN-241-L: $620");
 		System.out.println("SR71-D\t: $1,600\tXLK200B\t: $820\t\tXTP202\t: $345\t\tZTF109\t: $1,100");	
-		// end output of item catalog for facility*/
+		// end output of item catalog for facility
 	}
 	
 	// display shortest path test output
@@ -151,6 +130,7 @@ public class ReportService
 		networkService.displayFacilityPathInfo("Detroit, MI", "Nashville, TN"); 
 	}
 	
+	// Test that the service works
 	public static void main(String[] args)
 	{
 		//TO-DO: Need to create a dedicated display 
