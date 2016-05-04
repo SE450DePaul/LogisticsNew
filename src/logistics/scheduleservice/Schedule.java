@@ -1,7 +1,8 @@
 package logistics.scheduleservice;
 
+import java.util.ArrayList;
+
 import logistics.facilityservice.Facility;
-import logistics.facilityservice.FacilityDTO;
 
 /**
  * @author David Olorundare
@@ -11,9 +12,15 @@ public interface Schedule
 
     // ability to adjust schedule
     // perhaps generate the schedule for the next few days
-	public void getFacilityName(Facility facility);
-	public void getRunDays();
-	public void getAvailableDays();
+	
+	//public String getFacilityName(Facility facility);
+	//public Integer getFacilityRate(Facility facility)
+	public int getRunDays();
+	public int getAvailableDays();
+	public Schedule computeSchedule(int processItemNum);
+	public Schedule adjustScheduleDays(int lengthOfDays, String adjustType);
+	public Schedule updateSchedule();
+	public String displaySchedule();
 	
 
 }

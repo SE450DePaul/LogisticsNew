@@ -1,5 +1,7 @@
 package logistics.scheduleservice;
 
+import java.util.ArrayList;
+
 import logistics.facilityservice.Facility;
 import logistics.facilityservice.FacilityDTO;
 
@@ -12,44 +14,61 @@ public class ScheduleImpl implements Schedule
 	private String facilityName; 
 	
     
-    
+    private int getFacilityRate(Facility facility)
+    {
+    	return 0;
+    }
   
-	public void getfacilityRate(FacilityDTO facility) 
+    // return how many days the facility is working
+	public int getRunDays() 
 	{
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
-
-
-
-
-	@Override
-	public void getFacilityName(Facility facility) {
+	
+	// return the number of available days 
+	// the facility can still work.
+	public int getAvailableDays() 
+	{
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
 
-
-
-
-	@Override
-	public void getRunDays() {
+	// process certain number of items and compute the new schedule
+	public Schedule computeSchedule(int processItemNum) 
+	{
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
-
-
-
-	@Override
-	public void getAvailableDays() {
+	// increase or decrease the number of days the facility
+	// should work for
+	public Schedule adjustScheduleDays(int lengthOfDays, String adjustType) 
+	{
 		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
-	
-	
-	
-	
-	
+	// 
+	public Schedule updateSchedule() 
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// displays the schedule of the facility
+	public String displaySchedule() 
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
+
+
+
+	
+	
+	
+	
+	
+
