@@ -50,7 +50,7 @@ public class FacilityStatusService {
         str.append(inventoryService.getOutput(facilityName));
         str.append("\n");
         //Schedule to be done
-        // str.append(scheduleService.getDirectLinksOutput(facilityName);
+        // str.append(scheduleService.getOutput(facilityName);
 
         str.append("\n");
         str.append(generateDashedLine(100));
