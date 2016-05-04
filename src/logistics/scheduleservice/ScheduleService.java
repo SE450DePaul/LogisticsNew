@@ -54,6 +54,12 @@ public final class ScheduleService
     	return null;
     }
     
+    // create a schedule given a facilityDTO
+    public Schedule createSchedule(FacilityDTO facility)
+    {
+    	return null;
+    }
+    
     // create a schedule for a specific number of days, given a facility
 	public Schedule createSchedule(Facility facility, int runDays)
 	{
@@ -71,11 +77,6 @@ public final class ScheduleService
 	{
 		return null;
 	}
-    
-    
-    
-    
-    
 
     // Test that the service works
     public static void main(String[] args)
