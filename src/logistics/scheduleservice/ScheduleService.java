@@ -11,10 +11,14 @@ import logistics.itemservice.ItemCatalogService;
 
 public final class ScheduleService
 {
-
+	
     private volatile static ScheduleService instance;
 
-  
+
+	Integer [] facilityAvailableRate = new Integer[20];
+    //int orderNumberToProcess = 26;
+    int daysRemaining;
+    
     private ScheduleService() 
     {
 
@@ -45,6 +49,16 @@ public final class ScheduleService
     {
     	return "";
     }
+    
+    public void computeRemainingDay(Facility facility) 
+	{
+		// populate schedule with initial facility rate 
+    	for (int i = 0; i < facilityAvailableRate.length ; i++)
+        {
+        	facilityAvailableRate[i] = facility.getFacilityRate();
+        }
+		
+	}
     
     // generate SCHEDULE for facility using Schedule Manager API
     public void getSchedule()//Facility facility)

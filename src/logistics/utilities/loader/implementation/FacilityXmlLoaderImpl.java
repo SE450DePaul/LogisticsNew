@@ -75,7 +75,7 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 	                NodeList costNode = element.getElementsByTagName("cost");
 	                
 	                String name = nameNode.item(0).getTextContent();
-	                Double rate = Double.parseDouble(rateNode.item(0).getTextContent());
+	                Integer rate = Integer.parseInt(rateNode.item(0).getTextContent());
 	                Double cost = Double.parseDouble(costNode.item(0).getTextContent());
 	                
 	                Facility facility = FacilityFactory.build(name, rate, cost);

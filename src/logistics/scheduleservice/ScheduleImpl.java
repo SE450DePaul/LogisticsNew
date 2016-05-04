@@ -6,27 +6,49 @@ import logistics.facilityservice.FacilityDTO;
 public class ScheduleImpl implements Schedule
 {
 
-	Integer [] facilityAvailableRate = new Integer[20];
-    //int numberToProcess = 26;
-    int daysRemaining;
+	private int runDays = 20;
+	private Integer[] availableDays = new Integer[runDays];
+	private Integer [] facilityAvailableRate;
+	private String facilityName; 
 	
     
     
-    public void computeRemaingDay(Facility facility)
-    {
-    		
-    	// populate schedule with initial facility rate 
-    	for (int i = 0; i < facilityAvailableRate.length ; i++)
-        {
-        	facilityAvailableRate[i] = facility.getFacilityRate();
-        }
-    }
-    
+  
 	public void getfacilityRate(FacilityDTO facility) 
 	{
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+
+	@Override
+	public void getFacilityName(Facility facility) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	@Override
+	public void getRunDays() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	@Override
+	public void getAvailableDays() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
 	
 	
 	

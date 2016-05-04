@@ -21,15 +21,25 @@ import logistics.utilities.exceptions.FacilityNotFoundInNetworkException;
 
 public class ReportService 
 {
+	
 	// Initialize and setup a bunch of stuff
 	
 	private volatile static ReportService instance;
-	ItemCatalogService itemCatalogService = ItemCatalogService.getInstance();
-	NetworkService networkService = NetworkService.getInstance();
-	FacilityService facilityService = FacilityService.getInstance();
-	InventoryService inventoryService = InventoryService.getInstance();
-	ScheduleService scheduleService = ScheduleService.getInstance();
+
+	ItemCatalogService itemCatalogService;
+	NetworkService networkService;
+	FacilityService facilityService;
+	InventoryService inventoryService;
+	ScheduleService scheduleService;
 		
+	
+	private ReportService() {
+		itemCatalogService = ItemCatalogService.getInstance();
+		networkService = NetworkService.getInstance();
+		facilityService = FacilityService.getInstance();
+		inventoryService = InventoryService.getInstance();
+		scheduleService = ScheduleService.getInstance();
+	}
 	
 	public static ReportService getInstance()
     {
@@ -86,14 +96,15 @@ public class ReportService
 		System.out.println("\nItem Catalog: \n");
 		
 		//TO-DO: this should not be hardcoded  
-		
+		/*
+		//itemCatalogService.getItemOutput();
 		// use an iterator structure to generate item details using ItemCatalog Service APIs
 		System.out.println("ABC123\t: $550\t\tCR2032\t: $240\t\tCT1928\t: $910\t\tE241i\t: $10,400");
 		System.out.println("JBL3100\t: $180\t\tMM35P\t: $1,950\tPL132-C\t: $440\t\tPU238\t: $2,200");
 		System.out.println("JBL3100\t: $180\t\tMM35P\t: $1,950\tPL132-C\t: $440\t\tPU238\t: $2,200");
 		System.out.println("RL123A\t: $360\t\tRTF110\t: $715\t\tRX100-3\t: $642\t\tSN-241-L: $620");
 		System.out.println("SR71-D\t: $1,600\tXLK200B\t: $820\t\tXTP202\t: $345\t\tZTF109\t: $1,100");	
-		// end output of item catalog for facility
+		// end output of item catalog for facility*/
 	}
 	
 	// display shortest path test output
@@ -130,6 +141,16 @@ public class ReportService
 		
 		System.out.println("j) Detroit, MI to Nashville, TN:");
 		networkService.displayFacilityPathInfo("Detroit, MI", "Nashville, TN"); 
+	}
+	
+	public void reportEverything()
+	{
+		
+		instance.facilityOutput();
+		System.out.println("---------------------------------------------------------------------------");
+		instance.itemCatalogOutput();
+		System.out.println("---------------------------------------------------------------------------");
+		instance.shortestPathOutput();
 	}
 	
 	// Test that the service works

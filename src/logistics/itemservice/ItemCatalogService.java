@@ -61,12 +61,12 @@ public final class ItemCatalogService
         if (item == null) return null;
         return new ItemDTO(item.getItemId(), item.getItemPrice());
     }
-
+/*
     public Set<String> getItems()
     {
         return new TreeSet<String>(itemsHash.keySet());
     }
-    
+*/    
     public String getItemOutput(String itemName)
     {
         Item itemId = itemsHash.get(itemName);

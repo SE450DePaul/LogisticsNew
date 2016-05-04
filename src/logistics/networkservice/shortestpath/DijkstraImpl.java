@@ -16,12 +16,9 @@ public class DijkstraImpl implements ShortestPathStrategy
     private HashMap<String, String> parentHash;
     private NetworkGraph netGraph;
 
-    public NetworkGraph getNetGraph() 
-    {
-		return netGraph;
-	}
+   
 
-	public void setNetGraph(NetworkGraph graph) 
+	private void setNetGraph(NetworkGraph graph) 
 	{
 		netGraph = graph;
 	}
@@ -36,7 +33,7 @@ public class DijkstraImpl implements ShortestPathStrategy
 
     public Collection<String> shortestPathTo(String destination) throws FacilityNotFoundInNetworkException 
     {
-        validateVertexExists(getNetGraph(), destination);
+        validateVertexExists(netGraph, destination);
         Collection<String> path = recursivePathTo(destination, new ArrayList<>());
         if (path.isEmpty())
         {

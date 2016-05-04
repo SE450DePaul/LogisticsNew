@@ -1,3 +1,4 @@
+import logistics.reportservice.ReportService;
 
 /**
  * 
@@ -15,8 +16,8 @@ public class Logistics
 	// call the Report service to generate all required output
 	public static void main(String[] args)
 	{
-		
-		
+		ReportService reportService = ReportService.getInstance();
+		reportService.reportEverything();
 		
 	}
 	
