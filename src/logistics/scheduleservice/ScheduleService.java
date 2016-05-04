@@ -49,6 +49,13 @@ public final class ScheduleService
     	getOutput(facilityService.getFacility(facilityName));
     }
     
+	// given a facility return its schedule
+	public void getOutput(FacilityDTO facility)
+	{
+		ScheduleImpl schedule = new ScheduleImpl(facility);
+		schedule.displaySchedule();
+	}
+
     // create a schedule given a facilityDTO
     public Schedule createSchedule(FacilityDTO facility)
     {
@@ -75,23 +82,14 @@ public final class ScheduleService
 		return null;
 	}
 	
-	// given a facility return its schedule
-	public void getOutput(FacilityDTO facility)
-	{
-		ScheduleImpl schedule = new ScheduleImpl(facility);
-		schedule.displaySchedule();
-	}
 
     // Test that the service works
     public static void main(String[] args)
     {
     	//ScheduleService scheduleService = ScheduleService.getInstance();
-    	
     	//this should not be here
-    	
-		
     	// neither should use of instance.getFacility
-    	//scheduleService.getOutput(instance.getFacility("Chicago, IL"));
+    	//scheduleService.getOutput(getFacility("Chicago, IL"));
 		
     	
     }

@@ -13,11 +13,12 @@ import logistics.facilityservice.FacilityService;
 
 public class ScheduleImpl implements Schedule
 {
-	public int counter = 0;
-	private double daysUsed;
+	public int globalCounter = 0;
+	private int daysUsed;
 	private int floorDaysUsed;
 	private int remainingVacancy;
 	private int remainder;
+	private int lastOpRemainder;
 	
 	private int runDays = 20;
 	
@@ -90,34 +91,61 @@ public class ScheduleImpl implements Schedule
 	// process certain number of items and compute the new resulting schedule
 	public void computeSchedule(int processItemNum) 
 	{
-		// calculate stuff
-		daysUsed = processItemNum / facilityRate;
-		System.out.println("daysUsed: " + daysUsed);
-		floorDaysUsed = (int) Math.floor(daysUsed);
-		System.out.println("floorDays " + floorDaysUsed);
-		remainder = processItemNum % facilityRate;
-		System.out.println("remainder: " + remainder);
-		remainingVacancy = Math.abs(facilityRate - remainder);
-		System.out.println("remVac " + remainingVacancy);
+		System.out.println("processIteNum BEFORE subtraction " + processItemNum + "\n");
 		
-		int pinch = counter + floorDaysUsed;
-		counter = 0;
-		System.out.println("pinch: " + pinch);
-		// zeroing fields
-		for (int i = 0 ; i < pinch; i++)
+		System.out.println("Last Operation Remainder BEFORE subtraction " + lastOpRemainder + "\n");
+		
+		// determine if there were any vacancies from the last call of the method
+		if (lastOpRemainder > 0)
 		{
+			processItemNum -= lastOpRemainder;
+			globalCounter++;
 			
+			//reset Last Operation's Remainder to Zero
+			lastOpRemainder = 0;
+		}
+		System.out.println("Last Operation Remainder AFTER subtraction " + lastOpRemainder + "\n");
+		System.out.println("processItemNum AFTER subtraction " + processItemNum + "\n");
+		
+		// calculate the number of days used-up for processing of the items
+		daysUsed = processItemNum / facilityRate;
+		System.out.println("(daysUsed = processItemNum / facilityRate)  Number of Days Used Up: " + daysUsed + " days\n");
+		
+		// determine the remainder, and use it to evaluate the facility vacancy
+		remainder = processItemNum % facilityRate;
+		System.out.println("(remainder = processItemNum % facilityRate): " + remainder);
+		
+		// calculate the remaining vacancy in that facility
+		remainingVacancy = Math.abs(facilityRate - remainder);
+		System.out.println("remaing vacancy: " + remainingVacancy);
+		
+		// calculate the number of used-up days on the schedule to cross-out
+		int fillToCounter = globalCounter + daysUsed;
+		
+		// reset the counter to the first day
+		globalCounter = 0;
+		System.out.println("Amount to zero-out " + fillToCounter);
+		
+		// zero-ing of the used-up days
+		for (int i = 0 ; i < fillToCounter; i++)
+		{
 			dayAvailability.put(i, 0);	
-			//don't forget to do bounds checking
 			
-			counter++;
+			//don't forget to do bounds checking code
+			// ????
+			
+			globalCounter++;
 		}
 		
-		//update next slot
-		dayAvailability.put(counter, remainingVacancy);
-		remainingVacancy = facilityRate;
-		System.out.println("counter: " +counter);
-		System.out.println("counter: " +facilityRate);
+		//update the next available facility vacancy
+		dayAvailability.put(globalCounter, remainingVacancy);
+		
+		// keep track of the available facility vacancy amount
+		// for the next call of the method
+		lastOpRemainder += remainingVacancy;
+		
+		System.out.println("\nRemainder of Last Operation " + lastOpRemainder );
+		System.out.println("counter: " +globalCounter + "\n");	
 	}
 
 	// increase or decrease the number of days the facility
@@ -155,7 +183,8 @@ public class ScheduleImpl implements Schedule
 		ScheduleImpl schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
 		//schedule.displaySchedule();
 		schedule.computeSchedule(26);
-		//schedule.computeSchedule(33);
+		System.out.println("-----------------------------------------------------");
+		schedule.computeSchedule(33);
 		schedule.displaySchedule();
 		
 		
