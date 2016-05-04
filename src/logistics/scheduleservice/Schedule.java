@@ -17,7 +17,7 @@ public interface Schedule
 	//public Integer getFacilityRate(Facility facility)
 	public int getRunDays();
 	public int getAvailableDays();
-	public void computeSchedule(int processItemNum);
+	public void computeChangedSchedule(int processItemNum);
 	public Schedule adjustScheduleDays(int lengthOfDays, String adjustType);
 	public void displaySchedule();
 	

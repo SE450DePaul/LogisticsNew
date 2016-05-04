@@ -1,6 +1,5 @@
 package logistics.scheduleservice;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import logistics.facilityservice.FacilityDTO;
 import logistics.facilityservice.FacilityService;
@@ -15,7 +14,6 @@ public class ScheduleImpl implements Schedule
 {
 	public int globalCounter = 0;
 	private int daysUsed;
-	private int floorDaysUsed;
 	private int remainingVacancy;
 	private int remainder;
 	private int lastOpRemainder;
@@ -37,11 +35,9 @@ public class ScheduleImpl implements Schedule
 		facilityName = facility.facilityName;
 		facilityRate = facility.facilityRate;
 		
-		// populate schedule with initial available process days
+		// populate schedule with initial available facility-process days
 		for (int i = 1; i <= runDays; i++)
 		{
-			//workDays.add(i);
-			//facilityAvailableRate.add(facilityRate);
 			dayAvailability.put(i, facilityRate);
 		}
 	}
@@ -89,11 +85,12 @@ public class ScheduleImpl implements Schedule
 	}	
 
 	// process certain number of items and compute the new resulting schedule
-	public void computeSchedule(int processItemNum) 
+	// schedule dynamically increases if you run out of process days
+	public void computeChangedSchedule(int processItemNum) 
 	{
-		System.out.println("processIteNum BEFORE subtraction " + processItemNum + "\n");
+		System.out.println("processIteNum BEFORE the subtraction: " + processItemNum + " items\n");
 		
-		System.out.println("Last Operation Remainder BEFORE subtraction " + lastOpRemainder + "\n");
+		System.out.println("Last Operation Facility Vacancy (BEFORE the subtraction): " + lastOpRemainder + "\n");
 		
 		// determine if there were any vacancies from the last call of the method
 		if (lastOpRemainder > 0)
@@ -104,8 +101,8 @@ public class ScheduleImpl implements Schedule
 			//reset Last Operation's Remainder to Zero
 			lastOpRemainder = 0;
 		}
-		System.out.println("Last Operation Remainder AFTER subtraction " + lastOpRemainder + "\n");
-		System.out.println("processItemNum AFTER subtraction " + processItemNum + "\n");
+		System.out.println("Last Operation Facility Vacancy (AFTER the subtraction): " + lastOpRemainder + "\n");
+		System.out.println("processItemNum AFTER the subtraction: " + processItemNum + " items\n");
 		
 		// calculate the number of days used-up for processing of the items
 		daysUsed = processItemNum / facilityRate;
@@ -117,17 +114,17 @@ public class ScheduleImpl implements Schedule
 		
 		// calculate the remaining vacancy in that facility
 		remainingVacancy = Math.abs(facilityRate - remainder);
-		System.out.println("remaing vacancy: " + remainingVacancy);
+		System.out.println("Remaing Facility Vacancy slot: " + remainingVacancy);
 		
 		// calculate the number of used-up days on the schedule to cross-out
 		int fillToCounter = globalCounter + daysUsed;
 		
 		// reset the counter to the first day
 		globalCounter = 0;
-		System.out.println("Amount to zero-out " + fillToCounter);
+		System.out.println("Amount to zero-out: " + fillToCounter);
 		
 		// zero-ing of the used-up days
-		for (int i = 0 ; i < fillToCounter; i++)
+		for (int i = 1 ; i < fillToCounter+1; i++)
 		{
 			dayAvailability.put(i, 0);	
 			
@@ -138,7 +135,7 @@ public class ScheduleImpl implements Schedule
 		}
 		
 		//update the next available facility vacancy
-		dayAvailability.put(globalCounter, remainingVacancy);
+		dayAvailability.put(globalCounter+1, remainingVacancy);
 		
 		// keep track of the available facility vacancy amount
 		// for the next call of the method
@@ -182,9 +179,11 @@ public class ScheduleImpl implements Schedule
 		
 		ScheduleImpl schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
 		//schedule.displaySchedule();
-		schedule.computeSchedule(26);
+		schedule.computeChangedSchedule(215);
 		System.out.println("-----------------------------------------------------");
-		schedule.computeSchedule(33);
+		//schedule.computeSchedule(33);
+		System.out.println("-----------------------------------------------------");
+		//schedule.computeSchedule(7);
 		schedule.displaySchedule();
 		
 		
