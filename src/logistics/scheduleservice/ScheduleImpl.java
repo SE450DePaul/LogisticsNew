@@ -2,26 +2,30 @@ package logistics.scheduleservice;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import logistics.facilityservice.Facility;
 import logistics.facilityservice.FacilityDTO;
 import logistics.facilityservice.FacilityService;
+
+/**
+ * 
+ * @author David Olorundare
+ *
+ */
 
 public class ScheduleImpl implements Schedule
 {
 	public int counter = 0;
-	private int daysUsed;
-	private int remainingSlot;
-	private int lastElement;
+	private double daysUsed;
+	private int floorDaysUsed;
+	private int remainingVacancy;
 	private int remainder;
-	private int leftOver;
 	
 	private int runDays = 20;
 	
-	// approaches to storing the dynamic Day and Available fields
-	// using Two ArrayLists OR One HashMap 
-	private ArrayList<Integer> workDays;
-	private ArrayList<Integer> facilityAvailableRate;
+	// Approaches to storing the dynamic Day and Available fields
+	// using Two ArrayLists OR One HashMap. Actually had considered
+	// using a LinkedList too.
+	//private ArrayList<Integer> workDays;
+	//private ArrayList<Integer> facilityAvailableRate;
 	private HashMap<Integer, Integer> dayAvailability = new HashMap<>();
 	
 	private String facilityName;
@@ -48,19 +52,13 @@ public class ScheduleImpl implements Schedule
 		facilityRate = facility.facilityRate;
 		
 		// populate schedule with initial available process days
-		for (int i = 1; i <= run+1; i++)
+		for (int i = 1; i <= run; i++)
 		{
 			//workDays.add(i);
 			//facilityAvailableRate.add(facilityRate);
 			dayAvailability.put(i, facilityRate);
 		}
 	}
-	
-    // returns the facilty's rate
-    private int getFacilityRate()
-    {
-    	return facilityRate;
-    }
   
     // return how many days the facility is working
 	public int getRunDays() 
@@ -75,13 +73,6 @@ public class ScheduleImpl implements Schedule
 		runDays = run;
 	}
 	*/
-	
-	// return the number of available days, for 
-	// a given day, that the facility can still work.
-	public int getAvailableDays(int day) 
-	{
-		return dayAvailability.get(day);
-	}
 	
 	// return the total number of available days 
 	// the facility can still work.
@@ -101,14 +92,19 @@ public class ScheduleImpl implements Schedule
 	{
 		// calculate stuff
 		daysUsed = processItemNum / facilityRate;
+		//System.out.println(daysUsed);
+		floorDaysUsed = (int) Math.floor(daysUsed);
+		//System.out.println(floorDaysUsed);
 		remainder = processItemNum % facilityRate;
-		remainingSlot = facilityRate - remainder;
+		remainingVacancy = Math.abs(facilityRate - remainder);
 		
-		int pinch = counter + daysUsed;
-		
+		int pinch = counter + floorDaysUsed;
+		counter = 0;
+		System.out.println("pinch: " + pinch);
 		// zeroing fields
-		for (int i = 1 ; i < pinch+1; i++)
+		for (int i = 0 ; i < pinch; i++)
 		{
+			
 			dayAvailability.put(i, 0);	
 			//don't forget to do bounds checking
 			
@@ -116,8 +112,9 @@ public class ScheduleImpl implements Schedule
 		}
 		
 		//update next slot
-		dayAvailability.put(counter+1, remainingSlot);
+		dayAvailability.put(counter, remainingVacancy);
 		
+		System.out.println("counter: " +counter);
 	}
 
 	// increase or decrease the number of days the facility
@@ -129,11 +126,6 @@ public class ScheduleImpl implements Schedule
 	}
 
 	// 
-	public Schedule updateSchedule() 
-	{
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	// displays the schedule of the facility
 	public void displaySchedule() 
@@ -158,8 +150,8 @@ public class ScheduleImpl implements Schedule
 		
 		ScheduleImpl schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
 		//schedule.displaySchedule();
-		//schedule.computeSchedule(18);
-		//schedule.computeSchedule(18);
+		schedule.computeSchedule(26);
+		schedule.computeSchedule(33);
 		schedule.displaySchedule();
 		
 		

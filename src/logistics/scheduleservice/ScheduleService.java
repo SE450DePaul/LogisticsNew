@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 import logistics.facilityservice.Facility;
 import logistics.facilityservice.FacilityDTO;
+import logistics.facilityservice.FacilityService;
 import logistics.itemservice.ItemCatalogService;
 
 /**
  * @author David Olorundare
-
+ *
  */
 
 public final class ScheduleService
@@ -47,22 +48,16 @@ public final class ScheduleService
     	return "";
     }
     
-    // create a schedule given a facility
-    public Schedule createSchedule(Facility facility)
-    {
-    	return null;
-    }
-    
     // create a schedule given a facilityDTO
     public Schedule createSchedule(FacilityDTO facility)
     {
-    	return null;
+    	return new ScheduleImpl(facility);
     }
     
     // create a schedule for a specific number of days, given a facility
-	public Schedule createSchedule(Facility facility, int runDays)
+	public Schedule createSchedule(FacilityDTO facility, int runDays)
 	{
-		return null;
+		return new ScheduleImpl(facility, runDays);
 	}
 	
 	// return a list of all facilities and their schedules
@@ -71,10 +66,18 @@ public final class ScheduleService
 		return null;
 	}
 	
-	// given a facility return its schedule
-	public Schedule getOutput(Facility facility)
+	// update the schedule of a facility given a number of items to process
+	public Schedule updateSchedule() 
 	{
+		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	// given a facility return its schedule
+	public void getOutput(FacilityDTO facility)
+	{
+		ScheduleImpl schedule = new ScheduleImpl(facility);
+		schedule.displaySchedule();
 	}
 
     // Test that the service works
@@ -82,9 +85,12 @@ public final class ScheduleService
     {
     	ScheduleService scheduleService = ScheduleService.getInstance();
     	
-    	//scheduleService.getSchedule();
-    	//scheduleService.generateSchedule();
+    	//this should not be here
+    	FacilityService instance = FacilityService.getInstance();
+		
+    	// neither should use of instance.getFacility
+    	scheduleService.getOutput(instance.getFacility("Chicago, IL"));
+		
     	
     }
-    
 }
