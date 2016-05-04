@@ -10,8 +10,8 @@ import logistics.reportservice.ReportService;
 public class Logistics 
 {
 	// Should initialize all the services: Facility, Item, Inventory, Network, Report
-	
-	
+
+	// SHOULD SOMETHING BE HERE ?
 	
 	// call the Report service to generate all required output
 	public static void main(String[] args)

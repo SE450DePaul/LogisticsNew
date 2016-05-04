@@ -1,6 +1,7 @@
 package logistics.scheduleservice;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import logistics.facilityservice.Facility;
 import logistics.facilityservice.FacilityDTO;
@@ -16,12 +17,12 @@ public final class ScheduleService
 {
 	
     private volatile static ScheduleService instance;
-
+    FacilityService facilityService;
 
 
     private ScheduleService() 
     {
-
+    	facilityService = FacilityService.getInstance();
 
 
     }
@@ -43,9 +44,9 @@ public final class ScheduleService
     }
 
     // return string output of a schedule of a given facility name 
-    public String getOutput(String facility)
+    public void getOutput(String facilityName)
     {
-    	return "";
+    	getOutput(facilityService.getFacility(facilityName));
     }
     
     // create a schedule given a facilityDTO
@@ -63,6 +64,7 @@ public final class ScheduleService
 	// return a list of all facilities and their schedules
 	public ArrayList<Schedule> getSchedules()
 	{
+		//Set<String> facilities = facilityService.getFacilities();
 		return null;
 	}
 	
@@ -83,13 +85,13 @@ public final class ScheduleService
     // Test that the service works
     public static void main(String[] args)
     {
-    	ScheduleService scheduleService = ScheduleService.getInstance();
+    	//ScheduleService scheduleService = ScheduleService.getInstance();
     	
     	//this should not be here
-    	FacilityService instance = FacilityService.getInstance();
+    	
 		
     	// neither should use of instance.getFacility
-    	scheduleService.getOutput(instance.getFacility("Chicago, IL"));
+    	//scheduleService.getOutput(instance.getFacility("Chicago, IL"));
 		
     	
     }

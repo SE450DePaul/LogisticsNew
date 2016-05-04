@@ -92,11 +92,13 @@ public class ScheduleImpl implements Schedule
 	{
 		// calculate stuff
 		daysUsed = processItemNum / facilityRate;
-		//System.out.println(daysUsed);
+		System.out.println("daysUsed: " + daysUsed);
 		floorDaysUsed = (int) Math.floor(daysUsed);
-		//System.out.println(floorDaysUsed);
+		System.out.println("floorDays " + floorDaysUsed);
 		remainder = processItemNum % facilityRate;
+		System.out.println("remainder: " + remainder);
 		remainingVacancy = Math.abs(facilityRate - remainder);
+		System.out.println("remVac " + remainingVacancy);
 		
 		int pinch = counter + floorDaysUsed;
 		counter = 0;
@@ -113,8 +115,9 @@ public class ScheduleImpl implements Schedule
 		
 		//update next slot
 		dayAvailability.put(counter, remainingVacancy);
-		
+		remainingVacancy = facilityRate;
 		System.out.println("counter: " +counter);
+		System.out.println("counter: " +facilityRate);
 	}
 
 	// increase or decrease the number of days the facility
@@ -130,7 +133,7 @@ public class ScheduleImpl implements Schedule
 	// displays the schedule of the facility
 	public void displaySchedule() 
 	{
-		System.out.print("\nDays:\t\t");
+		System.out.print("Days:\t\t");
 		
 		for(Integer day: dayAvailability.keySet())
 		{
@@ -141,6 +144,7 @@ public class ScheduleImpl implements Schedule
 		{
 			System.out.print(dayAvailability.get(day) + "\t");	
 		}
+		System.out.println("\n");
 	}
 	
 	
@@ -151,7 +155,7 @@ public class ScheduleImpl implements Schedule
 		ScheduleImpl schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
 		//schedule.displaySchedule();
 		schedule.computeSchedule(26);
-		schedule.computeSchedule(33);
+		//schedule.computeSchedule(33);
 		schedule.displaySchedule();
 		
 		
