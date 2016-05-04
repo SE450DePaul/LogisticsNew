@@ -44,6 +44,24 @@ public final class ItemCatalogService {
         return instance;
     }
 
+    public String getOutput(){
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("Item Catalog: ");
+        stringBuffer.append("\n");
+        int i = 1;
+        Collection<Item> items = itemsHash.values();
+        for (Item item : items){
+            stringBuffer.append(item.toString());
+            if (i % 4 == 0){
+                stringBuffer.append("\n");
+            } else {
+                stringBuffer.append("\t");
+            }
+            i++;
+        }
+        return stringBuffer.toString();
+    }
+
 
     public ItemDTO getItem(String itemId){
         Item item = itemsHash.get(itemId);

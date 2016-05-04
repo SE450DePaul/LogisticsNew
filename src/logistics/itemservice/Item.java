@@ -9,5 +9,6 @@ public interface Item
 
     String getId();
     Double getPrice();
+    String toString();
 
 }

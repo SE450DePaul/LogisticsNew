@@ -8,10 +8,10 @@ import logistics.utilities.exceptions.NullParameterException;
 public class FacilityImpl implements Facility
 {
     private String name;
-    private Double rate;
+    private Integer rate;
     private Double cost;
 
-    public FacilityImpl(String name, Double rate, Double cost) throws NullParameterException
+    public FacilityImpl(String name, Integer rate, Double cost) throws NullParameterException
     {
         setName(name);
         setRate(rate);
@@ -22,7 +22,7 @@ public class FacilityImpl implements Facility
 		return name;
 	}
 
-	public Double getRate() 
+	public Integer getRate()
 	{
 		return rate;
 	}
@@ -33,13 +33,25 @@ public class FacilityImpl implements Facility
 		return cost;
 	}
 
+	@Override
+	public String toString() {
+		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append(name);
+		stringBuffer.append("\n");
+		stringBuffer.append("Rate per Day: " + rate);
+		stringBuffer.append("\n");
+		stringBuffer.append("Cost per day: " + cost);
+		stringBuffer.append("\n");
+		return stringBuffer.toString();
+	}
+
 	private void setName(String facilityName) throws NullParameterException
 	{
 		validateName(facilityName);
 		name = facilityName;
 	}
 
-	private void setRate(Double facilityRate) throws NullParameterException
+	private void setRate(Integer facilityRate) throws NullParameterException
 	{
 		validateRate(facilityRate);
 		rate = facilityRate;
@@ -57,7 +69,7 @@ public class FacilityImpl implements Facility
 		}
 	}
 
-	private void validateRate(Double rate) throws NullParameterException {
+	private void validateRate(Integer rate) throws NullParameterException {
 		if (rate == null){
 			throw new NullParameterException();
 		}
@@ -68,6 +80,7 @@ public class FacilityImpl implements Facility
 			throw new NullParameterException();
 		}
 	}
+
 
 
 

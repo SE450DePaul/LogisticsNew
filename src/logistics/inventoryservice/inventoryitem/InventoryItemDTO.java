@@ -9,9 +9,9 @@ public class InventoryItemDTO
     public String id;
     public int quantity;
 
-    public InventoryItemDTO(String id, int quantity)
+    public InventoryItemDTO(String itemId, int itemQuantity)
     {
-        this.id = id;
-        this.quantity = quantity;
+        id = itemId;
+        quantity = itemQuantity;
     }
 }

@@ -8,9 +8,9 @@ public class FacilityDTO
 
     public String name;
     public Double cost;
-    public Double rate;
+    public Integer rate;
 
-    public FacilityDTO(String facilityName, Double facilityCost, Double facilityRate)
+    public FacilityDTO(String facilityName, Double facilityCost, Integer facilityRate)
     {
         name = facilityName;
         cost = facilityCost;

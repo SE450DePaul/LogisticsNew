@@ -55,25 +55,15 @@ public final class FacilityService
         return new FacilityDTO(facility.getName(), facility.getCost(), facility.getRate());
     }
 
-    public Set<String> getFacilities(){
+    public Set<String> getFacilityNames(){
         return new TreeSet<String>(facilityHashMap.keySet());
     }
 
 
     public String getOutput(String name){
         Facility facility = facilityHashMap.get(name);
-        if (facility == null) return "";
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append(facility.getName());
-        stringBuffer.append("\n");
-        stringBuffer.append("Rate per Day: " + facility.getRate());
-        stringBuffer.append("\n");
-        stringBuffer.append("Cost per day: " + facility.getCost());
-        stringBuffer.append("\n");
-        return stringBuffer.toString();
+        return facility.toString();
     }
-
-
 
 
     public static void main(String[] args) {
@@ -87,7 +77,7 @@ public final class FacilityService
         System.out.println(output);
 
         System.out.println("Facilities: ");
-        Set<String> facilities = instance.getFacilities();
+        Set<String> facilities = instance.getFacilityNames();
         for (String facility : facilities){
             System.out.println(facility);
         }

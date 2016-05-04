@@ -3,6 +3,7 @@ package logistics.utilities.loader.implementation;
 
 import logistics.networkservice.factory.FacilityVertexFactory;
 import logistics.networkservice.interfaces.FacilityVertex;
+import logistics.utilities.exceptions.NegativeOrZeroParameterException;
 import logistics.utilities.exceptions.NullParameterException;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.utilities.exceptions.NeighborNotFoundInNetworkException;
@@ -31,13 +32,13 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 
 	private String filepath;
 
-	public NetworkXmlLoaderImpl(String filepath){
-		this.filepath = filepath;
+	public NetworkXmlLoaderImpl(String networkFilepath){
+		filepath = networkFilepath;
 	}
 
 	public ArrayList<FacilityVertex> load() throws LoaderFileNotFoundException {
 
-		ArrayList<FacilityVertex> facilityVertices = new ArrayList<FacilityVertex>();
+		ArrayList<FacilityVertex> facilityVertices = new ArrayList<>();
 
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -105,6 +106,8 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (NullParameterException e) {
+			e.printStackTrace();
+		} catch (NegativeOrZeroParameterException e) {
 			e.printStackTrace();
 		}
 

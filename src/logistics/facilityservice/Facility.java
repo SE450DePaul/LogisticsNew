@@ -7,7 +7,8 @@ public interface Facility
 {
 
     String getName();
-    Double getRate();
+    Integer getRate();
     Double getCost();
+    String toString();
 
 }

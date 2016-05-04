@@ -23,6 +23,15 @@ public class ItemImpl implements Item
         return price;
     }
 
+    @Override
+    public String toString() {
+        StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append(id);
+        stringBuffer.append(" : ");
+        stringBuffer.append("$" + price);
+        return stringBuffer.toString();
+    }
+
     private void setId(String itemId) throws NullParameterException {
         validateId(itemId);
         id = itemId;

@@ -3,10 +3,7 @@ package logistics.networkservice.implementation;
 import logistics.networkservice.factory.FacilityVertexFactory;
 import logistics.networkservice.interfaces.FacilityVertex;
 import logistics.networkservice.interfaces.NetworkGraph;
-import logistics.utilities.exceptions.FacilityNotFoundInNetworkException;
-import logistics.utilities.exceptions.NullParameterException;
-import logistics.utilities.exceptions.NeighborNotFoundInNetworkException;
-import logistics.utilities.exceptions.SelfLoopNetworkException;
+import logistics.utilities.exceptions.*;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -34,7 +31,7 @@ public class NetworkGraphImpl implements NetworkGraph {
   }
 
   @Override
-  public void addNeighbor(String facility, String neighbor, int distance) throws FacilityNotFoundInNetworkException, NullParameterException, SelfLoopNetworkException {
+  public void addNeighbor(String facility, String neighbor, int distance) throws FacilityNotFoundInNetworkException, NullParameterException, SelfLoopNetworkException, NegativeOrZeroParameterException {
       validateAddNeighbor(facility, neighbor);
       FacilityVertex facilityVertex = facilityHashMap.get(facility);
       facilityVertex.addNeighbor(neighbor, distance);

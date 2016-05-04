@@ -1,15 +1,8 @@
 package logistics.utilities.loader.implementation;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
 import logistics.facilityservice.Facility;
 import logistics.facilityservice.FacilityFactory;
+import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.utilities.exceptions.NullParameterException;
 import logistics.utilities.loader.interfaces.FacilityLoader;
 import org.w3c.dom.Document;
@@ -18,7 +11,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import logistics.utilities.exceptions.LoaderFileNotFoundException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * 
@@ -77,7 +75,7 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 	                NodeList costNode = element.getElementsByTagName("cost");
 	                
 	                String name = nameNode.item(0).getTextContent();
-	                Double rate = Double.parseDouble(rateNode.item(0).getTextContent());
+	                Integer rate = Integer.parseInt(rateNode.item(0).getTextContent());
 	                Double cost = Double.parseDouble(costNode.item(0).getTextContent());
 	                
 	                Facility facility = FacilityFactory.build(name, rate, cost);

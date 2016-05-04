@@ -22,8 +22,9 @@ import java.util.ArrayList;
 public class ItemXmlLoaderImpl implements ItemLoader {
 
     private String filepath;
-    public ItemXmlLoaderImpl(String filepath){
-        this.filepath = filepath;
+
+    public ItemXmlLoaderImpl(String itemFilepath){
+        filepath = itemFilepath;
     }
 
     public ArrayList<Item> load() throws LoaderFileNotFoundException {

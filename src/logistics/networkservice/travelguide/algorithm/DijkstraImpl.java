@@ -1,4 +1,4 @@
-package logistics.networkservice.shortestpath;
+package logistics.networkservice.travelguide.algorithm;
 
 import logistics.networkservice.interfaces.NetworkGraph;
 import logistics.utilities.exceptions.FacilityNotFoundInNetworkException;
@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * Created by uchennafokoye on 5/2/16.
  */
-public class DijkstraImpl implements ShortestPathStrategy{
+public class DijkstraImpl implements ShortestPathAlgorithm {
 
     private HashMap<String, Integer> dist;
     private HashMap<String, String> parentHash;

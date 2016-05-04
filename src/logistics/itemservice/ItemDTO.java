@@ -8,8 +8,8 @@ public class ItemDTO {
     public String id;
     public Double price;
 
-    public ItemDTO(String id, Double price){
-        this.id = id;
-        this.price = price;
+    public ItemDTO(String itemId, Double itemPrice){
+        id = itemId;
+        price = itemPrice;
     }
 }

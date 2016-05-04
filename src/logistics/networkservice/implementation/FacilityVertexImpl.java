@@ -1,6 +1,7 @@
 package logistics.networkservice.implementation;
 
 import logistics.networkservice.interfaces.FacilityVertex;
+import logistics.utilities.exceptions.NegativeOrZeroParameterException;
 import logistics.utilities.exceptions.NullParameterException;
 import logistics.utilities.exceptions.NeighborNotFoundInNetworkException;
 
@@ -22,7 +23,7 @@ public class FacilityVertexImpl implements FacilityVertex {
     }
 
     @Override
-    public void addNeighbor(String facility, int distance) throws NullParameterException {
+    public void addNeighbor(String facility, int distance) throws NullParameterException, NegativeOrZeroParameterException {
         validateFacility(facility);
         validateDistance(distance);
         weights.put(facility, distance);
@@ -37,8 +38,6 @@ public class FacilityVertexImpl implements FacilityVertex {
         return distance;
     }
 
-
-
     @Override
     public Iterator<String> neighbors() {
         return new TreeSet<String>(weights.keySet()).iterator();
@@ -48,6 +47,7 @@ public class FacilityVertexImpl implements FacilityVertex {
     public String getFacilityName() {
         return facility;
     }
+
 
 
     private void setFacility(String fac) throws NullParameterException {
@@ -62,9 +62,9 @@ public class FacilityVertexImpl implements FacilityVertex {
         }
     }
 
-    private void validateDistance(int distance) throws NullParameterException {
+    private void validateDistance(int distance) throws NegativeOrZeroParameterException {
         if (distance < 0){
-            throw new NullParameterException("Distance cannot be null");
+            throw new NegativeOrZeroParameterException("Distance cannot be negative");
         }
     }
 }
