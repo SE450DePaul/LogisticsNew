@@ -38,6 +38,8 @@ public class FacilityImpl implements Facility
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append(name);
 		stringBuffer.append("\n");
+		stringBuffer.append(generateDashedLine(name.length()));
+		stringBuffer.append("\n");
 		stringBuffer.append("Rate per Day: " + rate);
 		stringBuffer.append("\n");
 		stringBuffer.append("Cost per day: " + cost);
@@ -79,6 +81,14 @@ public class FacilityImpl implements Facility
 		if (cost == null){
 			throw new NullParameterException();
 		}
+	}
+
+	private String generateDashedLine(int length) {
+		StringBuffer str = new StringBuffer();
+		for (int i = 0; i < length; i++){
+			str.append("-");
+		}
+		return str.toString();
 	}
 
 

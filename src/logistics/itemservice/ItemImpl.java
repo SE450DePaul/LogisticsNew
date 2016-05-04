@@ -2,6 +2,8 @@ package logistics.itemservice;
 
 import logistics.utilities.exceptions.NullParameterException;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by uchennafokoye on 4/22/16.
  */
@@ -25,10 +27,11 @@ public class ItemImpl implements Item
 
     @Override
     public String toString() {
+        DecimalFormat inputFormatter = new DecimalFormat("$#,###");
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append(id);
         stringBuffer.append(" : ");
-        stringBuffer.append("$" + price);
+        stringBuffer.append(inputFormatter.format(price));
         return stringBuffer.toString();
     }
 

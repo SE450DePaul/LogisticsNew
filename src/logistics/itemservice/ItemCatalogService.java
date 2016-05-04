@@ -1,11 +1,12 @@
 package logistics.itemservice;
 
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
-import logistics.utilities.loader.interfaces.Loader;
 import logistics.utilities.loader.factory.LoaderFactory;
+import logistics.utilities.loader.interfaces.Loader;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.TreeSet;
 
 /**
  * Created by uchennafokoye on 4/22/16.
@@ -46,16 +47,17 @@ public final class ItemCatalogService {
 
     public String getOutput(){
         StringBuffer stringBuffer = new StringBuffer();
+        stringBuffer.append("\n");
         stringBuffer.append("Item Catalog: ");
         stringBuffer.append("\n");
         int i = 1;
-        Collection<Item> items = itemsHash.values();
-        for (Item item : items){
+        Collection<String> itemIds = new TreeSet<>(itemsHash.keySet());
+        for (String itemId : itemIds){
+            Item item = itemsHash.get(itemId);
             stringBuffer.append(item.toString());
+            stringBuffer.append("\t");
             if (i % 4 == 0){
                 stringBuffer.append("\n");
-            } else {
-                stringBuffer.append("\t");
             }
             i++;
         }

@@ -42,13 +42,18 @@ public class FacilityStatusService {
     public String getOutput(String facilityName) throws FacilityNotFoundInNetworkException, IllegalParameterException {
 
         StringBuffer str = new StringBuffer();
+        str.append("\n");
         str.append(facilityService.getOutput(facilityName));
+        str.append("\n");
         str.append(networkService.getDirectLinksOutput(facilityName));
+        str.append("\n");
         str.append(inventoryService.getOutput(facilityName));
+        str.append("\n");
         //Schedule to be done
         // str.append(scheduleService.getDirectLinksOutput(facilityName);
 
-        str.append(generateDashedLine(50));
+        str.append("\n");
+        str.append(generateDashedLine(100));
 
         return str.toString();
 

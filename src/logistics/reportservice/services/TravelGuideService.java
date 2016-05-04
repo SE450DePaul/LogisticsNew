@@ -6,6 +6,7 @@ import logistics.utilities.exceptions.FacilityNotFoundInNetworkException;
 import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.NeighborNotFoundInNetworkException;
 
+import java.text.DecimalFormat;
 import java.util.Collection;
 
 
@@ -56,9 +57,9 @@ public class TravelGuideService {
         int i = 0;
         int size = path.size() - 1;
         for (String link : path) {
-            if (size == 0){
+            if (i == 0){
                 str.append("\t");
-                str.append("-");
+                str.append("- ");
             }
             str.append(link);
             if (i < size){
@@ -68,15 +69,18 @@ public class TravelGuideService {
             i++;
         }
 
-        String distanceInString = distance + "mi";
-        String daysInString = days + " days";
+        DecimalFormat commaFormat = new DecimalFormat("#,###");
+        DecimalFormat inputFormat = new DecimalFormat(".##");
+
+        String distanceInString = commaFormat.format(distance) + " mi";
+        String daysInString = inputFormat.format(days) + " days";
 
         str.append(" = ");
         str.append(distanceInString);
 
         str.append("\n");
         str.append("\t");
-        str.append(distanceInString + "/ (" + drivingHours + "hours per day * " + mph  + "mph");
+        str.append("- " + distanceInString + " / (" + drivingHours + " hours per day * " + mph  + " mph");
         str.append(" = ");
         str.append(daysInString);
 

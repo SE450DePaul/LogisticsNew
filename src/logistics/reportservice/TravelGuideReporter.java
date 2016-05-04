@@ -36,11 +36,16 @@ public class TravelGuideReporter implements Reporter {
     public void printOutput() {
         String[][] shortestPathTests =  Main.SHORTEST_PATH_TEST;
 
+        System.out.println("Shortest Path Tests: ");
+        System.out.print("\n");
+        char alph = 'a';
         for (int i = 0; i < shortestPathTests.length; i++){
-            String facility = shortestPathTests[i][0];
+            String origin = shortestPathTests[i][0];
             String destination = shortestPathTests[i][1];
             try {
-                System.out.println(TravelGuideService.printItinerary(facility, destination));
+                System.out.println(alph + ") " + origin + " to " + destination + ":");
+                System.out.println(TravelGuideService.printItinerary(origin, destination));
+                System.out.print("\n");
             } catch (FacilityNotFoundInNetworkException e) {
                 e.printStackTrace();
             } catch (IllegalParameterException e) {
@@ -48,6 +53,7 @@ public class TravelGuideReporter implements Reporter {
             } catch (NeighborNotFoundInNetworkException e) {
                 e.printStackTrace();
             }
+            alph++;
         }
 
     }

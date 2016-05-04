@@ -17,7 +17,7 @@ public class Main {
                             {"Austin, TX", "Norfolk, VA"},
                                 {"Miami, FL", "Seattle, WA"},
                                     {"Los Angeles, CA", "Chicago, IL"},
-                                        {"Detroit, MI", "Nashville, TV"}};
+                                        {"Detroit, MI", "Nashville, TN"}};
 
 
     public static void main(String args[]){
