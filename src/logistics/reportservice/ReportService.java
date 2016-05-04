@@ -33,7 +33,8 @@ public class ReportService
 	ScheduleService scheduleService;
 		
 	
-	private ReportService() {
+	private ReportService() 
+	{
 		itemCatalogService = ItemCatalogService.getInstance();
 		networkService = NetworkService.getInstance();
 		facilityService = FacilityService.getInstance();
