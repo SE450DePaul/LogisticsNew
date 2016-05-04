@@ -41,7 +41,6 @@ public final class ScheduleService
         return instance;
     }
 
-    
     // return string output of a schedule of a given facility name 
     public String getOutput(String facility)
     {

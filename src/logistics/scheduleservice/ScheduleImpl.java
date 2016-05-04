@@ -5,12 +5,17 @@ import java.util.HashMap;
 
 import logistics.facilityservice.Facility;
 import logistics.facilityservice.FacilityDTO;
+import logistics.facilityservice.FacilityService;
 
 public class ScheduleImpl implements Schedule
 {
+	public int counter = 0;
+	private int daysUsed;
+	private int remainingSlot;
+	private int lastElement;
+	private int remainder;
+	private int leftOver;
 	
-	//private int Day;
-	//private int AvailableNum;
 	private int runDays = 20;
 	
 	// approaches to storing the dynamic Day and Available fields
@@ -28,7 +33,7 @@ public class ScheduleImpl implements Schedule
 		facilityRate = facility.facilityRate;
 		
 		// populate schedule with initial available process days
-		for (int i = 1; i <= runDays+1; i++)
+		for (int i = 1; i <= runDays; i++)
 		{
 			//workDays.add(i);
 			//facilityAvailableRate.add(facilityRate);
@@ -91,11 +96,28 @@ public class ScheduleImpl implements Schedule
 		return totalDays;
 	}	
 
-	// process certain number of items and compute the new schedule
-	public Schedule computeSchedule(int processItemNum) 
+	// process certain number of items and compute the new resulting schedule
+	public void computeSchedule(int processItemNum) 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		// calculate stuff
+		daysUsed = processItemNum / facilityRate;
+		remainder = processItemNum % facilityRate;
+		remainingSlot = facilityRate - remainder;
+		
+		int pinch = counter + daysUsed;
+		
+		// zeroing fields
+		for (int i = 1 ; i < pinch+1; i++)
+		{
+			dayAvailability.put(i, 0);	
+			//don't forget to do bounds checking
+			
+			counter++;
+		}
+		
+		//update next slot
+		dayAvailability.put(counter+1, remainingSlot);
+		
 	}
 
 	// increase or decrease the number of days the facility
@@ -114,10 +136,33 @@ public class ScheduleImpl implements Schedule
 	}
 
 	// displays the schedule of the facility
-	public String displaySchedule() 
+	public void displaySchedule() 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		System.out.print("\nDays:\t\t");
+		
+		for(Integer day: dayAvailability.keySet())
+		{
+			System.out.print(day + "\t");
+	    }
+		System.out.print("\nSchedule:\t");
+		for(Integer day: dayAvailability.keySet())
+		{
+			System.out.print(dayAvailability.get(day) + "\t");	
+		}
+	}
+	
+	
+	public static void main(String[] args)
+	{
+		FacilityService instance = FacilityService.getInstance();
+		
+		ScheduleImpl schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
+		//schedule.displaySchedule();
+		//schedule.computeSchedule(18);
+		//schedule.computeSchedule(18);
+		schedule.displaySchedule();
+		
+		
 	}
 }
 

@@ -17,10 +17,10 @@ public interface Schedule
 	//public Integer getFacilityRate(Facility facility)
 	public int getRunDays();
 	public int getAvailableDays();
-	public Schedule computeSchedule(int processItemNum);
+	public void computeSchedule(int processItemNum);
 	public Schedule adjustScheduleDays(int lengthOfDays, String adjustType);
 	public Schedule updateSchedule();
-	public String displaySchedule();
+	public void displaySchedule();
 	
 
 }
