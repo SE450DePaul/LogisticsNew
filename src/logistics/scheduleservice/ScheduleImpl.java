@@ -2,7 +2,6 @@ package logistics.scheduleservice;
 
 import java.util.HashMap;
 import logistics.facilityservice.FacilityDTO;
-import logistics.facilityservice.FacilityService;
 
 /**
  * 
@@ -68,7 +67,7 @@ public class ScheduleImpl implements Schedule
 
 	// return the total number of available days 
 	// the facility can still work.
-	public int getAvailableDays() 
+	public int getTotalAvailableDays() 
 	{
 		int totalDays = 0;
 		for(Integer day: dayAvailability.keySet())

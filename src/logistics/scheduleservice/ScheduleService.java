@@ -1,12 +1,10 @@
 package logistics.scheduleservice;
 
-import java.util.ArrayList;
-import java.util.Set;
 
-import logistics.facilityservice.Facility;
+import java.util.Set;
 import logistics.facilityservice.FacilityDTO;
 import logistics.facilityservice.FacilityService;
-import logistics.itemservice.ItemCatalogService;
+
 
 /**
  * @author David Olorundare
