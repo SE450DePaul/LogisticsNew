@@ -18,7 +18,6 @@ public interface Schedule
 	public int getRunDays();
 	public int getAvailableDays();
 	public void computeChangedSchedule(int processItemNum);
-	public Schedule adjustScheduleDays(int lengthOfDays, String adjustType);
 	public void displaySchedule();
 	
 

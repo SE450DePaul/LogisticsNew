@@ -15,10 +15,8 @@ import logistics.itemservice.ItemCatalogService;
 
 public final class ScheduleService
 {
-	
     private volatile static ScheduleService instance;
     FacilityService facilityService;
-
 
     private ScheduleService() 
     {
@@ -46,11 +44,11 @@ public final class ScheduleService
     // return string output of a schedule of a given facility name 
     public void getOutput(String facilityName)
     {
-    	getOutput(facilityService.getFacility(facilityName));
+    	getSchedule(facilityService.getFacility(facilityName));
     }
     
 	// given a facility return its schedule
-	public void getOutput(FacilityDTO facility)
+	public void getSchedule(FacilityDTO facility)
 	{
 		ScheduleImpl schedule = new ScheduleImpl(facility);
 		schedule.displaySchedule();
@@ -69,28 +67,47 @@ public final class ScheduleService
 	}
 	
 	// return a list of all facilities and their schedules
-	public ArrayList<Schedule> getSchedules()
+	public void getFacilitySchedules()
 	{
-		//Set<String> facilities = facilityService.getFacilities();
-		return null;
+		Set<String> facilities = facilityService.getFacilities();
+		for (String facility : facilities)
+		{
+			System.out.println(" " + facility);
+			getOutput(facility);
+		}
 	}
 	
 	// update the schedule of a facility given a number of items to process
-	public Schedule updateSchedule() 
+	public Schedule updateSchedule(FacilityDTO facility, int itemNums) 
 	{
-		// TODO Auto-generated method stub
-		return null;
+		ScheduleImpl updatedSchedule = new ScheduleImpl(facility);
+		updatedSchedule.computeChangedSchedule(itemNums);
+		return updatedSchedule;
 	}
 	
 
     // Test that the service works
     public static void main(String[] args)
     {
-    	//ScheduleService scheduleService = ScheduleService.getInstance();
-    	//this should not be here
-    	// neither should use of instance.getFacility
-    	//scheduleService.getOutput(getFacility("Chicago, IL"));
+/*
+		FacilityService instance = FacilityService.getInstance();
 		
+		ScheduleImpl schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
+		System.out.println("-------------------------Initial Schedule-----------------------------------------------\n");
+		schedule.displaySchedule();
+		System.out.println("--------------------New Schedule when 26 items processed--------------------------------\n");
+		schedule.computeChangedSchedule(26);
+		schedule.displaySchedule();
+		System.out.println("--------------------New Schedule when another 33 items are processed--------------------\n");
+		schedule.computeChangedSchedule(33);
+		schedule.displaySchedule();
+		System.out.println("--------------------New Schedule when 7 more items processed----------------------------\n");
+		schedule.computeChangedSchedule(7);
+		schedule.displaySchedule();	*/
+    	
+    	// Get all the current schedules in the facility
+    	ScheduleService test = new ScheduleService();
+    	test.getFacilitySchedules();
     	
     }
 }
