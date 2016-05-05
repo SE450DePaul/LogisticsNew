@@ -1,7 +1,7 @@
 package logistics.utilities.exceptions;
 
 /**
- * Created by uchennafokoye on 4/22/16.
+ * @author Uchenna F. Okoye
  */
 public class IllegalParameterException extends Exception {
 
