@@ -6,7 +6,7 @@ import logistics.facilityservice.FacilityService;
 import java.util.HashMap;
 
 /**
- *
+ * schedule dynamically increases if you run out of process days
  * @author David Olorundare
  *
  */
@@ -21,8 +21,10 @@ public class ScheduleImpl implements Schedule
 
     private int runDays = 20;
 
-    // Approaches to storing the dynamic Day and Available fields
-    // using a HashMap
+    /* A HashMap is used to store the schedule of the facility,
+    * the key-value representation is mapped to the work DAYS
+    * and AVAILABLE Rate for each day.
+    */ 
     private HashMap<Integer, Integer> dayAvailability = new HashMap<>();
 
     private String facilityName;
@@ -33,7 +35,7 @@ public class ScheduleImpl implements Schedule
     }
 
     private int facilityRate;
-
+    
     public ScheduleImpl(FacilityDTO facility)
     {
         facilityName = facility.name;
@@ -46,7 +48,7 @@ public class ScheduleImpl implements Schedule
         }
     }
 
-    // create schedule with a particular length
+    // create a schedule with a particular length
     public ScheduleImpl(FacilityDTO facility, int run)
     {
         facilityName = facility.name;
@@ -55,20 +57,22 @@ public class ScheduleImpl implements Schedule
         // populate schedule with initial available process days
         for (int i = 1; i <= run; i++)
         {
-            //workDays.add(i);
-            //facilityAvailableRate.add(facilityRate);
             dayAvailability.put(i, facilityRate);
         }
     }
 
-    // return how many days the facility is working
+    /*
+     *  Returns how many days the facility is working
+     */
     public int getRunDays()
     {
         return runDays;
     }
 
-    // return the total number of available days
-    // the facility can still work.
+    /*
+     *  Returns the total number of available days
+     *  the facility can still work.
+     */
     public int getTotalAvailableDays()
     {
         int totalDays = 0;
@@ -80,11 +84,12 @@ public class ScheduleImpl implements Schedule
         return totalDays;
     }
 
-    // process certain number of items and compute the new resulting schedule
-    // schedule dynamically increases if you run out of process days
+    /*
+     *  Process a certain number of items and compute the new resulting schedule.
+     */
     public void computeChangedSchedule(int processItemNum)
     {
-        // determine if there were any vacancies from the last call of the method
+        // determine if there were any vacancies from the last call of this method
         if (lastOpRemainder > 0)
         {
             processItemNum -= lastOpRemainder;
@@ -103,13 +108,13 @@ public class ScheduleImpl implements Schedule
         // calculate the remaining vacancy in that facility
         remainingFacilityVacancy = Math.abs(facilityRate - remainder);
 
-        // calculate the number of used-up days on the schedule to cross-out
+        // calculate the number of used-up days on the schedule that should be crossed-out
         int fillToCounter = globalCounter + daysUsed;
 
         // reset the counter to the first day
         globalCounter = 0;
 
-        // zero-ing of the used-up days
+        // cross-out the used-up days
         for (int i = 1 ; i < fillToCounter+1; i++)
         {
             dayAvailability.put(i, 0);
@@ -120,13 +125,15 @@ public class ScheduleImpl implements Schedule
         dayAvailability.put(globalCounter+1, remainingFacilityVacancy);
 
         // keep track of the available facility vacancy amount
-        // for the next call of the method
+        // for the next call of this method
         lastOpRemainder += remainingFacilityVacancy;
     }
 
 
 
-    // displays the schedule of the facility
+    /*
+     *  Returns the schedule of the associated facility
+     */
     public String getScheduleOutput()
     {
         StringBuffer str = new StringBuffer();
@@ -147,16 +154,21 @@ public class ScheduleImpl implements Schedule
         return str.toString();
     }
 
+    // Test that this class works
     public static void main(String[] args)
     {
 		FacilityService instance = FacilityService.getInstance();
 
 		ScheduleImpl schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
+		System.out.println("-----------Initial Schedule for Chicago, IL Facility ------------------------------------------");
 		System.out.println(schedule.getScheduleOutput());
 		schedule.computeChangedSchedule(26);
-		System.out.println("-----------------------------------------------------");
+		System.out.println("-----------New Schedule After Processing 26 Items ------------------------------------------");
+		System.out.println(schedule.getScheduleOutput());
+		System.out.println("-----------New Schedule After Processing another 33 Items------------------------------------------");
 		schedule.computeChangedSchedule(33);
-		System.out.println("-----------------------------------------------------");
+		System.out.println(schedule.getScheduleOutput());
+		System.out.println("-----------------New Schedule After Processing 7 more Items------------------------------------");
 		schedule.computeChangedSchedule(7);
 		System.out.println(schedule.getScheduleOutput());
     }
