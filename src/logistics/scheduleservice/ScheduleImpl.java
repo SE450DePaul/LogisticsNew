@@ -6,7 +6,7 @@ package logistics.scheduleservice;
  * process a given item. The HashMap's key-value representation is mapped to 
  * Facility work-days and available processing rate for each day. 
  * 
- * This class provides methods to create schedules as well as change existing ones.
+ * Thhe class provides methods to create schedules as well as change existing ones.
  * The HashMap dynamically increases to add more workdays whenever the initial
  * set days are exhausted.
  * 
@@ -20,11 +20,11 @@ import java.util.HashMap;
 
 public class ScheduleImpl implements Schedule
 {
-    public int globalCounter = 0;
-    private int daysUsed;
+    public int count = 0;
+    private int workDaysUsed;
     private int remainingFacilityVacancy;
     private int remainder;
-    private int lastOpRemainder;
+    private int previousFacilityVacancy;
 
     private int workDays = 20;
 
@@ -50,7 +50,6 @@ public class ScheduleImpl implements Schedule
         facilityName = facility.name;
         facilityRate = facility.rate;
 
-        // populate schedule with initial available facility-process days
         for (int i = 1; i <= workDays; i++)
         {
             dayAvailability.put(i, facilityRate);
@@ -65,7 +64,6 @@ public class ScheduleImpl implements Schedule
         facilityName = facility.name;
         facilityRate = facility.rate;
 
-        // populate schedule with initial available process days
         for (int i = 1; i <= processDays; i++)
         {
             dayAvailability.put(i, facilityRate);
@@ -100,44 +98,29 @@ public class ScheduleImpl implements Schedule
      */
     public void computeChangedSchedule(int processItemNum)
     {
-        // determine if there were any vacancies from the last call of this method
-        if (lastOpRemainder > 0)
+        if (previousFacilityVacancy > 0)
         {
-            processItemNum -= lastOpRemainder;
-            globalCounter++;
-
-            //reset Last Operation's Remainder to Zero
-            lastOpRemainder = 0;
+            processItemNum -= previousFacilityVacancy;
+            count++;
+            previousFacilityVacancy = 0;
         }
 
-        // calculate the number of days used-up for processing of the items
-        daysUsed = processItemNum / facilityRate;
-
-        // determine the remainder, and use it to evaluate the facility processing vacancy
+        workDaysUsed = processItemNum / facilityRate;
         remainder = processItemNum % facilityRate;
 
-        // calculate the remaining processing-vacancy in that facility
         remainingFacilityVacancy = Math.abs(facilityRate - remainder);
 
-        // calculate the number of used-up days on the schedule that should be crossed-out
-        int fillToCounter = globalCounter + daysUsed;
+        int workDaysToCrossOut = count + workDaysUsed;
+        count = 0;
 
-        // reset the counter to the first day
-        globalCounter = 0;
-
-        // cross-out the used-up days
-        for (int i = 1 ; i < fillToCounter+1; i++)
+        for (int i = 1 ; i < workDaysToCrossOut+1; i++)
         {
             dayAvailability.put(i, 0);
-            globalCounter++;
+            count++;
         }
 
-        //update the next available facility vacancy
-        dayAvailability.put(globalCounter+1, remainingFacilityVacancy);
-
-        // keep track of the available facility vacancy amount
-        // for the next call of this method
-        lastOpRemainder += remainingFacilityVacancy;
+        dayAvailability.put(count+1, remainingFacilityVacancy);
+        previousFacilityVacancy += remainingFacilityVacancy;
     }
 
     /*
