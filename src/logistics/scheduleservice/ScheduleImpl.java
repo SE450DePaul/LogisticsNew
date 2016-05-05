@@ -4,9 +4,9 @@ package logistics.scheduleservice;
  * This class represents the Schedule of a given Facility.
  * It uses a Java HashMap to keep track of the workdays a Facility uses to 
  * process a given item. The HashMap's key-value representation is mapped to 
- * Facility work-days and available processing rate for each day. 
+ * Facility work-days and available processing rate for each day, respectively. 
  * 
- * Thhe class provides methods to create schedules as well as change existing ones.
+ * The class provides methods to create schedules as well as change existing ones.
  * The HashMap dynamically increases to add more workdays whenever the initial
  * set days are exhausted.
  * 

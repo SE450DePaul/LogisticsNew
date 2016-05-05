@@ -13,13 +13,20 @@ import logistics.utilities.exceptions.NullParameterException;
 
 public class ScheduleFactory
 {
+	/*
+	 * Returns a newly created Facility Schedule implementation.
+	 */
     public static Schedule build(FacilityDTO facility) throws NullParameterException
     {
         return new ScheduleImpl(facility);
     }
 
-    public static Schedule build(FacilityDTO facility, int runDays) throws NullParameterException, NegativeOrZeroParameterException
+    /*
+     * Returns a newly created Facility Schedule implementation 
+     * given a Facility and a number of work days.
+     */
+    public static Schedule build(FacilityDTO facility, int workDays) throws NullParameterException, NegativeOrZeroParameterException
     {
-        return new ScheduleImpl(facility, runDays);
+        return new ScheduleImpl(facility, workDays);
     }
 }
