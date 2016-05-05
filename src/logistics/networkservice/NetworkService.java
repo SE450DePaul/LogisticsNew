@@ -15,7 +15,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 /**
- * Created by uchennafokoye on 4/22/16.
+ * This class represents the Network Service manager and provides
+ * methods determining the location details between Facilities.
+ * 
+ * @author Uchenna F. Okoye
  */
 public final class NetworkService {
 
@@ -79,7 +82,9 @@ public final class NetworkService {
 
     }
 
-
+    /*
+     * Helper method that builds a network graph of Facilities and their neighbors.
+     */
     private void buildGraph() {
         try {
             Collection<FacilityVertex> facilityVertices = loader.load();
@@ -111,7 +116,9 @@ public final class NetworkService {
         }
     }
 
-
+    /*
+     * Helper method that builds a network travel guide.
+     */
     private void buildTravelGuide() {
         try {
             travelGuide = TravelGuideFactory.build(networkGraph);
@@ -119,7 +126,4 @@ public final class NetworkService {
             e.printStackTrace();
         }
     }
-
-
-
 }
