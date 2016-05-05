@@ -1,12 +1,16 @@
 package logistics.utilities.loader.factory;
 
+/**
+ * This class represents a Facility Loader Factory, which handles object creation 
+ * of new Facility Loader implementation classes.
+ * 
+ * @author Uchenna F. Okoye
+ */
+
 import logistics.utilities.loader.LoaderConfig;
 import logistics.utilities.loader.implementation.FacilityXmlLoaderImpl;
 import logistics.utilities.loader.interfaces.FacilityLoader;
 
-/**
- * Created by uchennafokoye on 4/23/16.
- */
 public class FacilityLoaderFactory {
 
     public static FacilityLoader build() {
@@ -18,7 +22,5 @@ public class FacilityLoaderFactory {
             default:
                 return null;
         }
-
     }
-
 }

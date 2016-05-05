@@ -5,7 +5,10 @@ import logistics.utilities.loader.interfaces.ItemLoader;
 import logistics.utilities.loader.implementation.ItemXmlLoaderImpl;
 
 /**
- * Created by uchennafokoye on 4/23/16.
+ * This class represents an Item Loader Factory, which handles object creation 
+ * of new Item Loader Implementation classes.
+ * 
+ * @author Uchenna F. Okoye
  */
 public class ItemLoaderFactory {
 
@@ -18,8 +21,5 @@ public class ItemLoaderFactory {
             default:
                 return null;
         }
-
     }
-
-
 }

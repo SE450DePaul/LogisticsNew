@@ -1,10 +1,14 @@
 package logistics.utilities.loader.factory;
 
+/**
+ * This class represents a Loader Factory, which handles creation 
+ * of Facility, Item, Inventory, and Network Loader Factories.
+ * 
+ * @author Uchenna F. Okoye
+ */
+
 import logistics.utilities.loader.interfaces.Loader;
 
-/**
- * Created by uchennafokoye on 4/23/16.
- */
 public class LoaderFactory {
 
     public static Loader build(String type){
@@ -17,8 +21,6 @@ public class LoaderFactory {
         } else if (type == "network"){
             return NetworkLoaderFactory.build();
         }
-
         return null;
     }
-
 }
