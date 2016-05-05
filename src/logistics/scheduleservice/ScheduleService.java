@@ -1,16 +1,21 @@
 package logistics.scheduleservice;
 
 
-import logistics.facilityservice.FacilityDTO;
-import logistics.facilityservice.FacilityService;
-
-import java.util.Set;
-
 
 /**
+ * This class represents a Schedule Manager that keeps track of the schedules
+ * of all the Facilities.
+ * It provides methods for create a Schedule (given a Facility), updating a
+ * Facility's Schedule, as well as display the list of all available Facility Schedules.
+ *  
  * @author David Olorundare
  *
  */
+
+import logistics.facilityservice.FacilityDTO;
+import logistics.facilityservice.FacilityService;
+import java.util.Set;
+
 
 public final class ScheduleService
 {

@@ -1,10 +1,14 @@
 package logistics.scheduleservice;
 
+/**
+ * This class represents a Schedule Factory, which handles object creation 
+ * of new Schedule Implementation classes.
+ * 
+ * @author Uchenna F.Okoye
+ */
+
 import logistics.facilityservice.FacilityDTO;
 
-/**
- * @author uchenna f.okoye
- */
 public class ScheduleFactory
 {
     public static Schedule build(FacilityDTO facility)
@@ -16,7 +20,4 @@ public class ScheduleFactory
     {
         return new ScheduleImpl(facility, runDays);
     }
-
-
-
 }

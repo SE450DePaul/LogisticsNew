@@ -1,15 +1,20 @@
 package logistics.scheduleservice;
 
+/**
+ * This class represents the Schedule of a given Facility. It uses a Java HashMap to
+ * keep track of the workdays a Facility uses to process a given item as well as
+ * the available processing rates for each day.
+ * It provides methods to create schedules as well as change existing ones.
+ * The HashMap dynamically increases to add more workdays whenever the initial
+ * set days are exhausted.
+ * 
+ * @author David Olorundare
+ */
+
 import logistics.facilityservice.FacilityDTO;
 import logistics.facilityservice.FacilityService;
-
 import java.util.HashMap;
 
-/**
- * schedule dynamically increases if you run out of process days
- * @author David Olorundare
- *
- */
 
 public class ScheduleImpl implements Schedule
 {
@@ -19,7 +24,7 @@ public class ScheduleImpl implements Schedule
     private int remainder;
     private int lastOpRemainder;
 
-    private int runDays = 20;
+    private int workDays = 20;
 
     /* A HashMap is used to store the schedule of the facility,
     * the key-value representation is mapped to the work DAYS
@@ -42,20 +47,22 @@ public class ScheduleImpl implements Schedule
         facilityRate = facility.rate;
 
         // populate schedule with initial available facility-process days
-        for (int i = 1; i <= runDays; i++)
+        for (int i = 1; i <= workDays; i++)
         {
             dayAvailability.put(i, facilityRate);
         }
     }
 
-    // create a schedule with a particular length
-    public ScheduleImpl(FacilityDTO facility, int run)
+    /*
+     *  Creates a Schedule with a particular length
+     */
+    public ScheduleImpl(FacilityDTO facility, int processDays)
     {
         facilityName = facility.name;
         facilityRate = facility.rate;
 
         // populate schedule with initial available process days
-        for (int i = 1; i <= run; i++)
+        for (int i = 1; i <= processDays; i++)
         {
             dayAvailability.put(i, facilityRate);
         }
@@ -64,24 +71,24 @@ public class ScheduleImpl implements Schedule
     /*
      *  Returns how many days the facility is working
      */
-    public int getRunDays()
+    public int getWorkDays()
     {
-        return runDays;
+        return workDays;
     }
 
     /*
-     *  Returns the total number of available days
-     *  the facility can still work.
+     *  Returns the total process-rate for the available 
+     *  number of days the facility can currently work for.
      */
-    public int getTotalAvailableDays()
+    public int getTotalFacilityRate()
     {
-        int totalDays = 0;
+        int totalRate = 0;
         for(Integer day: dayAvailability.keySet())
         {
-            totalDays += dayAvailability.get(day);
+            totalRate += dayAvailability.get(day);
         }
 
-        return totalDays;
+        return totalRate;
     }
 
     /*
@@ -102,10 +109,10 @@ public class ScheduleImpl implements Schedule
         // calculate the number of days used-up for processing of the items
         daysUsed = processItemNum / facilityRate;
 
-        // determine the remainder, and use it to evaluate the facility vacancy
+        // determine the remainder, and use it to evaluate the facility processing vacancy
         remainder = processItemNum % facilityRate;
 
-        // calculate the remaining vacancy in that facility
+        // calculate the remaining processing-vacancy in that facility
         remainingFacilityVacancy = Math.abs(facilityRate - remainder);
 
         // calculate the number of used-up days on the schedule that should be crossed-out
@@ -128,8 +135,6 @@ public class ScheduleImpl implements Schedule
         // for the next call of this method
         lastOpRemainder += remainingFacilityVacancy;
     }
-
-
 
     /*
      *  Returns the schedule of the associated facility
