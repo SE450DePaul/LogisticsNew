@@ -8,15 +8,17 @@ package logistics.scheduleservice;
  */
 
 import logistics.facilityservice.FacilityDTO;
+import logistics.utilities.exceptions.NegativeOrZeroParameterException;
+import logistics.utilities.exceptions.NullParameterException;
 
 public class ScheduleFactory
 {
-    public static Schedule build(FacilityDTO facility)
+    public static Schedule build(FacilityDTO facility) throws NullParameterException
     {
         return new ScheduleImpl(facility);
     }
 
-    public static Schedule build(FacilityDTO facility, int runDays)
+    public static Schedule build(FacilityDTO facility, int runDays) throws NullParameterException, NegativeOrZeroParameterException
     {
         return new ScheduleImpl(facility, runDays);
     }

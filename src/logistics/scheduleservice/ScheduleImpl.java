@@ -15,6 +15,9 @@ package logistics.scheduleservice;
 
 import logistics.facilityservice.FacilityDTO;
 import logistics.facilityservice.FacilityService;
+import logistics.utilities.exceptions.NegativeOrZeroParameterException;
+import logistics.utilities.exceptions.NullParameterException;
+
 import java.util.HashMap;
 
 
@@ -45,9 +48,11 @@ public class ScheduleImpl implements Schedule
 
     private int facilityRate;
     
-    public ScheduleImpl(FacilityDTO facility)
+    public ScheduleImpl(FacilityDTO facility) throws NullParameterException
     {
-        facilityName = facility.name;
+        if (facility == null)
+        	throw new NullParameterException("Facility cannot be null");
+    	facilityName = facility.name;
         facilityRate = facility.rate;
 
         for (int i = 1; i <= workDays; i++)
@@ -59,12 +64,17 @@ public class ScheduleImpl implements Schedule
     /*
      *  Creates a Schedule with a particular length
      */
-    public ScheduleImpl(FacilityDTO facility, int processDays)
+    public ScheduleImpl(FacilityDTO facility, int workDays) throws NullParameterException, NegativeOrZeroParameterException
     {
-        facilityName = facility.name;
+        if (facility == null)
+        	throw new NullParameterException("Facility cannot be null");
+        if (workDays == 0)
+        	throw new NegativeOrZeroParameterException("The number of work-days cannot be zero" );
+    	
+    	facilityName = facility.name;
         facilityRate = facility.rate;
 
-        for (int i = 1; i <= processDays; i++)
+        for (int i = 1; i <= workDays; i++)
         {
             dayAvailability.put(i, facilityRate);
         }
@@ -96,9 +106,11 @@ public class ScheduleImpl implements Schedule
     /*
      *  Process a certain number of items and compute the new resulting schedule.
      */
-    public void computeChangedSchedule(int processItemNum)
+    public void computeChangedSchedule(int processItemNum) throws NegativeOrZeroParameterException
     {
-        if (previousFacilityVacancy > 0)
+        if (processItemNum == 0)
+        	throw new NegativeOrZeroParameterException("Number of items to process cannot be zero");
+    	if (previousFacilityVacancy > 0)
         {
             processItemNum -= previousFacilityVacancy;
             count++;
@@ -151,18 +163,31 @@ public class ScheduleImpl implements Schedule
     {
 		FacilityService instance = FacilityService.getInstance();
 
-		ScheduleImpl schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
-		System.out.println("-----------Initial Schedule for Chicago, IL Facility ------------------------------------------");
-		System.out.println(schedule.getScheduleOutput());
-		schedule.computeChangedSchedule(26);
-		System.out.println("-----------New Schedule After Processing 26 Items ------------------------------------------");
-		System.out.println(schedule.getScheduleOutput());
-		System.out.println("-----------New Schedule After Processing another 33 Items------------------------------------------");
-		schedule.computeChangedSchedule(33);
-		System.out.println(schedule.getScheduleOutput());
-		System.out.println("-----------------New Schedule After Processing 7 more Items------------------------------------");
-		schedule.computeChangedSchedule(7);
-		System.out.println(schedule.getScheduleOutput());
+		ScheduleImpl schedule;
+		try 
+		{
+			schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
+			System.out.println("-----------Initial Schedule for Chicago, IL Facility ------------------------------------------");
+			System.out.println(schedule.getScheduleOutput());
+			schedule.computeChangedSchedule(26);
+			System.out.println("-----------New Schedule After Processing 26 Items ------------------------------------------");
+			System.out.println(schedule.getScheduleOutput());
+			System.out.println("-----------New Schedule After Processing another 33 Items------------------------------------------");
+			schedule.computeChangedSchedule(33);
+			System.out.println(schedule.getScheduleOutput());
+			System.out.println("-----------------New Schedule After Processing 7 more Items------------------------------------");
+			schedule.computeChangedSchedule(7);
+			System.out.println(schedule.getScheduleOutput());
+		} 
+		catch (NullParameterException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (NegativeOrZeroParameterException e) 
+		{
+			e.printStackTrace();
+		}
+		
     }
 }
 
