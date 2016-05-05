@@ -1,11 +1,19 @@
 package logistics;
 
+/**
+ * This is the Main class of the Logistics Application.
+ * Running the code in this class initiates all the application's services
+ * and display a printout of each Facility and its corresponding Inventory
+ * and Schedule details, as well as the Item Catalog.
+ * Output from the Shortest Path tests is also displayed.
+ * 
+ * @author Uchenna F. Okoye
+ */
+
 import logistics.reportservice.Reporter;
 import logistics.reportservice.ReporterFactory;
 
-/**
- * Created by uchennafokoye on 5/3/16.
- */
+
 public class Main {
 
     public static String[][] SHORTEST_PATH_TEST = {{"Santa Fe, NM", "Chicago, IL"},
