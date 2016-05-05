@@ -3,7 +3,9 @@ package logistics.facilityservice;
 import logistics.utilities.exceptions.NullParameterException;
 
 /**
- * @author David Olorundare and uchenna f. okoye
+ * This class represents a Facility implementation.
+ * 
+ * @author David Olorundare and Uchenna F. okoye
  */
 public class FacilityImpl implements Facility
 {
@@ -27,13 +29,11 @@ public class FacilityImpl implements Facility
 		return rate;
 	}
 
-
 	public Double getCost()
 	{
 		return cost;
 	}
 
-	@Override
 	public String toString() {
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append(name);
@@ -89,9 +89,4 @@ public class FacilityImpl implements Facility
 		}
 		return str.toString();
 	}
-
-
-
-
-
 }
