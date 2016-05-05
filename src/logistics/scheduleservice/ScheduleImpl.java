@@ -1,10 +1,12 @@
 package logistics.scheduleservice;
 
 /**
- * This class represents the Schedule of a given Facility. It uses a Java HashMap to
- * keep track of the workdays a Facility uses to process a given item as well as
- * the available processing rates for each day.
- * It provides methods to create schedules as well as change existing ones.
+ * This class represents the Schedule of a given Facility.
+ * It uses a Java HashMap to keep track of the workdays a Facility uses to 
+ * process a given item. The HashMap's key-value representation is mapped to 
+ * Facility work-days and available processing rate for each day. 
+ * 
+ * This class provides methods to create schedules as well as change existing ones.
  * The HashMap dynamically increases to add more workdays whenever the initial
  * set days are exhausted.
  * 
@@ -26,14 +28,16 @@ public class ScheduleImpl implements Schedule
 
     private int workDays = 20;
 
-    /* A HashMap is used to store the schedule of the facility,
-    * the key-value representation is mapped to the work DAYS
-    * and AVAILABLE Rate for each day.
+    /* 
+    * Stores schedule work-days and available process-rate.
     */ 
     private HashMap<Integer, Integer> dayAvailability = new HashMap<>();
 
     private String facilityName;
 
+    /*
+     * Returns the name of the Facility associated with a Schedule
+     */
     private String getFacilityName()
     {
         return facilityName;

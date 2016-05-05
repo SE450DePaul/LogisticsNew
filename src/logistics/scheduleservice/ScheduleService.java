@@ -1,11 +1,9 @@
 package logistics.scheduleservice;
 
-
-
 /**
  * This class represents a Schedule Manager that keeps track of the schedules
  * of all the Facilities.
- * It provides methods for create a Schedule (given a Facility), updating a
+ * It provides methods for creating a Schedule (given a Facility), updating a
  * Facility's Schedule, as well as display the list of all available Facility Schedules.
  *  
  * @author David Olorundare
