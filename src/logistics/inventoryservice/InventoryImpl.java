@@ -1,13 +1,20 @@
 package logistics.inventoryservice;
 
-import logistics.utilities.exceptions.NullParameterException;
+/**
+ * This class represents the Inventory of a given Facility.
+ * 
+ * The class provides methods to add and remove items to the
+ * a Facility's inventory, as well as list out all the inventory
+ * in the Facility. 
+ * 
+ * @author Uchenna F. Okoye
+ */
 
+import logistics.utilities.exceptions.NullParameterException;
 import java.util.HashMap;
 import java.util.Set;
 
-/**
- * @author uchenna f. okoye
- */
+
 public class InventoryImpl implements Inventory
 {
 
@@ -21,35 +28,55 @@ public class InventoryImpl implements Inventory
 		depletedItemHash = new HashMap<>();
 	}
 
+	/*
+	 * Helper method that sets a Facility's Name.
+	 */
 	private void setFacilityName(String nameOfFacility) throws NullParameterException {
 		validateFacility(nameOfFacility);
 		facilityName = nameOfFacility;
 	}
 
-	@Override
+	/*
+	 * Updates a Facility's Inventory with a new Item and its quantity.
+	 * 
+	 */
 	public void updateInventory(String itemId, int quantity) throws NullParameterException {
 		validateItem(itemId);
 		validateQuantity(quantity);
 		updateInventoryHelper(itemId, quantity);
 	}
 
-	@Override
+	/*
+	 * Adds a new Item to a Facility's Inventory given
+	 * an item ID and quantity.
+	 */
 	public void addInventoryItem(String itemId, int quantity) throws NullParameterException {
 		validateItem(itemId);
 		validateQuantity(quantity);
 		updateInventoryHelper(itemId, quantity);
 	}
 
-	@Override
+	/*
+	 * Helper method that returns a Facility Inventory's item quantity
+	 * given an item ID.
+	 */
 	public Integer getQuantity(String itemId) {
 		return activeItemHash.get(itemId);
 	}
 
+	/*
+	 * Helper method that returns a Facility's Name.
+	 */
 	public String getFacilityName() {
 		return facilityName;
 	}
 
-	@Override
+	/*
+	 * Displays the Active Inventory details of a Facility,
+	 * showing the Items currently present in the inventory, 
+	 * its Quantity, as well as the total quantity of Items
+	 *  that have already been used up.
+	 */
 	public String getInventoryOutput() {
 
 		Set<String> activeItems = activeItemHash.keySet();
@@ -81,11 +108,13 @@ public class InventoryImpl implements Inventory
 			stringBuffer.append("\n");
 			stringBuffer.append("\t" + item);
 		}
-
-
+		
 		return stringBuffer.toString();
 	}
 
+	/*
+	 * Updates the Active Inventory of a Facility with a given Item and its Quantity.
+	 */
 	private void updateInventoryHelper(String itemId, int quantity) {
 		if (quantity == 0) {
 			activeItemHash.remove(itemId);
@@ -96,18 +125,27 @@ public class InventoryImpl implements Inventory
 		}
 	}
 
+	/*
+	 * Validates that a Facility's name is not Null.
+	 */
 	private void validateFacility(String facilityName) throws NullParameterException {
 		if (facilityName == null){
 			throw new NullParameterException();
 		}
 	}
 
+	/*
+	 * Validates that a Facility's inventory quantity is not less than zero.
+	 */
 	private void validateQuantity(int quantity) throws NullParameterException {
 		if (quantity < 0){
 			throw new NullParameterException();
 		}
 	}
 
+	/*
+	 * Validates that a Facility's inventory-item name is not Null.
+	 */
 	private void validateItem(String itemId) throws NullParameterException {
 		if (itemId == null){
 			throw new NullParameterException();

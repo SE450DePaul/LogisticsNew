@@ -1,23 +1,26 @@
 package logistics.inventoryservice;
 
+/**
+ * This class represents an Inventory Manager that keeps track of the Inventories
+ * of all the Facilities.
+ * The class provides methods for returning the Inventory of a given Facility, as well
+ * as displaying the Inventories of all Facilities.
+ * 
+ * @author Uchenna F. Okoye
+ */
+
 import logistics.inventoryservice.inventoryitem.InventoryItemDTO;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
-
 import java.util.Collection;
 import java.util.HashMap;
 
-/**
- * @author uchenna f. okoye
- */
 public final class InventoryService
 {
-
     private volatile static InventoryService instance;
     private HashMap<String, Inventory> inventoryHashMap = new HashMap<>();
     private Loader<Inventory> loader;
-
 
     private InventoryService() {
         loader = LoaderFactory.build("inventory");
@@ -30,9 +33,11 @@ public final class InventoryService
         } catch (LoaderFileNotFoundException e) {
             e.printStackTrace();
         }
-
     }
     
+    /*
+     * Returns an instance of the Inventory Service 
+     */
     public static InventoryService getInstance() {
         if (instance == null)
         {
@@ -46,7 +51,11 @@ public final class InventoryService
         }
         return instance;
     }
-
+    
+    /*
+     * Returns an Inventory Item's information given a Facility
+     * and the Item being sort for. 
+     */
     public InventoryItemDTO getInventoryItem(String facilityName, String itemId) {
 
         Inventory inventory = inventoryHashMap.get(facilityName);
@@ -54,10 +63,11 @@ public final class InventoryService
         Integer quantity = inventory.getQuantity(itemId);
         if (quantity == null) { return null; }
         return new InventoryItemDTO(itemId, quantity);
-
     }
 
-
+    /*
+     * Returns the Inventory of a given Facility.
+     */
     public String getOutput(String facilityName){
         Inventory inventory = inventoryHashMap.get(facilityName);
         if (inventory == null) { return ""; }
