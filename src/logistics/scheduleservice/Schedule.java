@@ -7,5 +7,5 @@ public interface Schedule
 {
     public int getTotalAvailableDays();
     public void computeChangedSchedule(int processItemNum);
-    public String displaySchedule();
+    public String getScheduleOutput();
 }

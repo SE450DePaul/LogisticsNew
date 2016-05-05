@@ -49,20 +49,20 @@ public final class ScheduleService
     // given a facility return its schedule
     public String getSchedule(FacilityDTO facility)
     {
-        ScheduleImpl schedule = new ScheduleImpl(facility);
-        return schedule.displaySchedule();
+        Schedule schedule = ScheduleFactory.build(facility);;
+        return schedule.getScheduleOutput();
     }
 
     // create a schedule given a facilityDTO
     public Schedule createSchedule(FacilityDTO facility)
     {
-        return new ScheduleImpl(facility);
+        return ScheduleFactory.build(facility);
     }
 
     // create a schedule for a specific number of days, given a facility
     public Schedule createSchedule(FacilityDTO facility, int runDays)
     {
-        return new ScheduleImpl(facility, runDays);
+        return ScheduleFactory.build(facility, runDays);
     }
 
     // return a list of all facilities and their schedules
@@ -81,7 +81,7 @@ public final class ScheduleService
     // update the schedule of a facility given a number of items to process
     public Schedule updateSchedule(FacilityDTO facility, int itemNums)
     {
-        ScheduleImpl updatedSchedule = new ScheduleImpl(facility);
+        Schedule updatedSchedule = ScheduleFactory.build(facility);
         updatedSchedule.computeChangedSchedule(itemNums);
         return updatedSchedule;
     }
@@ -90,21 +90,20 @@ public final class ScheduleService
     // Test that the service works
     public static void main(String[] args)
     {
-/*
-		FacilityService instance = FacilityService.getInstance();
+	    FacilityService instance = FacilityService.getInstance();
 
-		ScheduleImpl schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
+		Schedule schedule = ScheduleFactory.build(instance.getFacility("Chicago, IL"));
 		System.out.println("-------------------------Initial Schedule-----------------------------------------------\n");
-		schedule.displaySchedule();
+		System.out.println(schedule.getScheduleOutput());
 		System.out.println("--------------------New Schedule when 26 items processed--------------------------------\n");
 		schedule.computeChangedSchedule(26);
-		schedule.displaySchedule();
+		System.out.println(schedule.getScheduleOutput());
 		System.out.println("--------------------New Schedule when another 33 items are processed--------------------\n");
 		schedule.computeChangedSchedule(33);
-		schedule.displaySchedule();
+		System.out.println(schedule.getScheduleOutput());
 		System.out.println("--------------------New Schedule when 7 more items processed----------------------------\n");
 		schedule.computeChangedSchedule(7);
-		schedule.displaySchedule();	*/
+		System.out.println(schedule.getScheduleOutput());
 
         // Get all the current schedules in the facility
         ScheduleService test = new ScheduleService();

@@ -10,7 +10,7 @@ import java.text.DecimalFormat;
 import java.util.Collection;
 
 
-public class TravelGuideService {
+public final class TravelGuideService {
 
 
     private volatile static TravelGuideService instance;

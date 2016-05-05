@@ -1,6 +1,7 @@
 package logistics.scheduleservice;
 
 import logistics.facilityservice.FacilityDTO;
+import logistics.facilityservice.FacilityService;
 
 import java.util.HashMap;
 
@@ -126,7 +127,7 @@ public class ScheduleImpl implements Schedule
 
 
     // displays the schedule of the facility
-    public String displaySchedule()
+    public String getScheduleOutput()
     {
         StringBuffer str = new StringBuffer();
         str.append("Days:\t\t");
@@ -147,16 +148,16 @@ public class ScheduleImpl implements Schedule
 
     public static void main(String[] args)
     {
-//		FacilityService instance = FacilityService.getInstance();
-//
-//		ScheduleImpl schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
-//		//schedule.displaySchedule();
-//		schedule.computeChangedSchedule(26);
-//		System.out.println("-----------------------------------------------------");
-//		schedule.computeChangedSchedule(33);
-//		System.out.println("-----------------------------------------------------");
-//		schedule.computeChangedSchedule(7);
-//		schedule.displaySchedule();
+		FacilityService instance = FacilityService.getInstance();
+
+		ScheduleImpl schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
+		System.out.println(schedule.getScheduleOutput());
+		schedule.computeChangedSchedule(26);
+		System.out.println("-----------------------------------------------------");
+		schedule.computeChangedSchedule(33);
+		System.out.println("-----------------------------------------------------");
+		schedule.computeChangedSchedule(7);
+		System.out.println(schedule.getScheduleOutput());
     }
 }
 

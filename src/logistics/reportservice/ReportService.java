@@ -1,6 +1,6 @@
 package logistics.reportservice;
 
-public class ReportService implements Reporter {
+public final class ReportService implements Reporter {
 
 
     private volatile static ReportService instance;
