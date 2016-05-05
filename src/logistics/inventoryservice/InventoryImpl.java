@@ -54,6 +54,7 @@ public class InventoryImpl implements Inventory
 
 		Set<String> activeItems = activeItemHash.keySet();
 		StringBuffer stringBuffer = new StringBuffer();
+		stringBuffer.append("\n");
 		stringBuffer.append("Active Inventory: ");
 		stringBuffer.append("\n");
 		stringBuffer.append("\tItem Id\t\tQuantity");
@@ -80,6 +81,7 @@ public class InventoryImpl implements Inventory
 			stringBuffer.append("\n");
 			stringBuffer.append("\t" + item);
 		}
+
 
 		return stringBuffer.toString();
 	}

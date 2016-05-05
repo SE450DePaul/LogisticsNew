@@ -43,7 +43,6 @@ public class FacilityImpl implements Facility
 		stringBuffer.append("Rate per Day: " + rate);
 		stringBuffer.append("\n");
 		stringBuffer.append("Cost per day: " + cost);
-		stringBuffer.append("\n");
 		return stringBuffer.toString();
 	}
 

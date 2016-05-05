@@ -130,6 +130,7 @@ public class ScheduleImpl implements Schedule
     public String getScheduleOutput()
     {
         StringBuffer str = new StringBuffer();
+        str.append("\n");
         str.append("Days:\t\t");
 
         for(Integer day: dayAvailability.keySet())

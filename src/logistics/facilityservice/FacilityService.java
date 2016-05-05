@@ -65,23 +65,4 @@ public final class FacilityService
         return facility.toString();
     }
 
-
-    public static void main(String[] args) {
-
-        FacilityService instance = FacilityService.getInstance();
-//        FacilityDTO facilityDTO = instance.getFacility("San Francisco, CA");
-//        System.out.println("Please get Facility");
-//        System.out.println(" Facility name " + facilityDTO.name + " Facility cost " + facilityDTO.cost);
-
-        String output = instance.getOutput("San Francisco, CA");
-        System.out.println(output);
-
-        System.out.println("Facilities: ");
-        Set<String> facilities = instance.getFacilityNames();
-        for (String facility : facilities){
-            System.out.println(facility);
-        }
-
-
-    }
 }

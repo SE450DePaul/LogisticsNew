@@ -70,7 +70,6 @@ public final class NetworkService {
 
         }
 
-        stringBuffer.append("\n");
         return stringBuffer.toString();
     }
 
