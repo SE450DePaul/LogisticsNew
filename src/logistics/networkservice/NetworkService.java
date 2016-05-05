@@ -47,20 +47,11 @@ public final class NetworkService {
         return instance;
     }
 
-//    public int distance (String facility, String destination) throws FacilityNotFoundInNetworkException, NeighborNotFoundInNetworkException, NullParameterException {
-//        return travelGuide.distance(facility, destination);
-//    }
-//
-//
-//    public Collection<String> shortestPath (String facility, String destination) throws FacilityNotFoundInNetworkException, NeighborNotFoundInNetworkException, NullParameterException {
-//        return travelGuide.shortestPath(facility, destination);
-//    }
-
     public String getDirectLinksOutput(String facility) throws FacilityNotFoundInNetworkException{
         StringBuffer stringBuffer = new StringBuffer();
         Iterator<String> iterator = networkGraph.neighbors(facility);
         stringBuffer.append("\n");
-        stringBuffer.append("Direct links: ");
+        stringBuffer.append("Direct Links: ");
         stringBuffer.append("\n");
         while (iterator.hasNext()) {
 
@@ -88,19 +79,6 @@ public final class NetworkService {
         return travelGuide.getTravelGuideDTO(facility, destination);
 
     }
-
-//    public String printTravelItinerary(String facility, String destination) throws FacilityNotFoundInNetworkException, NeighborNotFoundInNetworkException{
-//        try {
-//            return travelGuide.printTravelItinerary(facility, destination, DEFAULT_DRIVING_HOURS_PER_DAY, DEFAULT_DRIVING_MILES_PER_HOUR);
-//        } catch (NegativeOrZeroParameterException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    public String printTravelItinerary(String facility, String destination, Double drivingHours, Double mph) throws FacilityNotFoundInNetworkException, NeighborNotFoundInNetworkException, NegativeOrZeroParameterException {
-//        return travelGuide.printTravelItinerary(facility, destination, drivingHours, mph);
-//    }
-
 
 
     private void buildGraph() {
@@ -144,54 +122,5 @@ public final class NetworkService {
     }
 
 
-    public static void main(String[] args){
-
-//        NetworkService networkService = NetworkService.getInstance();
-//        try {
-//            System.out.println(networkService.getDirectLinksOutput("Chicago, IL"));
-//        } catch (FacilityNotFoundInNetworkException e) {
-//            e.printStackTrace();
-//        }
-//
-//
-//        try {
-//            System.out.println("Distance from Chicago to Denver, CO: ");
-//            System.out.println(networkService.distance("Chicago, IL", "Denver, CO"));
-//        } catch (FacilityNotFoundInNetworkException e) {
-//            e.printStackTrace();
-//        } catch (NeighborNotFoundInNetworkException e) {
-//            e.printStackTrace();
-//        } catch (NullParameterException e) {
-//            e.printStackTrace();
-//        }
-//
-//        try {
-//            Collection<String> shortestPath = networkService.shortestPath("Chicago, IL", "Denver, CO");
-//
-//            System.out.println("Shortest path from Chicago to Denver");
-//
-//            int i = 0;
-//            int size = shortestPath.size() - 1;
-//            for (String link : shortestPath){
-//                System.out.print(link);
-//                if (i < size){
-//                    System.out.print(" -> ");
-//                }
-//                i++;
-//            }
-//
-//            System.out.println("");
-//
-//        } catch (FacilityNotFoundInNetworkException e) {
-//            e.printStackTrace();
-//        } catch (NeighborNotFoundInNetworkException e) {
-//            e.printStackTrace();
-//        } catch (NullParameterException e) {
-//            e.printStackTrace();
-//        }
-
-
-
-    }
 
 }

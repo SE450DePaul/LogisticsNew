@@ -64,17 +64,5 @@ public final class InventoryService
         return inventory.getInventoryOutput();
 
     }
-
-    public static void main(String[] args) {
-
-        InventoryService instance = InventoryService.getInstance();
-//        InventoryItemDTO inventoryItemDTO = instance.getInventoryItem("San Francisco, CA", "RL123A");
-//        System.out.println("Please get Inventory Item");
-//        System.out.println(" Item ID " + inventoryItemDTO.id  + " quantity: " + inventoryItemDTO.quantity);
-
-        String output = instance.getOutput("San Francisco, CA");
-        System.out.println(output);
-
-
-    }
 }
+

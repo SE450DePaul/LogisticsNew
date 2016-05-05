@@ -3,23 +3,26 @@ package logistics.reportservice.services;
 import logistics.facilityservice.FacilityService;
 import logistics.inventoryservice.InventoryService;
 import logistics.networkservice.NetworkService;
+import logistics.scheduleservice.ScheduleService;
 import logistics.utilities.exceptions.FacilityNotFoundInNetworkException;
 import logistics.utilities.exceptions.IllegalParameterException;
 
 
-public class FacilityStatusService {
+public final class FacilityStatusService {
 
 
     private volatile static FacilityStatusService instance;
     NetworkService networkService;
     FacilityService facilityService;
     InventoryService inventoryService;
+    ScheduleService scheduleService;
 
     private FacilityStatusService() {
 
         networkService = NetworkService.getInstance();
         facilityService = FacilityService.getInstance();
         inventoryService = InventoryService.getInstance();
+        scheduleService = ScheduleService.getInstance();
 
     }
 
@@ -49,8 +52,7 @@ public class FacilityStatusService {
         str.append("\n");
         str.append(inventoryService.getOutput(facilityName));
         str.append("\n");
-        //Schedule to be done
-        // str.append(scheduleService.getOutput(facilityName);
+        str.append(scheduleService.getOutput(facilityName));
 
         str.append("\n");
         str.append(generateDashedLine(100));

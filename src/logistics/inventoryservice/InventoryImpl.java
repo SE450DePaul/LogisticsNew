@@ -56,7 +56,7 @@ public class InventoryImpl implements Inventory
 		StringBuffer stringBuffer = new StringBuffer();
 		stringBuffer.append("Active Inventory: ");
 		stringBuffer.append("\n");
-		stringBuffer.append("\tItem Id\tQuantity");
+		stringBuffer.append("\tItem Id\t\tQuantity");
 
 		if (activeItems.isEmpty()){
 			stringBuffer.append("None");
@@ -65,7 +65,7 @@ public class InventoryImpl implements Inventory
 		for (String item : activeItems){
 			int quantity = activeItemHash.get(item);
 			stringBuffer.append("\n");
-			stringBuffer.append("\t" + item + "\t" + quantity);
+			stringBuffer.append("\t" + item + "\t\t" + quantity);
 		}
 
 		stringBuffer.append("\n\n");

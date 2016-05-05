@@ -9,7 +9,7 @@ import logistics.utilities.exceptions.IllegalParameterException;
 import java.util.Set;
 
 
-public class FacilityStatusReporter implements Reporter {
+public final class FacilityStatusReporter implements Reporter {
 
 
     private volatile static FacilityStatusReporter instance;
