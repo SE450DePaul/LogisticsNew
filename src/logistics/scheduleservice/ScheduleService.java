@@ -53,6 +53,8 @@ public final class ScheduleService
     {
         if (facilityName == "")
         	throw new NullParameterException("Facility name cannot be empty");
+        if (facilityName == null)
+        	throw new NullParameterException("Facility name cannot be null");
     	return getSchedule(facilityService.getFacility(facilityName));
     }
 
