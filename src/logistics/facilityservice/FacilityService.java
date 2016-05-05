@@ -37,6 +37,9 @@ public final class FacilityService
         }
     }
     
+    /*
+     * Returns an instance of the Facility Service.
+     */
     public static FacilityService getInstance() {
         if (instance == null)
         {
@@ -51,6 +54,9 @@ public final class FacilityService
         return instance;
     }
 
+    /* 
+     * Returns a FacilityDTO given the name of the Facility.
+     */
     public FacilityDTO getFacility(String name) throws NullParameterException
     {
         if (name == "")
@@ -60,10 +66,16 @@ public final class FacilityService
         return new FacilityDTO(facility.getName(), facility.getCost(), facility.getRate());
     }
 
+    /*
+     * Returns a list of all Facilities
+     */
     public Set<String> getFacilityNames(){
         return new TreeSet<String>(facilityHashMap.keySet());
     }
-
+    
+    /*
+     * Returns information about a Facility given its name.
+     */
     public String getOutput(String name) throws NullParameterException
     {
     	if (name == "")

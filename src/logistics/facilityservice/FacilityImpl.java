@@ -3,7 +3,7 @@ package logistics.facilityservice;
 /**
  * This class represents a Facility implementation.
  * 
- * @author David Olorundare and Uchenna F. okoye
+ * @authors David Olorundare and Uchenna F. okoye
  */
 
 import logistics.utilities.exceptions.NullParameterException;
