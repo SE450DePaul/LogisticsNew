@@ -142,6 +142,8 @@ public class ScheduleImpl implements Schedule
     {
         StringBuffer str = new StringBuffer();
         str.append("\n");
+        str.append("Schedule: ");
+        str.append("\n");
         str.append("Days:\t\t");
 
         for(Integer day: dayAvailability.keySet())

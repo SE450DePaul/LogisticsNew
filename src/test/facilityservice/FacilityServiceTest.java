@@ -3,6 +3,7 @@ package test.facilityservice;
 
 import logistics.facilityservice.FacilityDTO;
 import logistics.facilityservice.FacilityService;
+import logistics.utilities.exceptions.NullParameterException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,21 +30,36 @@ public class FacilityServiceTest {
     @Test
     public void getFacilityName() {
         assertNotNull(FacilityService.getInstance());
-        FacilityDTO facility = instance.getFacility("San Francisco, CA");
+        FacilityDTO facility = null;
+        try {
+            facility = instance.getFacility("San Francisco, CA");
+        } catch (NullParameterException e) {
+            e.printStackTrace();
+        }
         assertEquals("San Francisco, CA", facility.name);
     }
 
     @Test
     public void getFacilityCost() {
         assertNotNull(FacilityService.getInstance());
-        FacilityDTO facility = instance.getFacility("San Francisco, CA");
+        FacilityDTO facility = null;
+        try {
+            facility = instance.getFacility("San Francisco, CA");
+        } catch (NullParameterException e) {
+            e.printStackTrace();
+        }
         assertEquals(facility.cost, 300, 0.002);
     }
 
     @Test
     public void getFacilityNull() {
         assertNotNull(FacilityService.getInstance());
-        FacilityDTO facility = instance.getFacility(null);
+        FacilityDTO facility = null;
+        try {
+            facility = instance.getFacility(null);
+        } catch (NullParameterException e) {
+            e.printStackTrace();
+        }
         assertNull(facility);
     }
 

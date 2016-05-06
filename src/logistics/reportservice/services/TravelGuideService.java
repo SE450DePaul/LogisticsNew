@@ -71,6 +71,7 @@ public final class TravelGuideService {
 
         DecimalFormat commaFormat = new DecimalFormat("#,###");
         DecimalFormat inputFormat = new DecimalFormat(".##");
+        DecimalFormat nonDecimalFormat = new DecimalFormat("#");
 
         String distanceInString = commaFormat.format(distance) + " mi";
         String daysInString = inputFormat.format(days) + " days";
@@ -80,7 +81,7 @@ public final class TravelGuideService {
 
         str.append("\n");
         str.append("\t");
-        str.append("- " + distanceInString + " / (" + drivingHours + " hours per day * " + mph  + " mph");
+        str.append("- " + distanceInString + " / (" + nonDecimalFormat.format(drivingHours) + " hours per day * " + nonDecimalFormat.format(mph)  + " mph");
         str.append(" = ");
         str.append(daysInString);
 
