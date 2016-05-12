@@ -138,6 +138,7 @@ public final class ScheduleService
 			schedule = ScheduleFactory.build(instance.getFacility("Chicago, IL"));
 			System.out.println("-------------------------Initial Schedule-----------------------------------------------\n");
 			System.out.println(schedule.getScheduleOutput());
+
 			System.out.println("--------------------New Schedule when 26 items processed--------------------------------\n");
 			schedule.computeChangedSchedule(26);
 			System.out.println(schedule.getScheduleOutput());
