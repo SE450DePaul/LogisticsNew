@@ -4,7 +4,7 @@ package test.facilityservice;
 import logistics.facilityservice.FacilityDTO;
 import logistics.facilityservice.FacilityService;
 import logistics.utilities.exceptions.NullParameterException;
-import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -15,10 +15,10 @@ import static org.junit.Assert.*;
 
 public class FacilityServiceTest {
 
-    FacilityService instance = null;
+    static FacilityService instance = null;
 
-    @Before
-    public void setUp()  {
+    @BeforeClass
+    public static void setUp()  {
          instance = FacilityService.getInstance();
     }
 
