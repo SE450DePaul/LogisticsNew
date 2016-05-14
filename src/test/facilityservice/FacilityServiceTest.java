@@ -3,7 +3,7 @@ package test.facilityservice;
 
 import logistics.facilityservice.FacilityDTO;
 import logistics.facilityservice.FacilityService;
-import logistics.utilities.exceptions.NullParameterException;
+import logistics.utilities.exceptions.IllegalParameterException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -33,7 +33,7 @@ public class FacilityServiceTest {
         FacilityDTO facility = null;
         try {
             facility = instance.getFacility("San Francisco, CA");
-        } catch (NullParameterException e) {
+        }catch (IllegalParameterException e) {
             e.printStackTrace();
         }
         assertEquals("San Francisco, CA", facility.name);
@@ -45,7 +45,7 @@ public class FacilityServiceTest {
         FacilityDTO facility = null;
         try {
             facility = instance.getFacility("San Francisco, CA");
-        } catch (NullParameterException e) {
+        } catch (IllegalParameterException e) {
             e.printStackTrace();
         }
         assertEquals(facility.cost, 300, 0.002);
@@ -57,7 +57,7 @@ public class FacilityServiceTest {
         FacilityDTO facility = null;
         try {
             facility = instance.getFacility(null);
-        } catch (NullParameterException e) {
+        } catch (IllegalParameterException e) {
             e.printStackTrace();
         }
         assertNull(facility);

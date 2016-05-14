@@ -10,6 +10,7 @@ import logistics.utilities.exceptions.NegativeOrZeroParameterException;
  */
 public interface Schedule
 {
-    public void bookFacility(int processItemNum) throws NegativeOrZeroParameterException;
+    public boolean bookFacility(int processItemNum) throws NegativeOrZeroParameterException;
+    public boolean bookFacility(int processItemNum, int startDay) throws NegativeOrZeroParameterException;
     public String getScheduleOutput();
 }

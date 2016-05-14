@@ -12,26 +12,38 @@ package logistics.scheduleservice;
 
 import logistics.facilityservice.FacilityDTO;
 import logistics.facilityservice.FacilityService;
+import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.NegativeOrZeroParameterException;
 import logistics.utilities.exceptions.NullParameterException;
-import java.util.Set;
+
+import java.util.Collection;
+import java.util.HashMap;
 
 
 public final class ScheduleService
 {
     private volatile static ScheduleService instance;
-    FacilityService facilityService;
+    private HashMap<String, Schedule> scheduleHashMap;
 
-    private ScheduleService()
-    {
-        facilityService = FacilityService.getInstance();
+    private ScheduleService() {
+        FacilityService facilityService = FacilityService.getInstance();
+        scheduleHashMap = new HashMap<>();
+        Collection<FacilityDTO> facilityDTOCollection = facilityService.getFacilityDTOs();
+        for (FacilityDTO facilityDTO : facilityDTOCollection){
+            try {
+                Schedule schedule = ScheduleFactory.build(facilityDTO);
+                scheduleHashMap.put(facilityDTO.name, schedule);
+            } catch (NullParameterException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     /*
      *  Returns a static instance of the Schedule Service
      */
-    public static ScheduleService getInstance()
-    {
+    public static ScheduleService getInstance(){
         if (instance == null)
         {
             synchronized (ScheduleService.class)
@@ -45,122 +57,61 @@ public final class ScheduleService
         return instance;
     }
 
+
     /*
      *  Returns string output of a Schedule of a given Facility name
      */
-    public String getOutput(String facilityName) throws NullParameterException
-    {
-        if (facilityName == "")
-        	throw new NullParameterException("Facility name cannot be empty");
-        if (facilityName == null)
-        	throw new NullParameterException("Facility name cannot be null");
-    	return getSchedule(facilityService.getFacility(facilityName));
-    }
-
-    /*
-     * Returns a Schedule given a Facility
-     */
-    public String getSchedule(FacilityDTO facility) throws NullParameterException
-    {
-    	if (facility == null)
-    		throw new NullParameterException("Facility cannot be null");
-        Schedule schedule = ScheduleFactory.build(facility);;
+    public String getOutput(String facilityName) throws IllegalParameterException {
+        validateFacilityName(facilityName);
+        Schedule schedule = scheduleHashMap.get(facilityName);
+        if (schedule == null) { return null; }
         return schedule.getScheduleOutput();
     }
 
     /*
-     *  Creates and returns a Schedule given a FacilityDTO
+    /* Processes item with default day of Day 1
      */
-    public Schedule createSchedule(FacilityDTO facility) throws NullParameterException
-    {
-        if (facility == null)
-        	throw new NullParameterException("Facility cannot be null");
-    	return ScheduleFactory.build(facility);
+    public boolean bookFacility(String facility, int noOfItemsToProcess) throws NegativeOrZeroParameterException {
+        return bookFacility(facility, noOfItemsToProcess, 1);
     }
 
-    /*
-     *  Creates and returns a Schedule for a specific number of 
-     *  work-days, given a facility
-     */
-    public Schedule createSchedule(FacilityDTO facility, int workDays) throws NullParameterException, NegativeOrZeroParameterException
-    {
-    	if (facility == null)
-    	 throw new NullParameterException("Facility cannot be null");
-    	if (workDays == 0)
-    		throw new NegativeOrZeroParameterException("Number of work-days cannot be zero");
-        return ScheduleFactory.build(facility);
-    }
 
     /*
-     *  Returns a list of all Facilities and their Schedules
+     *  Updates schedule
+     *  given a number of items to process
      */
-    public void getFacilitySchedules()
-    {
-        Set<String> facilities = facilityService.getFacilityNames();
-        for (String facility : facilities)
-        {
-            System.out.println(" " + facility);
-            try 
-            {
-				getOutput(facility);
-			} 
-            catch (NullParameterException e) 
-            {
-				e.printStackTrace();
-			}
+    public boolean bookFacility(String facility, int noOfItemsToProcess, int startDay) throws NegativeOrZeroParameterException {
+        Schedule schedule = scheduleHashMap.get(facility);
+        if (schedule == null) { return false; }
+        return schedule.bookFacility(noOfItemsToProcess, startDay);
+    }
+
+    private void validateFacilityName(String name) throws IllegalParameterException {
+        if (name == null) {
+            throw new NullParameterException("Facility name cannot be null");
+        }
+        if (name.equals("")){
+            throw new IllegalParameterException("Facility name cannot be empty string");
         }
     }
 
-    /*
-     *  Updates and returns the Schedule of a Facility 
-     *  given a number of items to process
-     */
-    public Schedule updateSchedule(FacilityDTO facility, int itemNums) throws NullParameterException, NegativeOrZeroParameterException
-    {
-        if (facility == null)
-        	throw new NullParameterException("Facility cannot be null");
-        if(itemNums == 0)
-        	throw new NegativeOrZeroParameterException("Number of items cannot be zero");
-    	
-    	Schedule updatedSchedule = ScheduleFactory.build(facility);
-        updatedSchedule.bookFacility(itemNums);
-        return updatedSchedule;
-    }
-
-    // Test that the service works
-    public static void main(String[] args)
-    {
-	    FacilityService instance = FacilityService.getInstance();
-
-		Schedule schedule;
-		try 
-		{
-			schedule = ScheduleFactory.build(instance.getFacility("Chicago, IL"));
-			System.out.println("-------------------------Initial Schedule-----------------------------------------------\n");
-			System.out.println(schedule.getScheduleOutput());
-
-			System.out.println("--------------------New Schedule when 26 items processed--------------------------------\n");
-			schedule.bookFacility(26);
-			System.out.println(schedule.getScheduleOutput());
-			System.out.println("--------------------New Schedule when another 33 items are processed--------------------\n");
-			schedule.bookFacility(33);
-			System.out.println(schedule.getScheduleOutput());
-			System.out.println("--------------------New Schedule when 7 more items processed----------------------------\n");
-			schedule.bookFacility(7);
-			System.out.println(schedule.getScheduleOutput());
-
-		} 
-		catch (NullParameterException e) 
-		{
-			e.printStackTrace();
-		} 
-		catch (NegativeOrZeroParameterException e) 
-		{
-			e.printStackTrace();
-		}
-		
-        // Get all the current schedules in the facility
-        ScheduleService test = new ScheduleService();
-        test.getFacilitySchedules();
+    public static void main(String[] args) {
+	    ScheduleService instance = ScheduleService.getInstance();
+        String facility = "Chicago, IL";
+        try {
+            System.out.println("-------------------------Initial Schedule-----------------------------------------------\n");
+            System.out.println(instance.getOutput(facility));
+            System.out.println("--------------------New Schedule when 26 items processed--------------------------------\n");
+            instance.bookFacility(facility, 26, 5);
+            System.out.println(instance.getOutput("Chicago, IL"));
+            System.out.println("--------------------New Schedule when another 33 items are processed--------------------\n");
+            instance.bookFacility(facility, 33);
+            System.out.println(instance.getOutput("Chicago, IL"));
+            System.out.println("--------------------New Schedule when 7 more items processed----------------------------\n");
+            instance.bookFacility(facility, 7);
+            System.out.println(instance.getOutput("Chicago, IL"));
+        } catch (IllegalParameterException e) {
+            e.printStackTrace();
+        }
     }
 }

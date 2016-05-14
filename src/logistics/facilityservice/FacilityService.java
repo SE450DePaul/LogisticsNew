@@ -9,14 +9,13 @@ package logistics.facilityservice;
  * @author Uchenna F. Okoye
  */
 
+import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.utilities.exceptions.NullParameterException;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.TreeSet;
+
+import java.util.*;
 
 public final class FacilityService
 {
@@ -57,13 +56,31 @@ public final class FacilityService
     /* 
      * Returns a FacilityDTO given the name of the Facility.
      */
-    public FacilityDTO getFacility(String name) throws NullParameterException
-    {
-        if (name == "")
-        	throw new NullParameterException("Facility name cannot be empty string");
+    public FacilityDTO getFacility(String name) throws IllegalParameterException {
+        validateFacilityName(name);
     	Facility facility = facilityHashMap.get(name);
         if (facility == null) return null;
         return new FacilityDTO(facility.getName(), facility.getCost(), facility.getRate());
+    }
+
+    public Collection<FacilityDTO> getFacilityDTOs() {
+        Collection<String> facilityNames = facilityHashMap.keySet();
+        Collection<FacilityDTO> facilityDTOs = new ArrayList<FacilityDTO>();
+        for (String facilityName : facilityNames){
+            Facility facility = facilityHashMap.get(facilityName);
+            FacilityDTO facilityDTO = new FacilityDTO(facility.getName(), facility.getCost(), facility.getRate());
+            facilityDTOs.add(facilityDTO);
+        }
+        return facilityDTOs;
+    }
+
+    private void validateFacilityName(String name) throws IllegalParameterException {
+        if (name == null) {
+            throw new NullParameterException("Facility name cannot be null");
+        }
+        if (name.equals("")){
+            throw new IllegalParameterException("Facility name cannot be empty string");
+        }
     }
 
     /*

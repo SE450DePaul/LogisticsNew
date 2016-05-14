@@ -15,6 +15,7 @@ package logistics.scheduleservice;
 
 import logistics.facilityservice.FacilityDTO;
 import logistics.facilityservice.FacilityService;
+import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.NegativeOrZeroParameterException;
 import logistics.utilities.exceptions.NullParameterException;
 
@@ -42,8 +43,6 @@ public class ScheduleImpl implements Schedule
         buildHashMapValues(pointerToNextAvailableDay, 20);
     }
 
-
-
     /*
     /* Determines the days needed to process items located at the facility.
      */
@@ -67,15 +66,15 @@ public class ScheduleImpl implements Schedule
     /*
     /* Processes item with default day of Day 1
      */
-    public void bookFacility(int noOfItemsToProcess) throws NegativeOrZeroParameterException {
-        bookFacility(noOfItemsToProcess, 1);
+    public boolean bookFacility(int noOfItemsToProcess) throws NegativeOrZeroParameterException {
+        return bookFacility(noOfItemsToProcess, 1);
     }
 
 
     /*
     /* Processes items
      */
-    public void bookFacility(int noOfItemsToProcess, int startDay) throws NegativeOrZeroParameterException {
+    public boolean bookFacility(int noOfItemsToProcess, int startDay) throws NegativeOrZeroParameterException {
         validateProcessItemNum(noOfItemsToProcess);
         validateStartDay(startDay);
         buildHashMapValues(startDay, 20);
@@ -92,35 +91,9 @@ public class ScheduleImpl implements Schedule
             noOfItemsToProcess -= availability;
             pointer++;
         }
+
+        return true;
    }
-
-    /*
-     * Builds Hashmap values from the day given
-     */
-    private void buildHashMapValues(int startDay, int noToBuild){
-        int endDay = startDay + noToBuild;
-        for (int i = startDay; i < endDay; i++){
-            if (!dayAvailability.containsKey(i)){
-                dayAvailability.put(i, pacePerDay);
-            }
-        }
-    }
-
-    private void validateFacilityDTO(FacilityDTO facilityDTO) throws NullParameterException {
-        if (facilityDTO == null)
-            throw new NullParameterException("Facility cannot be null");
-    }
-
-    private void validateProcessItemNum(int noOfItemsToProcess) throws NegativeOrZeroParameterException {
-        if (noOfItemsToProcess <= 0)
-            throw new NegativeOrZeroParameterException("Number of items to process cannot be less than or zero");
-    }
-
-    private void validateStartDay(int startDay) throws NegativeOrZeroParameterException {
-        if (startDay <= 0){
-            throw new NegativeOrZeroParameterException("Start Day cannot be less than or equal to zero");
-        }
-    }
 
     /*
      *  Returns the schedule of the associated facility
@@ -144,6 +117,34 @@ public class ScheduleImpl implements Schedule
         str.append("\n");
 
         return str.toString();
+    }
+
+    /*
+    * Builds Hashmap values from the day given
+    */
+    private void buildHashMapValues(int startDay, int noToBuild){
+        int endDay = startDay + noToBuild;
+        for (int i = startDay; i < endDay; i++){
+            if (!dayAvailability.containsKey(i)){
+                dayAvailability.put(i, pacePerDay);
+            }
+        }
+    }
+
+    private void validateFacilityDTO(FacilityDTO facilityDTO) throws NullParameterException {
+        if (facilityDTO == null)
+            throw new NullParameterException("Facility cannot be null");
+    }
+
+    private void validateProcessItemNum(int noOfItemsToProcess) throws NegativeOrZeroParameterException {
+        if (noOfItemsToProcess <= 0)
+            throw new NegativeOrZeroParameterException("Number of items to process cannot be less than or zero");
+    }
+
+    private void validateStartDay(int startDay) throws NegativeOrZeroParameterException {
+        if (startDay <= 0){
+            throw new NegativeOrZeroParameterException("Start Day cannot be less than or equal to zero");
+        }
     }
 
     // Test that this class works
@@ -175,8 +176,10 @@ public class ScheduleImpl implements Schedule
 		catch (NegativeOrZeroParameterException e) 
 		{
 			e.printStackTrace();
-		}
-		
+		} catch (IllegalParameterException e) {
+            e.printStackTrace();
+        }
+
     }
 }
 
