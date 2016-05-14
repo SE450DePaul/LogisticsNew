@@ -1,4 +1,4 @@
-package logistics.inventoryservice.inventoryitem;
+package logistics.inventoryservice.dtos;
 
 /**
  * This class represents an Inventory-item Data Transfer Object,

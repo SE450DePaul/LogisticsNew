@@ -9,12 +9,16 @@ package logistics.inventoryservice;
  * @author Uchenna F. Okoye
  */
 
-import logistics.inventoryservice.inventoryitem.InventoryItemDTO;
+import logistics.inventoryservice.dtos.FacilityWithItemDTO;
+import logistics.inventoryservice.dtos.InventoryItemDTO;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
+
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Set;
 
 public final class InventoryService
 {
@@ -63,6 +67,26 @@ public final class InventoryService
         Integer quantity = inventory.getQuantity(itemId);
         if (quantity == null) { return null; }
         return new InventoryItemDTO(itemId, quantity);
+    }
+
+    /*
+     * Returns FacilitiesWithItemDTO
+     * which provides a list of all the facilities with an item and the quantity
+     */
+    public Collection<FacilityWithItemDTO> getFacilitiesWithItemDTO(String itemId){
+
+        if (itemId == null) return null;
+        Set<String> facilities = inventoryHashMap.keySet();
+        ArrayList<FacilityWithItemDTO> facilityWithItemDTOs = new ArrayList<>();
+
+        for (String facility : facilities) {
+            Integer quantity = inventoryHashMap.get(facility).getQuantity(itemId);
+            if (quantity != null && quantity > 0){
+                facilityWithItemDTOs.add(new FacilityWithItemDTO(facility, itemId, quantity));
+            }
+        }
+
+        return facilityWithItemDTOs;
     }
 
     /*

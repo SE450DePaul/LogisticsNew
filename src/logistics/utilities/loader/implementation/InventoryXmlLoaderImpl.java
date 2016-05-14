@@ -10,7 +10,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import logistics.inventoryservice.Inventory;
 import logistics.inventoryservice.InventoryFactory;
-import logistics.inventoryservice.inventoryitem.InventoryItemDTO;
+import logistics.inventoryservice.dtos.InventoryItemDTO;
 import logistics.utilities.exceptions.NullParameterException;
 import logistics.utilities.loader.interfaces.InventoryLoader;
 import org.w3c.dom.Document;
