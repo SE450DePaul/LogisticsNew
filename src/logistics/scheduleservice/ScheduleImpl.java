@@ -10,7 +10,7 @@ package logistics.scheduleservice;
  * The HashMap dynamically increases to add more workdays whenever the initial
  * set days are exhausted.
  * 
- * @author David Olorundare
+ * @author David Olorundare and uchenna f. okoye
  */
 
 import logistics.facilityservice.FacilityDTO;
@@ -19,120 +19,107 @@ import logistics.utilities.exceptions.NegativeOrZeroParameterException;
 import logistics.utilities.exceptions.NullParameterException;
 
 import java.util.HashMap;
+import java.util.Set;
 
 
 public class ScheduleImpl implements Schedule
 {
-    public int count = 0;
-    private int workDaysUsed;
-    private int remainingFacilityVacancy;
-    private int remainder;
-    private int previousFacilityVacancy;
-
-    private int workDays = 20;
-
-    /* 
-    * Stores schedule work-days and available process-rate.
-    */ 
-    private HashMap<Integer, Integer> dayAvailability = new HashMap<>();
-
+    public int pointerToNextAvailableDay;
     private String facilityName;
+    private int pacePerDay;
+    private HashMap<Integer, Integer> dayAvailability;
 
-    /*
-     * Returns the name of the Facility associated with a Schedule
-     */
-    private String getFacilityName()
-    {
+    public String getFacilityName() {
         return facilityName;
     }
 
-    private int facilityRate;
-    
-    public ScheduleImpl(FacilityDTO facility) throws NullParameterException
-    {
-        if (facility == null)
-        	throw new NullParameterException("Facility cannot be null");
+    public ScheduleImpl(FacilityDTO facility) throws NullParameterException {
+        validateFacilityDTO(facility);
     	facilityName = facility.name;
-        facilityRate = facility.rate;
+        pacePerDay = facility.rate;
+        dayAvailability = new HashMap<>();
+        pointerToNextAvailableDay = 1;
+        buildHashMapValues(pointerToNextAvailableDay, 20);
+    }
 
-        for (int i = 1; i <= workDays; i++)
-        {
-            dayAvailability.put(i, facilityRate);
+
+
+    /*
+    /* Determines the days needed to process items located at the facility.
+     */
+    public int getProcessDaysNeeded(int noOfItemsToProcess, int startDay) throws NegativeOrZeroParameterException {
+        validateProcessItemNum(noOfItemsToProcess);
+        validateStartDay(startDay);
+        buildHashMapValues(startDay, 20);
+
+        int pointer = startDay;
+        while (noOfItemsToProcess > 0){
+            Integer availability = dayAvailability.get(pointer);
+            noOfItemsToProcess -= availability;
+            if (noOfItemsToProcess > 0) {
+                pointer++;
+            }
         }
+
+        return pointer;
     }
 
     /*
-     *  Creates a Schedule with a particular length
+    /* Processes item with default day of Day 1
      */
-    public ScheduleImpl(FacilityDTO facility, int workDays) throws NullParameterException, NegativeOrZeroParameterException
-    {
-        if (facility == null)
-        	throw new NullParameterException("Facility cannot be null");
-        if (workDays == 0)
-        	throw new NegativeOrZeroParameterException("The number of work-days cannot be zero" );
-    	
-    	facilityName = facility.name;
-        facilityRate = facility.rate;
+    public void bookFacility(int noOfItemsToProcess) throws NegativeOrZeroParameterException {
+        bookFacility(noOfItemsToProcess, 1);
+    }
 
-        for (int i = 1; i <= workDays; i++)
-        {
-            dayAvailability.put(i, facilityRate);
+
+    /*
+    /* Processes items
+     */
+    public void bookFacility(int noOfItemsToProcess, int startDay) throws NegativeOrZeroParameterException {
+        validateProcessItemNum(noOfItemsToProcess);
+        validateStartDay(startDay);
+        buildHashMapValues(startDay, 20);
+
+        int pointer = startDay;
+        while (noOfItemsToProcess > 0){
+            Integer availability = dayAvailability.get(pointer);
+            if (availability > noOfItemsToProcess){
+                dayAvailability.put(pointer, availability - noOfItemsToProcess);
+            } else {
+                dayAvailability.put(pointer, 0);
+            }
+
+            noOfItemsToProcess -= availability;
+            pointer++;
+        }
+   }
+
+    /*
+     * Builds Hashmap values from the day given
+     */
+    private void buildHashMapValues(int startDay, int noToBuild){
+        int endDay = startDay + noToBuild;
+        for (int i = startDay; i < endDay; i++){
+            if (!dayAvailability.containsKey(i)){
+                dayAvailability.put(i, pacePerDay);
+            }
         }
     }
 
-    /*
-     *  Returns how many days the facility is working
-     */
-    public int getWorkDays()
-    {
-        return workDays;
+    private void validateFacilityDTO(FacilityDTO facilityDTO) throws NullParameterException {
+        if (facilityDTO == null)
+            throw new NullParameterException("Facility cannot be null");
     }
 
-    /*
-     *  Returns the total process-rate for the available 
-     *  number of days the facility can currently work for.
-     */
-    public int getTotalFacilityRate()
-    {
-        int totalRate = 0;
-        for(Integer day: dayAvailability.keySet())
-        {
-            totalRate += dayAvailability.get(day);
-        }
-
-        return totalRate;
+    private void validateProcessItemNum(int noOfItemsToProcess) throws NegativeOrZeroParameterException {
+        if (noOfItemsToProcess <= 0)
+            throw new NegativeOrZeroParameterException("Number of items to process cannot be less than or zero");
     }
 
-    /*
-     *  Process a certain number of items and compute the new resulting schedule.
-     */
-    public void computeChangedSchedule(int processItemNum) throws NegativeOrZeroParameterException
-    {
-        if (processItemNum == 0)
-        	throw new NegativeOrZeroParameterException("Number of items to process cannot be zero");
-    	if (previousFacilityVacancy > 0)
-        {
-            processItemNum -= previousFacilityVacancy;
-            count++;
-            previousFacilityVacancy = 0;
+    private void validateStartDay(int startDay) throws NegativeOrZeroParameterException {
+        if (startDay <= 0){
+            throw new NegativeOrZeroParameterException("Start Day cannot be less than or equal to zero");
         }
-
-        workDaysUsed = processItemNum / facilityRate;
-        remainder = processItemNum % facilityRate;
-
-        remainingFacilityVacancy = Math.abs(facilityRate - remainder);
-
-        int workDaysToCrossOut = count + workDaysUsed;
-        count = 0;
-
-        for (int i = 1 ; i < workDaysToCrossOut+1; i++)
-        {
-            dayAvailability.put(i, 0);
-            count++;
-        }
-
-        dayAvailability.put(count+1, remainingFacilityVacancy);
-        previousFacilityVacancy += remainingFacilityVacancy;
     }
 
     /*
@@ -146,13 +133,12 @@ public class ScheduleImpl implements Schedule
         str.append("\n");
         str.append("Days:\t\t");
 
-        for(Integer day: dayAvailability.keySet())
-        {
+        Set<Integer> days = dayAvailability.keySet();
+        for(Integer day: days){
             str.append(day + "\t" );
         }
         str.append("\nAvailable:\t");
-        for(Integer day: dayAvailability.keySet())
-        {
+        for(Integer day: dayAvailability.keySet()) {
             str.append(dayAvailability.get(day) + "\t");
         }
         str.append("\n");
@@ -168,17 +154,18 @@ public class ScheduleImpl implements Schedule
 		ScheduleImpl schedule;
 		try 
 		{
-			schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
-			System.out.println("-----------Initial Schedule for Chicago, IL Facility ------------------------------------------");
+			schedule = new ScheduleImpl(instance.getFacility("San Francisco, CA"));
+			System.out.println("-----------Initial Schedule for San Francisco Facility ------------------------------------------");
 			System.out.println(schedule.getScheduleOutput());
-			schedule.computeChangedSchedule(26);
-			System.out.println("-----------New Schedule After Processing 26 Items ------------------------------------------");
+            System.out.println("Days needed to process RL123A for 40 items on Day 2: " + schedule.getProcessDaysNeeded(40, 2));
+			schedule.bookFacility(40, 2);
+			System.out.println("-----------New Schedule After Processing 40 Items ------------------------------------------");
 			System.out.println(schedule.getScheduleOutput());
 			System.out.println("-----------New Schedule After Processing another 33 Items------------------------------------------");
-			schedule.computeChangedSchedule(33);
+			schedule.bookFacility(33);
 			System.out.println(schedule.getScheduleOutput());
 			System.out.println("-----------------New Schedule After Processing 7 more Items------------------------------------");
-			schedule.computeChangedSchedule(7);
+			schedule.bookFacility(7);
 			System.out.println(schedule.getScheduleOutput());
 		} 
 		catch (NullParameterException e) 

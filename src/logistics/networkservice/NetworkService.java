@@ -76,6 +76,9 @@ public final class NetworkService {
         return stringBuffer.toString();
     }
 
+    /*
+     * Helper method that provides Travel Guide DTO. This DTO provides the path, distance as well as the travel
+     */
     public TravelGuideDTO getTravelGuideDTO(String facility, String destination) throws NullParameterException, FacilityNotFoundInNetworkException, NeighborNotFoundInNetworkException {
 
         return travelGuide.getTravelGuideDTO(facility, destination);

@@ -88,7 +88,7 @@ public final class ScheduleService
     	 throw new NullParameterException("Facility cannot be null");
     	if (workDays == 0)
     		throw new NegativeOrZeroParameterException("Number of work-days cannot be zero");
-        return ScheduleFactory.build(facility, workDays);
+        return ScheduleFactory.build(facility);
     }
 
     /*
@@ -123,7 +123,7 @@ public final class ScheduleService
         	throw new NegativeOrZeroParameterException("Number of items cannot be zero");
     	
     	Schedule updatedSchedule = ScheduleFactory.build(facility);
-        updatedSchedule.computeChangedSchedule(itemNums);
+        updatedSchedule.bookFacility(itemNums);
         return updatedSchedule;
     }
 
@@ -140,13 +140,13 @@ public final class ScheduleService
 			System.out.println(schedule.getScheduleOutput());
 
 			System.out.println("--------------------New Schedule when 26 items processed--------------------------------\n");
-			schedule.computeChangedSchedule(26);
+			schedule.bookFacility(26);
 			System.out.println(schedule.getScheduleOutput());
 			System.out.println("--------------------New Schedule when another 33 items are processed--------------------\n");
-			schedule.computeChangedSchedule(33);
+			schedule.bookFacility(33);
 			System.out.println(schedule.getScheduleOutput());
 			System.out.println("--------------------New Schedule when 7 more items processed----------------------------\n");
-			schedule.computeChangedSchedule(7);
+			schedule.bookFacility(7);
 			System.out.println(schedule.getScheduleOutput());
 
 		} 

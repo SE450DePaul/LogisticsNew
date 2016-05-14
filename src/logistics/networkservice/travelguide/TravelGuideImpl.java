@@ -27,11 +27,7 @@ public final class TravelGuideImpl implements TravelGuide {
 
 
     public TravelGuideDTO getTravelGuideDTO(String facility, String destination) throws NullParameterException, FacilityNotFoundInNetworkException {
-
-        if (shortestPathHash.get(facility) == null) {
-            ShortestPathAlgorithm shortestPaths = ShortestPathAlgorithmFactory.build(networkGraph, facility);
-            shortestPathHash.put(facility, shortestPaths);
-        }
+        buildShortestPath(facility);
         int distance = shortestPathHash.get(facility).distanceTo(destination);
         Collection<String> path = shortestPathHash.get(facility).shortestPathTo(destination);
         Double travelTime = travelTime(distance, DEFAULT_DRIVING_HOURS_PER_DAY, DEFAULT_DRIVING_MILES_PER_HOUR);
@@ -50,6 +46,13 @@ public final class TravelGuideImpl implements TravelGuide {
     private Double travelTime(int distance, double drivingHours, double mph){
         Double time = distance / drivingHours / mph;
         return time;
+    }
+
+    private void buildShortestPath(String facility) throws NullParameterException, FacilityNotFoundInNetworkException {
+        if (shortestPathHash.get(facility) == null) {
+            ShortestPathAlgorithm shortestPaths = ShortestPathAlgorithmFactory.build(networkGraph, facility);
+            shortestPathHash.put(facility, shortestPaths);
+        }
     }
 
 
