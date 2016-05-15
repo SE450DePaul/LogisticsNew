@@ -10,7 +10,7 @@ public class ReporterFactory {
         type = type.toLowerCase();
         if (type == "item"){
             return ItemCatalogReporter.getInstance();
-        } else if (type == "facility" || type == "facility status"){
+        } else if (type == "name" || type == "name status"){
             return FacilityStatusReporter.getInstance();
         } else if (type == "shortest path"){
             return TravelGuideReporter.getInstance();

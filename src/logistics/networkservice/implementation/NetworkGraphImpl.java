@@ -69,7 +69,7 @@ public class NetworkGraphImpl implements NetworkGraph {
 
   private void validateFacilityExists(String fac) throws FacilityNotFoundInNetworkException {
     if (!facilityHashMap.containsKey(fac)) {
-      throw new FacilityNotFoundInNetworkException("Please add facility before add neighbors");
+      throw new FacilityNotFoundInNetworkException("Please add name before add neighbors");
     };
   }
 

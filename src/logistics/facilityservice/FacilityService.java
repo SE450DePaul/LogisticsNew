@@ -24,7 +24,7 @@ public final class FacilityService
     private Loader<Facility> loader;
 
     private FacilityService() {
-        loader = LoaderFactory.build("facility");
+        loader = LoaderFactory.build("name");
 
         try {
             Collection<Facility> facilities = loader.load();

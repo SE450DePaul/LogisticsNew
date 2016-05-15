@@ -68,6 +68,14 @@ public final class ScheduleService
         return schedule.getScheduleOutput();
     }
 
+
+    public Integer getProcessDaysNeeded(String facilityName, int noOfItemsToProcess, int startDay) throws IllegalParameterException {
+        validateFacilityName(facilityName);
+        Schedule schedule = scheduleHashMap.get(facilityName);
+        if (schedule == null) { return null; }
+        return schedule.getProcessDaysNeeded(noOfItemsToProcess, startDay);
+    }
+
     /*
     /* Processes item with default day of Day 1
      */
@@ -77,8 +85,7 @@ public final class ScheduleService
 
 
     /*
-     *  Updates schedule
-     *  given a number of items to process
+     *  Updates schedule given a number of items to process
      */
     public boolean bookFacility(String facility, int noOfItemsToProcess, int startDay) throws NegativeOrZeroParameterException {
         Schedule schedule = scheduleHashMap.get(facility);

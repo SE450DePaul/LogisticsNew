@@ -44,7 +44,7 @@ public class ScheduleImpl implements Schedule
     }
 
     /*
-    /* Determines the days needed to process items located at the facility.
+    /* Determines the days needed to process items located at the name.
      */
     public int getProcessDaysNeeded(int noOfItemsToProcess, int startDay) throws NegativeOrZeroParameterException {
         validateProcessItemNum(noOfItemsToProcess);
@@ -62,14 +62,6 @@ public class ScheduleImpl implements Schedule
 
         return pointer;
     }
-
-    /*
-    /* Processes item with default day of Day 1
-     */
-    public boolean bookFacility(int noOfItemsToProcess) throws NegativeOrZeroParameterException {
-        return bookFacility(noOfItemsToProcess, 1);
-    }
-
 
     /*
     /* Processes items
@@ -96,7 +88,7 @@ public class ScheduleImpl implements Schedule
    }
 
     /*
-     *  Returns the schedule of the associated facility
+     *  Returns the schedule of the associated name
      */
     public String getScheduleOutput()
     {
@@ -153,7 +145,7 @@ public class ScheduleImpl implements Schedule
 		FacilityService instance = FacilityService.getInstance();
 
 		ScheduleImpl schedule;
-		try 
+		try
 		{
 			schedule = new ScheduleImpl(instance.getFacility("San Francisco, CA"));
 			System.out.println("-----------Initial Schedule for San Francisco Facility ------------------------------------------");
@@ -163,17 +155,17 @@ public class ScheduleImpl implements Schedule
 			System.out.println("-----------New Schedule After Processing 40 Items ------------------------------------------");
 			System.out.println(schedule.getScheduleOutput());
 			System.out.println("-----------New Schedule After Processing another 33 Items------------------------------------------");
-			schedule.bookFacility(33);
+			schedule.bookFacility(33, 1);
 			System.out.println(schedule.getScheduleOutput());
 			System.out.println("-----------------New Schedule After Processing 7 more Items------------------------------------");
-			schedule.bookFacility(7);
+			schedule.bookFacility(7, 1);
 			System.out.println(schedule.getScheduleOutput());
-		} 
-		catch (NullParameterException e) 
+		}
+		catch (NullParameterException e)
 		{
 			e.printStackTrace();
-		} 
-		catch (NegativeOrZeroParameterException e) 
+		}
+		catch (NegativeOrZeroParameterException e)
 		{
 			e.printStackTrace();
 		} catch (IllegalParameterException e) {

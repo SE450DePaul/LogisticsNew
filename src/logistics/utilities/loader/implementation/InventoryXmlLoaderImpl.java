@@ -72,7 +72,7 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 				}
 
 				String entryName = node.getNodeName();
-				if (!entryName.equals("facility"))
+				if (!entryName.equals("name"))
 				{
 					continue;
 					//Or perhaps throw an error

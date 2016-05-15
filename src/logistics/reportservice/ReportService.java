@@ -33,7 +33,7 @@ public final class ReportService implements Reporter {
 
     @Override
     public void printOutput() {
-        setReportType("facility");
+        setReportType("name");
         reporter.printOutput();
         setReportType("item");
         reporter.printOutput();

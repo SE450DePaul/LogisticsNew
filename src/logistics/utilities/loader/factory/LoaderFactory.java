@@ -14,7 +14,7 @@ public class LoaderFactory {
     public static Loader build(String type){
         if (type == "item"){
             return ItemLoaderFactory.build();
-        } else if (type == "facility"){
+        } else if (type == "name"){
             return FacilityLoaderFactory.build();
         } else if (type == "inventory"){
             return InventoryLoaderFactory.build();
