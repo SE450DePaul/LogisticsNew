@@ -1,5 +1,6 @@
 package logistics.orderservice;
 
+import logistics.facilityservice.FacilityDTO;
 import logistics.facilityservice.FacilityService;
 import logistics.inventoryservice.InventoryService;
 import logistics.inventoryservice.dtos.FacilityWithItemDTO;
@@ -14,6 +15,8 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.TreeSet;
 
+import static logistics.ApplicationConfig.TRANSPORT_COST;
+
 /**
  * This class represents the Order Processor Impl manager and provides
  * methods to help process one order at a time.
@@ -26,6 +29,7 @@ public class OrderProcessorImpl implements OrderProcessor {
     private String itemId;
     private int startTime;
     private int quantityNeeded;
+    private double itemPrice;
     private FacilityService facilityService;
     private NetworkService networkService;
     private InventoryService inventoryService;
@@ -38,6 +42,7 @@ public class OrderProcessorImpl implements OrderProcessor {
         this.itemId = itemId;
         this.startTime = startTime;
         this.quantityNeeded = quantityNeeded;
+        this.itemPrice = itemCatalogService.getItem(itemId).price;
         facilityService = FacilityService.getInstance();
         networkService = NetworkService.getInstance();
         inventoryService = InventoryService.getInstance();
@@ -51,7 +56,16 @@ public class OrderProcessorImpl implements OrderProcessor {
 
     private void processItems() throws NeighborNotFoundInNetworkException {
         TreeSet<FacilityRecordDTO> facilityRecordDTOTreeSet = buildFacilityRecordCollection();
-        processFacilityRecords(facilityRecordDTOTreeSet);
+        facilityRecordDTOTreeSet = processFacilityRecords(facilityRecordDTOTreeSet);
+    }
+
+    private double calculateCost(FacilityRecordDTO facilityRecordDTO) {
+
+        int noOfItemsUsed = facilityRecordDTO.noOfItems;
+        double processingDays = noOfItemsUsed / facilityRecordDTO.rate;
+        int travelDays = facilityRecordDTO.arrivalDay - facilityRecordDTO.processingEndDay;
+        return (itemPrice * noOfItemsUsed) + (processingDays * facilityRecordDTO.costPerDay) + (travelDays * TRANSPORT_COST);
+
     }
 
     private TreeSet<FacilityRecordDTO> buildFacilityRecordCollection() throws NeighborNotFoundInNetworkException {
@@ -84,7 +98,10 @@ public class OrderProcessorImpl implements OrderProcessor {
             int travelTime = getTravelTime(source, destination);
             int processingEndDay = scheduleService.getProcessDaysNeeded(source, noOfItems, startTime);
             int arrivalDay = calculateArrivalDay(processingEndDay, travelTime);
-            facilityRecordDTO = new FacilityRecordDTO(source, noOfItems, processingEndDay, travelTime, arrivalDay);
+            FacilityDTO facilityDTO = facilityService.getFacility(source);
+            double costPerDay = facilityDTO.cost;
+            int rate = facilityDTO.rate;
+            facilityRecordDTO = new FacilityRecordDTO(source, noOfItems, processingEndDay, travelTime, arrivalDay, costPerDay, rate);
         } catch (NullParameterException e) {
             e.printStackTrace();
         } catch (FacilityNotFoundInNetworkException e) {
@@ -96,7 +113,7 @@ public class OrderProcessorImpl implements OrderProcessor {
         return facilityRecordDTO;
     }
 
-    private void processFacilityRecords(TreeSet<FacilityRecordDTO> facilityRecordDTOTreeSet){
+    private TreeSet<FacilityRecordDTO> processFacilityRecords(TreeSet<FacilityRecordDTO> facilityRecordDTOTreeSet){
         int requiredQuantity = quantityNeeded;
         for (FacilityRecordDTO facilityRecordDTO : facilityRecordDTOTreeSet){
             if(requiredQuantity <= 0) {
@@ -124,6 +141,8 @@ public class OrderProcessorImpl implements OrderProcessor {
                 e.printStackTrace();
             }
         }
+
+        return facilityRecordDTOTreeSet;
     }
 
     private void processFromFacility(FacilityRecordDTO facilityRecordDTO, int quantity) throws IllegalParameterException, FacilityNotFoundException {

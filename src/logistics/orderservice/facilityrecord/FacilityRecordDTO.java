@@ -14,16 +14,20 @@ public class FacilityRecordDTO {
     public int processingEndDay;
     public int travelTime;
     public int arrivalDay;
+    public double costPerDay;
+    public double rate;
 
     /*
      * Constructor that creates a new ItemDTO given
      * an item's ID and price.
      */
-    public FacilityRecordDTO(String source, int noOfItems, int processingEndDay, int travelTime, int arrivalDay) {
+    public FacilityRecordDTO(String source, int noOfItems, int processingEndDay, int travelTime, int arrivalDay, double facilityCostPerDay, int facilityRate) {
         this.source = source;
         this.noOfItems = noOfItems;
         this.processingEndDay = processingEndDay;
         this.travelTime = travelTime;
         this.arrivalDay = arrivalDay;
+        this.costPerDay = facilityCostPerDay;
+        this.rate = facilityRate;
     }
 }
