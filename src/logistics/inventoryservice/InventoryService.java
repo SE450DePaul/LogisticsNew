@@ -9,9 +9,10 @@ package logistics.inventoryservice;
  * @author Uchenna F. Okoye
  */
 
+import logistics.facilityservice.Facility;
 import logistics.inventoryservice.dtos.FacilityWithItemDTO;
 import logistics.inventoryservice.dtos.InventoryItemDTO;
-import logistics.utilities.exceptions.LoaderFileNotFoundException;
+import logistics.utilities.exceptions.*;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
 
@@ -67,6 +68,13 @@ public final class InventoryService
         Integer quantity = inventory.getQuantity(itemId);
         if (quantity == null) { return null; }
         return new InventoryItemDTO(itemId, quantity);
+    }
+
+    public boolean reduceFromInventory(String facilityName, String itemId, int quantity) throws QuantityExceedsAvailabilityException, NullParameterException, ItemNotFoundInActiveInventoryException, NegativeOrZeroParameterException, FacilityNotFoundException {
+        Inventory inventory = inventoryHashMap.get(facilityName);
+        if (inventory == null) { return false; }
+        inventory.reduceFromInventory(itemId, quantity);
+        return true;
     }
 
     /*

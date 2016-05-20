@@ -10,7 +10,11 @@ package logistics.inventoryservice;
  * @author Uchenna F. Okoye
  */
 
+import logistics.utilities.exceptions.ItemNotFoundInActiveInventoryException;
+import logistics.utilities.exceptions.NegativeOrZeroParameterException;
 import logistics.utilities.exceptions.NullParameterException;
+import logistics.utilities.exceptions.QuantityExceedsAvailabilityException;
+
 import java.util.HashMap;
 import java.util.Set;
 
@@ -36,14 +40,11 @@ public class InventoryImpl implements Inventory
 		facilityName = nameOfFacility;
 	}
 
-	/*
-	 * Updates a Facility's Inventory with a new Item and its quantity.
-	 * 
-	 */
-	public void updateInventory(String itemId, int quantity) throws NullParameterException {
-		validateItem(itemId);
-		validateQuantity(quantity);
-		updateInventoryHelper(itemId, quantity);
+	public void reduceFromInventory(String itemId, int quantity) throws NullParameterException, QuantityExceedsAvailabilityException, ItemNotFoundInActiveInventoryException, NegativeOrZeroParameterException {
+		validateQuantityNeeded(itemId, quantity);
+		int quantityAvailable = activeItemHash.get(itemId);;
+		quantityAvailable -= quantity;
+		updateInventoryHelper(itemId, quantityAvailable);
 	}
 
 	/*
@@ -123,6 +124,22 @@ public class InventoryImpl implements Inventory
 			activeItemHash.put(itemId, quantity);
 			depletedItemHash.remove(itemId);
 		}
+	}
+
+	private void validateQuantityNeeded(String itemId, int quantityNeeded) throws ItemNotFoundInActiveInventoryException, QuantityExceedsAvailabilityException, NegativeOrZeroParameterException {
+		Integer quantityAvailable  = activeItemHash.get(itemId);
+		if (quantityAvailable == null) {
+			throw new ItemNotFoundInActiveInventoryException("Item with id: " + itemId + "is not in active inventory");
+		}
+
+		if (quantityAvailable > quantityNeeded){
+			throw new QuantityExceedsAvailabilityException("Quantity requested: " + quantityNeeded + "exceeds availability of " + quantityAvailable);
+		}
+
+		if (quantityNeeded < 0){
+			throw new NegativeOrZeroParameterException("Please provide requested quantity greater than 0");
+		}
+
 	}
 
 	/*
