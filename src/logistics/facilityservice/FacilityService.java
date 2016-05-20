@@ -95,7 +95,7 @@ public final class FacilityService
      */
     public String getOutput(String name) throws NullParameterException
     {
-    	if (name == "")
+    	if (name.equals(""))
         	throw new NullParameterException("Facility name cannot be empty string"); 
         Facility facility = facilityHashMap.get(name);
         return facility.toString();

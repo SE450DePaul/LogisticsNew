@@ -141,7 +141,7 @@ public class OrderProcessorImpl implements OrderProcessor {
     private Collection<FacilityWithItemDTO> getFacilitiesWithItem(String itemId) {
         Collection<FacilityWithItemDTO> facilityWithItemDTOs = inventoryService.getFacilitiesWithItemDTO(itemId);
         for (FacilityWithItemDTO facilityWithItemDTO : facilityWithItemDTOs) {
-            if (facilityWithItemDTO.name == destination) {
+            if (facilityWithItemDTO.name.equals(destination)) {
                 facilityWithItemDTOs.remove(facilityWithItemDTO);
             }
         }
