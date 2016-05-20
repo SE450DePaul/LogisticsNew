@@ -61,7 +61,7 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 				}
 
 				String entryName = node.getNodeName();
-				if (!entryName.equals("name")) {
+				if (!entryName.equals("facility")) {
 					continue;
 //                    Or perhaps throw an error
 				}

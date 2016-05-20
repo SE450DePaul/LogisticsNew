@@ -1,16 +1,9 @@
 package logistics.utilities.loader.implementation;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
 import logistics.inventoryservice.Inventory;
 import logistics.inventoryservice.InventoryFactory;
 import logistics.inventoryservice.dtos.InventoryItemDTO;
+import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.utilities.exceptions.NullParameterException;
 import logistics.utilities.loader.interfaces.InventoryLoader;
 import org.w3c.dom.Document;
@@ -19,7 +12,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import logistics.utilities.exceptions.LoaderFileNotFoundException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -72,7 +70,7 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 				}
 
 				String entryName = node.getNodeName();
-				if (!entryName.equals("name"))
+				if (!entryName.equals("facility"))
 				{
 					continue;
 					//Or perhaps throw an error

@@ -62,7 +62,7 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 	                }
 
 	                String entryName = node.getNodeName();
-	                if (!entryName.equals("name"))
+	                if (!entryName.equals("facility"))
 	                {
 	                    continue;
 	                    //Or perhaps throw an error
