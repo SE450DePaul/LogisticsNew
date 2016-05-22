@@ -59,7 +59,7 @@ public final class FacilityService
      */
     public FacilityDTO getFacility(String name) throws NullParameterException
     {
-        if (name == "")
+        if (name.isEmpty())
         	throw new NullParameterException("Facility name cannot be empty string");
     	Facility facility = facilityHashMap.get(name);
         if (facility == null) return null;
@@ -78,7 +78,7 @@ public final class FacilityService
      */
     public String getOutput(String name) throws NullParameterException
     {
-    	if (name == "")
+    	if (name.isEmpty())
         	throw new NullParameterException("Facility name cannot be empty string"); 
         Facility facility = facilityHashMap.get(name);
         return facility.toString();
