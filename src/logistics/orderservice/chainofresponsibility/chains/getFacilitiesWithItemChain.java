@@ -1,0 +1,69 @@
+package logistics.orderservice.chainofresponsibility.chains;
+
+import logistics.facilityservice.FacilityDTO;
+import logistics.inventoryservice.dtos.FacilityWithItemDTO;
+import logistics.networkservice.NetworkService;
+import logistics.networkservice.travelguide.TravelGuideDTO;
+import logistics.orderservice.dtos.OrderItemRequestDTO;
+import logistics.orderservice.chainofresponsibility.ProcessChain;
+import logistics.orderservice.facilityrecord.FacilityRecordDTO;
+import logistics.utilities.exceptions.*;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+/**
+ * Creates a sorted Facility Record Collection
+ * Created by uchennafokoye on 5/20/16.
+ */
+public class getFacilitiesWithItemChain extends ProcessChain {
+
+    private OrderItemRequestDTO orderItemRequestDTO;
+
+    public getFacilitiesWithItemChain(OrderItemRequestDTO orderItemRequestDTO){
+        this.orderItemRequestDTO = orderItemRequestDTO;
+    }
+
+    @Override
+    public Collection<FacilityRecordDTO> getFacilityRecordDTOs(Collection<FacilityRecordDTO> facilityRecordDTOs) throws NeighborNotFoundInNetworkException, IllegalParameterException, FacilityNotFoundInNetworkException, FacilityNotFoundException {
+        return getFacilityRecordDTOs();
+    }
+
+    public Collection<FacilityRecordDTO> getFacilityRecordDTOs() throws NeighborNotFoundInNetworkException, IllegalParameterException, FacilityNotFoundInNetworkException {
+        Collection<FacilityWithItemDTO> facilitiesWithItemDTO = inventoryService.getFacilitiesWithItemDTO(orderItemRequestDTO.itemId);
+        Collection<FacilityRecordDTO> facilityRecordDTOs = new ArrayList<>();
+        for (FacilityWithItemDTO facilityWithItemDTO : facilitiesWithItemDTO) {
+            if (!facilityWithItemDTO.name.equals(orderItemRequestDTO.destination)){
+                facilityRecordDTOs.add(buildFacilityRecord(facilityWithItemDTO));
+            }
+        }
+
+        return facilityRecordDTOs;
+    }
+
+    private FacilityRecordDTO buildFacilityRecord(FacilityWithItemDTO facility) throws NeighborNotFoundInNetworkException, IllegalParameterException, FacilityNotFoundInNetworkException {
+        String source = facility.name;
+        int noOfItems = facility.quantity;
+        int travelTime = getTravelTime(source, orderItemRequestDTO.destination);
+        int processingEndDay = getProcessDaysNeeded(source, noOfItems, orderItemRequestDTO.startTime);
+        int arrivalDay = calculateArrivalDay(processingEndDay, travelTime);
+        double itemPrice = itemCatalogService.getItem(orderItemRequestDTO.itemId).price;
+        FacilityDTO facilityDTO = facilityService.getFacility(source);
+        double costPerDay = facilityDTO.cost;
+        int rate = facilityDTO.rate;
+        FacilityRecordDTO facilityRecordDTO = new FacilityRecordDTO(source, noOfItems, itemPrice, processingEndDay, travelTime, arrivalDay, costPerDay, rate);
+
+        return facilityRecordDTO;
+    }
+
+
+    private int getTravelTime(String source, String destination) throws FacilityNotFoundInNetworkException, NullParameterException, NeighborNotFoundInNetworkException {
+        TravelGuideDTO travelGuideDTO = NetworkService.getInstance().getTravelGuideDTO(source, destination);
+        int travelTime = travelGuideDTO.timeInDays.intValue();
+        return travelTime;
+    }
+    private int getProcessDaysNeeded(String source, int noOfItems, int startDay) throws IllegalParameterException {
+        return scheduleService.getProcessDaysNeeded(source, noOfItems, startDay);
+    }
+
+}

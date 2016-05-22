@@ -20,6 +20,8 @@ public class LoaderFactory {
             return InventoryLoaderFactory.build();
         } else if (type.equals("network")){
             return NetworkLoaderFactory.build();
+        } else if (type.equals("orders") || type.equals("order")){
+            return OrderLoaderFactory.build();
         }
         return null;
     }

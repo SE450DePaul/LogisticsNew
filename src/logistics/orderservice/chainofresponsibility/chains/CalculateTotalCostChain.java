@@ -1,0 +1,42 @@
+package logistics.orderservice.chainofresponsibility.chains;
+
+import logistics.orderservice.dtos.OrderItemRequestDTO;
+import logistics.orderservice.chainofresponsibility.ProcessChain;
+import logistics.orderservice.facilityrecord.FacilityRecordDTO;
+
+import java.util.Collection;
+
+import static logistics.ApplicationConfig.TRANSPORT_COST;
+
+/**
+ * Creates a sorted Facility Record Collection
+ * Created by uchennafokoye on 5/20/16.
+ */
+public class CalculateTotalCostChain extends ProcessChain {
+
+    private OrderItemRequestDTO orderItemRequestDTO;
+    private double itemPrice;
+
+    public CalculateTotalCostChain(OrderItemRequestDTO orderItemRequestDTO){
+        this.orderItemRequestDTO = orderItemRequestDTO;
+        this.itemPrice = itemCatalogService.getItem(orderItemRequestDTO.itemId).price;
+    }
+
+    @Override
+    public Collection<FacilityRecordDTO> getFacilityRecordDTOs(Collection<FacilityRecordDTO> facilityRecordDTOs){
+        for (FacilityRecordDTO facilityRecordDTO : facilityRecordDTOs){
+            double totalCost = calculateCost(facilityRecordDTO);
+            facilityRecordDTO.totalCost = totalCost;
+        }
+        return facilityRecordDTOs;
+    }
+
+    private double calculateCost(FacilityRecordDTO facilityRecordDTO) {
+        int noOfItemsUsed = facilityRecordDTO.noOfItems;
+        double processingDays = noOfItemsUsed / facilityRecordDTO.rate;
+        int travelDays = facilityRecordDTO.arrivalDay - facilityRecordDTO.processingEndDay;
+        return (itemPrice * noOfItemsUsed) + (processingDays * facilityRecordDTO.costPerDay) + (travelDays * TRANSPORT_COST);
+
+    }
+
+}
