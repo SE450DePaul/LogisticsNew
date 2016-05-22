@@ -51,7 +51,7 @@ public final class ItemCatalogService {
     }
     
     /*
-     * Returns information about all Items in the Facilities.
+     * Returns information about all Items in the Facilities.  // Needs to be modified to give proper alignment
      */
     public String getOutput(){
         StringBuffer stringBuffer = new StringBuffer();
@@ -88,5 +88,6 @@ public final class ItemCatalogService {
         ItemDTO itemDTO = itemCatalogService.getItem("ABC123");
         System.out.println("Please get item");
         System.out.println(" Item id: " + itemDTO.id + " Item price: " + itemDTO.price);
+        System.out.println(itemCatalogService.getOutput());
     }
 }

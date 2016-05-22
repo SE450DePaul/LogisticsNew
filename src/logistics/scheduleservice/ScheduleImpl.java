@@ -136,7 +136,7 @@ public class ScheduleImpl implements Schedule
     }
 
     /*
-     *  Returns the schedule of the associated facility  // Needs to be modified to give proper alignment
+     *  Returns the schedule of the associated facility  
      */
     public String getScheduleOutput()
     {

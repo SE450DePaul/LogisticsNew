@@ -37,7 +37,10 @@ public final class NetworkService {
             buildGraph();
             buildTravelGuide();
     }
-
+    
+    /*
+     * Returns an instance of the Network service.
+     */
     public static NetworkService getInstance() {
         if (instance == null){
             synchronized (NetworkService.class){
@@ -46,10 +49,12 @@ public final class NetworkService {
                 }
             }
         }
-
         return instance;
     }
 
+    /*
+     * Returns all the neighboring links of a given Facility.
+     */
     public String getDirectLinksOutput(String facility) throws FacilityNotFoundInNetworkException{
         StringBuffer stringBuffer = new StringBuffer();
         Iterator<String> iterator = networkGraph.neighbors(facility);
@@ -76,6 +81,9 @@ public final class NetworkService {
         return stringBuffer.toString();
     }
 
+    /*
+     * Returns a Travel Guide DTO object given two Facilities.
+     */
     public TravelGuideDTO getTravelGuideDTO(String facility, String destination) throws NullParameterException, FacilityNotFoundInNetworkException, NeighborNotFoundInNetworkException {
 
         return travelGuide.getTravelGuideDTO(facility, destination);
