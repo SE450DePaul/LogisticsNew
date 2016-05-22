@@ -3,7 +3,8 @@ package logistics.itemservice;
 /**
  * This class represents an Item Factory, which handles object creation 
  * of new Items implementation classes.
- * Created by uchennafokoye on 4/23/16.
+ * 
+ * @author Uchenna F. Okoye
  */
 
 import logistics.utilities.exceptions.NullParameterException;

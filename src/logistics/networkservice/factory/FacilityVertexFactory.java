@@ -1,12 +1,16 @@
 package logistics.networkservice.factory;
 
+/**
+ * This class represents an Facility Vertex Factory, which handles object creation 
+ * of new Facility Vertex implementation classes.
+ * 
+ * @author Uchenna F. Okoye
+ */
+
 import logistics.networkservice.implementation.FacilityVertexImpl;
 import logistics.networkservice.interfaces.FacilityVertex;
 import logistics.utilities.exceptions.NullParameterException;
 
-/**
- * Created by uchennafokoye on 4/30/16.
- */
 public class FacilityVertexFactory {
 
     public static FacilityVertex build(String facilityName) throws NullParameterException {
