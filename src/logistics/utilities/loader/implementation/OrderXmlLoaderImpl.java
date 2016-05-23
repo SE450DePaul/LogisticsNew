@@ -36,7 +36,7 @@ public class OrderXmlLoaderImpl
 	private Double itemQty;
 	private String itemQuantity;
 	private ArrayList<Item> orderItems;
-	private ArrayList<Order> orders;
+	
 	
 	
 	private String filepath;
@@ -55,7 +55,7 @@ public class OrderXmlLoaderImpl
     public ArrayList<Order> load() throws LoaderFileNotFoundException 
     {
 
-    	orders = new ArrayList<Order>();
+    	ArrayList<Order> orderList = new ArrayList<Order>();
 
         try 
         {
@@ -95,7 +95,7 @@ public class OrderXmlLoaderImpl
                 NodeList timeNode = element.getElementsByTagName("time");
                 orderStartDay = timeNode.item(0).getTextContent();
                 
-                NodeList destinationNode = element.getElementsByTagName("destinatinon");
+                NodeList destinationNode = element.getElementsByTagName("destination");
                 orderDestination = destinationNode.item(0).getTextContent();
                 
                 orderItems = new ArrayList<Item>();
@@ -126,6 +126,11 @@ public class OrderXmlLoaderImpl
 				}
 				
 				Order orders = OrderFactory.build(orderId, orderDestination, orderStartDay, orderItems);
+				
+				// Must be uncommented if this class is to be run from its main() method.
+				System.out.println("Order Id: " + orderId + "  Destination: " + orderDestination + "  Start Day: " + orderStartDay);
+				
+				orderList.add(orders);	
             }
         }
         catch (ParserConfigurationException e) 
@@ -145,13 +150,12 @@ public class OrderXmlLoaderImpl
             e.printStackTrace();
         }
 
-        return orders;
+        return orderList;
     }
     
     // Test that the class works.
     public static void main(String[] args)
     {
-
         OrderXmlLoaderImpl xmlLoader =  new OrderXmlLoaderImpl("data/orders.xml");
         try 
         {
