@@ -1,26 +1,33 @@
 package logistics.reportservice.services;
 
+/**
+ * This class represents a Travel Guide Service Manager that keeps track of
+ * all Traveling information needed by each Facility.
+ * 
+ * @author Uchenna F. Okoye
+ */
+
 import logistics.networkservice.NetworkService;
 import logistics.networkservice.travelguide.TravelGuideDTO;
 import logistics.utilities.exceptions.FacilityNotFoundInNetworkException;
 import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.NeighborNotFoundInNetworkException;
-
 import java.text.DecimalFormat;
 import java.util.Collection;
 
-
 public final class TravelGuideService {
-
 
     private volatile static TravelGuideService instance;
     NetworkService networkService;
 
     private TravelGuideService() {
 
-        networkService = networkService.getInstance();
+        networkService = NetworkService.getInstance();
     }
 
+    /*
+     * Returns an instance of the Travel Guide service.
+     */
     private static TravelGuideService getInstance()
     {
         if (instance == null)
@@ -33,18 +40,22 @@ public final class TravelGuideService {
                 }
             }
         }
-
-
         return instance;
     }
-
+    
+    /*
+     * Given a source Facility and its destination return a Travel Itinerary.
+     */
     public static String printItinerary(String origin, String destination) throws FacilityNotFoundInNetworkException, IllegalParameterException, NeighborNotFoundInNetworkException {
         TravelGuideService reporter = getInstance();
         NetworkService netService = reporter.networkService;
         TravelGuideDTO travelItinerary = netService.getTravelGuideDTO(origin, destination);
         return printTravelItinerary(travelItinerary);
     }
-
+    
+    /*
+     * Given a Travel Guide DTO return its Travel Itinerary.
+     */
     private static String printTravelItinerary(TravelGuideDTO travelGuideDTO) {
 
         Collection<String> path = travelGuideDTO.path;
@@ -86,7 +97,5 @@ public final class TravelGuideService {
         str.append(daysInString);
 
         return str.toString();
-
     }
-
 }
