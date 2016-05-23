@@ -1,7 +1,13 @@
 package logistics.reportservice;
 
-import logistics.itemservice.ItemCatalogService;
+/**
+ * This class represents a ItemCatalog implementation which
+ * prints out the current status of the Item Catalog .
+ * 
+ * @author Uchenna F. Okoye
+ */
 
+import logistics.itemservice.ItemCatalogService;
 
 public class ItemCatalogReporter implements Reporter {
 
@@ -9,12 +15,14 @@ public class ItemCatalogReporter implements Reporter {
     private volatile static ItemCatalogReporter instance;
     ItemCatalogService itemCatalogService;
 
-
     private ItemCatalogReporter() {
 
-        itemCatalogService = itemCatalogService.getInstance();
+        itemCatalogService = ItemCatalogService.getInstance();
     }
 
+    /*
+     * Returns an instance of the ItemCatalog Reporter.
+     */
     public static ItemCatalogReporter getInstance()
     {
         if (instance == null)
@@ -30,12 +38,10 @@ public class ItemCatalogReporter implements Reporter {
         return instance;
     }
 
-
+    /*
+     * Returns the status of the Item Catalog.
+     */
     public void printOutput() {
         System.out.println(itemCatalogService.getOutput());
     }
-
-
-
-
 }

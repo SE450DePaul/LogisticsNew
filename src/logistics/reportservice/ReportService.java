@@ -1,7 +1,13 @@
 package logistics.reportservice;
 
-public final class ReportService implements Reporter {
+/**
+ * This class represents a Report Service Manager that keeps
+ * track of the reports of all services in the Logistics application.
+ * 
+ * @author Uchenna F. Okoye
+ */
 
+public final class ReportService implements Reporter {
 
     private volatile static ReportService instance;
     private Reporter reporter;
@@ -10,6 +16,9 @@ public final class ReportService implements Reporter {
 
     }
 
+    /*
+     * Returns an instance of the Report Service.
+     */
     public static ReportService getInstance()
     {
         if (instance == null)
@@ -25,13 +34,17 @@ public final class ReportService implements Reporter {
         return instance;
     }
 
-
+    /*
+     * Helper method that sets the type of report to be returned by the service.
+     */
     private void setReportType(String type){
        reporter = ReporterFactory.build(type);
     }
 
-
-    @Override
+    /*
+     * Returns the reports of all services. 
+     * 
+     */
     public void printOutput() {
         setReportType("facility");
         reporter.printOutput();
@@ -40,11 +53,4 @@ public final class ReportService implements Reporter {
         setReportType("shortest path");
         reporter.printOutput();
     }
-
-
-
-
-
-
-
 }

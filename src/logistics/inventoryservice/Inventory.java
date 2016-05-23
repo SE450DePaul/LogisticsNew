@@ -2,7 +2,7 @@ package logistics.inventoryservice;
 
 /**
  * This is a Facility Inventory Interface which provides common behaviors 
- * every Facility Inventory should be able to perform.
+ * every Facility Inventory implementation should be able to perform.
  * 
  * @author David Olorundare
  */

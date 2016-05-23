@@ -1,24 +1,25 @@
 package logistics.reportservice;
 
-
 /**
- * Created by uchennafokoye on 4/23/16.
+ * This class represents an Report Factory, which handles object creation 
+ * of new Report implementation classes.
+ * 
+ * @author Uchenna F. Okoye
  */
+
 public class ReporterFactory {
 
     public static Reporter build(String type){
         type = type.toLowerCase();
-        if (type == "item"){
+        if (type.equals("item")){
             return ItemCatalogReporter.getInstance();
-        } else if (type == "facility" || type == "facility status"){
+        } else if (type.equals("facility") || type.equals("facility status")){
             return FacilityStatusReporter.getInstance();
-        } else if (type == "shortest path"){
+        } else if (type.equals("shortest path")){
             return TravelGuideReporter.getInstance();
-        } else if (type == "everything") {
+        } else if (type.equals("everything")) {
             return ReportService.getInstance();
         }
-
         return null;
     }
-
 }

@@ -12,13 +12,13 @@ import logistics.utilities.loader.interfaces.Loader;
 public class LoaderFactory {
 
     public static Loader build(String type){
-        if (type == "item"){
+        if (type.equals("item")){
             return ItemLoaderFactory.build();
-        } else if (type == "facility"){
+        } else if (type.equals("facility")){
             return FacilityLoaderFactory.build();
-        } else if (type == "inventory"){
+        } else if (type.equals("inventory")){
             return InventoryLoaderFactory.build();
-        } else if (type == "network"){
+        } else if (type.equals("network")){
             return NetworkLoaderFactory.build();
         }
         return null;

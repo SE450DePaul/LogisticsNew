@@ -13,7 +13,6 @@ import logistics.utilities.loader.interfaces.NetworkLoader;
 
 public class NetworkLoaderFactory {
 
-
     public static NetworkLoader build() {
         switch (LoaderConfig.FilePath.FILE_TYPE){
             case "xml":

@@ -1,21 +1,29 @@
 package logistics.reportservice;
 
+/**
+ * This class represents a Travel Guide Reporter implementation which
+ * prints out information about all Shortest Path Tests.
+ * 
+ * @author Uchenna F. Okoye
+ */
 import logistics.Main;
 import logistics.reportservice.services.TravelGuideService;
 import logistics.utilities.exceptions.FacilityNotFoundInNetworkException;
 import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.NeighborNotFoundInNetworkException;
 
-
 public class TravelGuideReporter implements Reporter {
-
 
     private volatile static TravelGuideReporter instance;
     TravelGuideService service;
+    
     private TravelGuideReporter() {
-
+    	
     }
 
+    /*
+     * Returns an instance of the Travel Guide Reporter.
+     */
     public static TravelGuideReporter getInstance()
     {
         if (instance == null)
@@ -28,11 +36,13 @@ public class TravelGuideReporter implements Reporter {
                 }
             }
         }
-
-
+        
         return instance;
     }
 
+    /*
+     * Returns the output of all Shortest Path Tests.
+     */
     public void printOutput() {
         String[][] shortestPathTests =  Main.SHORTEST_PATH_TEST;
 
@@ -57,5 +67,4 @@ public class TravelGuideReporter implements Reporter {
         }
 
     }
-
 }
