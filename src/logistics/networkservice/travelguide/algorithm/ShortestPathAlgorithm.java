@@ -1,12 +1,15 @@
 package logistics.networkservice.travelguide.algorithm;
 
-import logistics.utilities.exceptions.FacilityNotFoundInNetworkException;
+/**
+ * This is a Shortest Path Interface which provides common behaviors 
+ * every Shortest Path algorithm implementation should be able to perform.
+ * 
+ * @author Uchenna F. Okoye
+ */
 
+import logistics.utilities.exceptions.FacilityNotFoundInNetworkException;
 import java.util.Collection;
 
-/**
- * Created by uchennafokoye on 5/2/16.
- */
 public interface ShortestPathAlgorithm {
 
     Collection<String> shortestPathTo(String destination) throws FacilityNotFoundInNetworkException;
