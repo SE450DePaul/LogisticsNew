@@ -1,13 +1,16 @@
 package logistics.networkservice.interfaces;
 
-import logistics.utilities.exceptions.*;
+/**
+ * This class represents a Network Graph Factory, which handles object creation 
+ * of new Network Graph implementation classes.
+ * 
+ * @author Uchenna F. Okoye
+ */
 
+import logistics.utilities.exceptions.*;
 import java.util.Collection;
 import java.util.Iterator;
 
-/**
- * Created by uchennafokoye on 4/29/16.
- */
 public interface NetworkGraph {
 
     void addFacility(String facility) throws NullParameterException;
@@ -16,7 +19,4 @@ public interface NetworkGraph {
     int distanceToNeighbor(String facility, String neighbor) throws FacilityNotFoundInNetworkException, NeighborNotFoundInNetworkException;
     boolean contains(String facility);
     Collection<String> vertices();
-
-
-
 }

@@ -26,13 +26,16 @@ public class FacilityVertexImpl implements FacilityVertex {
     private String facility;
     private HashMap<String, Integer> weights;
 
+    /*
+     * Creates a new FacilityVertex given a Facility name.
+     */
     public FacilityVertexImpl(String fac) throws NullParameterException {
         setFacility(fac);
         weights = new HashMap<>();
     }
 
     /*
-     * Adds a new neighbor to this Facility given another Facility's name and
+     * Adds a new Neighbor to this Facility given another Facility's name and
      * corresponding distance from this Facility. 
      */
     public void addNeighbor(String facility, int distance) throws NullParameterException, NegativeOrZeroParameterException {

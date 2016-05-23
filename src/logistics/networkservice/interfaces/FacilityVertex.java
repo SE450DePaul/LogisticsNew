@@ -1,14 +1,17 @@
 package logistics.networkservice.interfaces;
 
+/**
+ * This class represents a Facility Vertex Factory, which handles object creation 
+ * of new FacilityVertex implementation classes.
+ * 
+ * @author Uchenna F. Okoye
+ */
+
 import logistics.utilities.exceptions.NegativeOrZeroParameterException;
 import logistics.utilities.exceptions.NullParameterException;
 import logistics.utilities.exceptions.NeighborNotFoundInNetworkException;
-
 import java.util.Iterator;
 
-/**
- * Created by uchennafokoye on 4/29/16.
- */
 public interface FacilityVertex {
 
     void addNeighbor(String facility, int distance) throws NullParameterException, NegativeOrZeroParameterException;
@@ -18,5 +21,4 @@ public interface FacilityVertex {
     Iterator<String> neighbors();
 
     String getFacilityName();
-
 }
