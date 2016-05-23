@@ -1,7 +1,9 @@
 package logistics.orderservice;
 
 /**
- * This class represents the implementation of an Order.
+ * This class represents the implementation of an Order,
+ * which consists of its ID, Destination, Starting Day for
+ * processing, and a list of Item Inventories.
  * 
  * The class provides methods to create new orders as well 
  * as update the properties of existing orders.
@@ -11,26 +13,25 @@ package logistics.orderservice;
 
 import logistics.utilities.exceptions.NullParameterException;
 import java.util.ArrayList;
-import logistics.itemservice.Item;
-import logistics.itemservice.ItemImpl;
+import logistics.inventoryservice.Inventory;
 
 public class OrderImpl implements Order
 {	
 
 	private String orderDestination;
 	private String orderStartDay;  // NEED a way to convert string 'Day 1' into just an integer 
-	private ArrayList<Item> orderItems;
+	private ArrayList<Inventory> orderItems;
 	private String orderId;
 	
 	/*
      * Creates a new Facility Order
      */
-	public OrderImpl(String name, String dest, String startDay, ArrayList<Item> items)
+	public OrderImpl(String name, String dest, String startDay, ArrayList<Inventory> items)
 	{
 		orderId = name;
 		orderStartDay = startDay;
 		
-		for (Item itm: items)
+		for (Inventory itm: items)
 		{
 			orderItems.add(itm);
 		}	
@@ -66,7 +67,7 @@ public class OrderImpl implements Order
 	/*
 	 * Helper method that adds a new item to this order.
 	 */
-	public void setOrderItems(Item items) throws NullParameterException
+	public void setOrderItems(Inventory items) throws NullParameterException
 	{
 		validateOrderItem(items);
 		orderItems.add(items);
@@ -109,12 +110,15 @@ public class OrderImpl implements Order
 	}
 
 	/*
-	 * Returns a list of all Items in this order.
+	 * Returns a list of all Item Inventories in this order.
 	 */
-	public ArrayList<Item> getOrderItems() 
+	public void getOrderItems() 
 	{
+		for (Inventory itm: orderItems)
+		{
+			System.out.println("Order ID: " + itm. + "Order Quantity: " + itm.
+		}
 		
-		return null;
 	}
 
 	/*

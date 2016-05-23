@@ -10,6 +10,9 @@ package logistics.utilities.loader.implementation;
 */
 
 import logistics.utilities.exceptions.NullParameterException;
+import logistics.utilities.loader.factory.LoaderFactory;
+import logistics.utilities.loader.interfaces.Loader;
+import logistics.utilities.loader.interfaces.OrderLoader;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.itemservice.Item;
 import logistics.itemservice.ItemFactory;
@@ -24,7 +27,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class OrderXmlLoaderImpl 
+public class OrderXmlLoaderImpl implements OrderLoader
 {
 	private String orderStartDay;
 	private String orderId;
@@ -148,7 +151,7 @@ public class OrderXmlLoaderImpl
     // Test that the class works.
     public static void main(String[] args)
     {
-        OrderXmlLoaderImpl xmlLoader =  new OrderXmlLoaderImpl("data/orders.xml");
+    	Loader xmlLoader = LoaderFactory.build("order");
         try 
         {
             xmlLoader.load();
