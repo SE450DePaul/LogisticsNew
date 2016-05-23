@@ -112,47 +112,23 @@ public class ScheduleImpl implements Schedule
         	throw new NegativeOrZeroParameterException("Number of items to process cannot be zero");
     	if (previousFacilityVacancy > 0)
         {
-            processItemNum -= remainingFacilityVacancy; //previousFacilityVacancy;
+            processItemNum -= remainingFacilityVacancy;
             count++;
-            //previousFacilityVacancy = 0;
+            
         }
-
-    	
-    	// useful code 
+ 
         workDaysUsed = processItemNum / facilityRate;
         remainder = processItemNum % facilityRate;
-
         remainingFacilityVacancy = Math.abs(facilityRate - remainder);
-        // useful code
         
-        //something goes here
-        
-        
-        
-
         int workDaysToCrossOut = count + workDaysUsed;
         count = 0;
         
         // day to start. cannot be zero.
         int startDay = 1;
         
-        // make the +1 variable 
-        
-        int plusOne = 1;
-        
         for (int i = startDay; i < workDaysToCrossOut+startDay; i++)
         {
-            /*check if that day is already zero. if it is skip to the next day.
-        	if ( (dayAvailability.get(i) == 0))
-        	{
-        		continue;
-        	}
-        	else
-        	{
-        	
-        	}
-        	*/
-        	
         	dayAvailability.put(i, 0);
             count++;
         }
