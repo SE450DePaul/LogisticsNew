@@ -138,7 +138,7 @@ public class ScheduleImpl implements Schedule
     }
 
     /*
-     *  Process a certain number of items and compute the new resulting schedule.
+     *  Process a certain number of items from a given starting day, and compute the new resulting schedule.
      */
     public void computeChangedScheduleWithStartDay(int processItemNum, int startDay) throws NegativeOrZeroParameterException
     {
