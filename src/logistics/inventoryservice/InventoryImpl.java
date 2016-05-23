@@ -1,5 +1,7 @@
 package logistics.inventoryservice;
 
+import logistics.utilities.exceptions.NegativeOrZeroParameterException;
+
 /**
  * This class represents the implementation of an Inventory of a given Facility.
  * 
@@ -23,7 +25,7 @@ public class InventoryImpl implements Inventory
 	private HashMap<String, Integer> depletedItemHash;
 	private String facilityName;
 
-	  /*
+	/*
      * Creates a new Inventory for a given Facility.
      */
 	public InventoryImpl(String facilityName) throws NullParameterException {
@@ -44,7 +46,7 @@ public class InventoryImpl implements Inventory
 	 * Updates a Facility's Inventory with a new Item and its quantity.
 	 * 
 	 */
-	public void updateInventory(String itemId, int quantity) throws NullParameterException {
+	public void updateInventory(String itemId, int quantity) throws NullParameterException, NegativeOrZeroParameterException {
 		validateItem(itemId);
 		validateQuantity(quantity);
 		updateInventoryHelper(itemId, quantity);
@@ -54,7 +56,7 @@ public class InventoryImpl implements Inventory
 	 * Adds a new Item to a Facility's Inventory given
 	 * an item ID and quantity.
 	 */
-	public void addInventoryItem(String itemId, int quantity) throws NullParameterException {
+	public void addInventoryItem(String itemId, int quantity) throws NullParameterException, NegativeOrZeroParameterException {
 		validateItem(itemId);
 		validateQuantity(quantity);
 		updateInventoryHelper(itemId, quantity);
@@ -134,16 +136,16 @@ public class InventoryImpl implements Inventory
 	 */
 	private void validateFacility(String facilityName) throws NullParameterException {
 		if (facilityName == null){
-			throw new NullParameterException();
+			throw new NullParameterException("Facility Name cannot be Null");
 		}
 	}
 
 	/*
 	 * Validates that a Facility's inventory quantity is not less than zero.
 	 */
-	private void validateQuantity(int quantity) throws NullParameterException {
+	private void validateQuantity(int quantity) throws NegativeOrZeroParameterException {
 		if (quantity < 0){
-			throw new NullParameterException();
+			throw new NegativeOrZeroParameterException("Quantity cannot be Negative");
 		}
 	}
 
@@ -152,7 +154,7 @@ public class InventoryImpl implements Inventory
 	 */
 	private void validateItem(String itemId) throws NullParameterException {
 		if (itemId == null){
-			throw new NullParameterException();
+			throw new NullParameterException("Item ID cannot be Null");
 		}
 	}
 }
