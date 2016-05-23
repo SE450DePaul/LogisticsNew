@@ -274,7 +274,7 @@ public class ScheduleImpl implements Schedule
 			System.out.println(schedule.getScheduleOutput());
 			
 			System.out.println("-----------New Schedule After Processing 12 Items on Start Day 1 ---------------------------------");
-			//schedule.computeChangedScheduleWithStartDay(12,1);
+			schedule.computeChangedScheduleWithStartDay(12,1);
 			System.out.println(schedule.getScheduleOutput());
 			
 			/*
