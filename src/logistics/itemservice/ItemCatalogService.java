@@ -51,7 +51,7 @@ public final class ItemCatalogService {
     }
     
     /*
-     * Returns information about all Items in the Facilities.  // Needs to be modified to give proper alignment
+     * Returns information about all Items in the Facilities.  // NEEDS TO BE MODIFIED TO GIVE PROPER ALIGNMENT.
      */
     public String getOutput(){
         StringBuffer stringBuffer = new StringBuffer();
