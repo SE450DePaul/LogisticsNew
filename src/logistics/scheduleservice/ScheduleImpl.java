@@ -171,9 +171,9 @@ public class ScheduleImpl implements Schedule
         if (startDay == 0)
         	throw new NegativeOrZeroParameterException("Starting day cannot be zero");
         
-    	if (previousFacilityVacancy > 0)
+    	if (dayAvailability.get(startDay) > 0)
         {
-            processItemNum -= remainingFacilityVacancy; 
+            processItemNum -= dayAvailability.get(startDay); 
             count++;
         }
 
@@ -197,17 +197,23 @@ public class ScheduleImpl implements Schedule
             //check if that day is already booked/zero. if it is skip to the next day.
         	if ( (dayAvailability.get(i) == 0))
         	{
+        		//continue;
         		computeChangedScheduleWithStartDay(processItemNum, startDay+1);
         	}
-        	else
-        	{
+        	
+        	
         		dayAvailability.put(i, 0);
                 count++;
-        	}
+        	
         }
 
         dayAvailability.put(count+startDay, remainingFacilityVacancy);
-        previousFacilityVacancy += remainingFacilityVacancy;
+        
+        // Checking status
+        count = 0;
+        System.out.println("Count is: " + count);
+        System.out.println("remVac is: " + remainingFacilityVacancy);
+        System.out.println("previousRem is: " + previousFacilityVacancy);
     }
 
     /*
@@ -250,11 +256,26 @@ public class ScheduleImpl implements Schedule
 			schedule.computeChangedScheduleWithStartDay(26,2);
 			System.out.println(schedule.getScheduleOutput());
 			
-			/*
+			
 			System.out.println("-----------New Schedule After Processing 13 Items on Start Day 6 ---------------------------------");
-			schedule.computeChangedScheduleWithStartDay(2,2);
+			schedule.computeChangedScheduleWithStartDay(13,6);
 			System.out.println(schedule.getScheduleOutput());
-			*/
+			
+			System.out.println("-----------New Schedule After Processing 17 Items on Start Day 7 ---------------------------------");
+			schedule.computeChangedScheduleWithStartDay(17,7);
+			System.out.println(schedule.getScheduleOutput());
+			
+			System.out.println("-----------New Schedule After Processing 14 Items on Start Day 10 ---------------------------------");
+			schedule.computeChangedScheduleWithStartDay(14,10);
+			System.out.println(schedule.getScheduleOutput());
+			
+			System.out.println("-----------New Schedule After Processing 20 Items on Start Day 11 ---------------------------------");
+			schedule.computeChangedScheduleWithStartDay(20,11);
+			System.out.println(schedule.getScheduleOutput());
+			
+			System.out.println("-----------New Schedule After Processing 12 Items on Start Day 1 ---------------------------------");
+			//schedule.computeChangedScheduleWithStartDay(12,1);
+			System.out.println(schedule.getScheduleOutput());
 			
 			/*
 			schedule.computeChangedSchedule(26);
