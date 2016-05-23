@@ -151,7 +151,7 @@ public class OrderXmlLoaderImpl implements OrderLoader
     // Test that the class works.
     public static void main(String[] args)
     {
-    	Loader xmlLoader = LoaderFactory.build("order");
+    	OrderXmlLoaderImpl xmlLoader =  new OrderXmlLoaderImpl("data/orders.xml"); 
         try 
         {
             xmlLoader.load();

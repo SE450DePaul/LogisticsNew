@@ -25,7 +25,7 @@ public final class OrderService
     private HashMap<String, Order> orderHashMap = new HashMap<>();
     private Loader<Inventory> loader;
 
-    private OrderService() 
+   /*private OrderService() 
     {
         loader = LoaderFactory.build("order");
 
@@ -58,25 +58,25 @@ public final class OrderService
     }
     
     /*
-     * Returns an Inventory Item's information given a Facility
-     * and the Item being sort for. 
+     * Returns an Order status of a Item given its name and
+     * a Facility name. 
      */
-    public OrderDTO getInventoryItem(String facilityName, String itemId) {
+   /* public OrderDTO getOrder(String facilityName, String itemId) {
 
         Order order = orderHashMap.get(facilityName);
-        if (inventory == null) { return null; }
+        if (order == null) { return null; }
         Integer quantity = inventory.getQuantity(itemId);
         if (quantity == null) { return null; }
-        return new InventoryItemDTO(itemId, quantity);
-    }
+        return new OrderDTO();
+    }*/
 
     /*
-     * Returns the Inventory of a given Facility.
+     * Returns the Order status
      */
-    public String getOutput(String facilityName){
+    /*public String getOutput(String facilityName){
         Order order = orderHashMap.get(facilityName);
         if (order == null) { return ""; }
         return inventory.getInventoryOutput();
 
-    }
+    }*/
 }

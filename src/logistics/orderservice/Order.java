@@ -7,14 +7,11 @@ package logistics.orderservice;
 * @author David Olorundare
 */
 
-import java.util.ArrayList;
-import logistics.itemservice.Item;
-
 public interface Order
 {
     String getId();
     String getStartDay();
     String getDestination();
     void getOrderItems();
-    String toString();
+    //String toString();
 }

@@ -13,25 +13,25 @@ package logistics.orderservice;
 
 import logistics.utilities.exceptions.NullParameterException;
 import java.util.ArrayList;
-import logistics.inventoryservice.Inventory;
+import logistics.itemservice.Item;
 
 public class OrderImpl implements Order
 {	
 
 	private String orderDestination;
 	private String orderStartDay;  // NEED a way to convert string 'Day 1' into just an integer 
-	private ArrayList<Inventory> orderItems;
+	private ArrayList<Item> orderItems;
 	private String orderId;
 	
 	/*
      * Creates a new Facility Order
      */
-	public OrderImpl(String name, String dest, String startDay, ArrayList<Inventory> items)
+	public OrderImpl(String name, String dest, String startDay, ArrayList<Item> items) //Should be ArrayList of Inventory
 	{
 		orderId = name;
 		orderStartDay = startDay;
 		
-		for (Inventory itm: items)
+		for (Item itm: items)
 		{
 			orderItems.add(itm);
 		}	
@@ -67,7 +67,7 @@ public class OrderImpl implements Order
 	/*
 	 * Helper method that adds a new item to this order.
 	 */
-	public void setOrderItems(Inventory items) throws NullParameterException
+	public void setOrderItems(Item items) throws NullParameterException
 	{
 		validateOrderItem(items);
 		orderItems.add(items);
@@ -93,12 +93,12 @@ public class OrderImpl implements Order
 	
 	/*
 	 * Returns (as an Integer) the starting Day the Order is to be processed from. 
-	 */
+	 /
 	public Integer getStartDay() 
 	{
 	
 		return null;
-	}
+	}*/
 
 	/*
 	 * Returns the name of the Facility destination of this order.
@@ -114,11 +114,10 @@ public class OrderImpl implements Order
 	 */
 	public void getOrderItems() 
 	{
-		for (Inventory itm: orderItems)
+		/*for (Item itm: orderItems)
 		{
 			System.out.println("Order ID: " + itm. + "Order Quantity: " + itm.
-		}
-		
+		}*/	
 	}
 
 	/*
@@ -166,12 +165,11 @@ public class OrderImpl implements Order
 
 	/*
 	 * Helper method to output the details of an Order.
-	 */
-	public String toString() 
+	 /
+	  public String toString() 
 	{
-		return "Order Details:\n\nOrder ID: " + orderId + " Destination: " + orderDestination + " Start Day: " + orderStartDay + "\nOrder Items:\n"
+		/*return "Order Details:\n\nOrder ID: " + orderId + " Destination: " + orderDestination + " Start Day: " + orderStartDay + "\nOrder Items:\n"
 				+ getOrderItems();
-	}	
-	
+	}*/
 	
 }
