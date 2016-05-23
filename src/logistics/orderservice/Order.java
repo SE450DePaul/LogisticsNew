@@ -15,6 +15,6 @@ public interface Order
     String getId();
     String getStartDay();
     String getDestination();
-    ArrayList<Item> getOrderItems();
+    void getOrderItems();
     String toString();
 }

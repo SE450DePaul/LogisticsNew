@@ -5,7 +5,7 @@ package logistics.networkservice.implementation;
  * which serves as a vertex on the Network Graph of all Facilities and 
  * their corresponding neighbors.
  * 
- * It provides methods for adding a new neighbor, to a given Facility,
+ * The class provides methods for adding a new neighbor, to a given Facility,
  * determining the distance between a Facility and its neighbor, as well as
  * returning a list of all neighbors of a given Facility.
  * 

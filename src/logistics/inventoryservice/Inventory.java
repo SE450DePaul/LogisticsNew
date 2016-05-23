@@ -1,7 +1,5 @@
 package logistics.inventoryservice;
 
-import logistics.utilities.exceptions.NegativeOrZeroParameterException;
-
 /**
  * This is a Facility Inventory Interface which provides common behaviors 
  * every Facility Inventory implementation should be able to perform.
@@ -9,6 +7,7 @@ import logistics.utilities.exceptions.NegativeOrZeroParameterException;
  * @author David Olorundare
  */
 
+import logistics.utilities.exceptions.NegativeOrZeroParameterException;
 import logistics.utilities.exceptions.NullParameterException;
 
 public interface Inventory

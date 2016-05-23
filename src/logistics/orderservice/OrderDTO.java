@@ -13,7 +13,7 @@ public class OrderDTO
     public String name;
     public String destination;
     public String startDay;
-    // ArrayList<Item> items;
+    // ArrayList<Inventory> items;
 
     public OrderDTO(String orderName, String orderDestination, String orderStartDay)
     {

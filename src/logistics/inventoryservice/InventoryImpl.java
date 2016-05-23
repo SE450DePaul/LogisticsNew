@@ -16,11 +16,17 @@ import logistics.utilities.exceptions.NegativeOrZeroParameterException;
 import logistics.utilities.exceptions.NullParameterException;
 import java.util.HashMap;
 import java.util.Set;
-
+/**
+ * This class represents the implementation of a Facility Inventory.
+ * 
+ * The class provides methods for creating new Inventories, updating existing
+ * ones, as well as displaying the Items contained in a given Inventory.
+ * 
+ * @author Uchenna F. Okoye
+ */
 
 public class InventoryImpl implements Inventory
 {
-
 	private HashMap<String, Integer> activeItemHash;
 	private HashMap<String, Integer> depletedItemHash;
 	private String facilityName;
@@ -44,7 +50,6 @@ public class InventoryImpl implements Inventory
 
 	/*
 	 * Updates a Facility's Inventory with a new Item and its quantity.
-	 * 
 	 */
 	public void updateInventory(String itemId, int quantity) throws NullParameterException, NegativeOrZeroParameterException {
 		validateItem(itemId);

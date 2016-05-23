@@ -5,7 +5,7 @@ package logistics.networkservice.implementation;
  * whose Vertexes are Facilities and whose Edges represent the distance
  * between two Facilities.
  * 
- * It provides methods for adding new Facilities to the Graph, adding new
+ * The class provides methods for adding new Facilities to the Graph, adding new
  * neighbors to those Facilities, and determining the distance between a 
  * Facility and its neighbor.
  * 
