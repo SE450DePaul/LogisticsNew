@@ -50,10 +50,12 @@ public final class ScheduleService
      */
     public String getOutput(String facilityName) throws NullParameterException
     {
-        if (facilityName == "")
+    	if (facilityName == null) {
+			throw new NullParameterException("Facility name cannot be null");
+		}
+    	if (facilityName.isEmpty())
         	throw new NullParameterException("Facility name cannot be empty");
-        if (facilityName == null)
-        	throw new NullParameterException("Facility name cannot be null");
+        
     	return getSchedule(facilityService.getFacility(facilityName));
     }
 
