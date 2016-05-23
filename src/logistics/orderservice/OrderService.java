@@ -37,7 +37,7 @@ public final class OrderService
         } catch (LoaderFileNotFoundException e) {
             e.printStackTrace();
         }
-    }
+    }*/
     
     /*
      * Returns an instance of the Inventory Service 

@@ -26,17 +26,23 @@ public class OrderImpl implements Order
 	/*
      * Creates a new Facility Order
      */
-	public OrderImpl(String name, String dest, String startDay, ArrayList<Item> items) //Should be ArrayList of Inventory
+	public OrderImpl(String name, String dest, String startDay, ArrayList<Item> items) throws NullParameterException//Should be ArrayList of Inventory
 	{
+		//validateOrderId(name);
+		//validateOrderStartDay(startDay);
+		
 		orderId = name;
 		orderStartDay = startDay;
 		
-		for (Item itm: items)
+		/*for (Item itm: items)
 		{
+			validateOrderItem(itm);
 			orderItems.add(itm);
-		}	
+		}*/	
 	}
 	
+	
+
 	/*
 	 * Helper method that sets the ID of this order given a name.
 	 */
@@ -165,11 +171,10 @@ public class OrderImpl implements Order
 
 	/*
 	 * Helper method to output the details of an Order.
-	 /
-	  public String toString() 
-	{
-		/*return "Order Details:\n\nOrder ID: " + orderId + " Destination: " + orderDestination + " Start Day: " + orderStartDay + "\nOrder Items:\n"
-				+ getOrderItems();
-	}*/
-	
+	 */
+	@Override
+	public String toString() {
+		return "OrderImpl [orderDestination=" + orderDestination + ", orderStartDay=" + orderStartDay + ", orderItems="
+				+ orderItems + ", orderId=" + orderId + "]";
+	}
 }

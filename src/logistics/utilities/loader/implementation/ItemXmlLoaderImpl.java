@@ -76,7 +76,7 @@ public class ItemXmlLoaderImpl implements ItemLoader {
                 Item item = ItemFactory.build(id, price);
 
              // Must be uncommented if this class is to be run from its main() method.
-                // System.out.println("No " + i + ": Item price: " + price + " Item Id: " + id);
+                 System.out.println("No " + i + ": Item price: " + price + " Item Id: " + id);
                 items.add(item);
 
             }

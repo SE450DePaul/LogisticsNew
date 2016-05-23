@@ -7,7 +7,7 @@ package logistics.orderservice;
  * @author David Olorundare
  */
 
-import logistics.inventoryservice.Inventory;
+//import logistics.inventoryservice.Inventory;
 import logistics.itemservice.Item;
 import logistics.utilities.exceptions.NullParameterException;
 import java.util.ArrayList;
