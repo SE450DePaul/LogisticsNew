@@ -19,8 +19,7 @@ public class ItemImpl implements Item
     private Double price;
     
     /*
-     * Constructor that creates a new Item given
-     * an item ID and price.
+     * Creates a new Item given an item ID and price.
      */
     public ItemImpl(String id, Double price) throws NullParameterException {
         setId(id);
