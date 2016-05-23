@@ -11,13 +11,10 @@ package logistics.utilities.loader.implementation;
 
 import logistics.utilities.exceptions.NullParameterException;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
-import logistics.inventoryservice.inventoryitem.InventoryItemDTO;
 import logistics.itemservice.Item;
 import logistics.itemservice.ItemFactory;
-import logistics.itemservice.ItemImpl;
 import logistics.orderservice.Order;
 import logistics.orderservice.OrderFactory;
-import logistics.utilities.loader.interfaces.ItemLoader;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
@@ -36,9 +33,6 @@ public class OrderXmlLoaderImpl
 	private Double itemQty;
 	private String itemQuantity;
 	private ArrayList<Item> orderItems;
-	
-	
-	
 	private String filepath;
 
     /*
@@ -54,7 +48,6 @@ public class OrderXmlLoaderImpl
  	 */
     public ArrayList<Order> load() throws LoaderFileNotFoundException 
     {
-
     	ArrayList<Order> orderList = new ArrayList<Order>();
 
         try 
@@ -89,7 +82,7 @@ public class OrderXmlLoaderImpl
                 
                 NamedNodeMap attributes = node.getAttributes();
                 Node orderName = attributes.getNamedItem("id");
-                String orderId = orderName.getNodeValue();
+                orderId = orderName.getNodeValue();
                 
                 Element element = (Element) orderEntries.item(i);
                 NodeList timeNode = element.getElementsByTagName("time");
@@ -115,7 +108,6 @@ public class OrderXmlLoaderImpl
 
 					}
 
-					// Get some named nodes
 					element = (Element) itemList.item(j);
 					itemId = element.getElementsByTagName("id").item(0).getTextContent();
 					itemQuantity = element.getElementsByTagName("quantity").item(0).getTextContent();
