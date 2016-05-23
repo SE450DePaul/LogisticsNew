@@ -164,10 +164,6 @@ public class ScheduleImpl implements Schedule
         int workDaysToCrossOut = count + workDaysUsed;
         count = 0;
         
-        // day to start. cannot be zero.
-        //startDay = 1;
-        
-        
         for (int i = startDay; i < workDaysToCrossOut+startDay; i++)
         {
             //check if that day is already booked/zero. if it is skip to the next day.
