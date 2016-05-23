@@ -8,13 +8,13 @@ package logistics.orderservice;
 */
 
 import java.util.ArrayList;
-import logistics.itemservice.ItemImpl;
+import logistics.itemservice.Item;
 
 public interface Order
 {
-    String getName();
-    Integer getStartDay();
+    String getId();
+    String getStartDay();
     String getDestination();
-    ArrayList<ItemImpl> getOrderItems();
+    ArrayList<Item> getOrderItems();
     String toString();
 }

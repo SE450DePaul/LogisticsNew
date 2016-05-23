@@ -1,0 +1,165 @@
+package logistics.utilities.loader.implementation;
+
+/**
+* This class represents the implementation of an Order XML Loader
+* which loads in XML data, containing details of various Orders, into
+* the Logistics application.
+*
+* @author David Olorundare
+*
+*/
+
+import logistics.utilities.exceptions.NullParameterException;
+import logistics.utilities.exceptions.LoaderFileNotFoundException;
+import logistics.inventoryservice.inventoryitem.InventoryItemDTO;
+import logistics.itemservice.Item;
+import logistics.itemservice.ItemFactory;
+import logistics.itemservice.ItemImpl;
+import logistics.orderservice.Order;
+import logistics.orderservice.OrderFactory;
+import logistics.utilities.loader.interfaces.ItemLoader;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public class OrderXmlLoaderImpl 
+{
+	private String orderStartDay;
+	private String orderId;
+	private String orderDestination;
+	private String itemId;
+	private Double itemQty;
+	private String itemQuantity;
+	private ArrayList<Item> orderItems;
+	private ArrayList<Order> orders;
+	
+	
+	private String filepath;
+
+    /*
+	 * Takes as input the filesystem path to the XML data. 
+	 */
+    public OrderXmlLoaderImpl(String orderFilepath)
+    {
+        filepath = orderFilepath;
+    }
+	
+    /*
+ 	 * Returns a list of Items loaded from the XML data.
+ 	 */
+    public ArrayList<Order> load() throws LoaderFileNotFoundException 
+    {
+
+    	orders = new ArrayList<Order>();
+
+        try 
+        {
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+
+            File xml = new File(filepath);
+            if (!xml.exists()) 
+            {
+                throw new LoaderFileNotFoundException();
+            }
+
+            Document doc = db.parse(xml);
+            Element documentElement = doc.getDocumentElement();
+            documentElement.normalize();
+            
+            NodeList orderEntries = documentElement.getChildNodes();
+            for (int i = 0; i < orderEntries.getLength(); i++) 
+            {
+                Node node = orderEntries.item(i);
+                if (node.getNodeType() == Node.TEXT_NODE) 
+                {
+                    continue;
+                }
+
+                String entryName = node.getNodeName();
+                if (!entryName.equals("order")) 
+                {
+                    continue;
+                }
+                
+                NamedNodeMap attributes = node.getAttributes();
+                Node orderName = attributes.getNamedItem("id");
+                String orderId = orderName.getNodeValue();
+                
+                Element element = (Element) orderEntries.item(i);
+                NodeList timeNode = element.getElementsByTagName("time");
+                orderStartDay = timeNode.item(0).getTextContent();
+                
+                NodeList destinationNode = element.getElementsByTagName("destinatinon");
+                orderDestination = destinationNode.item(0).getTextContent();
+                
+                orderItems = new ArrayList<Item>();
+                NodeList itemList = element.getElementsByTagName("item");
+                
+				for (int j = 0; j < itemList.getLength(); j++)
+				{
+					if (itemList.item(j).getNodeType() == Node.TEXT_NODE)
+					{
+						continue;
+					}
+
+					entryName = itemList.item(j).getNodeName();
+					if (!entryName.equals("item"))
+					{
+						System.err.println("Unexpected node found: " + entryName);
+
+					}
+
+					// Get some named nodes
+					element = (Element) itemList.item(j);
+					itemId = element.getElementsByTagName("id").item(0).getTextContent();
+					itemQuantity = element.getElementsByTagName("quantity").item(0).getTextContent();
+					itemQty = Double.parseDouble(itemQuantity);
+					
+					Item item = ItemFactory.build(itemId, itemQty);
+					orderItems.add(item);
+				}
+				
+				Order orders = OrderFactory.build(orderId, orderDestination, orderStartDay, orderItems);
+            }
+        }
+        catch (ParserConfigurationException e) 
+        {
+            e.printStackTrace();
+        } 
+        catch (SAXException e) 
+        {
+            e.printStackTrace();
+        } 
+        catch (IOException e) 
+        {
+            e.printStackTrace();
+        } 
+        catch (NullParameterException e) 
+        {
+            e.printStackTrace();
+        }
+
+        return orders;
+    }
+    
+    // Test that the class works.
+    public static void main(String[] args)
+    {
+
+        OrderXmlLoaderImpl xmlLoader =  new OrderXmlLoaderImpl("data/orders.xml");
+        try 
+        {
+            xmlLoader.load();
+        } 
+        catch (LoaderFileNotFoundException e) 
+        {
+            e.printStackTrace();
+        }
+    }
+}

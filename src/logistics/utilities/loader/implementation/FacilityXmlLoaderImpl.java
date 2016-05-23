@@ -73,7 +73,6 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 	                if (!entryName.equals("facility")) 
 	                {
 	                    continue;
-	                    //Or perhaps throw an error
 	                }
 
 	                Element element = (Element) facilityEntries.item(i);

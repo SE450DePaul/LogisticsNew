@@ -12,10 +12,10 @@ public class OrderDTO
 {
     public String name;
     public String destination;
-    public Integer startDay;
-    // ArrayList<ItemImpl> items;
+    public String startDay;
+    // ArrayList<Item> items;
 
-    public OrderDTO(String orderName, String orderDestination, Integer orderStartDay)
+    public OrderDTO(String orderName, String orderDestination, String orderStartDay)
     {
         name = orderName;
         destination = orderDestination;

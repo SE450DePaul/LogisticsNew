@@ -10,24 +10,25 @@ package logistics.orderservice;
 
 import logistics.utilities.exceptions.NullParameterException;
 import java.util.ArrayList;
+import logistics.itemservice.Item;
 import logistics.itemservice.ItemImpl;
 
 public class OrderImpl implements Order
 {	
 
 	private String orderDestination;
-	private Integer orderStartDay;
-	private ArrayList<ItemImpl> orderItems;
-	private String orderName;
+	private String orderStartDay;  // NEED a way to convert string 'Day 1' into just an integer 
+	private ArrayList<Item> orderItems;
+	private String orderId;
 	
-	public OrderImpl(String name, String dest, Integer startDay, ArrayList<ItemImpl> items)
+	public OrderImpl(String name, String dest, String startDay, ArrayList<Item> items)
 	{
 		
 	}
 	
-	public void setOrderName(String orderName) 
+	public void setOrderId(String orderName) 
 	{
-		this.orderName = orderName;
+		this.orderId = orderName;
 	}
 
 	public void setOrderDestination(String orderDestination) 
@@ -35,12 +36,12 @@ public class OrderImpl implements Order
 		this.orderDestination = orderDestination;
 	}
 
-	public void setOrderStartDay(Integer orderStartDay) 
+	public void setOrderStartDay(String orderStartDay) 
 	{
 		this.orderStartDay = orderStartDay;
 	}
 
-	public void setOrderItems(ArrayList<ItemImpl> orderItems) 
+	public void setOrderItems(ArrayList<Item> orderItems) 
 	{
 		this.orderItems = orderItems;
 	}
@@ -48,7 +49,7 @@ public class OrderImpl implements Order
 	/*
 	 * Returns the name of the Order
 	 */
-	public String getName() 
+	public String getId() 
 	{
 	
 		return null;
@@ -57,7 +58,7 @@ public class OrderImpl implements Order
 	/*
 	 * Returns the starting Day the Order is to be processed from. 
 	 */
-	public Integer getStartDay() 
+	public String getStartDay() 
 	{
 	
 		return null;
@@ -75,7 +76,7 @@ public class OrderImpl implements Order
 	/*
 	 * Returns a list of all Items in this order.
 	 */
-	public ArrayList<ItemImpl> getOrderItems() 
+	public ArrayList<Item> getOrderItems() 
 	{
 		
 		return null;
@@ -84,7 +85,7 @@ public class OrderImpl implements Order
 	/*
 	 * Helper method that validates that a given Facility's Cost is not Null.
 	 */
-	private void validateOrderName(String name)
+	private void validateOrderId(String name)
 	{
 		
 	}
@@ -92,7 +93,7 @@ public class OrderImpl implements Order
 	/*
 	 * Helper method that validates that a given Facility's Cost is not Null.
 	 */
-	private void validateOrderStartDay(Integer startDay)
+	private void validateOrderStartDay(String startDay)
 	{
 		
 	}
