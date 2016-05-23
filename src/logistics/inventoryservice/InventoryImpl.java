@@ -1,11 +1,12 @@
 package logistics.inventoryservice;
 
 /**
- * This class represents the Inventory of a given Facility.
+ * This class represents the implementation of an Inventory of a given Facility.
  * 
- * The class provides methods to add and remove items to the
- * a Facility's inventory, as well as list out all the inventory
- * in the Facility. 
+ * The class provides methods for creating an inventory for a given
+ * Facility, adding new items to the inventory, updating pre-existing
+ * items in an old inventory, and listing all inventories held by the
+ * Facility. 
  * 
  * @author Uchenna F. Okoye
  */
@@ -22,6 +23,9 @@ public class InventoryImpl implements Inventory
 	private HashMap<String, Integer> depletedItemHash;
 	private String facilityName;
 
+	  /*
+     * Creates a new Inventory for a given Facility.
+     */
 	public InventoryImpl(String facilityName) throws NullParameterException {
 		setFacilityName(facilityName);
 		activeItemHash = new HashMap<>();

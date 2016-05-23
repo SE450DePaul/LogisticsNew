@@ -1,6 +1,14 @@
 package logistics.utilities.loader.implementation;
 
 
+/**
+* This class represents the implementation of a Network XML Loader
+* which loads in XML data, containing details of a network of all
+* Facilities, into the Logistics application.
+*
+* @author Uchenna F. Okoye
+*
+*/
 import logistics.networkservice.factory.FacilityVertexFactory;
 import logistics.networkservice.interfaces.FacilityVertex;
 import logistics.utilities.exceptions.NegativeOrZeroParameterException;
@@ -15,7 +23,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -25,17 +32,20 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-/**
- * Created by uchennafokoye on 4/22/16.
- */
 public class NetworkXmlLoaderImpl implements NetworkLoader {
 
 	private String filepath;
 
-	public NetworkXmlLoaderImpl(String networkFilepath){
-		filepath = networkFilepath;
+	/*
+	 * Takes as input the filesystem path to the XML data. 
+	 */
+	public NetworkXmlLoaderImpl(String networkFilePath){
+		filepath = networkFilePath;
 	}
 
+	/*
+ 	 * Returns a list of Facility Networks loaded from the XML data.
+ 	 */
 	public ArrayList<FacilityVertex> load() throws LoaderFileNotFoundException {
 
 		ArrayList<FacilityVertex> facilityVertices = new ArrayList<>();
@@ -63,10 +73,8 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 				String entryName = node.getNodeName();
 				if (!entryName.equals("facility")) {
 					continue;
-//                    Or perhaps throw an error
 				}
 
-				// Get some named nodes
 				Element element = (Element) networkEntries.item(i);
 				String facilityName = element.getElementsByTagName("name").item(0).getTextContent();
 
@@ -91,14 +99,9 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 					String distanceString = element.getElementsByTagName("distance").item(0).getTextContent();
 					int distance = Integer.parseInt(distanceString);
 					facilityVertex.addNeighbor(neighborName, distance);
-
 				}
-
 				facilityVertices.add(facilityVertex);
-
 			}
-
-
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -110,13 +113,11 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 		} catch (NegativeOrZeroParameterException e) {
 			e.printStackTrace();
 		}
-
-
+		
 		return facilityVertices;
 	}
 
-
-
+	// Test that the class works.
 	public static void main(String[] args){
 
 		Loader loader = LoaderFactory.build("network");
@@ -133,15 +134,11 @@ public class NetworkXmlLoaderImpl implements NetworkLoader {
 					System.out.println(current);
 					System.out.println("distance: " + facilityVertex.distanceTo(current));
 				}
-
 			}
-
 		} catch (LoaderFileNotFoundException e) {
 			e.printStackTrace();
 		} catch (NeighborNotFoundInNetworkException e) {
 			e.printStackTrace();
 		}
-
-
 	}
 }

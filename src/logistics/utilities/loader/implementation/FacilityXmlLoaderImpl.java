@@ -1,5 +1,14 @@
 package logistics.utilities.loader.implementation;
 
+/**
+* This class represents the implementation of a Facility XML Loader
+* which loads in XML data, containing details of each Facility, into
+* the Logistics application.
+*
+* @author David Olorundare
+*
+*/
+
 import logistics.facilityservice.Facility;
 import logistics.facilityservice.FacilityFactory;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
@@ -10,7 +19,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -18,23 +26,23 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-/**
- * 
- * @author David Olorundare
- *
- */
 public class FacilityXmlLoaderImpl implements FacilityLoader
 {
-
 	 private String filepath;
-	 public FacilityXmlLoaderImpl(String path)
+	 
+	 /*
+	  * Takes as input the filesystem path to the XML data. 
+	  */
+	 public FacilityXmlLoaderImpl(String facilityFilePath)
 	 {
-	        filepath = path;
+	        filepath = facilityFilePath;
 	 }
 	
+	 	/*
+	 	 * Returns a list of Facilities loaded from the XML data.
+	 	 */
 	    public ArrayList<Facility> load() throws LoaderFileNotFoundException
 	    {
-
 	        ArrayList<Facility> facilities = new ArrayList<>();
 
 	        try 
@@ -68,7 +76,6 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 	                    //Or perhaps throw an error
 	                }
 
-
 	                Element element = (Element) facilityEntries.item(i);
 	                NodeList nameNode = element.getElementsByTagName("name");
 	                NodeList rateNode = element.getElementsByTagName("rate");
@@ -100,8 +107,7 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 			return facilities;
 	    }
 
-
-
+	    // Test that the class works.
 	    public static void main(String[] args){
 
 	        FacilityXmlLoaderImpl xmlLoader =  new FacilityXmlLoaderImpl("data/facilities.xml");
@@ -114,11 +120,9 @@ public class FacilityXmlLoaderImpl implements FacilityLoader
 					System.out.println("Cost: " + f.getCost());
 					System.out.println("Rate: " + f.getRate());
 					System.out.println("");
-
 				}
 			} catch (LoaderFileNotFoundException e) {
 				e.printStackTrace();
 			}
 	    }
-
 }

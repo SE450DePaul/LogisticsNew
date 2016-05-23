@@ -11,6 +11,4 @@ public interface ShortestPathAlgorithm {
 
     Collection<String> shortestPathTo(String destination) throws FacilityNotFoundInNetworkException;
     int distanceTo(String destination) throws FacilityNotFoundInNetworkException;
-
-
 }
