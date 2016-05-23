@@ -11,7 +11,11 @@ import logistics.utilities.exceptions.NullParameterException;
 
 public class FacilityFactory 
 {
-    public static Facility build(String name, Integer rate, Double cost) throws NullParameterException
+	/*
+	 * Returns a newly created Facility object given
+	 * the Facility's name, rate, and cost.
+	 */
+	public static Facility build(String name, Integer rate, Double cost) throws NullParameterException
     {
         return new FacilityImpl(name, rate, cost);
     }
