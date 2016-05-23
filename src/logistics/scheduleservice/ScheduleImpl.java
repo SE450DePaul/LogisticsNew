@@ -112,26 +112,101 @@ public class ScheduleImpl implements Schedule
         	throw new NegativeOrZeroParameterException("Number of items to process cannot be zero");
     	if (previousFacilityVacancy > 0)
         {
-            processItemNum -= previousFacilityVacancy;
+            processItemNum -= remainingFacilityVacancy; //previousFacilityVacancy;
             count++;
-            previousFacilityVacancy = 0;
+            //previousFacilityVacancy = 0;
         }
 
+    	
+    	// useful code 
         workDaysUsed = processItemNum / facilityRate;
         remainder = processItemNum % facilityRate;
 
         remainingFacilityVacancy = Math.abs(facilityRate - remainder);
+        // useful code
+        
+        //something goes here
+        
+        
+        
 
         int workDaysToCrossOut = count + workDaysUsed;
         count = 0;
-
-        for (int i = 1 ; i < workDaysToCrossOut+1; i++)
+        
+        // day to start. cannot be zero.
+        int startDay = 1;
+        
+        // make the +1 variable 
+        
+        int plusOne = 1;
+        
+        for (int i = startDay; i < workDaysToCrossOut+startDay; i++)
         {
-            dayAvailability.put(i, 0);
+            /*check if that day is already zero. if it is skip to the next day.
+        	if ( (dayAvailability.get(i) == 0))
+        	{
+        		continue;
+        	}
+        	else
+        	{
+        	
+        	}
+        	*/
+        	
+        	dayAvailability.put(i, 0);
             count++;
         }
 
-        dayAvailability.put(count+1, remainingFacilityVacancy);
+        dayAvailability.put(count+startDay, remainingFacilityVacancy);
+        previousFacilityVacancy += remainingFacilityVacancy;
+    }
+
+    /*
+     *  Process a certain number of items and compute the new resulting schedule.
+     */
+    public void computeChangedScheduleWithStartDay(int processItemNum, int startDay) throws NegativeOrZeroParameterException
+    {
+        if (processItemNum == 0)
+        	throw new NegativeOrZeroParameterException("Number of items to process cannot be zero");
+        if (startDay == 0)
+        	throw new NegativeOrZeroParameterException("Starting day cannot be zero");
+        
+    	if (previousFacilityVacancy > 0)
+        {
+            processItemNum -= remainingFacilityVacancy; 
+            count++;
+        }
+
+    	// useful code 
+        workDaysUsed = processItemNum / facilityRate;
+        remainder = processItemNum % facilityRate;
+
+        remainingFacilityVacancy = Math.abs(facilityRate - remainder);
+        // useful code
+        
+        //something goes here
+        int workDaysToCrossOut = count + workDaysUsed;
+        count = 0;
+        
+        // day to start. cannot be zero.
+        //startDay = 1;
+        
+        
+        for (int i = startDay; i < workDaysToCrossOut+startDay; i++)
+        {
+            //check if that day is already booked/zero. if it is skip to the next day.
+        	if ( (dayAvailability.get(i) == 0))
+        	{
+        		computeChangedScheduleWithStartDay(processItemNum, startDay+1);
+        	}
+        	else
+        	{
+        		dayAvailability.put(i, 0);
+                count++;
+        	}
+        }
+
+        dayAvailability.put(count+startDay, remainingFacilityVacancy);
         previousFacilityVacancy += remainingFacilityVacancy;
     }
 
@@ -171,6 +246,17 @@ public class ScheduleImpl implements Schedule
 			schedule = new ScheduleImpl(instance.getFacility("Chicago, IL"));
 			System.out.println("-----------Initial Schedule for Chicago, IL Facility ------------------------------------------");
 			System.out.println(schedule.getScheduleOutput());
+			System.out.println("-----------New Schedule After Processing 26 Items on Start Day 2 ---------------------------------");
+			schedule.computeChangedScheduleWithStartDay(26,2);
+			System.out.println(schedule.getScheduleOutput());
+			
+			/*
+			System.out.println("-----------New Schedule After Processing 13 Items on Start Day 6 ---------------------------------");
+			schedule.computeChangedScheduleWithStartDay(2,2);
+			System.out.println(schedule.getScheduleOutput());
+			*/
+			
+			/*
 			schedule.computeChangedSchedule(26);
 			System.out.println("-----------New Schedule After Processing 26 Items ------------------------------------------");
 			System.out.println(schedule.getScheduleOutput());
@@ -179,7 +265,7 @@ public class ScheduleImpl implements Schedule
 			System.out.println(schedule.getScheduleOutput());
 			System.out.println("-----------------New Schedule After Processing 7 more Items------------------------------------");
 			schedule.computeChangedSchedule(7);
-			System.out.println(schedule.getScheduleOutput());
+			System.out.println(schedule.getScheduleOutput()); */
 		} 
 		catch (NullParameterException e) 
 		{
