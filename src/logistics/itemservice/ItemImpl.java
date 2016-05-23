@@ -70,7 +70,7 @@ public class ItemImpl implements Item
     }
 
     /*
-     * Validates that an Item's name is not Empty or Null.
+     * Helper method that validates that an Item's name is not Empty or Null.
      */
     private void validateId(String id) throws NullParameterException {
         if (id == null || id.isEmpty()){
@@ -79,7 +79,7 @@ public class ItemImpl implements Item
     }
 
     /*
-     * Validates that an Item's price is not Null.
+     * Helper method that validates that an Item's price is not Null.
      */
     private void validatePrice(Double price) throws NullParameterException {
         if (price == null){

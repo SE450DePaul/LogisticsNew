@@ -87,7 +87,7 @@ public class FacilityImpl implements Facility
 	}
 
 	/*
-	 * Validates that a given Facility's Name is not Null.
+	 * Helper method that validates that a given Facility's Name is not Null.
 	 */
 	private void validateName(String name) throws NullParameterException {
 		if (name == null || name.isEmpty()){
@@ -96,7 +96,7 @@ public class FacilityImpl implements Facility
 	}
 
 	/*
-	 * Validates that a given Facility's Rate is not Null.
+	 * Helper method that validates that a given Facility's Rate is not Null.
 	 */
 	private void validateRate(Integer rate) throws NullParameterException {
 		if (rate == null){
@@ -105,7 +105,7 @@ public class FacilityImpl implements Facility
 	}
 	
 	/*
-	 * Validates that a given Facility's Cost is not Null.
+	 * Helper method that validates that a given Facility's Cost is not Null.
 	 */
 	private void validateCost(Double cost) throws NullParameterException {
 		if (cost == null){
