@@ -152,15 +152,13 @@ public class ScheduleImpl implements Schedule
             processItemNum -= dayAvailability.get(startDay); 
             count++;
         }
-
-    	// useful code 
+ 
         workDaysUsed = processItemNum / facilityRate;
         remainder = processItemNum % facilityRate;
-
         remainingFacilityVacancy = Math.abs(facilityRate - remainder);
-        // useful code
         
-        //something goes here
+        
+        //determining used days
         int workDaysToCrossOut = count + workDaysUsed;
         count = 0;
         
@@ -169,19 +167,17 @@ public class ScheduleImpl implements Schedule
             //check if that day is already booked/zero. if it is skip to the next day.
         	if ( (dayAvailability.get(i) == 0))
         	{
-        		//continue;
+        		//continue
         		computeChangedScheduleWithStartDay(processItemNum, startDay+1);
         	}
         	
-        	
         		dayAvailability.put(i, 0);
-                count++;
-        	
+                count++;	
         }
 
         dayAvailability.put(count+startDay, remainingFacilityVacancy);
         
-        // Checking status
+        // Checking status of variable; only for testing.
         count = 0;
         System.out.println("Count is: " + count);
         System.out.println("remVac is: " + remainingFacilityVacancy);
@@ -245,9 +241,9 @@ public class ScheduleImpl implements Schedule
 			schedule.computeChangedScheduleWithStartDay(20,11);
 			System.out.println(schedule.getScheduleOutput());
 			
-			System.out.println("-----------New Schedule After Processing 12 Items on Start Day 1 ---------------------------------");
-			//schedule.computeChangedScheduleWithStartDay(12,1);
-			System.out.println(schedule.getScheduleOutput());
+			/*System.out.println("-----------New Schedule After Processing 12 Items on Start Day 1 ---------------------------------");
+			schedule.computeChangedScheduleWithStartDay(12,1);
+			System.out.println(schedule.getScheduleOutput());*/
 			
 			/*
 			schedule.computeChangedSchedule(26);
