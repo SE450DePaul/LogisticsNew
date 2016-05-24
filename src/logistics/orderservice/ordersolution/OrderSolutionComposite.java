@@ -1,5 +1,6 @@
 package logistics.orderservice.ordersolution;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -9,6 +10,10 @@ public class OrderSolutionComposite implements OrderSolutionComponent{
 
 
     private Collection<OrderSolutionLeaf> orderSolutions;
+
+    public OrderSolutionComposite(){
+        orderSolutions = new ArrayList<>();
+    }
 
     public void addSolution(OrderSolutionLeaf orderSolution){
         orderSolutions.add(orderSolution);

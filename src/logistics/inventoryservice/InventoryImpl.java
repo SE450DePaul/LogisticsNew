@@ -132,7 +132,7 @@ public class InventoryImpl implements Inventory
 			throw new ItemNotFoundInActiveInventoryException("Item with id: " + itemId + "is not in active inventory");
 		}
 
-		if (quantityAvailable > quantityNeeded){
+		if (quantityNeeded > quantityAvailable){
 			throw new QuantityExceedsAvailabilityException("Quantity requested: " + quantityNeeded + "exceeds availability of " + quantityAvailable);
 		}
 

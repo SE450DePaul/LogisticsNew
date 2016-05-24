@@ -3,6 +3,7 @@ package logistics.orderservice.order;
 import logistics.orderservice.dtos.OrderRequestDTO;
 import logistics.orderservice.order.orderitem.OrderItem;
 
+import java.util.Collection;
 import java.util.Iterator;
 
 /**
@@ -10,23 +11,32 @@ import java.util.Iterator;
  */
 public class OrderImpl implements Order{
 
-    public OrderImpl(OrderRequestDTO orderRequestDTO){
+    private String id;
+    private int orderTime;
+    private String destination;
+    private Collection<OrderItem> orderItems;
 
+    public OrderImpl(OrderRequestDTO orderRequestDTO){
+        this.id = orderRequestDTO.orderId;
+        this.orderTime = orderRequestDTO.startTime;
+        this.destination = orderRequestDTO.destination;
     }
+
+
 
     @Override
     public String geId() {
-        return null;
+        return id;
     }
 
     @Override
     public int getOrderTime() {
-        return 0;
+        return orderTime;
     }
 
     @Override
     public String getDestination() {
-        return null;
+        return destination;
     }
 
     @Override

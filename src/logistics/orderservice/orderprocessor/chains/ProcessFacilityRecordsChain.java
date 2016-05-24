@@ -30,12 +30,12 @@ public class ProcessFacilityRecordsChain extends ProcessChain {
             if(requiredQuantity <= 0) {
                 break;
             }
-            int noOfItemsToRetrieve = 0;
+            int noOfItemsToRetrieve = requiredQuantity;
             int noOfItemsAtFacility = facilityRecordDTO.noOfItems;
-            if (requiredQuantity > noOfItemsAtFacility){
+            if (noOfItemsToRetrieve > noOfItemsAtFacility){
                 noOfItemsToRetrieve = noOfItemsAtFacility;
             }
-            requiredQuantity -= noOfItemsAtFacility;
+            requiredQuantity -= noOfItemsToRetrieve;
             processFromFacility(facilityRecordDTO, noOfItemsToRetrieve);
             facilityRecordDTOsUsed.add(facilityRecordDTO);
         }

@@ -11,33 +11,54 @@ package logistics.orderservice;
 
 import logistics.orderservice.dtos.OrderRequestDTO;
 import logistics.orderservice.order.Order;
-import logistics.orderservice.order.OrderFactory;
-import logistics.utilities.exceptions.LoaderFileNotFoundException;
-import logistics.utilities.exceptions.NullParameterException;
+import logistics.orderservice.ordersolution.OrderSolutionComponent;
+import logistics.utilities.exceptions.*;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
 
 import java.util.Collection;
+import java.util.HashMap;
 
 public final class OrderService {
     private volatile static OrderService instance;
     private Loader<OrderRequestDTO> loader;
     private Collection<Order> orders;
+    private HashMap<String, Order> orderHashMap;
+    private HashMap<String, OrderSolutionComponent> orderSolutionComponentHashMap;
 
     private OrderService() {
         loader = LoaderFactory.build("orders");
+        orderSolutionComponentHashMap = new HashMap<>();
         try {
             Collection<OrderRequestDTO> orderRequestDTOs = loader.load();
             for (OrderRequestDTO orderRequestDTO : orderRequestDTOs){
-                orders.add(OrderFactory.build(orderRequestDTO));
+
+                OrderSolutionComponent orderSolutionComponent = OrderProcessor.process(orderRequestDTO.orderItemRequestDTOs);
+//                orderHashMap.put(orderRequestDTO.orderId, OrderFactory.build(orderRequestDTO));
+                orderSolutionComponentHashMap.put(orderRequestDTO.orderId, orderSolutionComponent);
             }
 
         } catch (LoaderFileNotFoundException e) {
+            e.printStackTrace();
+        } catch (NeighborNotFoundInNetworkException e) {
+            e.printStackTrace();
+        } catch (IllegalParameterException e) {
+            e.printStackTrace();
+        } catch (FacilityNotFoundException e) {
+            e.printStackTrace();
+        } catch (FacilityNotFoundInNetworkException e) {
             e.printStackTrace();
         }
 
 
     }
+
+
+    public void printOutput(String orderId){
+        orderSolutionComponentHashMap.get(orderId).printOutput();
+    }
+
+
     
     /*
      * Returns an instance of the Facility Service.
@@ -55,16 +76,12 @@ public final class OrderService {
         }
         return instance;
     }
-    public String getOutput(String name) throws NullParameterException
-    {
-    	return "";
-    }
-
 
 
     public static void main(String[] args){
 
         OrderService orderService = OrderService.getInstance();
+        orderService.printOutput("TO-001");
 
 
     }

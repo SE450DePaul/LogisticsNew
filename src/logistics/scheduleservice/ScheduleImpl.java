@@ -49,11 +49,16 @@ public class ScheduleImpl implements Schedule
     public int getProcessDaysNeeded(int noOfItemsToProcess, int startDay) throws NegativeOrZeroParameterException {
         validateProcessItemNum(noOfItemsToProcess);
         validateStartDay(startDay);
-        buildHashMapValues(startDay, 20);
+        int howManyToBuild = (noOfItemsToProcess/pacePerDay) + 1;
+        buildHashMapValues(startDay, howManyToBuild);
 
         int pointer = startDay;
         while (noOfItemsToProcess > 0){
             Integer availability = dayAvailability.get(pointer);
+            if (availability == null){
+                buildHashMapValues(pointer, 20);
+                availability = dayAvailability.get(pointer);
+            }
             noOfItemsToProcess -= availability;
             if (noOfItemsToProcess > 0) {
                 pointer++;
@@ -69,11 +74,16 @@ public class ScheduleImpl implements Schedule
     public boolean bookFacility(int noOfItemsToProcess, int startDay) throws NegativeOrZeroParameterException {
         validateProcessItemNum(noOfItemsToProcess);
         validateStartDay(startDay);
-        buildHashMapValues(startDay, 20);
+        int howManyToBuild = (noOfItemsToProcess/pacePerDay) + 1;
+        buildHashMapValues(startDay, howManyToBuild);
 
         int pointer = startDay;
         while (noOfItemsToProcess > 0){
             Integer availability = dayAvailability.get(pointer);
+            if (availability == null){
+                buildHashMapValues(pointer, 20);
+                availability = dayAvailability.get(pointer);
+            }
             if (availability > noOfItemsToProcess){
                 dayAvailability.put(pointer, availability - noOfItemsToProcess);
             } else {
