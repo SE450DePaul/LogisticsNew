@@ -118,7 +118,7 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 				inventories.add(inventory);
 				
 				// Must be uncommented if this class is to be run from its main() method.
-				//System.out.println("Facility " + i + " : " + name + "Items: " + itemId + " Quantity " + itemQty);
+				System.out.println("Facility " + i + " : " + name + "  Items: " + itemId + " Quantity " + itemQty);
 			}
 		}
 		catch (ParserConfigurationException e)
@@ -144,7 +144,7 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 	// Test that the class works.
 	public static void main(String[] args){
 
-		InventoryXmlLoaderImpl xmlLoader =  new InventoryXmlLoaderImpl("src/data/facility_inventory.xml");
+		InventoryXmlLoaderImpl xmlLoader =  new InventoryXmlLoaderImpl("data/facility_inventory.xml");
 		try
 		{
 			xmlLoader.load();

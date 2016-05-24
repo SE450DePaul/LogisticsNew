@@ -165,17 +165,60 @@ public class ScheduleImpl implements Schedule
         for (int i = startDay; i < workDaysToCrossOut+startDay; i++)
         {
             //check if that day is already booked/zero. if it is skip to the next day.
-        	if ( (dayAvailability.get(i) == 0))
+        	/*if ( (dayAvailability.get(i) == 0))
         	{
-        		//continue
-        		computeChangedScheduleWithStartDay(processItemNum, startDay+1);
-        	}
+        		continue;
+        		//computeChangedScheduleWithStartDay(processItemNum, startDay+1);
+        	}*/
         	
         		dayAvailability.put(i, 0);
                 count++;	
         }
-
-        dayAvailability.put(count+startDay, remainingFacilityVacancy);
+        
+        int nextDay = count + startDay;   // was formerly count+startDay
+        System.out.println("Next Day is value: " + dayAvailability.get(nextDay));
+        System.out.println("Next Day is: " + nextDay);
+        System.out.println("Remainder is value: " + remainder);
+        
+        //for (int i = nextDay; dayAvailability.get(nextDay) != 0; i++)
+        //{
+        	//dayAvailability.put(count+startDay, remainingFacilityVacancy);
+        //}
+        
+        if (remainder > 0)
+        {
+        	if (dayAvailability.get(nextDay) == 0)
+          {		while (dayAvailability.get(nextDay) == 0)
+            {
+            	nextDay++;
+            }
+        	
+        	int subtraction = Math.abs((remainder - dayAvailability.get(nextDay)));
+        	dayAvailability.put(nextDay, subtraction); 
+          }
+        	
+        	else
+        	{
+        		dayAvailability.put(nextDay, remainingFacilityVacancy);
+        	}
+        	
+        }
+        
+        
+       // dayAvailability.put(nextDay, remainingFacilityVacancy);
+    /*    
+        if (dayAvailability.get(nextDay) == 0)
+        {
+        	System.out.println("nextDay is zero");
+        	
+        }
+        else
+        {*/
+        	//dayAvailability.put(nextDay, remainingFacilityVacancy);
+        //}
+        
+     
+           
         
         // Checking status of variable; only for testing.
         count = 0;
@@ -241,9 +284,24 @@ public class ScheduleImpl implements Schedule
 			schedule.computeChangedScheduleWithStartDay(20,11);
 			System.out.println(schedule.getScheduleOutput());
 			
-			/*System.out.println("-----------New Schedule After Processing 12 Items on Start Day 1 ---------------------------------");
-			schedule.computeChangedScheduleWithStartDay(12,1);
-			System.out.println(schedule.getScheduleOutput());*/
+			System.out.println("-----------New Schedule After Processing 12 Items on Start Day 1 ---------------------------------");
+			//schedule.computeChangedScheduleWithStartDay(12,1);
+			System.out.println(schedule.getScheduleOutput());
+			
+			System.out.println("-----------New Schedule After Processing 23 Items on Start Day 14 ---------------------------------");
+			schedule.computeChangedScheduleWithStartDay(23,14);
+			System.out.println(schedule.getScheduleOutput());
+			
+			System.out.println("-----------New Schedule After Processing 5 Items on Start Day 14 ---------------------------------");
+			schedule.computeChangedScheduleWithStartDay(5,14);
+			System.out.println(schedule.getScheduleOutput());
+			
+			System.out.println("-----------New Schedule After Processing 8 Items on Start Day 15 ---------------------------------");
+			
+			// starting on day that is zero
+			
+			//schedule.computeChangedScheduleWithStartDay(8,15);
+			System.out.println(schedule.getScheduleOutput());
 			
 			/*
 			schedule.computeChangedSchedule(26);
