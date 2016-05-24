@@ -1,11 +1,11 @@
-package logistics.orderservice.chainofresponsibility.chains;
+package logistics.orderservice.orderprocessor.chains;
 
 import logistics.facilityservice.FacilityDTO;
 import logistics.inventoryservice.dtos.FacilityWithItemDTO;
 import logistics.networkservice.NetworkService;
 import logistics.networkservice.travelguide.TravelGuideDTO;
 import logistics.orderservice.dtos.OrderItemRequestDTO;
-import logistics.orderservice.chainofresponsibility.ProcessChain;
+import logistics.orderservice.orderprocessor.ProcessChain;
 import logistics.orderservice.facilityrecord.FacilityRecordDTO;
 import logistics.utilities.exceptions.*;
 
@@ -16,16 +16,21 @@ import java.util.Collection;
  * Creates a sorted Facility Record Collection
  * Created by uchennafokoye on 5/20/16.
  */
-public class getFacilitiesWithItemChain extends ProcessChain {
+public class GetFacilitiesWithItemChain extends ProcessChain {
 
     private OrderItemRequestDTO orderItemRequestDTO;
 
-    public getFacilitiesWithItemChain(OrderItemRequestDTO orderItemRequestDTO){
+    public GetFacilitiesWithItemChain(OrderItemRequestDTO orderItemRequestDTO){
         this.orderItemRequestDTO = orderItemRequestDTO;
     }
 
     @Override
-    public Collection<FacilityRecordDTO> getFacilityRecordDTOs(Collection<FacilityRecordDTO> facilityRecordDTOs) throws NeighborNotFoundInNetworkException, IllegalParameterException, FacilityNotFoundInNetworkException, FacilityNotFoundException {
+    protected void validateFacilityRecordDTOs(Collection<FacilityRecordDTO> facilityRecordDTOs){
+        return;
+    }
+
+    @Override
+    public Collection<FacilityRecordDTO> buildFacilityRecordDTOs() throws NeighborNotFoundInNetworkException, IllegalParameterException, FacilityNotFoundInNetworkException, FacilityNotFoundException {
         return getFacilityRecordDTOs();
     }
 

@@ -1,4 +1,4 @@
-package logistics.orderservice.order.ordersolution;
+package logistics.orderservice.ordersolution;
 
 /**
  * Created by uchennafokoye on 5/21/16.

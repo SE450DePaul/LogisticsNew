@@ -1,5 +1,6 @@
 package logistics.orderservice.order;
 
+import logistics.orderservice.dtos.OrderRequestDTO;
 import logistics.orderservice.order.orderitem.OrderItem;
 
 import java.util.Iterator;
@@ -9,6 +10,9 @@ import java.util.Iterator;
  */
 public class OrderImpl implements Order{
 
+    public OrderImpl(OrderRequestDTO orderRequestDTO){
+
+    }
 
     @Override
     public String geId() {

@@ -9,21 +9,29 @@ package logistics.orderservice;
  * @author Uchenna F. Okoye
  */
 
-import logistics.facilityservice.Facility;
+import logistics.orderservice.dtos.OrderRequestDTO;
+import logistics.orderservice.order.Order;
+import logistics.orderservice.order.OrderFactory;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
 import logistics.utilities.exceptions.NullParameterException;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
 
-public final class OrderService
-{
+import java.util.Collection;
+
+public final class OrderService {
     private volatile static OrderService instance;
-    private Loader<Facility> loader;
+    private Loader<OrderRequestDTO> loader;
+    private Collection<Order> orders;
 
     private OrderService() {
         loader = LoaderFactory.build("orders");
         try {
-            loader.load();
+            Collection<OrderRequestDTO> orderRequestDTOs = loader.load();
+            for (OrderRequestDTO orderRequestDTO : orderRequestDTOs){
+                orders.add(OrderFactory.build(orderRequestDTO));
+            }
+
         } catch (LoaderFileNotFoundException e) {
             e.printStackTrace();
         }

@@ -1,7 +1,7 @@
-package logistics.orderservice.chainofresponsibility.chains;
+package logistics.orderservice.orderprocessor.chains;
 
 import logistics.orderservice.dtos.OrderItemRequestDTO;
-import logistics.orderservice.chainofresponsibility.ProcessChain;
+import logistics.orderservice.orderprocessor.ProcessChain;
 import logistics.orderservice.facilityrecord.FacilityRecordDTO;
 
 import java.util.Collection;
@@ -23,7 +23,7 @@ public class CalculateTotalCostChain extends ProcessChain {
     }
 
     @Override
-    public Collection<FacilityRecordDTO> getFacilityRecordDTOs(Collection<FacilityRecordDTO> facilityRecordDTOs){
+    protected Collection<FacilityRecordDTO> buildFacilityRecordDTOs(){
         for (FacilityRecordDTO facilityRecordDTO : facilityRecordDTOs){
             double totalCost = calculateCost(facilityRecordDTO);
             facilityRecordDTO.totalCost = totalCost;

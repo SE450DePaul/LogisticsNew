@@ -1,10 +1,11 @@
-package logistics.orderservice.chainofresponsibility.chains;
+package logistics.orderservice.orderprocessor.chains;
 
 import logistics.orderservice.dtos.OrderItemRequestDTO;
-import logistics.orderservice.chainofresponsibility.ProcessChain;
+import logistics.orderservice.orderprocessor.ProcessChain;
 import logistics.orderservice.facilityrecord.FacilityRecordDTO;
 import logistics.utilities.exceptions.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /** Processes Facility Records
@@ -18,12 +19,13 @@ public class ProcessFacilityRecordsChain extends ProcessChain {
         this.orderItemRequestDTO = orderItemRequestDTO;
     }
 
-    public Collection<FacilityRecordDTO> getFacilityRecordDTOs(Collection<FacilityRecordDTO> facilityRecordDTOs) throws IllegalParameterException, FacilityNotFoundException {
+    protected Collection<FacilityRecordDTO> buildFacilityRecordDTOs() throws IllegalParameterException, FacilityNotFoundException {
         return processFacilityRecords(facilityRecordDTOs);
     }
 
     private Collection<FacilityRecordDTO> processFacilityRecords(Collection<FacilityRecordDTO> facilityRecordDTOCollection) throws IllegalParameterException, FacilityNotFoundException {
         int requiredQuantity = orderItemRequestDTO.quantityNeeded;
+        Collection<FacilityRecordDTO> facilityRecordDTOsUsed = new ArrayList<>();
         for (FacilityRecordDTO facilityRecordDTO : facilityRecordDTOCollection){
             if(requiredQuantity <= 0) {
                 break;
@@ -35,9 +37,10 @@ public class ProcessFacilityRecordsChain extends ProcessChain {
             }
             requiredQuantity -= noOfItemsAtFacility;
             processFromFacility(facilityRecordDTO, noOfItemsToRetrieve);
+            facilityRecordDTOsUsed.add(facilityRecordDTO);
         }
 
-        return facilityRecordDTOCollection;
+        return facilityRecordDTOsUsed;
     }
 
     private void processFromFacility(FacilityRecordDTO facilityRecordDTO, int quantity) throws IllegalParameterException, FacilityNotFoundException {
