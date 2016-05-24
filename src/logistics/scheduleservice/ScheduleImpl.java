@@ -152,6 +152,11 @@ public class ScheduleImpl implements Schedule
             processItemNum -= dayAvailability.get(startDay); 
             count++;
         }
+    	
+    	// issues with starting on a day that is already zero:
+    	// if the client requests work to be done on a day whose availability is already zero, 
+    	// you should move the starting day to the next available day.
+    	
  
         workDaysUsed = processItemNum / facilityRate;
         remainder = processItemNum % facilityRate;
@@ -203,22 +208,6 @@ public class ScheduleImpl implements Schedule
         	}
         	
         }
-        
-        
-       // dayAvailability.put(nextDay, remainingFacilityVacancy);
-    /*    
-        if (dayAvailability.get(nextDay) == 0)
-        {
-        	System.out.println("nextDay is zero");
-        	
-        }
-        else
-        {*/
-        	//dayAvailability.put(nextDay, remainingFacilityVacancy);
-        //}
-        
-     
-           
         
         // Checking status of variable; only for testing.
         count = 0;
@@ -293,12 +282,13 @@ public class ScheduleImpl implements Schedule
 			System.out.println(schedule.getScheduleOutput());
 			
 			System.out.println("-----------New Schedule After Processing 5 Items on Start Day 14 ---------------------------------");
-			schedule.computeChangedScheduleWithStartDay(5,14);
+			//schedule.computeChangedScheduleWithStartDay(5,14);
 			System.out.println(schedule.getScheduleOutput());
 			
 			System.out.println("-----------New Schedule After Processing 8 Items on Start Day 15 ---------------------------------");
 			
-			// starting on day that is zero
+			// issues with starting on a day that is already zero.
+			// if client request work to be done on a day that is already zero, should you move the starting day to a day that is available ?
 			
 			//schedule.computeChangedScheduleWithStartDay(8,15);
 			System.out.println(schedule.getScheduleOutput());
