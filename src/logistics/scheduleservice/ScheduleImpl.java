@@ -157,7 +157,7 @@ public class ScheduleImpl implements Schedule
     	// if the client requests work to be done on a day whose availability is already zero, 
     	// you should move the starting day to the next available day.
     	
- 
+    	// core processing code
         workDaysUsed = processItemNum / facilityRate;
         remainder = processItemNum % facilityRate;
         remainingFacilityVacancy = Math.abs(facilityRate - remainder);
@@ -180,15 +180,11 @@ public class ScheduleImpl implements Schedule
                 count++;	
         }
         
+        // checking status of variables; only for testing.
         int nextDay = count + startDay;   // was formerly count+startDay
         System.out.println("Next Day is value: " + dayAvailability.get(nextDay));
         System.out.println("Next Day is: " + nextDay);
         System.out.println("Remainder is value: " + remainder);
-        
-        //for (int i = nextDay; dayAvailability.get(nextDay) != 0; i++)
-        //{
-        	//dayAvailability.put(count+startDay, remainingFacilityVacancy);
-        //}
         
         if (remainder > 0)
         {
