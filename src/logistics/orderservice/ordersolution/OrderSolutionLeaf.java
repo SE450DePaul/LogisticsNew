@@ -1,5 +1,6 @@
 package logistics.orderservice.ordersolution;
 
+import logistics.orderservice.dtos.OrderItemRequestDTO;
 import logistics.orderservice.facilityrecord.FacilityRecord;
 
 import java.util.Collection;
@@ -15,10 +16,13 @@ public class OrderSolutionLeaf implements OrderSolutionComponent{
     private int firstDeliveryDay = -1;
     private int lastDeliveryDay = -1;
     private Collection<FacilityRecord> facilityRecords;
+    private OrderItemRequestDTO orderItemRequestDTO;
 
-    public OrderSolutionLeaf(Collection<FacilityRecord> facilityRecords){
+    public OrderSolutionLeaf(OrderItemRequestDTO orderItemRequestDTO, Collection<FacilityRecord> facilityRecords){
         //validate facility records
+        // validate order item
         this.facilityRecords = facilityRecords;
+        this.orderItemRequestDTO = orderItemRequestDTO;
 
         for (FacilityRecord facilityRecord : facilityRecords){
             totalCost += facilityRecord.getTotalCost();
@@ -63,9 +67,6 @@ public class OrderSolutionLeaf implements OrderSolutionComponent{
 
     @Override
     public void printOutput() {
-        System.out.println("Total cost " + totalCost);
-        System.out.println("First Delivery Day " + firstDeliveryDay);
-        System.out.println("Last delivery day " + lastDeliveryDay);
-        System.out.println("No of sources used: " + noOfSourcesUsed);
+        System.out.println(orderItemRequestDTO.itemId + "\t" + orderItemRequestDTO.quantityNeeded + "\t" + getTotalCost() + "\t" + getNoOfSourcesUsed() + "\t" + getFirstDeliveryDay() + "\t" + getLastDeliveryDay());
     }
 }

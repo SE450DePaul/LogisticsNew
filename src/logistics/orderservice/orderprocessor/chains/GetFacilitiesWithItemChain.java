@@ -64,7 +64,7 @@ public class GetFacilitiesWithItemChain extends ProcessChain {
 
     private int getTravelTime(String source, String destination) throws FacilityNotFoundInNetworkException, NullParameterException, NeighborNotFoundInNetworkException {
         TravelGuideDTO travelGuideDTO = NetworkService.getInstance().getTravelGuideDTO(source, destination);
-        int travelTime = travelGuideDTO.timeInDays.intValue();
+        int travelTime = (int) Math.ceil(travelGuideDTO.timeInDays);
         return travelTime;
     }
     private int getProcessDaysNeeded(String source, int noOfItems, int startDay) throws IllegalParameterException {

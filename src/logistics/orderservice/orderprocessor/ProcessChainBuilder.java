@@ -16,8 +16,8 @@ import logistics.orderservice.dtos.OrderItemRequestDTO;
 public class ProcessChainBuilder {
     public static ProcessChain build(OrderItemRequestDTO orderItemRequestDTO) {
         ProcessChain firstStep = new GetFacilitiesWithItemChain(orderItemRequestDTO);
-        ProcessChain secondStep = new ProcessFacilityRecordsChain(orderItemRequestDTO);
-        ProcessChain thirdStep = new SortByArrivalDayChain();
+        ProcessChain secondStep = new SortByArrivalDayChain();
+        ProcessChain thirdStep = new ProcessFacilityRecordsChain(orderItemRequestDTO);
         ProcessChain fourthStep = new CalculateTotalCostChain(orderItemRequestDTO);
         firstStep.setNextChain(secondStep);
         secondStep.setNextChain(thirdStep);

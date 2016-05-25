@@ -44,7 +44,7 @@ public class OrderProcessor {
         for (FacilityRecordDTO facilityRecordDTO : facilityRecordDTOs){
             facilityRecords.add(FacilityRecordFactory.build(facilityRecordDTO));
         }
-        OrderSolutionLeaf orderSolutionLeaf = new OrderSolutionLeaf(facilityRecords);
+        OrderSolutionLeaf orderSolutionLeaf = new OrderSolutionLeaf(orderItemRequestDTO, facilityRecords);
         return orderSolutionLeaf;
     }
 

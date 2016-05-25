@@ -109,13 +109,16 @@ public final class ScheduleService
             System.out.println("-------------------------Initial Schedule-----------------------------------------------\n");
             System.out.println(instance.getOutput(facility));
             System.out.println("--------------------New Schedule when 26 items processed--------------------------------\n");
+            System.out.println(instance.getProcessDaysNeeded(facility, 26, 5));
             instance.bookFacility(facility, 26, 5);
             System.out.println(instance.getOutput("Chicago, IL"));
-            System.out.println("--------------------New Schedule when another 33 items are processed--------------------\n");
-            instance.bookFacility(facility, 33);
+            System.out.println("--------------------New Schedule when another 40 items are processed--------------------\n");
+            System.out.println(instance.getProcessDaysNeeded(facility, 40, 1));
+            instance.bookFacility(facility, 40);
             System.out.println(instance.getOutput("Chicago, IL"));
             System.out.println("--------------------New Schedule when 7 more items processed----------------------------\n");
-            instance.bookFacility(facility, 7);
+            System.out.println(instance.getProcessDaysNeeded(facility, 7, 5));
+            instance.bookFacility(facility, 7, 5);
             System.out.println(instance.getOutput("Chicago, IL"));
         } catch (IllegalParameterException e) {
             e.printStackTrace();

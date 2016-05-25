@@ -33,7 +33,7 @@ public class OrderSolutionComposite implements OrderSolutionComponent{
     public int getFirstDeliveryDay() {
         int firstDeliveryDay = Integer.MAX_VALUE;
         for (OrderSolutionLeaf orderSolution : orderSolutions){
-            if (firstDeliveryDay < orderSolution.getFirstDeliveryDay()){
+            if (firstDeliveryDay > orderSolution.getFirstDeliveryDay()){
                 firstDeliveryDay = orderSolution.getFirstDeliveryDay();
             }
         }
@@ -62,8 +62,10 @@ public class OrderSolutionComposite implements OrderSolutionComponent{
 
     @Override
     public void printOutput() {
-        System.out.println(toString());
-        System.out.println("Order Items: \n");
+        System.out.println("Total Cost: " + getTotalCost());
+        System.out.println("1st Delivery Day: " + getFirstDeliveryDay());
+        System.out.println("Last Delivery Day: " + getLastDeliveryDay());
+        System.out.println("Order Items:");
         for (OrderSolutionLeaf orderSolution : orderSolutions){
             orderSolution.printOutput();
         }

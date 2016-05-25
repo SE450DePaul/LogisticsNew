@@ -81,7 +81,8 @@ public final class OrderService {
     public static void main(String[] args){
 
         OrderService orderService = OrderService.getInstance();
-        orderService.printOutput("TO-001");
+        System.out.println("Processing Solution:");
+        orderService.printOutput("TO-007");
 
 
     }
