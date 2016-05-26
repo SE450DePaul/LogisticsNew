@@ -9,9 +9,10 @@ import logistics.utilities.exceptions.NullParameterException;
 import java.util.Collection;
 
 /**
- * Created by uchennafokoye on 5/21/16.
+ * @author Uchenna F. Okoye
  */
-public class OrderSolutionLeaf implements OrderSolutionComponent{
+public class OrderSolutionLeaf implements OrderSolutionComponent
+{
 
     private int totalCost = 0;
     private int noOfSourcesUsed = 0;
@@ -28,18 +29,22 @@ public class OrderSolutionLeaf implements OrderSolutionComponent{
     	setFacilityRecord(facilityRecords);
     	setOrderItemRequest(orderItemRequestDTO);
 
-        for (FacilityRecord facilityRecord : facilityRecords){
+        for (FacilityRecord facilityRecord : facilityRecords)
+        {
             totalCost += facilityRecord.getTotalCost();
             noOfSourcesUsed++;
             int arrivalDay = facilityRecord.getArrivalDay();
-            if (firstDeliveryDay == -1){
+            if (firstDeliveryDay == -1)
+            {
                 firstDeliveryDay =  arrivalDay;
                 lastDeliveryDay = arrivalDay;
             } else {
-                if (firstDeliveryDay > arrivalDay){
+                if (firstDeliveryDay > arrivalDay)
+                {
                     firstDeliveryDay = arrivalDay;
                 }
-                if (lastDeliveryDay < arrivalDay){
+                if (lastDeliveryDay < arrivalDay)
+                {
                     lastDeliveryDay = arrivalDay;
                 }
             }
@@ -69,35 +74,40 @@ public class OrderSolutionLeaf implements OrderSolutionComponent{
     /*
      * Returns the Total Cost.
      */
-    public int getTotalCost(){
+    public int getTotalCost()
+    {
         return totalCost;
     }
 
     /*
      * Returns the First Delivery Day.
      */
-    public int getFirstDeliveryDay() {
+    public int getFirstDeliveryDay() 
+    {
         return firstDeliveryDay;
     }
 
     /*
      * Returns the Last Delivery Day.
      */
-    public int getLastDeliveryDay() {
+    public int getLastDeliveryDay() 
+    {
         return lastDeliveryDay;
     }
 
     /*
      * Returns the Number of Sources used.
      */
-    public int getNoOfSourcesUsed() {
+    public int getNoOfSourcesUsed() 
+    {
         return noOfSourcesUsed;
     }
 
     /*
      * Helper method that outputs the orderItemRequestDTO's details.
      */
-    public void printOutput() {
+    public void printOutput() 
+    {
         System.out.println("  " + orderItemRequestDTO.itemId + "\t" + orderItemRequestDTO.quantityNeeded + "\t" + getTotalCost() + "\t" + getNoOfSourcesUsed() + "\t" + getFirstDeliveryDay() + "\t" + getLastDeliveryDay());
     }
     

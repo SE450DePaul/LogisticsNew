@@ -1,5 +1,6 @@
 package logistics.orderservice.dtos;
 
+import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.NegativeOrZeroParameterException;
 import logistics.utilities.exceptions.NullParameterException;
 
@@ -20,7 +21,7 @@ public class OrderItemRequestDTO
   /*
    * Creates a new Order Item Request DTO given an order destination, item ID, starting time, and quantity of items needed.
    */
-   public OrderItemRequestDTO(String destination, String itemId, int startTime, int quantityNeeded) throws NullParameterException, NegativeOrZeroParameterException
+   public OrderItemRequestDTO(String destination, String itemId, int startTime, int quantityNeeded) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException
    {
         setDestination(destination); 
         setItemId(itemId);
@@ -31,7 +32,7 @@ public class OrderItemRequestDTO
    /*
     * Helper method that sets the order destination.
     */
-	public void setDestination(String orderDestination) throws NullParameterException
+	public void setDestination(String orderDestination) throws NullParameterException, IllegalParameterException
 	{
 		validateDestination(destination);
 		orderDestination = destination;
@@ -40,7 +41,7 @@ public class OrderItemRequestDTO
    /*
 	* Helper method that sets the order item ID.
 	*/
-	public void setItemId(String orderItemId) throws NullParameterException
+	public void setItemId(String orderItemId) throws NullParameterException, IllegalParameterException
 	{
 		validateItemId(itemId);
 		orderItemId = itemId;
@@ -99,19 +100,23 @@ public class OrderItemRequestDTO
   /*
    * Helper method that validates that an order's destination is not null or empty.
    */
-   private void validateDestination(String destination) throws NullParameterException 
+   private void validateDestination(String destination) throws NullParameterException, IllegalParameterException 
    {
 	   if (destination == null || destination.isEmpty())
 			throw new NullParameterException("Order Destination cannot be Null or Empty");
+	   if(destination.isEmpty())
+			  throw new IllegalParameterException("Order Destination cannot be empty");
    }
 		
    /*
     * Helper method that validates that an order Item's name is not Empty or Null.
     */		
-  private void validateItemId(String itemId) throws NullParameterException 
+  private void validateItemId(String itemId) throws NullParameterException, IllegalParameterException
   {
-	  if (itemId == null || itemId.isEmpty())
-			throw new NullParameterException("Order Item ID cannot be Null or Empty");
+	  if (itemId == null)
+			throw new NullParameterException("Order Item ID cannot be Null");
+	  if(itemId.isEmpty())
+		  throw new IllegalParameterException("Order Item ID cannot be empty");
   }
   
   /*

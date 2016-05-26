@@ -62,10 +62,11 @@ public class OrderSolutionComposite implements OrderSolutionComponent{
 
     @Override
     public void printOutput() {
-        System.out.println("Total Cost: " + getTotalCost());
-        System.out.println("1st Delivery Day: " + getFirstDeliveryDay());
-        System.out.println("Last Delivery Day: " + getLastDeliveryDay());
-        System.out.println("Order Items:");
+        System.out.println("  Total Cost: \t" + getTotalCost());
+        System.out.println("  1st Delivery Day: \t" + getFirstDeliveryDay());
+        System.out.println("  Last Delivery Day: \t" + getLastDeliveryDay());
+        System.out.println("  Order Items: \n");
+        System.out.println("  Item ID  Quantity  Cost	# Sources Used  First Day  Last Day ");
         for (OrderSolutionLeaf orderSolution : orderSolutions){
             orderSolution.printOutput();
         }

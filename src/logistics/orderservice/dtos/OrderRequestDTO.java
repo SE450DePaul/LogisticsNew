@@ -11,6 +11,7 @@ package logistics.orderservice.dtos;
 import java.util.Collection;
 
 import logistics.orderservice.ordersolution.OrderSolutionLeaf;
+import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.NegativeOrZeroParameterException;
 import logistics.utilities.exceptions.NullParameterException;
 
@@ -24,7 +25,7 @@ public class OrderRequestDTO
    /*
     * Creates a new Order Request DTO given an order destination, item ID, starting time, and a collection of item request DTOs.
     */
-   public OrderRequestDTO(String orderId, String destination, int startTime, Collection<OrderItemRequestDTO> itemRequestDTOS) throws NullParameterException, NegativeOrZeroParameterException
+   public OrderRequestDTO(String orderId, String destination, int startTime, Collection<OrderItemRequestDTO> itemRequestDTOS) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException
    {
 	   setDestination(destination); 
        setOrderId(orderId);
@@ -35,7 +36,7 @@ public class OrderRequestDTO
    /*
     * Helper method that sets the order destination.
     */
-	public void setDestination(String orderDestination) throws NullParameterException
+	public void setDestination(String orderDestination) throws NullParameterException, IllegalParameterException
 	{
 		validateDestination(destination);
 		orderDestination = destination;
@@ -44,7 +45,7 @@ public class OrderRequestDTO
    /*
 	* Helper method that sets the order item ID.
 	*/
-	public void setOrderId(String orderItemId) throws NullParameterException
+	public void setOrderId(String orderItemId) throws NullParameterException, IllegalParameterException
 	{
 		validateOrderId(orderItemId);
 		orderItemId = orderId;
@@ -62,7 +63,7 @@ public class OrderRequestDTO
    /*
 	* Helper method that sets the Order Item DTOs given a collection of Item request DTOs
 	*/
-	public void setOrderItemRequest(Collection<OrderItemRequestDTO> orderItemDto) throws NullParameterException, NegativeOrZeroParameterException
+	public void setOrderItemRequest(Collection<OrderItemRequestDTO> orderItemDto) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException
 	{
 		validateOrderItemRequest(orderItemDto);
 		orderItemDto = orderItemRequestDTOs;
@@ -106,19 +107,23 @@ public class OrderRequestDTO
   /*
    * Helper method that validates that an order's destination is not null or empty.
    */
-   private void validateDestination(String destination) throws NullParameterException 
+   public void validateDestination(String destination) throws NullParameterException, IllegalParameterException 
    {
-	   if (destination == null || destination.isEmpty())
-			throw new NullParameterException("Destination cannot be Null or Empty");
+	   if (destination == null)
+			throw new NullParameterException("Destination cannot be Null");
+	   if (destination.isEmpty())
+     	  throw new IllegalParameterException("Destination cannot be Empty");
    }
 		
  /*
   * Helper method that validates that an order Item's name is not Empty or Null.
   */		
-  private void validateOrderId(String orderId) throws NullParameterException 
+  public void validateOrderId(String orderId) throws NullParameterException, IllegalParameterException 
   {
-	  if (orderId == null || orderId.isEmpty())
-			throw new NullParameterException("Item ID cannot be Null or Empty");
+	  if (orderId == null)
+			throw new NullParameterException("Item ID cannot be Null");
+	  if (orderId.isEmpty())
+    	  throw new IllegalParameterException("Item ID cannot be Empty");
   }
   
  /*
@@ -135,17 +140,22 @@ public class OrderRequestDTO
  /*
   * Helper method that validates that the Order Items are not Null.
   */
-  private void validateOrderItemRequest(Collection<OrderItemRequestDTO> itemRequest) throws NullParameterException, NegativeOrZeroParameterException 
+  private void validateOrderItemRequest(Collection<OrderItemRequestDTO> itemRequest) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException 
   {
 	  // might need to compact the checks to remove the dangling-if problem
 	  for (OrderItemRequestDTO orderItems : itemRequest){
           if (orderItems == null)
         	  throw new NullParameterException("Order Item Request cannot be Null");
           
-          if (orderItems.destination.isEmpty() || orderItems.destination == null)
-        	  throw new NullParameterException("The Order Item's Destination cannot be Null or Empty");
-          if (orderItems.itemId.isEmpty() || orderItems.itemId == null)
-        	  throw new NullParameterException("The Order Item's ID cannot be Null or Empty");
+          if (orderItems.destination == null)
+        	  throw new NullParameterException("The Order Item's Destination cannot be Null");
+          if (orderItems.destination.isEmpty())
+        	  throw new IllegalParameterException("The Order Item's ID cannot be Empty");
+          
+          if (orderItems.itemId == null)
+        	  throw new NullParameterException("The Order Item's ID cannot be Null");
+          if (orderItems.itemId.isEmpty())
+        	  throw new IllegalParameterException("The Order Item's ID cannot be Empty");
           
           if (orderItems.startTime == 0)
         	  throw new NullParameterException("The Order's Starting time cannot be zero");
