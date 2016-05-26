@@ -34,8 +34,8 @@ public class OrderItemRequestDTO
     */
 	public void setDestination(String orderDestination) throws NullParameterException, IllegalParameterException
 	{
-		validateDestination(destination);
-		orderDestination = destination;
+		validateDestination(orderDestination);
+		destination = orderDestination;
 	}
 
    /*
@@ -43,8 +43,8 @@ public class OrderItemRequestDTO
 	*/
 	public void setItemId(String orderItemId) throws NullParameterException, IllegalParameterException
 	{
-		validateItemId(itemId);
-		orderItemId = itemId;
+		validateItemId(orderItemId);
+		itemId = orderItemId;
 	}
 
    /*
@@ -52,8 +52,8 @@ public class OrderItemRequestDTO
 	*/
 	public void setStartTime(int orderStartTime) throws NullParameterException, NegativeOrZeroParameterException
 	{
-		validateStartTime(startTime);
-		orderStartTime = startTime;
+		validateStartTime(orderStartTime);
+		startTime = orderStartTime;
 	}
 
    /*
@@ -62,7 +62,7 @@ public class OrderItemRequestDTO
 	public void setQuantityNeeded(int orderQuantityNeeded) throws NullParameterException, NegativeOrZeroParameterException
 	{
 		validateQuantityNeeded(orderQuantityNeeded);
-		orderQuantityNeeded = quantityNeeded;
+		quantityNeeded = orderQuantityNeeded;
 	}
 
    /*
@@ -102,8 +102,9 @@ public class OrderItemRequestDTO
    */
    private void validateDestination(String destination) throws NullParameterException, IllegalParameterException 
    {
-	   if (destination == null || destination.isEmpty())
-			throw new NullParameterException("Order Destination cannot be Null or Empty");
+	   if (destination == null)
+			throw new NullParameterException("Order Destination cannot be Null");
+	   
 	   if(destination.isEmpty())
 			  throw new IllegalParameterException("Order Destination cannot be empty");
    }
@@ -115,6 +116,7 @@ public class OrderItemRequestDTO
   {
 	  if (itemId == null)
 			throw new NullParameterException("Order Item ID cannot be Null");
+	  
 	  if(itemId.isEmpty())
 		  throw new IllegalParameterException("Order Item ID cannot be empty");
   }
@@ -126,6 +128,7 @@ public class OrderItemRequestDTO
   {
 	  if (startTime == 0)
 			throw new NullParameterException("Order Start Time cannot be Zero");
+	  
 	  if (startTime < 0)
 			throw new NegativeOrZeroParameterException("Order Start Time cannot be a Negative value");
   }
@@ -137,6 +140,7 @@ public class OrderItemRequestDTO
   {
 	  if (quantityNeeded == 0)
 			throw new NullParameterException("Order Quantity Needed cannot be Zero");
+	  
 	  if (quantityNeeded < 0)
 			throw new NegativeOrZeroParameterException("Order Quantity Needed cannot be a Negative value");
   }

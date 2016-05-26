@@ -154,7 +154,7 @@ public class OrderSolutionLeaf implements OrderSolutionComponent
       private void validateOrderItemRequest(OrderItemRequestDTO itemRequest) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException 
       {
               if (itemRequest == null)
-            	  throw new NullParameterException("Order Item Request cannot be Null");
+            	  throw new NullParameterException("OrderItemRequestDTO cannot be Null");
               
               if (itemRequest.getDestination() == null)
             	  throw new NullParameterException("The OrderItemRequestDTO's Destination cannot be Null");
