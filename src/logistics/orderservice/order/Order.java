@@ -12,5 +12,4 @@ public interface Order {
     int getOrderTime();
     String getDestination();
     Iterator<OrderItem> getOrderItems();
-
 }

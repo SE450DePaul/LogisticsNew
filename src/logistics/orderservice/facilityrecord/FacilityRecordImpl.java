@@ -51,50 +51,50 @@ public class FacilityRecordImpl implements FacilityRecord{
     }
 
 
-    private void setSource(String source) throws IllegalParameterException {
-        if (source == null){
+    private void setSource(String recordSource) throws IllegalParameterException {
+        if (recordSource == null){
             throw new NullParameterException("Source cannot be null");
         }
-        if (source.isEmpty()){
+        if (recordSource.isEmpty()){
             throw new IllegalParameterException("Source cannot be blank");
         }
-        this.source = source;
+        recordSource = source;
     }
 
-    private void setNoOfItems(int noOfItems) throws NegativeOrZeroParameterException {
-        if (noOfItems < 0){
-            throw new NegativeOrZeroParameterException("no Of Items cannot be negative");
+    private void setNoOfItems(int recordNoOfItems) throws NegativeOrZeroParameterException {
+        if (recordNoOfItems < 0){
+            throw new NegativeOrZeroParameterException("Number of Items cannot be negative");
         }
-        this.noOfItems = noOfItems;
+        recordNoOfItems = noOfItems;
     }
 
-    private void setProcessingEndDay(int processingEndDay) throws NegativeOrZeroParameterException {
+    private void setProcessingEndDay(int recordProcessingEndDay) throws NegativeOrZeroParameterException {
+        if (recordProcessingEndDay < 0){
+            throw new NegativeOrZeroParameterException("Processing End Day cannot be negative");
+        }
+        recordProcessingEndDay = processingEndDay;
+    }
+
+    private void setTravelTime(int recordTravelTime) throws NegativeOrZeroParameterException {
         if (processingEndDay < 0){
             throw new NegativeOrZeroParameterException("Processing End Day cannot be negative");
         }
-        this.processingEndDay = processingEndDay;
+        recordTravelTime = travelTime;
     }
 
-    private void setTravelTime(int travelTime) throws NegativeOrZeroParameterException {
-        if (processingEndDay < 0){
-            throw new NegativeOrZeroParameterException("Processing End Day cannot be negative");
-        }
-        this.travelTime = travelTime;
-    }
-
-    private void setArrivalDay(int arrivalDay) throws NegativeOrZeroParameterException {
-        if (arrivalDay < 0){
+    private void setArrivalDay(int recordArrivalDay) throws NegativeOrZeroParameterException {
+        if (recordArrivalDay < 0){
             throw new NegativeOrZeroParameterException("Arrival Day cannot be negative");
         }
-        this.arrivalDay = arrivalDay;
+        recordArrivalDay = arrivalDay;
     }
 
-    private void setTotalCost(double totalCost) throws NegativeOrZeroParameterException {
-        if (totalCost < 0){
+    private void setTotalCost(double recordTotalCost) throws NegativeOrZeroParameterException {
+        if (recordTotalCost < 0){
             throw new NegativeOrZeroParameterException("Total coast cannot be negative");
         }
 
-        this.totalCost = totalCost;
+        recordTotalCost = totalCost;
 
     }
 }
