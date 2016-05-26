@@ -21,12 +21,12 @@ public class OrderSolutionLeaf implements OrderSolutionComponent
     private Collection<FacilityRecord> facilityRecords;
     private OrderItemRequestDTO orderItemRequestDTO;
 
-    public OrderSolutionLeaf(OrderItemRequestDTO orderItemRequestDTO, Collection<FacilityRecord> facilityRecords) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException
+    public OrderSolutionLeaf(OrderItemRequestDTO orderItemRequestDTO, Collection<FacilityRecord> facRecords) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException
     {
         //validate facility records
         // validate order item
     	
-    	setFacilityRecord(facilityRecords);
+    	setFacilityRecord(facRecords);
     	setOrderItemRequest(orderItemRequestDTO);
 
         for (FacilityRecord facilityRecord : facilityRecords)
