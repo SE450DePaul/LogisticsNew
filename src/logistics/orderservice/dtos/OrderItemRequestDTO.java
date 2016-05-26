@@ -12,7 +12,6 @@ import logistics.utilities.exceptions.NullParameterException;
  */
 public class OrderItemRequestDTO
 {
-
     public String destination;
 	public String itemId;
     public int startTime;
@@ -38,60 +37,60 @@ public class OrderItemRequestDTO
 		orderDestination = destination;
 	}
 
-	/*
-	 * Helper method that sets the order item ID.
-	 */
+   /*
+	* Helper method that sets the order item ID.
+	*/
 	public void setItemId(String orderItemId) throws NullParameterException
 	{
 		validateItemId(itemId);
 		orderItemId = itemId;
 	}
 
-	/*
-	 * Helper method that sets the order start time given a day.
-	 */
+   /*
+	* Helper method that sets the order start time given a day.
+	*/
 	public void setStartTime(int orderStartTime) throws NullParameterException, NegativeOrZeroParameterException
 	{
 		validateStartTime(startTime);
 		orderStartTime = startTime;
 	}
 
-	/*
-	 * Helper method that sets the Order quantity needed given an amount.
-	 */
+   /*
+	* Helper method that sets the Order quantity needed given an amount.
+	*/
 	public void setQuantityNeeded(int orderQuantityNeeded) throws NullParameterException, NegativeOrZeroParameterException
 	{
 		validateQuantityNeeded(orderQuantityNeeded);
 		orderQuantityNeeded = quantityNeeded;
 	}
 
-	/*
-	 * Returns the needed item Quantity of the Order.
-	 */
+   /*
+	* Returns the needed item Quantity of the Order.
+	*/
 	public int getQuantityNeeded()
 	{
 		return quantityNeeded;
 	}
 	
-	/*
-	 * Returns the Order's Start Time.
-	 */
+   /*
+	* Returns the Order's Start Time.
+	*/
 	public int getStartTime() 
 	{
 		return startTime;
 	}
 
-	/*
-	 * Returns the Order's Item ID
-	 */
+   /*
+	* Returns the Order's Item ID
+	*/
 	public String getItemId() 
 	{
 		return itemId;
 	}
 	
-	/*
-	 * Returns the Order Destination.
-	 */
+   /*
+	* Returns the Order Destination.
+	*/
 	public String getDestination() 
 	{
 		return destination;
@@ -103,7 +102,7 @@ public class OrderItemRequestDTO
    private void validateDestination(String destination) throws NullParameterException 
    {
 	   if (destination == null || destination.isEmpty())
-			throw new NullParameterException("Destination cannot be Null or Empty");
+			throw new NullParameterException("Order Destination cannot be Null or Empty");
    }
 		
    /*
@@ -112,7 +111,7 @@ public class OrderItemRequestDTO
   private void validateItemId(String itemId) throws NullParameterException 
   {
 	  if (itemId == null || itemId.isEmpty())
-			throw new NullParameterException("Item ID cannot be Null or Empty");
+			throw new NullParameterException("Order Item ID cannot be Null or Empty");
   }
   
   /*
@@ -121,9 +120,9 @@ public class OrderItemRequestDTO
   private void validateStartTime(int startTime) throws NullParameterException, NegativeOrZeroParameterException 
   {
 	  if (startTime == 0)
-			throw new NullParameterException("Start Time cannot be Zero");
+			throw new NullParameterException("Order Start Time cannot be Zero");
 	  if (startTime < 0)
-			throw new NegativeOrZeroParameterException("Start Time cannot be a Negative value");
+			throw new NegativeOrZeroParameterException("Order Start Time cannot be a Negative value");
   }
   
   /*
@@ -132,10 +131,9 @@ public class OrderItemRequestDTO
   private void validateQuantityNeeded(int quantityNeeded) throws NullParameterException, NegativeOrZeroParameterException 
   {
 	  if (quantityNeeded == 0)
-			throw new NullParameterException("Quantity Needed cannot be Zero");
+			throw new NullParameterException("Order Quantity Needed cannot be Zero");
 	  if (quantityNeeded < 0)
-			throw new NegativeOrZeroParameterException("Quantity Needed cannot be a Negative value");
+			throw new NegativeOrZeroParameterException("Order Quantity Needed cannot be a Negative value");
   }
-  
 }
 

@@ -14,8 +14,8 @@ import logistics.orderservice.ordersolution.OrderSolutionLeaf;
 import logistics.utilities.exceptions.NegativeOrZeroParameterException;
 import logistics.utilities.exceptions.NullParameterException;
 
-public class OrderRequestDTO {
-
+public class OrderRequestDTO 
+{
     private String orderId;
     private String destination;
     private int startTime;
@@ -24,7 +24,8 @@ public class OrderRequestDTO {
    /*
     * Creates a new Order Request DTO given an order destination, item ID, starting time, and a collection of item request DTOs.
     */
-   public OrderRequestDTO(String orderId, String destination, int startTime, Collection<OrderItemRequestDTO> itemRequestDTOS) throws NullParameterException, NegativeOrZeroParameterException{
+   public OrderRequestDTO(String orderId, String destination, int startTime, Collection<OrderItemRequestDTO> itemRequestDTOS) throws NullParameterException, NegativeOrZeroParameterException
+   {
 	   setDestination(destination); 
        setOrderId(orderId);
        setStartTime(startTime); 
@@ -40,66 +41,63 @@ public class OrderRequestDTO {
 		orderDestination = destination;
 	}
 
-	/*
-	 * Helper method that sets the order item ID.
-	 */
+   /*
+	* Helper method that sets the order item ID.
+	*/
 	public void setOrderId(String orderItemId) throws NullParameterException
 	{
 		validateOrderId(orderItemId);
 		orderItemId = orderId;
 	}
 
-	/*
-	 * Helper method that sets the order start time given a day.
-	 */
+   /*
+	* Helper method that sets the order start time given a day.
+	*/
 	public void setStartTime(int orderStartTime) throws NullParameterException, NegativeOrZeroParameterException
 	{
 		validateStartTime(startTime);
 		orderStartTime = startTime;
 	}
 
-	/*
-	 * Helper method that sets the Order Item DTOs given a collection of Item request DTOs
-	 */
+   /*
+	* Helper method that sets the Order Item DTOs given a collection of Item request DTOs
+	*/
 	public void setOrderItemRequest(Collection<OrderItemRequestDTO> orderItemDto) throws NullParameterException, NegativeOrZeroParameterException
 	{
 		validateOrderItemRequest(orderItemDto);
 		orderItemDto = orderItemRequestDTOs;
 	}
 
-	/*
-	 * Returns a list of the order item DTOs
-	 */
+   /*
+	* Returns a list of the order item DTOs
+	*/
 	public void getOrderItem()
 	{
-		//StringBuffer stringBuffer = new StringBuffer();
-		
-		for (OrderItemRequestDTO orderItems : orderItemRequestDTOs){
+		for (OrderItemRequestDTO orderItems : orderItemRequestDTOs)
+		{
             System.out.println("Item ID: " + orderItems.itemId + " Destination: " + orderItems.destination + " Start Time: " + orderItems.startTime + " Quantity Needed: " + orderItems.quantityNeeded );
         }
-		
-		//return stringBuffer.toString();
 	}
 	
-	/*
-	 * Returns the Order's Start Time.
-	 */
+   /*
+	* Returns the Order's Start Time.
+	*/
 	public int getStartTime() 
 	{
 		return startTime;
 	}
 
-	/*
-	 * Returns the Order's Item ID
-	 */
+   /*
+	* Returns the Order's Item ID
+	*/
 	public String getOrderId() 
 	{
 		return orderId;
 	}
 	
-	/*
-	 * Returns the Order Destination.
-	 */
+   /*
+	* Returns the Order Destination.
+	*/
 	public String getDestination() 
 	{
 		return destination;
@@ -114,18 +112,18 @@ public class OrderRequestDTO {
 			throw new NullParameterException("Destination cannot be Null or Empty");
    }
 		
-   /*
-    * Helper method that validates that an order Item's name is not Empty or Null.
-    */		
+ /*
+  * Helper method that validates that an order Item's name is not Empty or Null.
+  */		
   private void validateOrderId(String orderId) throws NullParameterException 
   {
 	  if (orderId == null || orderId.isEmpty())
 			throw new NullParameterException("Item ID cannot be Null or Empty");
   }
   
-  /*
-   * Helper method that validates an order's start time is not zero or negative.
-   */
+ /*
+  * Helper method that validates an order's start time is not zero or negative.
+  */
   private void validateStartTime(int startTime) throws NullParameterException, NegativeOrZeroParameterException 
   {
 	  if (startTime == 0)
@@ -134,29 +132,30 @@ public class OrderRequestDTO {
 			throw new NegativeOrZeroParameterException("Start Time cannot be a Negative value");
   }
   
-  /*
-   * Helper method that validates that the Order Items are not Null.
-   */
+ /*
+  * Helper method that validates that the Order Items are not Null.
+  */
   private void validateOrderItemRequest(Collection<OrderItemRequestDTO> itemRequest) throws NullParameterException, NegativeOrZeroParameterException 
   {
 	  // might need to compact the checks to remove the dangling-if problem
 	  for (OrderItemRequestDTO orderItems : itemRequest){
           if (orderItems == null)
         	  throw new NullParameterException("Order Item Request cannot be Null");
+          
           if (orderItems.destination.isEmpty() || orderItems.destination == null)
         	  throw new NullParameterException("The Order Item's Destination cannot be Null or Empty");
           if (orderItems.itemId.isEmpty() || orderItems.itemId == null)
         	  throw new NullParameterException("The Order Item's ID cannot be Null or Empty");
+          
           if (orderItems.startTime == 0)
         	  throw new NullParameterException("The Order's Starting time cannot be zero");
           if (orderItems.startTime < 0)
         	  throw new NegativeOrZeroParameterException("The Order's Starting time cannot be Negative");
+          
           if (orderItems.quantityNeeded == 0)
         	  throw new NullParameterException("The quantity needed for the order cannot be zero");
           if (orderItems.quantityNeeded < 0)
         	  throw new NegativeOrZeroParameterException("The quantity needed for the order cannot be Negative");
       }
-	 
   }
-  
 }

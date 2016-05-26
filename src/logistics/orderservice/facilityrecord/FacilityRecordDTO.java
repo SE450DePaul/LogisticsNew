@@ -10,8 +10,8 @@ import logistics.utilities.exceptions.NullParameterException;
  * 
  * @author Uchenna F. Okoye
  */
-public class FacilityRecordDTO {
-
+public class FacilityRecordDTO 
+{
     public String source;
     public int noOfItems;
     public double itemPrice;
@@ -257,7 +257,5 @@ public class FacilityRecordDTO {
 		throw new NullParameterException("The Facility Record's Rate cannot be Zero");
     if (recordRate < 0)
 		throw new NegativeOrZeroParameterException("The Facility Record's Rate cannot be a Negative value");
- }
-    
-    
+ }  
 }
