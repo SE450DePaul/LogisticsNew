@@ -17,10 +17,10 @@ import logistics.utilities.exceptions.NullParameterException;
 
 public class OrderRequestDTO 
 {
-    private String orderId;
+    public String orderId;
     private String destination;
     private int startTime;
-    private Collection<OrderItemRequestDTO> orderItemRequestDTOs;
+    public Collection<OrderItemRequestDTO> orderItemRequestDTOs;
 
    /*
     * Creates a new Order Request DTO given an order destination, item ID, starting time, and a collection of item request DTOs.
@@ -38,8 +38,8 @@ public class OrderRequestDTO
     */
 	public void setDestination(String orderDestination) throws NullParameterException, IllegalParameterException
 	{
-		validateDestination(destination);
-		orderDestination = destination;
+		validateDestination(orderDestination);
+		destination = orderDestination;
 	}
 
    /*
@@ -48,7 +48,7 @@ public class OrderRequestDTO
 	public void setOrderId(String orderItemId) throws NullParameterException, IllegalParameterException
 	{
 		validateOrderId(orderItemId);
-		orderItemId = orderId;
+		orderId = orderItemId;
 	}
 
    /*
@@ -56,8 +56,8 @@ public class OrderRequestDTO
 	*/
 	public void setStartTime(int orderStartTime) throws NullParameterException, NegativeOrZeroParameterException
 	{
-		validateStartTime(startTime);
-		orderStartTime = startTime;
+		validateStartTime(orderStartTime);
+		startTime = orderStartTime;
 	}
 
    /*
@@ -66,7 +66,7 @@ public class OrderRequestDTO
 	public void setOrderItemRequest(Collection<OrderItemRequestDTO> orderItemDto) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException
 	{
 		validateOrderItemRequest(orderItemDto);
-		orderItemDto = orderItemRequestDTOs;
+		orderItemRequestDTOs = orderItemDto;
 	}
 
    /*
@@ -78,6 +78,11 @@ public class OrderRequestDTO
 		{
             System.out.println("Item ID: " + orderItems.itemId + " Destination: " + orderItems.destination + " Start Time: " + orderItems.startTime + " Quantity Needed: " + orderItems.quantityNeeded );
         }
+	}
+	
+	public Collection<OrderItemRequestDTO> getOrderItems()
+	{
+		return orderItemRequestDTOs;
 	}
 	
    /*
