@@ -10,7 +10,7 @@ package logistics.scheduleservice;
  * The HashMap dynamically increases to add more workdays whenever the initial
  * set days are exhausted.
  * 
- * @author David Olorundare and uchenna f. okoye
+ * @author David Olorundare and Uchenna F. Okoye
  */
 
 import logistics.facilityservice.FacilityDTO;
