@@ -1,5 +1,6 @@
 package logistics.orderservice.facilityrecord;
 
+import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.NegativeOrZeroParameterException;
 import logistics.utilities.exceptions.NullParameterException;
 
@@ -25,7 +26,7 @@ public class FacilityRecordDTO
     /*
      * Constructor that creates a new FacilityRecordDTO given the source, number of items, item price, facility rate, travel time, arrival day, and processing end day.
      */
-    public FacilityRecordDTO(String source, int noOfItems, double itemPrice, int processingEndDay, int travelTime, int arrivalDay, double facilityCostPerDay, int facilityRate) throws NullParameterException, NegativeOrZeroParameterException
+    public FacilityRecordDTO(String source, int noOfItems, double itemPrice, int processingEndDay, int travelTime, int arrivalDay, double facilityCostPerDay, int facilityRate) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException
     {
         setSource(source);
         setNoOfItems(noOfItems);
@@ -40,7 +41,7 @@ public class FacilityRecordDTO
     /*
      * Helper method that sets the Facility Record's source.
      */
- 	public void setSource(String recordSource) throws NullParameterException
+ 	public void setSource(String recordSource) throws NullParameterException, IllegalParameterException
  	{
  		validateSource(recordSource);
  		recordSource = source;
@@ -176,10 +177,12 @@ public class FacilityRecordDTO
    /*
     * Helper method that validates that the Facility Record's Source is not Null or Empty.
     */
-    private void validateSource(String recordSource) throws NullParameterException 
+    private void validateSource(String recordSource) throws NullParameterException, IllegalParameterException 
     {
- 	   if (recordSource == null || recordSource.isEmpty())
- 			throw new NullParameterException("The Facility Record's Source cannot be Null or Empty");
+ 	   if (recordSource == null)
+ 			throw new NullParameterException("The Facility Record's Source cannot be Null");
+ 	   if (recordSource.isEmpty())
+ 		  throw new IllegalParameterException("The Facility Record's Source cannot be Empty");
     }
  		
     /*
