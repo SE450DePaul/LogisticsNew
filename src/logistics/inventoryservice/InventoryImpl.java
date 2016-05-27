@@ -85,29 +85,21 @@ public class InventoryImpl implements Inventory
 
 		Set<String> activeItems = activeItemHash.keySet();
 		StringBuffer stringBuffer = new StringBuffer();
-		/*stringBuffer.append("\n");
-		stringBuffer.append("Active Inventory: ");
-		stringBuffer.append("\n");
-		stringBuffer.append("\tItem Id\t\tQuantity");*/
+		
 		System.out.println("\nActive Inventory: \n\tItem Id\t\tQuantity");
 
 		if (activeItems.isEmpty()){
 			System.out.print("None");
-			//stringBuffer.append("None");
 		}
 
 		for (String item : activeItems){
 			int quantity = activeItemHash.get(item);
-			//System.out.println("\n");
 			stringBuffer.append("\n");
 			System.out.format("\t%-8s\t%-4d%n", item, quantity);
-			//stringBuffer.append("\t" + item + "\t\t" + quantity);
 		}
 
 		System.out.print("\n\n");
-		//stringBuffer.append("\n\n");
 		System.out.print("Depleted (Used-Up) Inventory: ");
-		//stringBuffer.append("Depleted (Used-Up) Inventory: ");
 
 		Set<String> depletedItems = depletedItemHash.keySet();
 		if (depletedItems.isEmpty()){
