@@ -12,6 +12,8 @@ package logistics.inventoryservice;
 import logistics.facilityservice.Facility;
 import logistics.inventoryservice.dtos.FacilityWithItemDTO;
 import logistics.inventoryservice.dtos.InventoryItemDTO;
+import logistics.itemservice.ItemCatalogService;
+import logistics.itemservice.ItemDTO;
 import logistics.utilities.exceptions.*;
 import logistics.utilities.loader.factory.LoaderFactory;
 import logistics.utilities.loader.interfaces.Loader;
@@ -102,9 +104,18 @@ public final class InventoryService
      */
     public String getOutput(String facilityName){
         Inventory inventory = inventoryHashMap.get(facilityName);
-        if (inventory == null) { return ""; }
+        if (inventory == null) { return "";}
         return inventory.getInventoryOutput();
 
+    }
+    
+    
+ // Test that the service works.
+    public static void main(String[] args){
+
+        InventoryService invent = InventoryService.getInstance();
+        
+        System.out.println(invent.getOutput("Phoenix, AZ"));//);
     }
 }
 

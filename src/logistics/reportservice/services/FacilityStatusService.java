@@ -45,17 +45,27 @@ public final class FacilityStatusService {
     public String getOutput(String facilityName) throws FacilityNotFoundInNetworkException, IllegalParameterException {
 
         StringBuffer str = new StringBuffer();
-        str.append("\n");
-        str.append(facilityService.getOutput(facilityName));
-        str.append("\n");
-        str.append(networkService.getDirectLinksOutput(facilityName));
-        str.append("\n");
-        str.append(inventoryService.getOutput(facilityName));
-        str.append("\n");
-        str.append(scheduleService.getOutput(facilityName));
+        System.out.print("\n\n");
+        //str.append("\n");
+        System.out.print(facilityService.getOutput(facilityName));
+        //str.append(facilityService.getOutput(facilityName));
+        System.out.print("\n");
+        //str.append("\n");
+        //str.append(networkService.getDirectLinksOutput(facilityName));
+        System.out.print(networkService.getDirectLinksOutput(facilityName));
+        System.out.print("\n");
+        //str.append("\n");
+        //str.append(inventoryService.getOutput(facilityName));
+        System.out.print(inventoryService.getOutput(facilityName));
+        //str.append("\n");
+        //System.out.print("\n");
+        //str.append(scheduleService.getOutput(facilityName));
+        System.out.print(scheduleService.getOutput(facilityName));
 
-        str.append("\n");
-        str.append(generateDashedLine(100));
+        //str.append("\n"); 
+        System.out.print("\n");
+        //str.append(generateDashedLine(100));
+        System.out.print(generateDashedLine(100));
 
         return str.toString();
 

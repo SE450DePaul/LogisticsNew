@@ -108,7 +108,7 @@ public class OrderSolutionLeaf implements OrderSolutionComponent
      */
     public void printOutput() 
     {
-        System.out.println("  " + orderItemRequestDTO.itemId + "\t" + orderItemRequestDTO.quantityNeeded + "\t" + getTotalCost() + "\t" + getNoOfSourcesUsed() + "\t" + getFirstDeliveryDay() + "\t" + getLastDeliveryDay());
+        System.out.println("  " + orderItemRequestDTO.getItemId() + "\t" + orderItemRequestDTO.getQuantityNeeded() + "\t" + getTotalCost() + "\t" + getNoOfSourcesUsed() + "\t" + getFirstDeliveryDay() + "\t" + getLastDeliveryDay());
     }
     
     /*
