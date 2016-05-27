@@ -106,8 +106,8 @@ public class OrderImpl implements Order
      {
   	   if (orderDestination == null)
   			throw new NullParameterException("Order Destination cannot be Null");
-  	 if (orderDestination.isEmpty())
-   	  throw new IllegalParameterException("The Order Destination cannot be Empty");
+  	   if (orderDestination.isEmpty())
+  		    throw new IllegalParameterException("The Order Destination cannot be Empty");
      }
   		
    /*
@@ -128,8 +128,8 @@ public class OrderImpl implements Order
      {
    	  if (orderId == null)
    			throw new NullParameterException("Order ID cannot be Null");
-   	if (orderId.isEmpty())
-  	  throw new IllegalParameterException("The Order ID cannot be Empty");
+   	  if (orderId.isEmpty())
+   		    throw new IllegalParameterException("The Order ID cannot be Empty");
      }
      
      /*

@@ -17,7 +17,7 @@ import logistics.utilities.exceptions.NullParameterException;
 
 public class OrderRequestDTO 
 {
-    public String orderId;
+    private String orderId;
     private String destination;
     private int startTime;
     public Collection<OrderItemRequestDTO> orderItemRequestDTOs;
@@ -25,11 +25,11 @@ public class OrderRequestDTO
    /*
     * Creates a new Order Request DTO given an order destination, item ID, starting time, and a collection of item request DTOs.
     */
-   public OrderRequestDTO(String orderId, String destination, int startTime, Collection<OrderItemRequestDTO> itemRequestDTOS) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException
+   public OrderRequestDTO(String oId, String oDestination, int oStartTime, Collection<OrderItemRequestDTO> itemRequestDTOS) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException
    {
-	   setDestination(destination); 
-       setOrderId(orderId);
-       setStartTime(startTime); 
+	   setDestination(oDestination); 
+       setOrderId(oId);
+       setStartTime(oStartTime); 
        setOrderItemRequest(itemRequestDTOS);
     }
    
@@ -80,6 +80,9 @@ public class OrderRequestDTO
         }
 	}
 	
+	/*
+	* Returns a collection of the order item DTOs
+	*/
 	public Collection<OrderItemRequestDTO> getOrderItems()
 	{
 		return orderItemRequestDTOs;

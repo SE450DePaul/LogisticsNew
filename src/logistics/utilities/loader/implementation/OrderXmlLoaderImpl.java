@@ -3,7 +3,10 @@ package logistics.utilities.loader.implementation;
 
 import logistics.orderservice.dtos.OrderItemRequestDTO;
 import logistics.orderservice.dtos.OrderRequestDTO;
+import logistics.utilities.exceptions.IllegalParameterException;
 import logistics.utilities.exceptions.LoaderFileNotFoundException;
+import logistics.utilities.exceptions.NegativeOrZeroParameterException;
+import logistics.utilities.exceptions.NullParameterException;
 import logistics.utilities.loader.interfaces.OrderLoader;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
@@ -53,7 +56,6 @@ public class OrderXmlLoaderImpl implements OrderLoader {
                 String entryName = node.getNodeName();
                 if (!entryName.equals("order")) {
                     continue;
-//                    Or perhaps throw an error
                 }
 
                 NamedNodeMap attributes = node.getAttributes();
@@ -85,8 +87,16 @@ public class OrderXmlLoaderImpl implements OrderLoader {
                     int quantity = Integer.parseInt(quantityString);
                     collection.add(new OrderItemRequestDTO(destination, itemId, orderDay, quantity));
 
+                    
+                    /*FOR TESTING ONLY:
+                    System.out.println("Order Destination: " + destination + " Item ID: " + itemId + " Order Day: " + orderDay + " Quantity: " + quantity);
+                    for (OrderItemRequestDTO thingy : collection)
+                    {
+                    	System.out.println(thingy.getDestination() + " " + thingy.getItemId() + " " + thingy.getStartTime() + " " + thingy.getQuantityNeeded() + " \n");
+                    }*/
                 }
 
+                
                 OrderRequestDTO orderRequestDTO = new OrderRequestDTO(orderId, destination, orderDay, collection);
                 orderRequests.add(orderRequestDTO);
             }
@@ -100,6 +110,15 @@ public class OrderXmlLoaderImpl implements OrderLoader {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        catch (NullParameterException e)
+        {
+        	e.printStackTrace();
+        }
+        catch (IllegalParameterException e)
+        {
+        	e.printStackTrace();
+        }
+       
 
 
         return orderRequests;

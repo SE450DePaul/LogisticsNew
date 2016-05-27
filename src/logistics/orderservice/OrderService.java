@@ -33,9 +33,9 @@ public final class OrderService {
             Collection<OrderRequestDTO> orderRequestDTOs = loader.load();
             for (OrderRequestDTO orderRequestDTO : orderRequestDTOs){
 
-                OrderSolutionComponent orderSolutionComponent = OrderProcessor.process(orderRequestDTO.orderItemRequestDTOs);
+                OrderSolutionComponent orderSolutionComponent = OrderProcessor.process(orderRequestDTO.orderItemRequestDTOs);//getOrderItems());//orderItemRequestDTOs);
 //                orderHashMap.put(orderRequestDTO.orderId, OrderFactory.build(orderRequestDTO));
-                orderSolutionComponentHashMap.put(orderRequestDTO.orderId, orderSolutionComponent);
+                orderSolutionComponentHashMap.put(orderRequestDTO.getOrderId(), orderSolutionComponent);
             }
 
         } catch (LoaderFileNotFoundException e) {
