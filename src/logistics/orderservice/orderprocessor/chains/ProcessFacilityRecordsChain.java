@@ -24,7 +24,7 @@ public class ProcessFacilityRecordsChain extends ProcessChain {
     }
 
     private Collection<FacilityRecordDTO> processFacilityRecords(Collection<FacilityRecordDTO> facilityRecordDTOCollection) throws IllegalParameterException, FacilityNotFoundException {
-        int requiredQuantity = orderItemRequestDTO.quantityNeeded;
+        int requiredQuantity = orderItemRequestDTO.getQuantityNeeded();
         Collection<FacilityRecordDTO> facilityRecordDTOsUsed = new ArrayList<>();
         for (FacilityRecordDTO facilityRecordDTO : facilityRecordDTOCollection){
             if(requiredQuantity <= 0) {
@@ -45,9 +45,9 @@ public class ProcessFacilityRecordsChain extends ProcessChain {
 
     private void processFromFacility(FacilityRecordDTO facilityRecordDTO, int quantity) throws IllegalParameterException, FacilityNotFoundException {
         String facility = facilityRecordDTO.source;
-        int startTime = orderItemRequestDTO.startTime;
+        int startTime = orderItemRequestDTO.getStartTime();
         int processingEndDay = scheduleService.getProcessDaysNeeded(facility, quantity, startTime);
-        inventoryService.reduceFromInventory(facility, orderItemRequestDTO.itemId, quantity);
+        inventoryService.reduceFromInventory(facility, orderItemRequestDTO.getItemId(), quantity);
         scheduleService.bookFacility(facility, quantity, startTime);
         if (processingEndDay != facilityRecordDTO.processingEndDay) {
             int arrivalDay = calculateArrivalDay(processingEndDay, facilityRecordDTO.travelTime);

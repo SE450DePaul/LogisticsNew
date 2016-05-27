@@ -1,5 +1,7 @@
 package logistics.orderservice;
 
+import logistics.orderservice.dtos.OrderItemRequestDTO;
+
 /**
  * This class represents a Facility Manager that keeps track of all Facilities.
  * It provides methods for creating a Facility (using a Facility Factory), returning
@@ -28,27 +30,37 @@ public final class OrderService {
 
     private OrderService() {
         loader = LoaderFactory.build("orders");
+     
         orderSolutionComponentHashMap = new HashMap<>();
         try {
             Collection<OrderRequestDTO> orderRequestDTOs = loader.load();
-            for (OrderRequestDTO orderRequestDTO : orderRequestDTOs){
+            for (OrderRequestDTO orderRequestDTO : orderRequestDTOs)
+            {
 
-                OrderSolutionComponent orderSolutionComponent = OrderProcessor.process(orderRequestDTO.orderItemRequestDTOs);//getOrderItems());//orderItemRequestDTOs);
+				System.out.println("ID: " + orderRequestDTO.getOrderId() + " Destination: " + orderRequestDTO.getDestination() + " Start Time: " + orderRequestDTO.getStartTime() );
+            
+				for (OrderItemRequestDTO orderRequest : orderRequestDTO.orderItemRequestDTOs)
+				{
+					System.out.println("ID: " + orderRequest.getItemId() + " Destination: " + orderRequest.getDestination() + " Start Time: " + orderRequest.getStartTime() + " Quantity: " + orderRequest.getQuantityNeeded() + " \n");
+				}
+
+                /*OrderSolutionComponent orderSolutionComponent = OrderProcessor.process(orderRequestDTO.orderItemRequestDTOs);   //getOrderItems());//orderItemRequestDTOs);
 //                orderHashMap.put(orderRequestDTO.orderId, OrderFactory.build(orderRequestDTO));
-                orderSolutionComponentHashMap.put(orderRequestDTO.getOrderId(), orderSolutionComponent);
+                orderSolutionComponentHashMap.put(orderRequestDTO.getOrderId(), orderSolutionComponent);*/
             }
 
         } catch (LoaderFileNotFoundException e) {
             e.printStackTrace();
-        } catch (NeighborNotFoundInNetworkException e) {
-            e.printStackTrace();
-        } catch (IllegalParameterException e) {
-            e.printStackTrace();
-        } catch (FacilityNotFoundException e) {
-            e.printStackTrace();
-        } catch (FacilityNotFoundInNetworkException e) {
-            e.printStackTrace();
-        }
+        } //catch (NeighborNotFoundInNetworkException e) {
+            //e.printStackTrace();
+        //} catch (IllegalParameterException e) {
+            //e.printStackTrace();
+        //} catch (FacilityNotFoundException e) {
+            //e.printStackTrace();
+        //} catch (FacilityNotFoundInNetworkException e) {
+          //  e.printStackTrace();
+        //}
+        
 
 
     }
@@ -82,8 +94,8 @@ public final class OrderService {
 
         OrderService orderService = OrderService.getInstance();
         System.out.println("Processing Solution:");
-        orderService.printOutput("TO-007");
-        orderService.printOutput("TO-006");
+        //orderService.printOutput("TO-007");
+        //orderService.printOutput("TO-006");
 
 
     }

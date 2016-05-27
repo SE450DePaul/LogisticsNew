@@ -8,9 +8,12 @@ package logistics.orderservice.order;
  */
 
 import logistics.orderservice.dtos.OrderRequestDTO;
+import logistics.utilities.exceptions.IllegalParameterException;
+import logistics.utilities.exceptions.NegativeOrZeroParameterException;
+import logistics.utilities.exceptions.NullParameterException;
 
 public class OrderFactory {
-    public static Order build(OrderRequestDTO orderRequestDTO) {
+    public static Order build(OrderRequestDTO orderRequestDTO) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException {
         return new OrderImpl(orderRequestDTO);
     }
 }

@@ -17,20 +17,20 @@ import logistics.utilities.exceptions.NullParameterException;
 
 public class OrderRequestDTO 
 {
-    private String orderId;
-    private String destination;
-    private int startTime;
+    public String orderId;
+    public String destination;
+    public int startTime;
     public Collection<OrderItemRequestDTO> orderItemRequestDTOs;
 
    /*
     * Creates a new Order Request DTO given an order destination, item ID, starting time, and a collection of item request DTOs.
     */
-   public OrderRequestDTO(String oId, String oDestination, int oStartTime, Collection<OrderItemRequestDTO> itemRequestDTOS) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException
+   public OrderRequestDTO(String oId, String oDestination, int oStartTime, Collection<OrderItemRequestDTO> itemRequestDTOs) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException
    {
 	   setDestination(oDestination); 
        setOrderId(oId);
        setStartTime(oStartTime); 
-       setOrderItemRequest(itemRequestDTOS);
+       setOrderItemRequest(itemRequestDTOs);
     }
    
    /*
@@ -65,7 +65,7 @@ public class OrderRequestDTO
 	*/
 	public void setOrderItemRequest(Collection<OrderItemRequestDTO> orderItemDto) throws NullParameterException, NegativeOrZeroParameterException, IllegalParameterException
 	{
-		validateOrderItemRequest(orderItemDto);
+		//validateOrderItemRequest(orderItemDto);
 		orderItemRequestDTOs = orderItemDto;
 	}
 
@@ -76,7 +76,7 @@ public class OrderRequestDTO
 	{
 		for (OrderItemRequestDTO orderItems : orderItemRequestDTOs)
 		{
-            System.out.println("Item ID: " + orderItems.itemId + " Destination: " + orderItems.destination + " Start Time: " + orderItems.startTime + " Quantity Needed: " + orderItems.quantityNeeded );
+            System.out.println("Item ID: " + orderItems.getItemId() + " Destination: " + orderItems.getDestination() + " Start Time: " + orderItems.getStartTime() + " Quantity Needed: " + orderItems.getQuantityNeeded() );
         }
 	}
 	
@@ -155,24 +155,24 @@ public class OrderRequestDTO
           if (orderItems == null)
         	  throw new NullParameterException("Order Item Request cannot be Null");
           
-          if (orderItems.destination == null)
+          if (orderItems.getDestination() == null)
         	  throw new NullParameterException("The Order Item's Destination cannot be Null");
-          if (orderItems.destination.isEmpty())
+          if (orderItems.getDestination().isEmpty())
         	  throw new IllegalParameterException("The Order Item's ID cannot be Empty");
           
-          if (orderItems.itemId == null)
+          if (orderItems.getItemId() == null)
         	  throw new NullParameterException("The Order Item's ID cannot be Null");
-          if (orderItems.itemId.isEmpty())
+          if (orderItems.getItemId().isEmpty())
         	  throw new IllegalParameterException("The Order Item's ID cannot be Empty");
           
-          if (orderItems.startTime == 0)
+          if (orderItems.getStartTime() == 0)
         	  throw new NullParameterException("The Order's Starting time cannot be zero");
-          if (orderItems.startTime < 0)
+          if (orderItems.getStartTime() < 0)
         	  throw new NegativeOrZeroParameterException("The Order's Starting time cannot be Negative");
           
-          if (orderItems.quantityNeeded == 0)
+          if (orderItems.getQuantityNeeded() == 0)
         	  throw new NullParameterException("The quantity needed for the order cannot be zero");
-          if (orderItems.quantityNeeded < 0)
+          if (orderItems.getQuantityNeeded() < 0)
         	  throw new NegativeOrZeroParameterException("The quantity needed for the order cannot be Negative");
       }
   }

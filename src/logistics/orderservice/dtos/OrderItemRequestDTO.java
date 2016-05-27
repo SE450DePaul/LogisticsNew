@@ -13,10 +13,10 @@ import logistics.utilities.exceptions.NullParameterException;
  */
 public class OrderItemRequestDTO
 {
-    public String destination;
-	public String itemId;
-    public int startTime;
-    public int quantityNeeded;
+    private String destination;
+	private String itemId;
+    private int startTime;
+    private int quantityNeeded;
 
   /*
    * Creates a new Order Item Request DTO given an order destination, item ID, starting time, and quantity of items needed.

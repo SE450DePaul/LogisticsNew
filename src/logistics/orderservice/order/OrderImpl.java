@@ -94,10 +94,10 @@ public class OrderImpl implements Order
     /*
      * Returns a list of Order Items
      */
-    public Iterator<OrderItem> getOrderItems() 
+    /*public Iterator<OrderItem> getOrderItems() 
     {
 		/// Need to write this code (^_^)
-    }
+    }*/
     
     /*
      * Helper method that validates that an order's destination is not null or empty.

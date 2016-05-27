@@ -32,7 +32,7 @@ public class ItemCatalogReporter implements Reporter {
 
 
     public void printOutput() {
-        System.out.println(itemCatalogService.getOutput());
+    	itemCatalogService.getOutput();
     }
 
 

@@ -19,7 +19,7 @@ public class CalculateTotalCostChain extends ProcessChain {
 
     public CalculateTotalCostChain(OrderItemRequestDTO orderItemRequestDTO){
         this.orderItemRequestDTO = orderItemRequestDTO;
-        this.itemPrice = itemCatalogService.getItem(orderItemRequestDTO.itemId).price;
+        this.itemPrice = itemCatalogService.getItem(orderItemRequestDTO.getItemId()).price;
     }
 
     @Override

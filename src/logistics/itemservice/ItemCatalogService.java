@@ -53,23 +53,22 @@ public final class ItemCatalogService {
     /*
      * Returns information about all Items in the Facilities.
      */
-    public String getOutput(){
-        StringBuffer stringBuffer = new StringBuffer();
-        stringBuffer.append("\n");
-        stringBuffer.append("Item Catalog: ");
-        stringBuffer.append("\n");
+    public void getOutput()
+    {
+        System.out.println("\nItem Catalog:  ");
+        
         int i = 1;
         Collection<String> itemIds = new TreeSet<>(itemsHash.keySet());
-        for (String itemId : itemIds){
+        for (String itemId : itemIds)
+        {
             Item item = itemsHash.get(itemId);
-            stringBuffer.append(item.toString());
-            stringBuffer.append("\t");
-            if (i % 4 == 0){
-                stringBuffer.append("\n");
+            System.out.printf("%-8s: $%,-5.0f\t", item.getId(), item.getPrice());
+            if (i % 4 == 0)
+            {
+                System.out.print("\n");
             }
             i++;
         }
-        return stringBuffer.toString();
     }
 
     /*
@@ -85,8 +84,10 @@ public final class ItemCatalogService {
     public static void main(String[] args){
 
         ItemCatalogService itemCatalogService = ItemCatalogService.getInstance();
-        ItemDTO itemDTO = itemCatalogService.getItem("ABC123");
+       // ItemDTO itemDTO = itemCatalogService.getItem("ABC123");
         System.out.println("Please get item");
-        System.out.println(" Item id: " + itemDTO.id + " Item price: " + itemDTO.price);
+        //System.out.println(" Item id: " + itemDTO.id + " Item price: " + itemDTO.price);
+        //System.out.println(
+        itemCatalogService.getOutput();//);
     }
 }

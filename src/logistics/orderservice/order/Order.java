@@ -8,8 +8,8 @@ import java.util.Iterator;
  * Created by uchennafokoye on 5/21/16.
  */
 public interface Order {
-    String geId();
+    String getOrderId();
     int getOrderTime();
     String getDestination();
-    Iterator<OrderItem> getOrderItems();
+   // Iterator<OrderItem> getOrderItems();
 }

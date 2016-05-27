@@ -35,10 +35,10 @@ public class GetFacilitiesWithItemChain extends ProcessChain {
     }
 
     public Collection<FacilityRecordDTO> getFacilityRecordDTOs() throws NeighborNotFoundInNetworkException, IllegalParameterException, FacilityNotFoundInNetworkException {
-        Collection<FacilityWithItemDTO> facilitiesWithItemDTO = inventoryService.getFacilitiesWithItemDTO(orderItemRequestDTO.itemId);
+        Collection<FacilityWithItemDTO> facilitiesWithItemDTO = inventoryService.getFacilitiesWithItemDTO(orderItemRequestDTO.getItemId());
         Collection<FacilityRecordDTO> facilityRecordDTOs = new ArrayList<>();
         for (FacilityWithItemDTO facilityWithItemDTO : facilitiesWithItemDTO) {
-            if (!facilityWithItemDTO.name.equals(orderItemRequestDTO.destination)){
+            if (!facilityWithItemDTO.name.equals(orderItemRequestDTO.getDestination())){
                 facilityRecordDTOs.add(buildFacilityRecord(facilityWithItemDTO));
             }
         }
@@ -49,10 +49,10 @@ public class GetFacilitiesWithItemChain extends ProcessChain {
     private FacilityRecordDTO buildFacilityRecord(FacilityWithItemDTO facility) throws NeighborNotFoundInNetworkException, IllegalParameterException, FacilityNotFoundInNetworkException {
         String source = facility.name;
         int noOfItems = facility.quantity;
-        int travelTime = getTravelTime(source, orderItemRequestDTO.destination);
-        int processingEndDay = getProcessDaysNeeded(source, noOfItems, orderItemRequestDTO.startTime);
+        int travelTime = getTravelTime(source, orderItemRequestDTO.getDestination());
+        int processingEndDay = getProcessDaysNeeded(source, noOfItems, orderItemRequestDTO.getStartTime());
         int arrivalDay = calculateArrivalDay(processingEndDay, travelTime);
-        double itemPrice = itemCatalogService.getItem(orderItemRequestDTO.itemId).price;
+        double itemPrice = itemCatalogService.getItem(orderItemRequestDTO.getItemId()).price;
         FacilityDTO facilityDTO = facilityService.getFacility(source);
         double costPerDay = facilityDTO.cost;
         int rate = facilityDTO.rate;

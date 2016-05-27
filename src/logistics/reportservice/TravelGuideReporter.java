@@ -36,7 +36,7 @@ public class TravelGuideReporter implements Reporter {
     public void printOutput() {
         String[][] shortestPathTests =  Main.SHORTEST_PATH_TEST;
 
-        System.out.println("Shortest Path Tests: ");
+        System.out.println("\nShortest Path Tests: ");
         System.out.print("\n");
         char alph = 'a';
         for (int i = 0; i < shortestPathTests.length; i++){
