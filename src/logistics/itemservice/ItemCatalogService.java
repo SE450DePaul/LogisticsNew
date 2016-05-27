@@ -55,7 +55,7 @@ public final class ItemCatalogService {
      */
     public void getOutput()
     {
-        System.out.println("\nItem Catalog:  ");
+    	System.out.println("\nItem Catalog:  ");
         
         int i = 1;
         Collection<String> itemIds = new TreeSet<>(itemsHash.keySet());
@@ -84,10 +84,10 @@ public final class ItemCatalogService {
     public static void main(String[] args){
 
         ItemCatalogService itemCatalogService = ItemCatalogService.getInstance();
-       // ItemDTO itemDTO = itemCatalogService.getItem("ABC123");
+        ItemDTO itemDTO = itemCatalogService.getItem("ABC123");
         System.out.println("Please get item");
-        //System.out.println(" Item id: " + itemDTO.id + " Item price: " + itemDTO.price);
-        //System.out.println(
-        itemCatalogService.getOutput();//);
+        System.out.println(" Item id: " + itemDTO.id + " Item price: " + itemDTO.price);
+        System.out.println();
+        itemCatalogService.getOutput();
     }
 }
