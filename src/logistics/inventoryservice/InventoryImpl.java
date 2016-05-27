@@ -103,15 +103,12 @@ public class InventoryImpl implements Inventory
 
 		Set<String> depletedItems = depletedItemHash.keySet();
 		if (depletedItems.isEmpty()){
-			//stringBuffer.append("None");
 			System.out.print("None");
 		}
 
 		for (String item : depletedItems){
-			//stringBuffer.append("\n");
 			System.out.print("\n");
 			System.out.print("\t" + item);
-			//stringBuffer.append("\t" + item);
 		}
 		
 		return stringBuffer.toString();
