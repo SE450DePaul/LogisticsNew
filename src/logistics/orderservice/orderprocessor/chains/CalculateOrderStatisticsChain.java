@@ -21,7 +21,7 @@ public class CalculateOrderStatisticsChain extends ProcessChain
 	private double percentUsed;
 	private double cummulativePercentUsed;
 	
-	public CalculateOrderStatisticsChain(OrderItemRequestDTO orderItemRequest) throws NullParameterException
+	public CalculateOrderStatisticsChain(OrderItemRequestDTO orderItemRequest) 
 	{
 		//validateOrderItemRequest(orderItemRequest);
 		orderItemRq = orderItemRequest;
