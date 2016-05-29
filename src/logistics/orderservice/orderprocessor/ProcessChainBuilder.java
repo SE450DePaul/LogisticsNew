@@ -1,5 +1,7 @@
 package logistics.orderservice.orderprocessor;
 
+import logistics.orderservice.orderprocessor.chains.CalculateOrderLogisticsChain;
+
 /**
  * This class represents a Facility Factory, which handles object creation 
  * of new Facility Implementation classes.
@@ -19,9 +21,11 @@ public class ProcessChainBuilder {
         ProcessChain secondStep = new SortByArrivalDayChain();
         ProcessChain thirdStep = new ProcessFacilityRecordsChain(orderItemRequestDTO);
         ProcessChain fourthStep = new CalculateTotalCostChain(orderItemRequestDTO);
+        ProcessChain fifthStep = new CalculateOrderLogisticsChain(orderItemRequestDTO);
         firstStep.setNextChain(secondStep);
         secondStep.setNextChain(thirdStep);
         thirdStep.setNextChain(fourthStep);
+        fourthStep.setNextChain(fifthStep);
         return firstStep;
     }
 }

@@ -39,27 +39,27 @@ public final class OrderService {
 
 				System.out.println("ID: " + orderRequestDTO.getOrderId() + " Destination: " + orderRequestDTO.getDestination() + " Start Time: " + orderRequestDTO.getStartTime() );
             
-				for (OrderItemRequestDTO orderRequest : orderRequestDTO.orderItemRequestDTOs)
+				/*for (OrderItemRequestDTO orderRequest : orderRequestDTO.orderItemRequestDTOs)
 				{
 					System.out.println("ID: " + orderRequest.getItemId() + " Destination: " + orderRequest.getDestination() + " Start Time: " + orderRequest.getStartTime() + " Quantity: " + orderRequest.getQuantityNeeded() + " \n");
-				}
+				}*/
 
-                /*OrderSolutionComponent orderSolutionComponent = OrderProcessor.process(orderRequestDTO.orderItemRequestDTOs);   //getOrderItems());//orderItemRequestDTOs);
+                /**/OrderSolutionComponent orderSolutionComponent = OrderProcessor.process(orderRequestDTO.orderItemRequestDTOs);   //getOrderItems());//orderItemRequestDTOs);
 //                orderHashMap.put(orderRequestDTO.orderId, OrderFactory.build(orderRequestDTO));
-                orderSolutionComponentHashMap.put(orderRequestDTO.getOrderId(), orderSolutionComponent);*/
+                orderSolutionComponentHashMap.put(orderRequestDTO.getOrderId(), orderSolutionComponent);/**/
             }
 
         } catch (LoaderFileNotFoundException e) {
             e.printStackTrace();
-        } //catch (NeighborNotFoundInNetworkException e) {
-            //e.printStackTrace();
-        //} catch (IllegalParameterException e) {
-            //e.printStackTrace();
-        //} catch (FacilityNotFoundException e) {
-            //e.printStackTrace();
-        //} catch (FacilityNotFoundInNetworkException e) {
-          //  e.printStackTrace();
-        //}
+        } /*//*/catch (NeighborNotFoundInNetworkException e) {
+            e.printStackTrace();
+        } catch (IllegalParameterException e) {
+            e.printStackTrace();
+        } catch (FacilityNotFoundException e) {
+            e.printStackTrace();
+        } catch (FacilityNotFoundInNetworkException e) {
+            e.printStackTrace();
+        }
         
 
 
@@ -95,7 +95,7 @@ public final class OrderService {
         OrderService orderService = OrderService.getInstance();
         System.out.println("Processing Solution:");
         //orderService.printOutput("TO-007");
-        //orderService.printOutput("TO-006");
+        orderService.printOutput("TO-006");
 
 
     }

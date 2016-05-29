@@ -20,6 +20,7 @@ public class ProcessFacilityRecordsChain extends ProcessChain {
     }
 
     protected Collection<FacilityRecordDTO> buildFacilityRecordDTOs() throws IllegalParameterException, FacilityNotFoundException {
+    	
         return processFacilityRecords(facilityRecordDTOs);
     }
 

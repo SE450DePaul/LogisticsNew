@@ -18,6 +18,7 @@ public class SortByArrivalDayChain extends ProcessChain {
 
     @Override
     protected Collection<FacilityRecordDTO> buildFacilityRecordDTOs() {
+    	
         return sort(facilityRecordDTOs);
     }
 

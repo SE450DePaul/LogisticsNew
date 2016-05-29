@@ -42,7 +42,7 @@ public class GetFacilitiesWithItemChain extends ProcessChain {
                 facilityRecordDTOs.add(buildFacilityRecord(facilityWithItemDTO));
             }
         }
-
+        
         return facilityRecordDTOs;
     }
 

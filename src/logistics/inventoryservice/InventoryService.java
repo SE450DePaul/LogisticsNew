@@ -110,12 +110,12 @@ public final class InventoryService
     }
     
     
- // Test that the service works.
+ /* Test that the service works.
     public static void main(String[] args){
 
         InventoryService invent = InventoryService.getInstance();
         
         System.out.println(invent.getOutput("Phoenix, AZ"));//);
-    }
+    }*/
 }
 

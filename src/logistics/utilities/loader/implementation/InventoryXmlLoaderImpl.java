@@ -144,7 +144,7 @@ public class InventoryXmlLoaderImpl implements InventoryLoader
 
 	public static void main(String[] args){
 
-		InventoryXmlLoaderImpl xmlLoader =  new InventoryXmlLoaderImpl("src/data/facility_inventory.xml");
+		InventoryXmlLoaderImpl xmlLoader =  new InventoryXmlLoaderImpl("data/facility_inventory.xml");
 		try
 		{
 			xmlLoader.load();
