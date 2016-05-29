@@ -36,14 +36,15 @@ public final class OrderService {
             Collection<OrderRequestDTO> orderRequestDTOs = loader.load();
             for (OrderRequestDTO orderRequestDTO : orderRequestDTOs)
             {
-
+            	// TESTING USING THIS CODE WORKS
 				System.out.println("ID: " + orderRequestDTO.getOrderId() + " Destination: " + orderRequestDTO.getDestination() + " Start Time: " + orderRequestDTO.getStartTime() );
             
-				/*for (OrderItemRequestDTO orderRequest : orderRequestDTO.orderItemRequestDTOs)
+				for (OrderItemRequestDTO orderRequest : orderRequestDTO.orderItemRequestDTOs)
 				{
 					System.out.println("ID: " + orderRequest.getItemId() + " Destination: " + orderRequest.getDestination() + " Start Time: " + orderRequest.getStartTime() + " Quantity: " + orderRequest.getQuantityNeeded() + " \n");
-				}*/
+				}
 
+				// THE REAL CODE: THIS PART DOESN'T SEEM TO WORK 
                 /**/OrderSolutionComponent orderSolutionComponent = OrderProcessor.process(orderRequestDTO.orderItemRequestDTOs);   //getOrderItems());//orderItemRequestDTOs);
 //                orderHashMap.put(orderRequestDTO.orderId, OrderFactory.build(orderRequestDTO));
                 orderSolutionComponentHashMap.put(orderRequestDTO.getOrderId(), orderSolutionComponent);/**/
